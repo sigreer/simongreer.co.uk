@@ -1,0 +1,25 @@
+---
+import directus from "../lib/directus";
+import { readSingleton } from "@directus/sdk";
+const global = await directus.request(readSingleton('global'));
+import { Image } from 'astro:assets';
+import bunIcon from '../images/bunicon.svg';
+import tailWindIcon from '../images/tailwindicon.svg';
+import reactIcon from '../images/reacticon.svg';
+import directusIcon from '../images/directusicon.svg';
+import astroIcon from '../images/astroicon.svg';
+import typescriptIcon from '../images/typescripticon.svg';
+interface Props {
+    iconFill?: string;
+    socialIconSize?: string;
+}
+const { iconFill = 'currentColor', socialIconSize = 'w-10 h-10' } = Astro.props as Props;
+---
+<div class="flex flex-wrap justify-items-start gap-5">
+    <Image src={astroIcon} alt="Astro" class={`${socialIconSize}`} />
+    <Image src={bunIcon} alt="Bun" class={`${socialIconSize}`} />
+    <Image src={tailWindIcon} alt="TailWind" class={`${socialIconSize}`} />
+    <Image src={reactIcon} alt="React" class={`${socialIconSize}`} />
+    <Image src={directusIcon} alt="Directus" class={`${socialIconSize}`} />
+    <Image src={typescriptIcon} alt="TypeScript" class={`${socialIconSize}`} />
+</div>

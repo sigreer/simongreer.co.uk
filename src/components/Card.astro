@@ -1,0 +1,30 @@
+---
+export interface Props {
+  title: string
+  content: string
+  slug: string
+  tags: string[]
+}
+
+const { title, content, slug, tags } = Astro.props
+---
+
+<li class="rounded-md bg-white shadow-md transition hover:shadow-xl">
+  <a href={`/blog/${slug}`}>
+    <div class="flex h-full flex-col gap-y-2 p-6">
+      <h2 class="pr-4 pt-2 text-xl font-semibold">
+        {title}
+      </h2>
+      <p>
+        {content}
+      </p>
+      <div class="flex flex-wrap gap-1">
+        {tags?.map((tag) => (
+          <span class="w-fit whitespace-nowrap rounded-md bg-black px-2 text-sm font-bold text-white shadow transition">
+            {tag}
+          </span>
+        ))}
+      </div>
+    </div>
+  </a>
+</li>

@@ -1,0 +1,33 @@
+---
+import directus from "../lib/directus";
+import { Image } from 'astro:assets';
+import { readItems } from "@directus/sdk";
+
+export async function getStaticPaths() {
+  try {
+    const authors = await directus.request(readItems("authors", {
+      fields: ['*'],
+    }));
+    return authors.map((author) => ({
+      params: { author_name: author.name, twitter: author.twitter, mastodon: author.mastodon, github: author.github },
+      props: { author }
+    }));
+  } catch (error) {
+    console.error("Error fetching pages:", error);
+    throw new Error("Failed to fetch pages from Directus");
+  }
+}
+
+const { author } = Astro.props;
+
+---
+<address class="flex items-center mb-6 not-italic">
+  <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
+    <img class="mr-4 w-16 h-16 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Jese Leos">
+    <div>
+        <a href="#" rel="author" class="text-xl font-bold text-gray-900 dark:text-white">Jese Leos</a>
+        <p class="text-base text-gray-500 dark:text-gray-400">Graphic Designer, educator & CEO Flowbite</p>
+        <p class="text-base text-gray-500 dark:text-gray-400"><time datetime="2022-02-08" title="February 8th, 2022">Feb. 8, 2022</time></p>
+    </div>
+</div>
+</address>
