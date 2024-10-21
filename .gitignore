@@ -21,3 +21,6 @@ pnpm-debug.log*
 # Bun-specific files
 bun.lockb
 .bun/
+
+.vscode/
+
