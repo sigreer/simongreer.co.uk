@@ -1,0 +1,53 @@
+---
+import XIcon from './SocialIcons/XIcon.astro';
+import GithubIcon from './SocialIcons/GithubIcon.astro';
+import MastadonIcon from './SocialIcons/MastadonIcon.astro';
+import DribbbleIcon from './SocialIcons/DribbbleIcon.astro';
+import LinkedInIcon from './SocialIcons/LinkedInIcon.astro';
+import InstagramIcon from './SocialIcons/InstagramIcon.astro';
+import FacebookIcon from './SocialIcons/FacebookIcon.astro';
+import DevIcon from './SocialIcons/DevIcon.astro';
+interface Props {
+    socialValues: {
+        twitter?: string;
+        github?: string;
+        mastadon?: string;
+        dribbble?: string;
+        linkedin?: string;
+        instagram?: string;
+        facebook?: string;
+        dev?: string;
+    }
+    iconFill?: string;
+    socialIconSize?: string;
+}
+const { socialValues, iconFill = 'currentColor', socialIconSize = 'w-10 h-10' } = Astro.props as Props;
+---
+
+
+<ul class="flex flex-wrap justify-items-start gap-5">
+    <li>
+        <XIcon class={socialIconSize} fill={iconFill} {...socialValues?.twitter && { href: socialValues.twitter } || { href: '#' }} />
+    </li>
+    <li>
+        <GithubIcon class={socialIconSize} fill={iconFill} {...socialValues?.github && { href: socialValues.github } || { href: '#' }} />
+    </li>
+    <li>
+        <DribbbleIcon class={socialIconSize} fill={iconFill} {...socialValues?.dribbble && { href: socialValues.dribbble } || { href: '#' }} />
+    </li>
+    <li>
+        <LinkedInIcon class={socialIconSize} fill={iconFill} {...socialValues?.linkedin && { href: socialValues.linkedin } || { href: '#' }} />
+    </li>
+    <li>
+        <InstagramIcon class={socialIconSize} fill={iconFill} {...socialValues?.instagram && { href: socialValues.instagram } || { href: '#' }} />
+    </li>
+    <li>
+        <FacebookIcon class={socialIconSize} fill={iconFill} {...socialValues?.facebook && { href: socialValues.facebook } || { href: '#' }} />
+    </li>
+    <li>
+        <MastadonIcon class={socialIconSize} fill={iconFill} {...socialValues?.mastadon && { href: socialValues.mastadon } || { href: '#' }} />
+    </li>
+    <li>
+        <DevIcon class={socialIconSize} fill={iconFill} {...socialValues?.dev && { href: socialValues.dev } || { href: '#' }} />
+    </li>
+</ul>

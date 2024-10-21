@@ -1,0 +1,22 @@
+---
+import directus from "../lib/directus";
+import { readSingleton } from "@directus/sdk";
+const global = await directus.request(readSingleton('global'));
+import { Image } from 'astro:assets';
+import bunIcon from '../images/bunicon.svg';
+import tailWindIcon from '../images/tailwindicon.svg';
+import reactIcon from '../images/reacticon.svg';
+import directusIcon from '../images/directusicon.svg';
+import astroIcon from '../images/astroicon.svg';
+import typescriptIcon from '../images/typescripticon.svg';
+---
+<section class="flex flex-col pt-8 pb-4 gap-4">
+    <div class="row-span-1"></div>
+    <h2 class="row-span-1 text-xl md:text-2xl lg:text-3xl font-bold pt-2 pb-2">Introduction</h2>
+    <div class="row-span-1 drop-shadow-lg bg-gradient-to-tl from-slate-100 to-white rounded-lg p-8">
+        
+        
+        <p class="text-sm md:text-lg lg:text-xl">{global.introduction}</p>
+       
+</div>
+</section>

@@ -1,0 +1,56 @@
+---
+import directus from "../lib/directus";
+import { readSingleton } from "@directus/sdk";
+const global = await directus.request(readSingleton('global'));
+import TagCloud from './TagCloud.astro';
+import ContentTagCloud from './ContentTagCloud.astro';
+import SocialIcons from './SocialIcons.astro';
+import PoweredBy from './PoweredBy.astro';
+import About from './About.astro';
+const socials = {
+  ...(global.twitter && { twitter: global.twitter }),
+  ...(global.github && { github: global.github }),
+  ...(global.mastodon && { mastodon: global.mastodon }),
+  ...(global.dribbble && { dribbble: global.dribbble }),
+  ...(global.linkedin && { linkedin: global.linkedin }),
+  ...(global.instagram && { instagram: global.instagram }),
+  ...(global.facebook && { facebook: global.facebook }),
+  ...(global.dev && { dev: global.dev }),
+};
+
+---
+
+<footer class="bg-gray-50 antialiased dark:bg-gray-800">
+  <div class="font-poppins mx-auto w-full py-16">
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-2 max-w-full 2xl:max-w-2xl sm:px-4 md:px-8 xl:px-16 mx-auto">
+      <div class="flex flex-col space-y-16">
+        <div>
+          <h2
+            class="mb-6 text-base md:text-xl font-semibold uppercase text-gray-900 dark:text-white">
+            Follow Me
+          </h2>
+          <SocialIcons iconFill="currentColor" socialIconSize="w-8 h-8 p-0" socialValues={socials} />
+        </div>
+        {global.about && global.about !== '' && (<About />)}
+      </div>
+
+      <div class="flex flex-col space-y-16">
+        <div>
+          <h2
+            class="mb-6 text-base font-semibold uppercase text-gray-900 dark:text-white md:text-xl">
+            Tag Cloud
+          </h2>
+          <ContentTagCloud />
+        <TagCloud />
+        </div>
+        <div class="w-full h-full">
+            <h2
+            class="mb-6 text-base font-semibold uppercase text-gray-900 dark:text-white md:text-xl">
+            Proudly Powered By
+            </h2>
+            <PoweredBy />
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,484 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap);
+@import '@fontsource/poppins';
+
+@layer base {
+  html {
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+@layer components {
+    
+    .keycard:hover .keycard-gradient {
+      opacity: 1;
+    }
+
+    .keycard:hover .keycard-bg-image {
+      opacity: 1;
+    }
+
+
+    .tag-style {
+        @apply font-light rounded-sm text-xs px-2 py-1 text-center me-0 my-1 drop-shadow;
+    }
+    .tag-block .cyan1, .tag-block .cyan2, .tag-block .cyan3  {
+        @apply drop-shadow-[0_1px_1px_rgba(25,25,25,0.5)];
+    }
+    .tag-block .cyan1  {
+        @apply text-gray-900 bg-gradient-to-r from-cyan-300 to-blue-500;
+    }
+    .tag-block .cyan2  {
+        @apply text-white bg-gradient-to-r from-cyan-600 to-purple-600;
+    }
+    .tag-block .cyan3  {
+        @apply text-white bg-gradient-to-r from-cyan-800 to-blue-800;
+    }
+    .tag-block .purple1  {
+        @apply text-gray-900 bg-gradient-to-r from-purple-300 to-pink-500;
+    }
+    .tag-block .purple2  {
+        @apply text-white bg-gradient-to-r from-purple-600 to-pink-600;
+    }
+    .tag-block .purple3  {
+        @apply text-white bg-gradient-to-r from-purple-800 to-pink-800;
+    }
+
+    /* BANNER (TITLE BAR) */
+    /* .banner .banner-bg-image {
+        background-image: url('/images/banner1-long-bg.jpg');
+        @apply bg-cover;
+    } */
+    .banner-gradient {
+        @apply text-white bg-gradient-to-r from-pink-400 to-pink-500;
+    }
+
+    .banner .h3-headline {
+        @apply bg-gradient-to-b from-[#fafafa] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .banner .h3-shadow {
+        @apply bg-gradient-to-b from-[#ffffff] to-[#74a9ea] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+
+    .styled-header {
+        @apply text-white top-0;
+    }
+    .styled-header .grey-shiny-bottom {
+        @apply text-white drop-shadow-[0px_1px_1px_rgba(0,0,0,0)];
+    }
+    .styled-header .grey-shiny-top {
+        @apply bg-gradient-to-b from-blue-500 from-50% to-65% to-blue-800 bg-clip-text text-transparent drop-shadow-[1px_1px_0px_rgba(0,0,0,0.3)];
+    }
+
+   
+    /* Red */
+    .red1 .keycard-bg-image {
+        background-image: url('/images/red1-bg.jpg');
+    }
+    .red1 .keycard-gradient {
+        @apply text-gray-900 bg-gradient-to-r from-slate-900 via-black via-50% to-yellow-500/25 to-100%;
+    }
+    .red1 .h3-headline {
+        @apply bg-gradient-to-b from-[#1c003d] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .red1 .h3-shadow {
+        @apply bg-gradient-to-b from-[#f1f1f1] to-[#d752ff] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+    .red2 .keycard-bg-image {
+        background-image: url('/images/red2-bg.jpg');
+    }
+    .red2 .keycard-gradient {
+        @apply text-white bg-gradient-to-br from-red-400 to-red-600;
+    }
+    .red2 .h3-headline {
+        @apply bg-gradient-to-b from-[#1c003d] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .red2 .h3-shadow {
+        @apply bg-gradient-to-b from-[#f1f1f1] to-[#d752ff] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+    .red3 .keycard-bg-image {
+        background-image: url('/images/red3-bg.jpg');
+    }
+    .red3 .keycard-gradient {
+        @apply text-white bg-gradient-to-r from-red-300 via-red-500 to-red-700;
+    }
+    .red3 .h3-headline {
+        @apply bg-gradient-to-b from-[#1c003d] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .red3 .h3-shadow {
+        @apply bg-gradient-to-b from-[#f1f1f1] to-[#d752ff] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+
+    /* Yellow */
+    .yellow1 .keycard-bg-image {
+        background-image: url('/images/yellow1-bg.jpg');
+    }
+    .yellow1 .keycard-gradient {
+        @apply text-gray-900 bg-gradient-to-r from-yellow-300 to-yellow-500;
+    }
+    .yellow1 .h3-headline {
+        @apply bg-gradient-to-b from-[#1c003d] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .yellow1 .h3-shadow {
+        @apply bg-gradient-to-b from-[#f1f1f1] to-[#d752ff] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+    .yellow2 .keycard-bg-image {
+        background-image: url('/images/yellow2-bg.jpg');
+    }
+    .yellow2 .keycard-gradient {
+        @apply text-gray-900 bg-gradient-to-br from-yellow-200 to-yellow-400;
+    }
+    .yellow2 .h3-headline {
+        @apply bg-gradient-to-b from-[#1c003d] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .yellow2 .h3-shadow {
+        @apply bg-gradient-to-b from-[#f1f1f1] to-[#d752ff] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+    .yellow3 .keycard-bg-image {
+        background-image: url('/images/yellow3-bg.jpg');
+    }
+    .yellow3 .keycard-gradient {
+        @apply text-gray-900 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600;
+    }
+    .yellow3 .h3-headline {
+        @apply bg-gradient-to-b from-[#1c003d] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .yellow3 .h3-shadow {
+        @apply bg-gradient-to-b from-[#f1f1f1] to-[#d752ff] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+
+    
+
+
+    /* Purple */
+    .purple1 .keycard-bg-image {
+        background-image: url('/images/purple1-bg.jpg');
+        @apply bg-cover;
+    }
+    .purple1 .keycard-gradient {
+        @apply bg-gradient-to-r from-purple-800/90 from-25% via-purple-800/90 via-50% to-pink-500/90 to-90%;
+    }
+    .purple1 .h3-headline {
+        @apply bg-gradient-to-b from-[#1c003d] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .purple1 .h3-shadow {
+        @apply bg-gradient-to-b from-[#f1f1f1] to-[#d752ff] bg-clip-text text-transparent  drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+
+    .purple2 .keycard-bg-image {
+        background-image: url('/images/purple2-bg.jpg');
+        @apply bg-cover;
+    }
+    .purple2 .keycard-gradient {
+        @apply text-white bg-gradient-to-r from-black via-purple-900/80 to-purple-600/25;
+    }
+    .purple2 .h3-headline {
+        @apply bg-gradient-to-b from-[#1c003d] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .purple2 .h3-shadow {
+        @apply bg-gradient-to-b from-[#f1f1f1] to-[#d752ff] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+    .purple3 .keycard-bg-image {
+        background-image: url('/images/purple3-bg.jpg');
+        @apply bg-cover;
+    }
+    .purple3 .keycard-gradient {
+        @apply text-white bg-gradient-to-r from-purple-300 via-purple-500 to-purple-700;
+    }
+    .purple3 .h3-headline {
+        @apply bg-gradient-to-b from-[#1c003d] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .purple3 .h3-shadow {
+        @apply bg-gradient-to-b from-[#f1f1f1] to-[#d752ff] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+
+    /* Cyan */
+    .cyan1 .keycard-bg-image {
+        background-image: url('/images/cyan1-bg.jpg');
+        @apply bg-cover;
+    }
+    .cyan1 .keycard-gradient {
+        @apply text-white bg-gradient-to-r from-cyan-800 from-25% via-cyan-800/50 via-50% to-cyan-800/25 to-100%;
+    }
+    .cyan1 .h3-headline {
+        @apply bg-gradient-to-b from-[#1c003d] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .cyan1 .h3-shadow {
+        @apply bg-gradient-to-b from-[#c0e430] to-[#fdfff9] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+    .cyan2 .keycard-bg-image {
+        background-image: url('/images/cyan2-bg.jpg');
+        @apply bg-cover;
+    }
+    .cyan2 .keycard-gradient {
+        @apply text-white bg-gradient-to-br from-cyan-400 to-cyan-600;
+    }
+    .cyan2 .h3-headline {
+        @apply bg-gradient-to-b from-[#1c003d] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .cyan2 .h3-shadow {
+        @apply bg-gradient-to-b from-[#c0e430] to-[#fdfff9] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+    .cyan3 .keycard-bg-image {
+        background-image: url('/images/cyan3-bg.jpg');
+        @apply bg-cover;
+    }
+    .cyan3 .keycard-gradient {
+        @apply text-white bg-gradient-to-r from-cyan-300 via-cyan-500 to-cyan-700;
+    }
+
+    /* Green */
+    .green1 .keycard-bg-image {
+        background-image: url('/images/green1-bg.jpg');
+        @apply bg-cover;
+    }
+    .green1 .keycard-gradient {
+        @apply text-white bg-gradient-to-r from-green-500 to-green-800/25;
+    }
+    .green1 .h3-headline {
+        @apply bg-gradient-to-b from-[#000000] to-[#005504] bg-clip-text text-transparent;
+    }
+    .green1 .h3-shadow {
+        @apply bg-gradient-to-b from-[#ffffff] to-[#009908] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(5,5,5,1)];
+    }
+    .green2 .keycard-bg-image {
+        background-image: url('/images/green2-bg.jpg');
+        @apply bg-cover;
+    }
+    .green2 .keycard-gradient {
+        @apply text-white bg-gradient-to-br from-green-400 to-green-600;
+    }
+    .green2 .h3-headline {
+        @apply bg-gradient-to-b from-[#000000] to-[#005504] bg-clip-text text-transparent;
+    }
+    .green2 .h3-shadow {
+        @apply bg-gradient-to-b from-[#ffffff] to-[#009908] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(5,5,5,1)];
+    }
+    .green3 .keycard-bg-image {
+        background-image: url('/images/green3-bg.jpg');
+        @apply bg-cover;
+    }
+    .green3 .keycard-gradient {
+        @apply text-white bg-gradient-to-r from-green-300 via-green-500 to-green-700;
+    }
+    .green3 .h3-headline {
+        @apply bg-gradient-to-b from-[#000000] to-[#005504] bg-clip-text text-transparent;
+    }
+    .green3 .h3-shadow {
+        @apply bg-gradient-to-b from-[#ffffff] to-[#009908] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(5,5,5,1)];
+    }
+    /* Pink */
+    .pink1 .keycard-bg-image {
+        background-image: url('/images/pink1-bg.jpg');
+        @apply bg-cover;
+    }
+    .pink1 .keycard-gradient {
+        @apply text-white bg-gradient-to-r from-pink-500 from-25% via-purple-600/25 via-50% to-pink-800/25;
+    }
+    .pink1 .h3-headline {
+        @apply bg-gradient-to-b from-[#fafafa] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .pink1 .h3-shadow {
+        @apply bg-gradient-to-b from-[#ffffff] to-[#74a9ea] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+    .pink2 .keycard-bg-image {
+        background-image: url('/images/pink2-bg.jpg');
+        @apply bg-cover;
+    }
+    .pink2 .keycard-gradient {
+        @apply text-white bg-gradient-to-br from-pink-400 to-pink-600;
+    }
+    .pink2 .h3-headline {
+        @apply bg-gradient-to-b from-[#fafafa] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .pink2 .h3-shadow {
+        @apply bg-gradient-to-b from-[#ffffff] to-[#74a9ea] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+    .pink3 .keycard-bg-image {
+        background-image: url('/images/pink3-bg.jpg');
+        @apply bg-cover;
+    }
+    .pink3 .keycard-gradient {
+        @apply text-white bg-gradient-to-r from-pink-300 via-pink-500 to-pink-700;
+    }
+    .pink3 .h3-headline {
+        @apply bg-gradient-to-b from-[#fafafa] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .pink3 .h3-shadow {
+        @apply bg-gradient-to-b from-[#ffffff] to-[#74a9ea] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+
+    /* Teal */
+    .teal1 .keycard-bg-image {
+        background-image: url('/images/teal1-bg.jpg');
+        @apply bg-cover;
+    }
+    .teal1 .keycard-gradient {
+        @apply text-white bg-gradient-to-r from-teal-500 to-teal-800;
+    }
+    .teal1 .h3-headline {
+        @apply bg-gradient-to-b from-[#fafafa] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .teal1 .h3-shadow {
+        @apply bg-gradient-to-b from-[#ffffff] to-[#74a9ea] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.9)];
+    }
+    .teal2 .keycard-bg-image {
+        background-image: url('/images/teal2-bg.jpg');
+        @apply bg-cover;
+    }
+    .teal2 .keycard-gradient {
+        @apply text-white bg-gradient-to-br from-teal-400 to-teal-600;
+    }
+    .teal2 .h3-headline {
+        @apply bg-gradient-to-b from-[#fafafa] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .teal2 .h3-shadow {
+        @apply bg-gradient-to-b from-[#ffffff] to-[#74a9ea] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+    .teal3 .keycard-bg-image {
+        background-image: url('/images/teal3-bg.jpg');
+        @apply bg-cover;
+    }
+    .teal3 .keycard-gradient {
+        @apply text-white bg-gradient-to-r from-teal-300 via-teal-500 to-teal-700;
+    }
+    .teal3 .h3-headline {
+        @apply bg-gradient-to-b from-[#fafafa] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .teal3 .h3-shadow {
+        @apply bg-gradient-to-b from-[#ffffff] to-[#74a9ea] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+
+    /* Lime */
+    .lime1 .keycard-bg-image {
+        background-image: url('/images/lime1-bg.jpg');
+        @apply bg-cover;
+    }
+    .lime1 .keycard-gradient {
+        @apply text-gray-900 bg-gradient-to-r from-lime-300 to-lime-500;
+    }
+    .lime1 .h3-headline {
+        @apply bg-gradient-to-b from-[#fafafa] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .lime1 .h3-shadow {
+        @apply bg-gradient-to-b from-[#ffffff] to-[#74a9ea] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+    .lime2 .keycard-bg-image {
+        background-image: url('/images/lime2-bg.jpg');
+        @apply bg-cover;
+    }
+    .lime2 .keycard-gradient {
+        @apply text-gray-900 bg-gradient-to-br from-lime-200 to-lime-400;
+    }
+    .lime2 .h3-headline {
+        @apply bg-gradient-to-b from-[#fafafa] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .lime2 .h3-shadow {
+        @apply bg-gradient-to-b from-[#ffffff] to-[#74a9ea] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+    .lime3 .keycard-bg-image {
+        background-image: url('/images/lime3-bg.jpg');
+        @apply bg-cover;
+    }
+    .lime3 .keycard-gradient {
+        @apply text-gray-900 bg-gradient-to-r from-lime-400 via-lime-500 to-lime-600;
+    }
+    .lime3 .h3-headline {
+        @apply bg-gradient-to-b from-[#fafafa] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .lime3 .h3-shadow {
+        @apply bg-gradient-to-b from-[#ffffff] to-[#74a9ea] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+
+    /* Orange */
+    .orange1 .keycard-bg-image {
+        background-image: url('/images/orange1-bg.jpg');
+        @apply bg-cover;
+    }
+    .orange1 .keycard-gradient {
+            @apply text-white bg-gradient-to-l from-orange-600 from-10% via-orange-600/80 via-65% to-orange-500;
+        }
+    .orange1 .h3-headline {
+        @apply bg-gradient-to-b from-[#ffffff] to-[#e4e4e4] bg-clip-text text-transparent;
+    }
+    .orange1 .h3-shadow {
+        @apply bg-gradient-to-b from-[#6b6b6b] to-[#000000] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(255,25,25,0.8)];
+    }
+    .orange2 .keycard-bg-image {
+        background-image: url('/images/orange2-bg.jpg');
+        @apply bg-cover;
+    }
+    .orange2 .keycard-gradient {
+        @apply text-white bg-gradient-to-bl from-indigo-900 from-50% to-orange-700/25;
+    }
+    .orange2 .h3-headline {
+        @apply bg-gradient-to-b from-[#fafafa] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .orange2 .h3-shadow {
+        @apply bg-gradient-to-b from-[#da5c13] to-[#ff9a57] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+    .orange3 .keycard-bg-image {
+        background-image: url('/images/orange3-bg.jpg');
+        @apply bg-cover;
+    }
+    .orange3 .keycard-gradient {
+        @apply text-white bg-gradient-to-r from-orange-300 via-orange-500 to-orange-700;
+    }
+    .orange3 .h3-headline {
+        @apply bg-gradient-to-b from-[#fafafa] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .orange3 .h3-shadow {
+        @apply bg-gradient-to-b from-[#ffffff] to-[#74a9ea] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+
+    /* Black */
+    .black1 .keycard-bg-image {
+        background-image: url('/images/black1-bg.jpg');
+        @apply bg-cover;
+    }
+    .black1 .keycard-gradient {
+        @apply text-gray-900 bg-gradient-to-r from-slate-900 via-black via-50% to-yellow-500/25 to-100%;
+    }
+    .black1 .h3-headline {
+        @apply bg-gradient-to-b from-[#fafafa] to-[#edff4a] bg-clip-text text-transparent;
+    }
+    .black1 .h3-shadow {
+        @apply bg-gradient-to-b from-[#ffffff] to-[#ffffff] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+    .black2 .keycard-bg-image {
+        background-image: url('/images/black2-bg.jpg');
+        @apply bg-cover;
+    }
+    .black2 .keycard-gradient {
+        @apply text-white bg-gradient-to-r from-gray-800 via-65% via-black to-gray-900/70 to-100%;
+    }
+    .black2 .h3-headline {
+        @apply bg-gradient-to-b from-[#fafafa] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .black2 .h3-shadow {
+        @apply bg-gradient-to-b from-[#ffffff] to-[#74a9ea] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+    .black3 .keycard-bg-image {
+        background-image: url('/images/black3-bg.jpg');
+        @apply bg-cover;
+    }
+    .black3 .keycard-gradient {
+        @apply text-white bg-gradient-to-r from-gray-600 via-gray-800 to-gray-950;
+    }
+    .black3 .h3-headline {
+        @apply bg-gradient-to-b from-[#fafafa] to-[#d752ff] bg-clip-text text-transparent;
+    }
+    .black3 .h3-shadow {
+        @apply bg-gradient-to-b from-[#ffffff] to-[#74a9ea] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(25,25,25,0.8)];
+    }
+}
+@layer utilities {
+    .text-shadow-lg {
+        text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
+    }
+}    
+ 

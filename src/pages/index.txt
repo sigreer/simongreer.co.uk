@@ -1,0 +1,36 @@
+---
+import Layout from "../layouts/Layout.astro";
+import directus from "../lib/directus";
+import { readSingleton, readItems } from "@directus/sdk";
+//import TagCloud from "../components/TagCloud.astro";
+import Introduction from "../components/Introduction.astro";
+import DynamicKeyCards from "../components/DynamicKeyCards.astro";
+import FixedKeyCards from "../components/FixedKeyCards.astro";
+import BlogListCards from "../components/BlogListCards.astro";
+import BlogListLines from "../components/BlogListLines.astro";
+import Carousel from "../components/Carousel.astro";
+import LogoLine from "../components/LogoLine.astro";
+import '../styles/custom.css';
+const global = await directus.request(readSingleton("global"));
+const posts = await directus.request(readItems("posts", {
+  fields: ['*', { author: ['*'] }],
+}));
+const tagCounts = posts.reduce((acc, post) => {
+  if (Array.isArray(post.tags)) {
+    post.tags.forEach(tag => {
+      acc[tag] = (acc[tag] || 0) + 1;
+    });
+  }
+  return acc;
+}, {});
+---
+
+<Layout title={global.title} description={global.description}>
+  {global.show_introduction && <Introduction />}
+  {global.show_logoline && <LogoLine />}
+  {global.show_dynamic_keycards && <DynamicKeyCards />}
+  {global.show_carousel && <Carousel />}
+  {global.show_fixed_keycards && <FixedKeyCards />}
+  {global.show_blogcards && <BlogListCards />}
+  {global.show_bloglines && <BlogListLines />}
+</Layout>

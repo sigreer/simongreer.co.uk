@@ -1,0 +1,82 @@
+---
+import { readItems } from "@directus/sdk";
+import directus from "../lib/directus";
+import BlogListCard from "./BlogListCard.astro";
+
+const posts = await directus.request(readItems("posts", {
+  fields: ['*'],
+  limit: 4, // Fetch up to 4 posts to cover all screen sizes
+}));
+---
+
+<section class="py-8 px-6 md:px-0">
+  <div class="w-full bg-purple-700 rounded-t-lg">
+    <h3 class="w-fit text-3xl font-bold relative my-2 px-4 py-3 text-white">Blog Posts</h3>
+  </div>
+  <ul class="grid gap-4
+    grid-cols-1 
+    sm:grid-cols-2 sm:gap-6 sm:px-0
+    md:gap-12
+    lg:grid-cols-3 lg:gap-6
+    xl:grid-cols-3 xl:gap-6
+    2xl:grid-cols-3 2xl:gap-6
+">
+{posts.slice(0, 1).map((post) => (
+  <BlogListCard
+    title={post.title}
+    slug={post.slug}
+    excerpt={post.excerpt}
+    tags={post.tags}
+    image={post.image}
+    className="block sm:hidden"
+  />
+))}
+      {posts.slice(0, 2).map((post) => (
+        <BlogListCard
+          title={post.title}
+          slug={post.slug}
+          excerpt={post.excerpt}
+          tags={post.tags}
+          image={post.image}
+          className="hidden sm:block md:hidden"
+        />
+      ))}
+      {posts.slice(0, 2).map((post) => (
+        <BlogListCard
+          title={post.title}
+          slug={post.slug}
+          excerpt={post.excerpt}
+          tags={post.tags}
+          image={post.image}
+          className="hidden md:block lg:hidden"
+        />
+      ))}
+      {posts.slice(0, 3).map((post) => (
+              <BlogListCard
+                title={post.title}
+                slug={post.slug}
+                excerpt={post.excerpt}
+                tags={post.tags}
+                image={post.image}
+                className="hidden lg:block"
+              />
+            ))}
+    </ul>
+</section>
+
+<style>
+  /* Fallback for browsers that don't support :nth-child */
+  @media (max-width: 639px) {
+    .sm\:hidden { display: block; }
+  }
+  @media (min-width: 640px) and (max-width: 767px) {
+    .sm\:hidden { display: none; }
+    .sm\:nth-child\(-n\+2\)\:block { display: block; }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .md\:nth-child\(n\+3\)\:hidden { display: none; }
+  }
+  @media (min-width: 1024px) {
+    .lg\:block { display: block; }
+  }
+</style>

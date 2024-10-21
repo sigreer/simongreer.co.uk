@@ -1,0 +1,31 @@
+---
+import directus from "../lib/directus";
+import { readSingleton } from "@directus/sdk";
+const global = await directus.request(readSingleton('global'));
+//import { Image } from 'astro:assets';
+//import bunIcon from '../images/bunicon.svg';
+---
+<div class="flex-col flex">
+    <div class="flex">
+    <h2
+      class="mb-6 text-base md:text-xl font-semibold uppercase text-gray-900 dark:text-white">
+      About Me
+    </h2>
+    </div>
+    <div class="flex flex-row">
+        {global.about_pic && (
+        <div class="flex max-h-24 max-w-24">
+            <img src=`${directus.url}assets/${global.about_pic}` alt={global.about_pic.description} />
+        </div>
+        )}
+        <div class="flex-cols flex px-4">
+            <p>
+            {global.about}
+            </p>
+        </div>
+    </div>  
+</div>
+</div>
+        
+        
+       
