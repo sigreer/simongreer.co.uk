@@ -2,7 +2,6 @@
 import BlogPostLayout from "../../layouts/BlogPostLayout.astro";
 import directus from "../../lib/directus";
 import { readItems } from "@directus/sdk";
-import Author from "../../components/Author.astro";
 import PostBody from "../../components/PostBody";
 
 export async function getStaticPaths() {
@@ -13,7 +12,7 @@ export async function getStaticPaths() {
   }));
 }
 
-const { title, author, content, image, tags } = Astro.props;
+const { title, content, image, tags } = Astro.props;
 ---
 
 <BlogPostLayout>
@@ -21,7 +20,6 @@ const { title, author, content, image, tags } = Astro.props;
     <article class="format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
       <header class="mb-4 lg:mb-6 not-format">
         <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">{title}</h1>
-        <Author author={author} />
       </header>
       
       {image && (
