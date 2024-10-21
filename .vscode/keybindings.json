@@ -1,0 +1,10 @@
+[
+  {
+    "key": "ctrl+alt+j",
+    "command": "editor.action.insertSnippet",
+    "args": {
+      "name": "Directus Singleton"
+    },
+    "when": "editorTextFocus && editorLangId =~ /react|javascript|typescript|astro/"
+  }
+]
