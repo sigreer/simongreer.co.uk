@@ -16,7 +16,7 @@ const posts = await directus.request(readItems("posts", {
   <ul class="grid gap-4
     grid-cols-1 
     sm:grid-cols-2 sm:gap-6 sm:px-0
-    md:gap-12
+    md:gap-4
     lg:grid-cols-3 lg:gap-6
     xl:grid-cols-3 xl:gap-6
     2xl:grid-cols-3 2xl:gap-6
@@ -62,6 +62,13 @@ const posts = await directus.request(readItems("posts", {
               />
             ))}
     </ul>
+    <div class="w-full flex justify-end">
+      <a class="px-4 py-2 bg-purple-600 text-gray-100 mt-3 rounded-md uppercase flex flex-row items-center hover:scale-110 transition-all duration-100 shadow-md hover:shadow-gray-700/30 shadow-gray-700/30 hover:shadow-md"><div class="font-semibold text-xl">More</div>
+        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+        </svg>
+      </a>
+    </div>
 </section>
 
 <style>

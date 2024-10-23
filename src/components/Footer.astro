@@ -2,7 +2,6 @@
 import directus from "../lib/directus";
 import { readSingleton } from "@directus/sdk";
 const global = await directus.request(readSingleton('global'));
-import TagCloud from './TagCloud.astro';
 import ContentTagCloud from './ContentTagCloud.astro';
 import SocialIcons from './SocialIcons.astro';
 import PoweredBy from './PoweredBy.astro';
@@ -41,7 +40,6 @@ const socials = {
             Tag Cloud
           </h2>
           <ContentTagCloud />
-        <TagCloud />
         </div>
         <div class="w-full h-full">
             <h2
