@@ -1,4 +1,4 @@
-import { createDirectus, rest, } from '@directus/sdk';
+import { createDirectus, rest } from '@directus/sdk';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -91,6 +91,15 @@ type Techguide = {
     id: string;
     description: string;
   };
+  vendorlogo_horizontal: {
+    id: string;
+    description: string;
+  };
+  vendorlogo_icon: {
+    id: string;
+    description: string;
+  };
+  vendorname: string;
 }
 
 type Tag = {

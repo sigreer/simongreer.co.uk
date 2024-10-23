@@ -22,7 +22,7 @@ const tags = await directus.request(readItems("tags", {
               slug={techguide.slug}
               content={techguide.excerpt}
               tags={techguide.tags.map(tag => tags.find(t => t.id === tag)?.name).filter(Boolean)}
-              image={techguide.image}
+              vendorlogo_icon={techguide.vendorlogo_icon}
             />
           ))
         }
