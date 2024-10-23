@@ -70,7 +70,9 @@ type Post = {
   content: string;
   slug: string;
   description: string;
-  tags: string[];
+  tags: {
+    name: string;
+  }[];
   excerpt: string;
   image: {
     id: string;

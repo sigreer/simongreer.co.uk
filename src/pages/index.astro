@@ -1,40 +1,26 @@
 ---
 import directus from "../lib/directus";
-import { readSingleton, readItems } from "@directus/sdk";
+import { readSingleton } from "@directus/sdk";
 import Layout from "../layouts/Layout.astro";
 import Introduction from "../components/Introduction.astro";
 import DynamicKeyCards from "../components/DynamicKeyCards.astro";
 import FixedKeyCards from "../components/FixedKeyCards.astro";
 import BlogListCards from "../components/BlogListCards.astro";
 import TechListLines from "../components/TechListLines.astro";
-import '../styles/custom.css';
 const global = await directus.request(readSingleton("global"));
-const posts = await directus.request(readItems("posts", {
-  fields: ['*'],
-}));
-const techguides = await directus.request(readItems("techguides", {
-  fields: ['*'],
-}));
-const tagCounts = posts.reduce((acc, post) => {
-  if (Array.isArray(post.tags)) {
-    post.tags.forEach(tag => {
-      acc[tag] = (acc[tag] || 0) + 1;
-    });
-  }
-  return acc;
-}, {});
+
 ---
 
 <Layout title={global.title} description={global.description}>
   <FixedKeyCards />
   <DynamicKeyCards />
   <Introduction />
-  <div class="w-full flex flex-row gap-6">
-    <div class="w-2/3">
+  <div class="w-full flex flex-col gap-2 md:flex-row md:gap-6">
+    <div class="w-full md:w-1/2 lg:w-2/3">
       <BlogListCards />
     </div>
-    <div class="w-1/3">
-      <TechListLines />
+    <div class="w-full md:w-1/2 lg:w-1/3">
+      <TechListLines columns={1} />
     </div>
   </div>
 </Layout>
