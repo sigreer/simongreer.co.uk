@@ -1,9 +1,8 @@
 ---
-import BlogPostLayout from "../../layouts/BlogPostLayout.astro";
 import directus from "../../lib/directus";
 import { readItems } from "@directus/sdk";
 import PostBody from "../../components/PostBody";
-
+import BlogPostLayout from "../../layouts/BlogPostLayout.astro";
 export async function getStaticPaths() {
   const posts = await directus.request(readItems("posts"));
   return posts.map((post) => ({

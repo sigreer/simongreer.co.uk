@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="cvfy"
+   x="652px"
+   y="152px"
+   width="150"
+   height="150"
+   version="1.1"
+   viewBox="0 250 150 150"
+   xml:space="preserve"
+   sodipodi:docname="opnsense-icon.svg"
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"><defs
+   id="defs29" /><sodipodi:namedview
+   id="namedview29"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="true"
+   inkscape:deskcolor="#d1d1d1"
+   inkscape:zoom="1.7654099"
+   inkscape:cx="497.33492"
+   inkscape:cy="120.65186"
+   inkscape:window-width="3832"
+   inkscape:window-height="1104"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="cvfy" /><title
+   id="title1">OPNsense Logo Icon</title><metadata
+   id="metadata1"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title>OPNsense Logo Icon</dc:title><cc:license
+         rdf:resource="https://simongreer.co.uk" /><dc:date>23/10/2024</dc:date><dc:creator><cc:Agent><dc:title>Simon Greer</dc:title></cc:Agent></dc:creator></cc:Work></rdf:RDF></metadata>
+<title
+   id="title2">OPNsense logo</title>
+<style
+   type="text/css"
+   id="style2">
+	.st0{clip-path:url(#cvfb);fill:#898B8D;}
+	.st1{clip-path:url(#cvfb);fill:url(#cvfj);}
+	.st2{clip-path:url(#cvfb);fill:url(#cvfi);}
+	.st3{fill:#403F41;}
+	.st4{clip-path:url(#cvfa);fill:#898B8D;}
+	.st5{clip-path:url(#cvfa);fill:url(#cvfh);}
+	.st6{clip-path:url(#cvfa);fill:url(#cvfg);}
+	.st7{clip-path:url(#cvff);fill:#58595B;}
+	.st8{clip-path:url(#cvff);fill:url(#cvfr);}
+	.st9{clip-path:url(#cvfe);fill:#58595B;}
+	.st10{clip-path:url(#cvfe);fill:url(#cvfq);}
+	.st11{clip-path:url(#cvfd);fill:#58595B;}
+	.st12{clip-path:url(#cvfd);fill:url(#cvfp);}
+	.st13{clip-path:url(#cvfc);fill:#58595B;}
+	.st14{clip-path:url(#cvfc);fill:url(#cvfo);}
+	.st15{fill:url(#cvfn);}
+	.st16{fill:url(#cvfm);}
+	.st17{fill:url(#cvfl);}
+	.st18{fill:url(#cvfk);}
+	.st19{fill:#E24525;}
+	.st20{fill:#808183;}
+</style>
+<g
+   transform="matrix(0.89924397,0,0,0.90312742,-5.4984155,31.438745)"
+   id="g28">
+	
+		<defs
+   id="defs2">
+			<path
+   id="cvfu"
+   d="m 38.8,284.1 v -4.8 c 0,-0.4 0.1,-1.1 0.1,-1.1 l 0.2,-0.5 v -0.2 l 0.2,-0.4 0.1,-0.1 0.1,-0.2 0.1,-0.1 v -0.1 l 0.2,-0.2 v -0.1 l 0.7,-0.7 0.2,-0.1 h 0.1 l 0.3,-0.2 h 0.3 L 42,275 c 0.4,-0.1 0.7,-0.1 1.1,-0.1 h 94.6 v 9.2 h 9 V 265.7 H 43.1 c -7.3,0 -13.3,6.1 -13.3,13.6 v 4.8 z" />
+		</defs>
+		<clipPath
+   id="cvfb">
+			<use
+   width="100%"
+   height="100%"
+   xlink:href="#cvfu"
+   id="use2" />
+		</clipPath>
+		<rect
+   class="st0"
+   x="30.200001"
+   y="264.70001"
+   width="117.1"
+   height="12"
+   clip-path="url(#cvfb)"
+   id="rect2" />
+		
+			<linearGradient
+   id="cvfj"
+   x1="-2420"
+   x2="-2400"
+   y1="800.09998"
+   y2="800.09998"
+   gradientTransform="matrix(0.1869,0.3575,-0.6751,0.353,1133,856.1)"
+   gradientUnits="userSpaceOnUse">
+			<stop
+   style="stop-color:#737373"
+   offset="0"
+   id="stop2" />
+			<stop
+   style="stop-color:#333"
+   offset="1"
+   id="stop3" />
+		</linearGradient>
+		<polygon
+   class="st1"
+   points="137.5,284.2 133.8,277 147,269.9 150.7,277.1 "
+   clip-path="url(#cvfb)"
+   style="fill:url(#cvfj)"
+   id="polygon3" />
+		
+			<linearGradient
+   id="cvfi"
+   x1="-2368"
+   x2="-2347"
+   y1="2163"
+   y2="2163"
+   gradientTransform="matrix(-0.1861,0.3579,-0.5495,-0.2858,785,1739)"
+   gradientUnits="userSpaceOnUse">
+			<stop
+   style="stop-color:#737373"
+   offset="0"
+   id="stop4" />
+			<stop
+   style="stop-color:#333"
+   offset="1"
+   id="stop5" />
+		</linearGradient>
+		<polygon
+   class="st2"
+   points="28.2,278.4 31.9,271.1 42.6,276.9 38.9,284.1 "
+   clip-path="url(#cvfb)"
+   style="fill:url(#cvfi)"
+   id="polygon5" />
+	
+	<rect
+   class="st3"
+   x="47.799999"
+   y="284.10001"
+   width="80.900002"
+   height="9.1999998"
+   id="rect5" />
+	<rect
+   class="st3"
+   x="47.799999"
+   y="358"
+   width="80.900002"
+   height="9.1999998"
+   id="rect6" />
+	
+		<defs
+   id="defs6">
+			<path
+   id="cvft"
+   d="m 137.7,367.2 v 4.8 c 0,0.4 -0.1,1.1 -0.1,1.1 l -0.2,0.5 v 0.2 l -0.2,0.4 -0.1,0.1 -0.1,0.2 -0.1,0.1 v 0.1 l -0.2,0.2 v 0.1 l -0.5,0.5 h -0.1 l -0.1,0.1 -0.2,0.1 -0.1,0.1 -0.3,0.2 h -0.3 l -0.5,0.2 c -0.4,0.1 -0.7,0.1 -1.1,0.1 H 38.8 v -9.2 h -9 v 18.4 h 103.6 c 7.3,0 13.3,-6.1 13.3,-13.6 v -4.8 h -9 z" />
+		</defs>
+		<clipPath
+   id="cvfa">
+			<use
+   width="100%"
+   height="100%"
+   xlink:href="#cvft"
+   id="use6" />
+		</clipPath>
+		<rect
+   class="st4"
+   x="29.200001"
+   y="374.60001"
+   width="117.1"
+   height="12"
+   clip-path="url(#cvfa)"
+   id="rect7" />
+		
+			<linearGradient
+   id="cvfh"
+   x1="1480"
+   x2="1501"
+   y1="2101"
+   y2="2101"
+   gradientTransform="matrix(-0.1869,-0.3575,0.6751,-0.353,-1106,1649)"
+   gradientUnits="userSpaceOnUse">
+			<stop
+   style="stop-color:#737373"
+   offset="0"
+   id="stop7" />
+			<stop
+   style="stop-color:#333"
+   offset="1"
+   id="stop8" />
+		</linearGradient>
+		<polygon
+   class="st5"
+   points="39,367.1 42.7,374.4 29.5,381.5 25.8,374.2 "
+   clip-path="url(#cvfa)"
+   style="fill:url(#cvfh)"
+   id="polygon8" />
+		
+			<linearGradient
+   id="cvfg"
+   x1="1880"
+   x2="1900"
+   y1="995.70001"
+   y2="995.70001"
+   gradientTransform="matrix(0.1861,-0.3579,0.5495,0.2858,-757.7,765.5)"
+   gradientUnits="userSpaceOnUse">
+			<stop
+   style="stop-color:#737373"
+   offset="0"
+   id="stop9" />
+			<stop
+   style="stop-color:#333"
+   offset="1"
+   id="stop10" />
+		</linearGradient>
+		<polygon
+   class="st6"
+   points="148.4,372.9 144.7,380.2 133.9,374.4 137.6,367.2 "
+   clip-path="url(#cvfa)"
+   style="fill:url(#cvfg)"
+   id="polygon10" />
+	
+	
+		<defs
+   id="defs10">
+			<rect
+   id="cvfs"
+   x="38.799999"
+   y="302.60001"
+   width="34.599998"
+   height="9.1999998" />
+		</defs>
+		<clipPath
+   id="cvff">
+			<use
+   width="100%"
+   height="100%"
+   xlink:href="#cvfs"
+   id="use10" />
+		</clipPath>
+		<rect
+   class="st7"
+   x="38.799999"
+   y="302.60001"
+   width="34.599998"
+   height="9.1999998"
+   clip-path="url(#cvff)"
+   id="rect10" />
+		
+			<linearGradient
+   id="cvfr"
+   x1="2724"
+   x2="2762"
+   y1="2480"
+   y2="2480"
+   gradientTransform="matrix(-1.521,-1.021,3.14,1.519,-3559,-659.4)"
+   gradientUnits="userSpaceOnUse">
+			<stop
+   style="stop-color:#58595B"
+   offset=".107"
+   id="stop11" />
+			<stop
+   offset="1"
+   id="stop12" />
+		</linearGradient>
+		<polygon
+   class="st8"
+   points="73.5,311.8 69.7,319.2 38.4,302.4 42.1,295 "
+   clip-path="url(#cvff)"
+   style="fill:url(#cvfr)"
+   id="polygon12" />
+	
+	
+		<defs
+   id="defs12">
+			<rect
+   id="cvfx"
+   x="103.1"
+   y="302.60001"
+   width="34.599998"
+   height="9.1999998" />
+		</defs>
+		<clipPath
+   id="cvfe">
+			<use
+   width="100%"
+   height="100%"
+   xlink:href="#cvfx"
+   id="use12" />
+		</clipPath>
+		<rect
+   class="st9"
+   x="103.1"
+   y="302.60001"
+   width="34.599998"
+   height="9.1999998"
+   clip-path="url(#cvfe)"
+   id="rect12" />
+		
+			<linearGradient
+   id="cvfq"
+   x1="2370"
+   x2="2408"
+   y1="2242"
+   y2="2242"
+   gradientTransform="matrix(1.521,-1.021,-3.14,1.519,3527,-659.4)"
+   gradientUnits="userSpaceOnUse">
+			<stop
+   style="stop-color:#58595B"
+   offset=".107"
+   id="stop13" />
+			<stop
+   offset="1"
+   id="stop14" />
+		</linearGradient>
+		<polygon
+   class="st10"
+   points="103.1,311.8 106.8,319.2 138.2,302.4 134.4,295 "
+   clip-path="url(#cvfe)"
+   style="fill:url(#cvfq)"
+   id="polygon14" />
+	
+	
+		<defs
+   id="defs14">
+			<rect
+   id="cvfw"
+   x="103.1"
+   y="339.5"
+   width="34.599998"
+   height="9.1999998" />
+		</defs>
+		<clipPath
+   id="cvfd">
+			<use
+   width="100%"
+   height="100%"
+   xlink:href="#cvfw"
+   id="use14" />
+		</clipPath>
+		<rect
+   class="st11"
+   x="103.1"
+   y="339.5"
+   width="34.599998"
+   height="9.1999998"
+   clip-path="url(#cvfd)"
+   id="rect14" />
+		
+			<linearGradient
+   id="cvfp"
+   x1="-2721"
+   x2="-2683"
+   y1="-204.89999"
+   y2="-204.89999"
+   gradientTransform="matrix(1.521,1.021,-3.14,-1.519,3587,2791)"
+   gradientUnits="userSpaceOnUse">
+			<stop
+   style="stop-color:#58595B"
+   offset=".107"
+   id="stop15" />
+			<stop
+   offset="1"
+   id="stop16" />
+		</linearGradient>
+		<polygon
+   class="st12"
+   points="103.1,339.5 106.8,332.1 138.2,348.9 134.4,356.3 "
+   clip-path="url(#cvfd)"
+   style="fill:url(#cvfp)"
+   id="polygon16" />
+	
+	
+		<defs
+   id="defs16">
+			<rect
+   id="cvfv"
+   x="38.799999"
+   y="339.5"
+   width="34.599998"
+   height="9.1999998" />
+		</defs>
+		<clipPath
+   id="cvfc">
+			<use
+   width="100%"
+   height="100%"
+   xlink:href="#cvfv"
+   id="use16" />
+		</clipPath>
+		<rect
+   class="st13"
+   x="38.799999"
+   y="339.5"
+   width="34.599998"
+   height="9.1999998"
+   clip-path="url(#cvfc)"
+   id="rect16" />
+		
+			<linearGradient
+   id="cvfo"
+   x1="-2569"
+   x2="-2530"
+   y1="-102.7"
+   y2="-102.7"
+   gradientTransform="matrix(-1.521,1.021,3.14,-1.519,-3500,2791)"
+   gradientUnits="userSpaceOnUse">
+			<stop
+   style="stop-color:#58595B"
+   offset=".107"
+   id="stop17" />
+			<stop
+   offset="1"
+   id="stop18" />
+		</linearGradient>
+		<polygon
+   class="st14"
+   points="73.5,339.5 69.7,332.1 38.4,348.9 42.1,356.3 "
+   clip-path="url(#cvfc)"
+   style="fill:url(#cvfo)"
+   id="polygon18" />
+	
+	<linearGradient
+   id="cvfn"
+   x1="29.84"
+   x2="73.400002"
+   y1="295.5"
+   y2="295.5"
+   gradientUnits="userSpaceOnUse">
+		<stop
+   style="stop-color:#A6A8AB"
+   offset=".2373"
+   id="stop19" />
+		<stop
+   style="stop-color:#404040"
+   offset="1"
+   id="stop20" />
+	</linearGradient>
+	<polygon
+   class="st15"
+   points="29.8,279.3 73.4,302.6 73.4,311.8 29.8,288.5 "
+   style="fill:url(#cvfn)"
+   id="polygon20" />
+	
+		<linearGradient
+   id="cvfm"
+   x1="-287.89999"
+   x2="-244.3"
+   y1="295.5"
+   y2="295.5"
+   gradientTransform="matrix(-1,0,0,1,-141.2,0)"
+   gradientUnits="userSpaceOnUse">
+		<stop
+   style="stop-color:#A6A8AB"
+   offset=".2373"
+   id="stop21" />
+		<stop
+   style="stop-color:#404040"
+   offset="1"
+   id="stop22" />
+	</linearGradient>
+	<polygon
+   class="st16"
+   points="146.7,279.3 103.1,302.6 103.1,311.8 146.7,288.5 "
+   style="fill:url(#cvfm)"
+   id="polygon22" />
+	
+		<linearGradient
+   id="cvfl"
+   x1="-119.4"
+   x2="-75.839996"
+   y1="1846"
+   y2="1846"
+   gradientTransform="rotate(180,13.64,1101)"
+   gradientUnits="userSpaceOnUse">
+		<stop
+   style="stop-color:#A6A8AB"
+   offset=".2373"
+   id="stop23" />
+		<stop
+   style="stop-color:#404040"
+   offset="1"
+   id="stop24" />
+	</linearGradient>
+	<polygon
+   class="st17"
+   points="146.7,372.1 103.1,348.8 103.1,339.5 146.7,362.8 "
+   style="fill:url(#cvfl)"
+   id="polygon24" />
+	
+		<linearGradient
+   id="cvfk"
+   x1="-138.60001"
+   x2="-95.07"
+   y1="1846"
+   y2="1846"
+   gradientTransform="matrix(1,0,0,-1,168.5,2202)"
+   gradientUnits="userSpaceOnUse">
+		<stop
+   style="stop-color:#A6A8AB"
+   offset=".2373"
+   id="stop25" />
+		<stop
+   style="stop-color:#404040"
+   offset="1"
+   id="stop26" />
+	</linearGradient>
+	<polygon
+   class="st18"
+   points="29.8,372.1 73.4,348.8 73.4,339.5 29.8,362.8 "
+   style="fill:url(#cvfk)"
+   id="polygon26" />
+	<polygon
+   class="st19"
+   points="128.7,307.4 103.1,321 103.1,330.3 128.7,344 128.7,334.7 120.4,330.3 146.7,330.3 146.7,321 120.4,321 128.7,316.6 "
+   id="polygon27" />
+	<polygon
+   class="st19"
+   points="29.8,321 29.8,330.3 56.1,330.3 47.8,334.7 47.8,344 73.4,330.3 73.4,321 47.8,307.4 47.8,316.6 56.2,321 "
+   id="polygon28" />
+</g>
+
+
+</svg>

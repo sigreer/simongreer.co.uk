@@ -4,10 +4,10 @@ export interface Props {
   content: string
   slug: string
   tags: string[]
-  image: {id: string, description: string}
+  vendorlogo_icon: {id: string, description: string}
 }
 
-const { title, content, slug, tags, image } = Astro.props
+const { title, content, slug, tags, vendorlogo_icon } = Astro.props
 ---
 
 <li class="flex flex-col rounded-md bg-white hover:shadow-lg hover:scale-105 shadow-md transition h-24">
@@ -16,7 +16,7 @@ const { title, content, slug, tags, image } = Astro.props
   class="flex flex-row gap-x-1 p-1 relative h-full"
   >
   <div class="w-1/5 overflow-hidden">
-    <img src={ `${process.env.DIRECTUS_URL}/assets/${image}` } alt={title} class="h-full w-full object-cover object-center rounded-l-md"/>
+    <img src={ `${process.env.DIRECTUS_URL}/assets/${vendorlogo_icon}` } alt={title} class="h-full w-full object-cover object-center rounded-l-md"/>
 </div>
 
     <div class="flex flex-col gap-y-0 py-1 px-4 w-5/6">
