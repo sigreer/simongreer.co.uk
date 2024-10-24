@@ -59,8 +59,45 @@ type Project = {
   title: string;
   content: string;
   slug: string;
+  tags: {
+    id: string;
+    name: string;
+  }[];
   description: string;
-  menus: string;
+  image: {
+    id: string;
+    description: string;
+  };
+  clientlogo_icon: {
+    id: string;
+    description: string;
+  };
+  clientlogo_horizontal: {
+    id: string;
+    description: string;
+  };
+  vendorlogo_horizontal: {
+    id: string;
+    description: string;
+  };
+  vendorlogo_icon: {
+    id: string;
+    description: string;
+  };
+  vendorname: string;
+  image_gallery: {
+    id: string;
+    description: string;
+  }[];
+  banner_image: {
+    id: string;
+    description: string;
+  };
+  files: {
+    id: string;
+    description: string;
+  }[];
+
 }
 
 
@@ -71,6 +108,7 @@ type Post = {
   slug: string;
   description: string;
   tags: {
+    id: string;
     name: string;
   }[];
   excerpt: string;
@@ -86,6 +124,7 @@ type Techguide = {
   content: string;
   slug: string;
   tags: {
+    id: string;
     name: string;
   }[];
   excerpt: string;
