@@ -1,12 +1,12 @@
 ---
 import { readItems } from "@directus/sdk";
 import directus from "../lib/directus";
-import TechListLine from "./TechListLine.astro";
+import ProjectBox from "./ProjectBox.astro";
 
 // Accept the columns prop
 const { columns } = Astro.props;
 
-const techguides = await directus.request(readItems("techguides", {
+const projects = await directus.request(readItems("projects", {
   fields: ['*'],
 }));
 const tags = await directus.request(readItems("tags", {
@@ -22,19 +22,19 @@ const tags = await directus.request(readItems("tags", {
 
   <ul class={`grid gap-y-4 md:gap-y-5 lg:gap-y-4 ${columns === 1 ? 'grid-cols-1' : 'grid-cols-2 gap-x-3'}`}>
     {
-      techguides.slice(0, 4).map((techguide) => (
-        <TechListLine
-          title={techguide.title}
-          slug={techguide.slug}
-          content={techguide.excerpt}
-          tags={techguide.tags.map(tagId => {
+      projects.slice(0, 4).map((project) => (
+        <ProjectBox
+          title={project.title}
+          slug={project.slug}
+          content={project.excerpt}
+          tags={project.tags.map(tagId => {
             const foundTag = tags.find(t => t.id === tagId);
             console.log('Processing tag:', tagId);
             console.log('Found tag:', foundTag);
-            console.log('Techguide tags:', techguide.tags);
+            console.log('Techguide tags:', project.tags);
             return foundTag?.name;
           }).filter(Boolean) as string[]}
-          vendorlogo_icon={techguide.vendorlogo_icon}
+          vendorlogo_icon={project.vendorlogo_icon}
         />
       ))
     }

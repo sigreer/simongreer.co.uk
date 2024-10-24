@@ -8,6 +8,7 @@ import BriefcaseIcon from "../images/briefcase-icon.svg";
 import NewspaperIcon from "../images/newspaper-icon.svg";
 import SpannerScrewdriverIcon from "../images/spannerscrewdriver-icon.svg";
 import ChatBubbleIcon from "../images/chatbubble-icon.svg";
+import PersonalIcon from "../images/personal-icon.svg";
 function isActive(href: string) {
   return Astro.url.pathname === href || Astro.url.pathname.startsWith(href + '/');
 }
@@ -86,7 +87,19 @@ function isActive(href: string) {
               <span class="flex text-lg md:text-xs w-full justify-center">My Thoughts</span>
             </div></a>
         </li>
-
+        <li class="h-42 border-y-4 md:h-24 lg:h-28 md:py-0 md:border-y-0 flex">
+          <a href="/personal" class={`
+            h-full w-full flex flex-col items-center p-4 m-0 text-gray-200 transition-all duration-100 justify-between relative
+            md:p-0 md:h-24 md:py-0 md:m-0 md:px-1 md:border-r md:border-y-0 md:border-blue-950/75 md:hover:bg-blue-900 md:hover:shadow-lg md:hover:drop-shadow-lg md:hover:scale-110 md:hover:border-0
+            lg:px-5 lg:h-28
+            ${isActive('/personal') ? 'md:border-b-4 md:border-b-red-500' : ''}
+          `}>
+            <div class="min-w-24 flex flex-col items-center">
+              <span class="flex text-2xl pt-0 md:pt-0 lg:pt-2 font-semibold text-center md:text-base">Me</span>
+              <span class="flex py-1 justify-center"><Image src={PersonalIcon} alt="Blog Icon" class="w-16 h-16 md:w-8 md:h-8 md:my-0 lg:w-10 lg:h-10 mb-1 brightness-0 invert" /></span>
+              <span class="flex text-lg md:text-xs w-full justify-center">Personal Stuff</span>
+            </div></a>
+        </li>
         <li class="h-42 border-y-4 md:h-24 lg:h-28 md:p-0 md:border-y-0 flex">
           <a href="/get-in-touch" class={`
             h-full w-full flex flex-col items-center p-4 m-0 text-gray-200 transition-all duration-100 justify-between relative
