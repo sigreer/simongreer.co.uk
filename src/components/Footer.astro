@@ -1,22 +1,13 @@
 ---
 import directus from "../lib/directus";
-import { readSingleton } from "@directus/sdk";
-const global = await directus.request(readSingleton('global'));
-import ContentTagCloud from './ContentTagCloud.astro';
-import SocialIcons from './SocialIcons.astro';
+import { readItems } from "@directus/sdk";
 import PoweredBy from './PoweredBy.astro';
-import About from './About.astro';
-const socials = {
-  ...(global.twitter && { twitter: global.twitter }),
-  ...(global.github && { github: global.github }),
-  ...(global.mastodon && { mastodon: global.mastodon }),
-  ...(global.dribbble && { dribbble: global.dribbble }),
-  ...(global.linkedin && { linkedin: global.linkedin }),
-  ...(global.instagram && { instagram: global.instagram }),
-  ...(global.facebook && { facebook: global.facebook }),
-  ...(global.dev && { dev: global.dev }),
-};
-
+const posts = await directus.request(readItems("posts", {
+  fields: ['*'],
+}));
+const techguides = await directus.request(readItems("techguides", {
+  fields: ['*'],
+}));
 ---
 <footer class="w-full">
 <div class="px-4 md:py-10 bg-blue-900 sm:p-6 dark:bg-gray-800">
@@ -24,41 +15,31 @@ const socials = {
       <div class="md:flex md:justify-between">
           <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
               <div class="px-4">
-                  <h2 class="mb-6 text-md font-semibold uppercase text-white">Resources</h2>
+                  <h2 class="mb-6 text-md font-semibold uppercase text-white">Blog Posts</h2>
                   <ul class="text-gray-200 text-sm">
+                    {
+      posts.slice(0, 4).map((post) => (
                       <li class="mb-4">
-                          <a href="https://flowbite.com" class="hover:underline">Link to a Project 1 Link to a Project 1</a>
+                          <a href={`/posts/${post.slug}`} class="hover:underline">{post.title}</a>
                       </li>
-                      <li class="mb-4">
-                          <a href="https://tailwindcss.com/" class="hover:underline">Link to a Project 2 Some more text here</a>
-                      </li>
-                      <li class="mb-4">
-                        <a href="https://flowbite.com" class="hover:underline">Link to a Project 3 A bit more text here</a>
-                    </li>
-                    <li class="mb-0">
-                        <a href="https://tailwindcss.com/" class="hover:underline">Link to a Project 4 some more padding</a>
-                    </li>
+                    ))
+                  }
                   </ul>
               </div>
               <div class="px-4">
-                <h2 class="mb-6 text-md font-semibold uppercase text-white">Resources</h2>
+                <h2 class="mb-6 text-md font-semibold uppercase text-white">Tech Stuff</h2>
                 <ul class="text-gray-200 text-sm">
+                  {
+    techguides.slice(0, 4).map((techguide) => (
                     <li class="mb-4">
-                        <a href="https://flowbite.com" class="hover:underline">Link to a Project 1 Link to a Project 1</a>
+                        <a href={`/tech/${techguide.slug}`} class="hover:underline">{techguide.title}</a>
                     </li>
-                    <li class="mb-4">
-                        <a href="https://tailwindcss.com/" class="hover:underline">Link to a Project 2 Some more text here</a>
-                    </li>
-                    <li class="mb-4">
-                      <a href="https://flowbite.com" class="hover:underline">Link to a Project 3 A bit more text here</a>
-                  </li>
-                  <li class="mb-0">
-                      <a href="https://tailwindcss.com/" class="hover:underline">Link to a Project 4 some more padding</a>
-                  </li>
+                  ))
+                }
                 </ul>
             </div>
             <div class="px-4">
-              <h2 class="mb-6 text-md font-semibold uppercase text-white">Resources</h2>
+              <h2 class="mb-6 text-md font-semibold uppercase text-white">Links</h2>
               <ul class="text-gray-200 text-sm">
                   <li class="mb-4">
                       <a href="https://flowbite.com" class="hover:underline">Couple of words</a>
@@ -76,6 +57,8 @@ const socials = {
             </div>
           </div>
           <div class="p-4"><PoweredBy /></div>
+          <div class="w-96 h-96 max-h-96 max-w-96 min-w-96 min-h-96 p-0 rounded-full bg-green-500 border-4 border-black">
+          </div>
       </div>
 
   </div>
