@@ -20,7 +20,10 @@ pnpm-debug.log*
 
 # Bun-specific files
 bun.lockb
+.bunlockb
 .bun/
 
 .vscode/
+
+_ignore*
 
