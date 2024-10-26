@@ -49,6 +49,7 @@ type Page = {
   id: string;
   title: string;
   content: string;
+  html_content: string;
   slug: string;
   description: string;
   menus: string;

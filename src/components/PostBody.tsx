@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { github } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 
 const components: {} = {
   p: (p: { children: string }) => {
@@ -31,7 +33,24 @@ const components: {} = {
         className="rounded-md shadow"
       />
     )
-  }
+  },
+  code({ className, children, ...rest }: { className: string, children: string, rest: any }) {
+  const match = /language-(\w+)/.exec(className || "");
+            return match ? (
+              <SyntaxHighlighter
+                PreTag="div"
+                language={match[1]}
+                style={github}
+                {...rest}
+              >
+                {children}
+              </SyntaxHighlighter>
+            ) : (
+              <code {...rest} className={className}>
+                {children}
+              </code>
+      );
+    },
 }
 
 const PostBody: React.FC<{ content: string }> = ({ content }) => {

@@ -20,5 +20,12 @@ export default defineConfig({
     }
   },
   integrations: [tailwind({ applyBaseStyles: false }), react(), robotsTxt()],
+  markdown: {
+    shikiConfig: {
+      theme: 'github-dark',
+      wrap: true,
+      langs: ['javascript', 'typescript', 'python', 'json', 'css', 'scss', 'bash', 'yaml', 'markdown', 'html', 'astro', 'nginx', 'dockerfile', 'docker-compose', 'sql', 'flutter', 'dart']
+    }
+  },
   site: process.env.SITE_URL
 })
