@@ -1,7 +1,6 @@
 import { createDirectus, rest } from '@directus/sdk';
-import dotenv from 'dotenv';
+import { DIRECTUS_URL } from 'astro:env/client';
 
-dotenv.config();
 
 type Global = {
   title: string;
@@ -49,10 +48,14 @@ type Page = {
   id: string;
   title: string;
   content: string;
-  html_content: string;
+  status: string;
+  //html_content: string;
   slug: string;
   description: string;
-  menus: string;
+  image: {
+    id: string;
+    description: string;
+  };
 }
 
 type Project = {
@@ -142,11 +145,13 @@ type Techguide = {
     description: string;
   };
   vendorname: string;
+  status: string;
 }
 
 type Tag = {
   id: string;
   name: string;
+  status: string;
 }
 
 type Schema = {
@@ -159,6 +164,6 @@ type Schema = {
   tags: Tag[];
 }
 
-const directus = createDirectus<Schema>(process.env.DIRECTUS_URL!).with(rest());
+const directus = createDirectus<Schema>(DIRECTUS_URL!).with(rest());
 
 export default directus;

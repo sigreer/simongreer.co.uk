@@ -1,19 +1,14 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
-import TechListLines from '../../components/TechListLines.astro';
+import { getCollection } from 'astro:content';
+const techs = await getCollection('tech');
+import TechLayout from "../../layouts/TechLayout.astro";
+import '@styles/custom.css';
 ---
-<PageLayout title="Tech" description="Features">
-    
-    <section class="p-12">
-        <div class="w-full flex flex-col gap-2 md:flex-row md:gap-6">
-            <div class="w-full md:w-1/2 lg:w-2/3">
-                <TechListLines columns={2} />
-            </div>
-            <div class="w-full md:w-1/2 lg:w-1/3">
-                <TechListLines columns={1} />
-            </div>
-          </div>
-        
-    </section>
 
-</PageLayout>
+<TechLayout title="Tech">
+<ul>
+  {techs.map(tech => (
+    <li><a href={`/tech/${tech.data.slug}`}>{tech.data.title}</a></li>
+  ))}
+</ul>
+</TechLayout>

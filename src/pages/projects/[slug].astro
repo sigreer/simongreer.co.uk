@@ -1,72 +1,19 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import directus from "../../lib/directus";
-import { readItems } from "@directus/sdk";
-
+import BlogLayout from "../../layouts/BlogLayout.astro";
+import { getCollection, render } from 'astro:content';
 export async function getStaticPaths() {
-  const projects = await directus.request(readItems("projects"));
-  return projects.map((project) => ({
-    params: { slug: project.slug },
-    props: project,
+  const projects = await getCollection('blog');
+  return projects.map(project => ({
+    params: { slug: project.id },
+    props: { project: {...project} },
   }));
 }
-const project = Astro.props;
+
+const { project } = Astro.props;
+const { Content } = await render(project);
 ---
 
-
-<!-- HTML Meta Tags -->
-<title>{project.title}</title>
-<meta name="description" content={project.description} />
-
-<!-- Google / Search Engine Tags -->
-<meta itemprop="name" content={project.title} />
-<meta itemprop="description" content={project.description} />
-
-<!-- Facebook Meta Tags -->
-<meta property="og:url" content={project.slug} />
-<meta property="og:type" content="website" />
-<meta property="og:title" content={project.title} />
-<meta property="og:description" content={project.description} />
-
-<!-- Twitter Meta Tags -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content={project.title} />
-<meta name="twitter:description" content={project.description} />
-
-<!-- Favicon Meta Tags -->
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width" />
-<link
-  rel="apple-touch-icon"
-  sizes="180x180"
-  href="/favicon/apple-touch-icon.png"
-/>
-<link
-  rel="icon"
-  type="image/png"
-  sizes="32x32"
-  href="/favicon/favicon-32x32.png"
-/>
-<link
-  rel="icon"
-  type="image/png"
-  sizes="16x16"
-  href="/favicon/favicon-16x16.png"
-/>
-<link rel="manifest" href="/favicon/site.webmanifest" />
-<link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#000000" />
-<link rel="shortcut icon" href="/favicon/favicon.ico" />
-<meta name="msapplication-TileColor" content="#000000" />
-<meta name="msapplication-config" content="/favicon/browserconfig.xml" />
-<meta name="theme-color" content="#000" />
-<link rel="alternate" type="application/rss+xml" href="/feed.xml" />
-<meta name="generator" content={Astro.generator} />
-
-
-<Layout title={project.title} description={project.description}>
-  <main>
-    
-    <h1>{project.title}</h1>
-    <div set:html={project.content} />
-  </main>
-</Layout>
+<BlogLayout title={project.data.title}>
+  <h1>{project.data.title}</h1>
+<Content />
+</BlogLayout>

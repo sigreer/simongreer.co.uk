@@ -1,21 +1,45 @@
 ---
-import { createHighlighter } from 'shiki';
-const theme = 'nord';
-const { code, lang, ...props } = Astro.props;
-const highlighter = await createHighlighter({
-     themes: [theme],
-     langs: [lang],
- });
+ import { unified } from 'unified'
+  import remarkParse from 'remark-parse'
+  import remarkRehype from 'remark-rehype'
+  import rehypeStringify from 'rehype-stringify'
+  import rehypePrettyCode from 'rehype-pretty-code'
+  import { transformerCopyButton } from '@rehype-pretty/transformers' with { type: 'json' };
+  const { lang, code, ...props } = Astro.props;
+  async function highlightCode(code: string) {
+    const file = await unified()
+      .use(remarkParse)
+      .use(remarkRehype)
+      .use(rehypePrettyCode, {
+        transformers: [transformerCopyButton({ feedbackDuration: 2_000, visibility: 'hover' })],
+        keepBackground: true,
+      })
+      .use(rehypeStringify)
+      .process(code)
+
+    return String(file)
+  }
 
 
- const highlighted = highlighter.codeToHtml(code, {
-     lang: lang,
-     theme: theme,
- });
+  const highlightedSnippet = await highlightCode(code)
 
-console.log(code);
-console.log(highlighted);
 ---
 
+<div ><pre class={`language-${lang} sg-code-block`} ><code set:html={highlightedSnippet}></code></pre></div>
 
-<div lang={`${lang}`} set:html={highlighted} class="rounded-lg"></div>
+<style is:global>
+  figure {
+    @apply mb-6 mt-1;
+  }
+  pre,
+  code,
+  figure {
+    @apply overflow-x-auto px-2 py-1;
+  }
+  p {
+    @apply text-xl;
+  }
+</style>
+
+
+

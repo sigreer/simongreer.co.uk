@@ -1,76 +1,19 @@
 ---
-import LayoutTechGuide from "../../layouts/LayoutTechGuide.astro";
-import directus from "../../lib/directus";
-import { readItems } from "@directus/sdk";
-
+import BlogLayout from "../../layouts/BlogLayout.astro";
+import { getCollection, render } from 'astro:content';
 export async function getStaticPaths() {
-  const techguides = await directus.request(readItems("techguides"));
-  return techguides.map((techguide) => ({
-    params: { slug: techguide.slug, id: techguide.id },
-    props: techguide,
+  const techs = await getCollection('blog');
+  return techs.map(tech => ({
+    params: { slug: tech.id },
+    props: { tech: {...tech} },
   }));
 }
-const techguide = Astro.props;
+
+const { tech } = Astro.props;
+const { Content } = await render(tech);
 ---
 
-
-<!-- HTML Meta Tags -->
-<title>{techguide.title}</title>
-<meta name="description" content={techguide.excerpt} />
-
-<!-- Google / Search Engine Tags -->
-<meta itemprop="name" content={techguide.title} />
-<meta itemprop="description" content={techguide.excerpt} />
-
-<!-- Facebook Meta Tags -->
-<meta property="og:url" content={techguide.slug} />
-<meta property="og:type" content="website" />
-<meta property="og:title" content={techguide.title} />
-<meta property="og:description" content={techguide.excerpt} />
-
-<!-- Twitter Meta Tags -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content={techguide.title} />
-<meta name="twitter:description" content={techguide.excerpt} />
-
-<!-- Favicon Meta Tags -->
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width" />
-<link
-  rel="apple-touch-icon"
-  sizes="180x180"
-  href="/favicon/apple-touch-icon.png"
-/>
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
-<link rel="manifest" href="/favicon/site.webmanifest" />
-<link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#000000" />
-<link rel="shortcut icon" href="/favicon/favicon.ico" />
-<meta name="msapplication-TileColor" content="#000000" />
-<meta name="msapplication-config" content="/favicon/browserconfig.xml" />
-<meta name="theme-color" content="#000" />
-<link rel="alternate" type="application/rss+xml" href="/feed.xml" />
-<meta name="generator" content={Astro.generator} />
-
-
-<LayoutTechGuide title={global.title} description={global.description}>
-
-  <div class="w-full">
-    <div class="w-full items-center">
-      <h1 class="text-5xl text-center p-8">{techguide.title}</h1>
-    </div>
-    <div class="w-full flex flex-row gap-6">
-    <div class="w-2/3">
-      <main>
- 
-
-        <div set:html={techguide.content} />
-    </main>
-    </div>
-    <div class="w-1/3">
-      {techguide.vendorlogo_horizontal && <img src={`${process.env.DIRECTUS_URL}/assets/${techguide.vendorlogo_horizontal}?w=300&auto=format,compression`} alt={techguide.vendorname} />}
-      <slot />
-    </div>
-  </div>
-  </div>
-</LayoutTechGuide>
+<BlogLayout title={tech.data.title}>
+  <h1>{tech.data.title}</h1>
+<Content />
+</BlogLayout>

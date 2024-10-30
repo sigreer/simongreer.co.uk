@@ -8,10 +8,15 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["src/components/*"],
+      "@components/": ["src/components/"],
+      "@content/*": ["src/content/*"],
+      "@images/*": ["src/images/*"],
+      "@styles/*": ["src/styles/*"],
       "@assets/*": ["src/assets/*"],
       "@layouts/*": ["src/layouts/*"],
       "@pages/*": ["src/pages/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@lib/*": ["src/lib/*"]
     },
     "plugins": [
       {
@@ -22,6 +27,6 @@
     "outDir": "./public/js",
     "rootDir": "./src"
   },
-  "include": ["src/**/*.ts*"],
-  "exclude": ["node_modules", "dist"]
+  "include": [".astro/types.d.ts", "src/**/*.ts*"],
+  "exclude": ["dist"]
 }

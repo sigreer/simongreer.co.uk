@@ -77,5 +77,6 @@ module.exports = {
 		require('flowbite/plugin'),
 		require('flowbite-typography'),
 		require("@designbycode/tailwindcss-text-stroke"),
+		require('@tailwindcss/typography'),
 	],
 }

@@ -1,7 +1,7 @@
 ---
 import directus from "../lib/directus";
 import { readSingleton } from "@directus/sdk";
-import Layout from "../layouts/Layout.astro";
+import PageLayout from "../layouts/PageLayout.astro";
 import Introduction from "../components/Introduction.astro";
 import DynamicKeyCards from "../components/DynamicKeyCards.astro";
 import FixedKeyCards from "../components/FixedKeyCards.astro";
@@ -11,7 +11,7 @@ const global = await directus.request(readSingleton("global"));
 
 ---
 
-<Layout title={global.title} description={global.description}>
+<PageLayout title={global.title} description={global.description}>
   <FixedKeyCards />
   <DynamicKeyCards />
   <Introduction />
@@ -23,4 +23,4 @@ const global = await directus.request(readSingleton("global"));
       <TechListLines columns={1} />
     </div>
   </div>
-</Layout>
+</PageLayout>

@@ -1,13 +1,13 @@
 ---
 import directus from "../lib/directus";
 import { readSingleton } from "@directus/sdk";
-import Layout from "../layouts/Layout.astro";
+import PageLayout from "../layouts/PageLayout.astro";
 import ContactForm from "../components/ContactForm.astro";
 import ContactInfo from "../components/ContactInfo.astro";
 const global = await directus.request(readSingleton("global"));
 ---
 
-<Layout title={global.title} description={global.description}>
+<PageLayout title={global.title} description={global.description}>
   <div class="w-full flex flex-col gap-2 md:flex-row md:gap-6">
     <div class="w-full md:w-1/2 lg:w-2/3">
       <ContactForm />
@@ -16,4 +16,4 @@ const global = await directus.request(readSingleton("global"));
       <ContactInfo />
     </div>
   </div>
-</Layout>
+</PageLayout>
