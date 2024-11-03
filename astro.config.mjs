@@ -3,16 +3,31 @@ import react from '@astrojs/react';
 import preact from '@astrojs/preact';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
+import theme from './src/syntaxtheme.json';
 import robotsTxt from 'astro-robots-txt';
 import tailwindcssNesting from 'tailwindcss/nesting';
-import { bundledLanguages, bundledThemes } from 'shiki';
-import { transformerNotationFocus } from '@shikijs/transformers';
-import { addCopyButton } from 'shiki-transformer-copy-button';
+import { transformerCopyButton } from '@rehype-pretty/transformers';
 import rehypePrettyCode from 'rehype-pretty-code';
 import dotenv from 'dotenv';
-const options = {
-  toggle: 2000,
-}
+
+const prettyCodeOptions = {
+  theme,
+  onVisitHighlightedLine(node) {
+    node?.properties?.className
+      ? node.properties.className.push("highlighted")
+      : (node.properties.className = ["highlighted"]);
+  },
+  onVisitHighlightedChars(node) {
+    console.log(node);
+    node?.properties?.className
+      ? node.properties.className.push("highlighted-chars")
+      : (node.properties.className = ["highlighted-chars"]);
+  },
+  filterMetaString: (string) => string,
+  showLanguage: true,
+  transformers: [transformerCopyButton({ feedbackDuration: 2_000, visibility: 'hover' })],
+  tokensMap: {},
+};
 
 dotenv.config();
 // https://astro.build/config
@@ -34,19 +49,16 @@ export default defineConfig({
       }
     }
   },
-  integrations: [tailwind({ applyBaseStyles: false }), robotsTxt(), mdx(), react(),preact()],
+  integrations: [
+    tailwind({ applyBaseStyles: false }),
+    robotsTxt(),
+    mdx(),
+    react(),
+    preact()],
   markdown: {
-    shikiConfig: {
-      theme: 'github-dark',
-      wrap: true,
-      langs: ['javascript', 'typescript', 'python', 'json', 'css', 'scss', 'bash', 'yaml', 'markdown', 'html', 'astro', 'nginx', 'sql', 'ts', 'jsx', 'mdx'],
-      transformers: [addCopyButton(options), transformerNotationFocus()],
-      plugins: [rehypePrettyCode, {
-        theme: 'github-dark',
-        keepBackground: false, 
-        showLineNumbers: true,
-      }]
-    }
-  },
+    syntaxHighlight: false,
+    rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
+    shikiConfig: { theme },
+    },
   site: process.DIRECTUS_URL
 })

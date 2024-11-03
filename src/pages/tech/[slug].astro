@@ -1,19 +1,31 @@
 ---
-import BlogLayout from "../../layouts/BlogLayout.astro";
+import TechLayout from "../../layouts/BlogLayout.astro";
+import { Image } from "astro:assets";
+import Prose from "../../components/Prose.astro";
 import { getCollection, render } from 'astro:content';
 export async function getStaticPaths() {
-  const techs = await getCollection('blog');
+  const techs = await getCollection('tech');
   return techs.map(tech => ({
     params: { slug: tech.id },
     props: { tech: {...tech} },
   }));
 }
-
 const { tech } = Astro.props;
 const { Content } = await render(tech);
+const allImages = import.meta.glob('../../images/vendor-icons/*', { eager: true })
+const ImageSrc = tech.data.vendorlogo ? allImages[`../../images/vendor-icons/${tech.data.vendorlogo}`]?.default : null;
 ---
 
-<BlogLayout title={tech.data.title}>
-  <h1>{tech.data.title}</h1>
-<Content />
-</BlogLayout>
+<TechLayout title={tech.data.title}>
+    <div class="w-full bg-purple-700 rounded-t-lg">
+      <h3 class="w-fit text-3xl font-bold relative my-2 px-4 py-3 text-white">{tech.data.title}</h3>
+    </div>
+    {ImageSrc && (
+      <Image src={ImageSrc} alt={tech.data.title} width={800} height={400} format="webp" aspectRatio="16:9" sizes="(max-width: 800px) 60vw, 500px" loading="lazy"
+      />
+    )}
+    <Prose>
+      <Content />
+    </Prose>
+  
+  </TechLayout>

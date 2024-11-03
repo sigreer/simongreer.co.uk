@@ -1,7 +1,10 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "lib": ["dom", "ES2015"],
+    "target": "ESNext",
+    "lib": ["dom", "ES2015", "ESNext", "DOM", "DOM.Iterable"],
+    "moduleResolution": "Bundler",
+    "module": "ESNext",
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
     "strictNullChecks": true,
@@ -27,6 +30,6 @@
     "outDir": "./public/js",
     "rootDir": "./src"
   },
-  "include": [".astro/types.d.ts", "src/**/*.ts*"],
+  "include": [".astro/types.d.ts", "src/**/*.ts*", "src/**/*.mdx"],
   "exclude": ["dist"]
 }

@@ -1,19 +1,23 @@
 ---
-import directus from "../lib/directus";
-import { readSingleton } from "@directus/sdk";
-import PageLayout from "../layouts/PageLayout.astro";
+import PlainLayout from "../layouts/PlainLayout.astro";
 import ContactForm from "../components/ContactForm.astro";
 import ContactInfo from "../components/ContactInfo.astro";
-const global = await directus.request(readSingleton("global"));
+import AboutInfo from "../components/AboutInfo.astro";
 ---
 
-<PageLayout title={global.title} description={global.description}>
+<PlainLayout>
+  <div class="w-full bg-purple-700 rounded-t-lg mt-8">
+    <h3 class="w-fit text-3xl font-bold relative my-2 px-4 py-3 text-white">Get In Touch</h3>
+  </div>
   <div class="w-full flex flex-col gap-2 md:flex-row md:gap-6">
-    <div class="w-full md:w-1/2 lg:w-2/3">
+    <div class="w-full md:w-1/2 lg:w-1/3">
       <ContactForm />
+    </div>
+    <div class="w-full md:w-1/2 lg:w-1/3">
+      <AboutInfo />
     </div>
     <div class="w-full md:w-1/2 lg:w-1/3">
       <ContactInfo />
     </div>
   </div>
-</PageLayout>
+</PlainLayout>

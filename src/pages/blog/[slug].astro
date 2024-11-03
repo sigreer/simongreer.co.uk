@@ -1,19 +1,38 @@
 ---
-import BlogLayout from "../../layouts/BlogLayout.astro";
+import BlogPostLayout from "../../layouts/BlogPostLayout.astro";
 import { getCollection, render } from 'astro:content';
+import { Image } from "astro:assets";
+import "@styles/codeblock.css";
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
+  console.log(posts);
   return posts.map(post => ({
-    params: { slug: post.id },
-    props: { post: {...post} },
+    params: { slug: post.data.slug },
+    props: { post: post }
   }));
 }
-
 const { post } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
+const allImages = import.meta.glob('../../images/covers/*', { eager: true })
+const ImageSrc = post.data.coverimage ? allImages[`../../images/covers/${post.data.coverimage}`]?.default : null;
+
 ---
 
-<BlogLayout title={post.data.title}>
-  <h1>{post.data.title}</h1>
-<Content />
-</BlogLayout>
+<BlogPostLayout title={post.data.title} slug={post.data.slug} toc={headings}>
+  {ImageSrc && (
+    <div class="relative w-full max-h-[70vh] items-center overflow-hidden rounded-b-lg border-white border-4 drop-shadow-lg">
+      <Image 
+        src={ImageSrc} 
+        alt={post.data.title} 
+        width={1200} 
+        height={600} 
+        format="webp"
+        class="w-full h-full  p-0 mt-0 rounded-none"
+        loading="lazy"
+      />
+    </div>
+  )}
+
+  <Content/>
+
+</BlogPostLayout>

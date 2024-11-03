@@ -1,20 +1,18 @@
 ---
-import directus from "../lib/directus";
-import { readSingleton } from "@directus/sdk";
-import PageLayout from "../layouts/PageLayout.astro";
-import Introduction from "../components/Introduction.astro";
-import DynamicKeyCards from "../components/DynamicKeyCards.astro";
-import FixedKeyCards from "../components/FixedKeyCards.astro";
+import HomeLayout from "../layouts/HomeLayout.astro";
+// import Introduction from "../components/Introduction.astro";
+// import DynamicKeyCards from "../components/DynamicKeyCards.astro";
+// import FixedKeyCards from "../components/FixedKeyCards.astro";
 import BlogListCards from "../components/BlogListCards.astro";
 import TechListLines from "../components/TechListLines.astro";
-const global = await directus.request(readSingleton("global"));
+const global = { title: 'Home', description: 'Home' }
 
 ---
 
-<PageLayout title={global.title} description={global.description}>
-  <FixedKeyCards />
+<HomeLayout title={global.title} description={global.description}>
+  <!-- <FixedKeyCards />
   <DynamicKeyCards />
-  <Introduction />
+  <Introduction /> -->
   <div class="w-full flex flex-col gap-2 md:flex-row md:gap-6">
     <div class="w-full md:w-1/2 lg:w-2/3">
       <BlogListCards />
@@ -23,4 +21,4 @@ const global = await directus.request(readSingleton("global"));
       <TechListLines columns={1} />
     </div>
   </div>
-</PageLayout>
+</HomeLayout>

@@ -1,10 +1,13 @@
 ---
-title: "Introduction"
-type: blog
+id: "truenas-scale-electric-eel"
+title: "TrueNAS Scale Electric Eel"
+excerpt: "TrueNAS Scale Electric Eel"
+tags: ["storage", "nas", "truenas"]
 created_date: 2024-10-30
 status: published
-slug: 'introduction'
-image: "/images/truenas.png"
+slug: 'truenas-scale-electric-eel'
+image: "truenas-scale-electric-eel.png"
+vendorlogo: "truenas-icon.svg"
 ---
 
 ## Test

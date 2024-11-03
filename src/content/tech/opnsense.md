@@ -1,12 +1,13 @@
 ---
-title: "LBWebRTC Linux Embedded System Development"
-excerpt: "A multi-faceted development project for live broadcast media companies"
-type: project
+id: "opnsense"
+title: "OPNsense"
+excerpt: "OPNsense"
+tags: ["networking", "firewall", "opnsense"]
 created_date: 2024-10-30
 status: published
-slug: 'lbwebrtc-embedded-linux-system-suite'
-image: "/images/projects/lbwebrtc/lbwebrtc-logo.svg"
-tags: ["linux", "embedded", "development", "shell", "flutter", "webrtc", "obs"]
+slug: 'opnsense'
+image: "/images/truenas.png"
+vendorlogo: "opnsense-icon.svg"
 ---
 
 ## Test
@@ -90,7 +91,7 @@ echo "Hello, World!"
 
 #### TypeScript
 
-```typescript
+```typescript showLineNumbers
 function greet(name: string): string {
     return `Hello, ${name}!`;
 }

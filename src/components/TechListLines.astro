@@ -1,17 +1,9 @@
 ---
-import { readItems } from "@directus/sdk";
-import directus from "../lib/directus";
-import TechListLine from "./TechListLine.astro";
-
-// Accept the columns prop
+import TechLine from "./TechLine.astro";
+import { getCollection } from 'astro:content';
+const techs = await getCollection('tech');
 const { columns } = Astro.props;
 
-const techguides = await directus.request(readItems("techguides", {
-  fields: ['*'],
-}));
-const tags = await directus.request(readItems("tags", {
-  fields: ['*'],
-}));
 ---
 
 <section class="py-8">
@@ -19,23 +11,12 @@ const tags = await directus.request(readItems("tags", {
     <h3 class="w-fit text-3xl font-bold relative my-2 px-4 py-3 text-gray-100">Tech Focus</h3>
   </div>
 
-
   <ul class={`grid gap-y-4 md:gap-y-5 lg:gap-y-4 ${columns === 1 ? 'grid-cols-1' : 'grid-cols-2 gap-x-3'}`}>
     {
-      techguides.slice(0, 4).map((techguide) => (
-        <TechListLine
-          title={techguide.title}
-          slug={techguide.slug}
-          content={techguide.excerpt}
-          tags={techguide.tags.map(tagId => {
-            const foundTag = tags.find(t => t.id === tagId);
-            // console.log('Processing tag:', tagId);
-            // console.log('Found tag:', foundTag);
-            // console.log('Techguide tags:', techguide.tags);
-            return foundTag?.name;
-          }).filter(Boolean) as string[]}
-          vendorlogo_icon={techguide.vendorlogo_icon}
-        />
+    techs.slice(0, 4).map((tech) => (
+<li class="flex flex-col rounded-md bg-white hover:shadow-lg hover:scale-105 shadow-md transition h-24">
+  <TechLine tech={tech} />
+</li>
       ))
     }
   </ul>

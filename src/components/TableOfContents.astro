@@ -1,0 +1,93 @@
+---
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+const { toc } = Astro.props;
+const filteredToc = toc.filter((heading: Heading) => heading.depth >= 2 && heading.depth <= 3);
+---
+
+<nav class="toc sticky top-4 p-6 bg-white rounded-lg shadow-md border border-gray-100">
+  <h2 class="text-lg font-semibold mb-4 text-gray-800 border-b pb-2">Table of Contents</h2>
+  <ul class="space-y-2">
+    {
+      filteredToc.map((heading: Heading) => (
+        <li>
+          <a
+            href={`#${heading.slug}`}
+            class={`
+              block transition-colors duration-200 
+              ${heading.depth === 3 
+                ? 'ml-4 text-sm normal-case' 
+                : 'font-medium text-base normal-case'
+              } 
+              text-gray-600 hover:text-purple-600 hover:underline leading-tight
+            `}
+            data-toc-link
+          >
+            {heading.text}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const links = document.querySelectorAll('[data-toc-link]');
+    const headings = Array.from(document.querySelectorAll('h2[id], h3[id]'));
+    let activeLink = null;
+    
+    // Handle clicks
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = link.getAttribute('href');
+        const target = document.querySelector(href);
+        
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+            inline: 'nearest'
+          });
+          
+          history.pushState(null, '', href);
+        }
+      });
+    });
+
+    // Handle scroll
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Remove active class from previous
+            if (activeLink) {
+              activeLink.classList.remove('text-purple-600', 'font-bold');
+            }
+            
+            // Add active class to current link
+            const href = `#${entry.target.id}`;
+            const currentLink = document.querySelector(`[data-toc-link][href="${href}"]`);
+            if (currentLink) {
+              currentLink.classList.add('text-purple-600', 'font-bold');
+              activeLink = currentLink;
+            }
+          }
+        });
+      },
+      {
+        rootMargin: '0px',
+        threshold: 0.5
+      }
+    );
+
+    headings.forEach((heading) => {
+      observer.observe(heading);
+    });
+  });
+</script>

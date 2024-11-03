@@ -1,11 +1,10 @@
-  pre:has(code) {
+  figure:has(code) {
     position: relative;
-    padding: 1rem;
     border-radius: 0.5rem;
     border-color:white;
-    border-width: 3px;
+    border-width: 0px;
     border-style: solid;
-    @apply shadow-lg;
+    @apply shadow-lg my-0 p-0;
   }
   
   pre button.copy {
@@ -76,7 +75,7 @@
   }
   
   code {
-    @apply text-sm md:text-base !leading-loose;
+    @apply text-sm md:text-base !leading-normal;
   }
   
   pre > code {
@@ -116,13 +115,14 @@
   }
   
   [data-highlighted-line] {
-    background: rgba(200, 200, 255, 0.1);
+    background: var(--shiki-highlighted-bg);
     @apply border-l-blue-400;
   }
   
   [data-highlighted-chars] {
-    @apply bg-zinc-600/50 rounded;
-    box-shadow: 0 0 0 4px rgb(82 82 91 / 0.5);
+    background: var(--shiki-highlighted-bg);
+    @apply rounded;
+    box-shadow: 0 0 0 4px var(--shiki-highlighted-bg);
   }
   
   [data-chars-id] {
@@ -134,19 +134,47 @@
   }
   
   [data-chars-id='v'] {
-    @apply !text-pink-300 bg-rose-800/50 border-b-pink-600 font-bold;
+    @apply font-bold;
+    color: var(--shiki-token-string);
+    background: var(--shiki-highlighted-bg);
+    border-bottom-color: var(--shiki-token-string);
   }
   
   [data-chars-id='s'] {
-    @apply !text-yellow-300 bg-yellow-800/50 border-b-yellow-600 font-bold;
+    @apply font-bold;
+    color: var(--shiki-token-keyword);
+    background: var(--shiki-highlighted-bg);
+    border-bottom-color: var(--shiki-token-keyword);
   }
   
   [data-chars-id='i'] {
-    @apply !text-purple-200 bg-purple-800/50 border-b-purple-600 font-bold;
+    @apply font-bold;
+    color: var(--shiki-token-function);
+    background: var(--shiki-highlighted-bg);
+    border-bottom-color: var(--shiki-token-function);
   }
   
   [data-rehype-pretty-code-title] {
-    @apply bg-zinc-700 text-zinc-200 rounded-t-lg py-2 px-3 font-semibold text-sm;
+    background: var(--shiki-bg);
+    color: var(--shiki-fg);
+    @apply rounded-t-lg py-2 m-0 mb-0 px-3 font-semibold text-sm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 2.5rem;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  
+  [data-rehype-pretty-code-title]:after {
+    content: attr(data-language);
+    font-size: 0.8rem;
+    color: #999;
+    font-weight: normal;
+  }
+
+  figcaption + pre {
+    @apply !m-0;
   }
   
   figcaption + pre {
@@ -154,10 +182,36 @@
   }
   
   figure {
-      @apply mb-6 mt-1;
+      @apply mb-6 mt-0;
   }
   pre,
   code,
   figure {
-    @apply overflow-x-auto px-2 py-1;
+    @apply overflow-x-auto px-2 py-0;
+  }
+
+  pre:has([data-caption]), pre:has([data-title]) {
+    @apply !my-0 !py-0;
+  }
+
+  [data-caption] {
+    background: var(--shiki-bg);
+    color: var(--shiki-fg);
+    @apply rounded-b-lg py-0 px-3 text-sm;
+    display: none;
+    height: 2.5rem;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  [data-caption]:not([data-caption=""]) {
+    display: block;
+  }
+
+  pre + [data-caption] {
+    @apply mt-0;
+  }
+
+  pre:has(+ [data-caption]) {
+    @apply mb-0 rounded-b-none;
   }

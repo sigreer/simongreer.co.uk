@@ -1,21 +1,16 @@
 ---
-import '@styles/custom.css';
-import "@styles/codeblock.css";
-import '@fontsource/poppins';
-import Prose from '../components/Prose.astro';
 import HeaderBar from "../components/HeaderBar.astro";
 import Footer from "../components/Footer.astro";
-import Navbar from "../components/Navbar.astro";
+import Navbar from '../components/Navbar.astro';
 import { ClientRouter } from 'astro:transitions';
-import TechListLines from "../components/TechListLines.astro";
-const global = { title: 'Website' };
-const { title } = Astro.props;
+import '../styles/custom.css';
+import Prose from '../components/Prose.astro';
+import '@fontsource/poppins';
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>{global.title} - {title}</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/png" href="/favicon.png" />
@@ -41,20 +36,8 @@ const { title } = Astro.props;
         2xl:w-full 2xl:max-w-2xl 2xl:px-16
         3xl:w-full 3xl:max-w-2xl 3xl:px-16
         sm:text-lg font-poppins mx-auto px-3">
-      <div class="flex flex-row gap-4">
-        <div class="w-2/3 py-8">
-          <div class="w-full bg-purple-700 rounded-t-lg">
-            <h3 class="w-fit text-3xl font-bold relative my-2 px-4 py-3 text-white">{title}</h3>
-          </div>
-          <Prose>
-            <slot />
-          </Prose>
-        </div>
-        <div class="w-1/3">
-          <TechListLines columns={1} />
-        </div>
-      </div>
-      <script src="@utils/tagColors.ts"></script>
+        <slot />
+      <script src="../utils/tagColors.ts"></script>
     </main>
     <Footer />
     <script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>

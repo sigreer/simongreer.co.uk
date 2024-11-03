@@ -1,8 +1,5 @@
 ---
-import directus from "../lib/directus";
-import { readSingleton, readItems } from "@directus/sdk";
 import LogoImage from "../images/logo-image.svg";
-import LogoText from "../images/logo-text.svg";
 import { Image } from "astro:assets";
 import BriefcaseIcon from "../images/briefcase-icon.svg";
 import NewspaperIcon from "../images/newspaper-icon.svg";
@@ -60,11 +57,11 @@ function isActive(href: string) {
         </li>
 
         <li class="h-42 border-y-4 md:h-24 lg:h-28 md:py-0 md:border-y-0 flex">
-          <a href="/features" class={`
+          <a href="/tech" class={`
             h-full w-full flex flex-col items-center p-4 m-0 text-gray-200 transition-all duration-100 justify-between relative
             md:p-0 md:h-24 md:py-0 md:m-0 md:px-1 md:border-r md:border-y-0 md:border-blue-950/75 md:hover:bg-blue-900 md:hover:shadow-lg md:hover:drop-shadow-lg md:hover:scale-110 md:hover:border-0
             lg:px-5 lg:h-28
-            ${isActive('/technical-guides') ? 'md:border-b-4 md:border-b-red-500' : ''}
+            ${isActive('/tech') ? 'md:border-b-4 md:border-b-red-500' : ''}
           `}>
             <div class="min-w-24 flex flex-col items-center">
               <span class="flex text-2xl md:pt-0 lg:pt-2 font-semibold text-center md:text-base">Guides</span>
@@ -88,11 +85,11 @@ function isActive(href: string) {
             </div></a>
         </li>
         <li class="h-42 border-y-4 md:h-24 lg:h-28 md:py-0 md:border-y-0 flex">
-          <a href="/personal" class={`
+          <a href="/me" class={`
             h-full w-full flex flex-col items-center p-4 m-0 text-gray-200 transition-all duration-100 justify-between relative
             md:p-0 md:h-24 md:py-0 md:m-0 md:px-1 md:border-r md:border-y-0 md:border-blue-950/75 md:hover:bg-blue-900 md:hover:shadow-lg md:hover:drop-shadow-lg md:hover:scale-110 md:hover:border-0
             lg:px-5 lg:h-28
-            ${isActive('/personal') ? 'md:border-b-4 md:border-b-red-500' : ''}
+            ${isActive('/me') ? 'md:border-b-4 md:border-b-red-500' : ''}
           `}>
             <div class="min-w-24 flex flex-col items-center">
               <span class="flex text-2xl pt-0 md:pt-0 lg:pt-2 font-semibold text-center md:text-base">Me</span>
