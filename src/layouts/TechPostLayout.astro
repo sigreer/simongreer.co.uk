@@ -4,12 +4,12 @@ import HeaderBar from "../components/HeaderBar.astro";
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
 import { ClientRouter } from 'astro:transitions';
-import Prose from "../components/Prose.astro";
 import TableOfContents from "../components/TableOfContents.astro";
+import { Image } from "astro:assets";
 import '@styles/custom.css';
 import '@fontsource/poppins';
 const global = { title: 'Website' };
-const { title, slug, toc } = Astro.props;
+const { title, slug, toc, horizontal_logo, cover_image } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -54,9 +54,26 @@ const { title, slug, toc } = Astro.props;
           <div class="w-full bg-purple-700 rounded-t-lg">
             <h3 class="w-fit text-xl font-bold relative px-4 py-2 text-white">{title}</h3>
           </div>
-          <Prose>
-            <slot />
-          </Prose>
+          {horizontal_logo && (<Image 
+            src={horizontal_logo} 
+            alt={title} 
+            height={120}
+          />
+      )}
+      {cover_image && (
+        <div class="relative w-full max-h-[70vh] items-center overflow-hidden rounded-b-lg border-white border-4 drop-shadow-lg">
+          <Image 
+            src={cover_image} 
+            alt={title} 
+            width={1200} 
+            height={600} 
+            format="webp"
+            class="w-full h-full  p-0 mt-0 rounded-none"
+              loading="lazy"
+            />
+          </div>
+          )}
+          <slot />
         </div>
         
         <div class="w-1/4">

@@ -183,18 +183,10 @@ declare module 'astro:content' {
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
 };
-"tech copy": Record<string, {
-  id: string;
-  slug: string;
-  body: string;
-  collection: "tech copy";
-  data: any;
-  render(): Render[".md"];
-}>;
 "tech": {
-"bitfocus-companion-streamdeck-linux-guide.mdx": {
-	id: "bitfocus-companion-streamdeck-linux-guide.mdx";
-  slug: "bitfocus-companion-streamdeck-linux-guide";
+"bitfocus-companion.mdx": {
+	id: "bitfocus-companion.mdx";
+  slug: "bitfocus-companion-elgato-streamdeck";
   body: string;
   collection: "tech";
   data: InferEntrySchema<"tech">
@@ -213,22 +205,21 @@ declare module 'astro:content' {
   collection: "tech";
   data: InferEntrySchema<"tech">
 } & { render(): Render[".mdx"] };
-"truenas-scale-electric-eel.mdx": {
-	id: "truenas-scale-electric-eel.mdx";
-  slug: "truenas-scale-electric-eel";
+"pfsense.mdx": {
+	id: "pfsense.mdx";
+  slug: "pfsense";
+  body: string;
+  collection: "tech";
+  data: InferEntrySchema<"tech">
+} & { render(): Render[".mdx"] };
+"truenas-scale.mdx": {
+	id: "truenas-scale.mdx";
+  slug: "truenas-scale";
   body: string;
   collection: "tech";
   data: InferEntrySchema<"tech">
 } & { render(): Render[".mdx"] };
 };
-"vendors": Record<string, {
-  id: string;
-  slug: string;
-  body: string;
-  collection: "vendors";
-  data: any;
-  render(): Render[".md"];
-}>;
 
 	};
 

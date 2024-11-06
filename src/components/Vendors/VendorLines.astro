@@ -21,11 +21,11 @@ const allVendorIcons = import.meta.glob('../../images/vendor-icons/*', { eager: 
           <a href={`/tech/${tech.data.slug}`} class="flex flex-row gap-x-1 p-0 relative h-full">
             {VendorIconSrc && (
               <div class="w-10 overflow-hidden">
-                <Image src={VendorIconSrc} alt={tech.data.title} class="h-full w-full object-cover object-center rounded-l-md"/>
+                <Image src={VendorIconSrc} alt={tech.data.title} class="h-full w-full object-cover object-center"/>
               </div>
             )}
-            <div class="flex flex-col gap-y-0 py-0 px-4 w-5/6">
-              <h3 class="text-base font-semibold line-clamp-2 py-2 line-leading-5">
+            <div class="flex flex-col gap-y-0 py-0 px-1 w-5/6">
+              <h3 class="text-base line-clamp-1 py-2 line-leading-5 font-[500]">
                 {tech.data.title}
               </h3>
     </div>

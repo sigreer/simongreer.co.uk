@@ -22,6 +22,7 @@ const tech = defineCollection({
     slug: z.string(),
     coverimage: z.string().optional(),
     vendoricon: z.string().optional(),
+    horizontal_logo: z.string().optional(),
   })
 });
 
