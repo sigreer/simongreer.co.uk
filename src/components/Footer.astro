@@ -1,13 +1,8 @@
 ---
-import directus from "../lib/directus";
-import { readItems } from "@directus/sdk";
 import PoweredBy from './PoweredBy.astro';
-const posts = await directus.request(readItems("posts", {
-  fields: ['*'],
-}));
-const techguides = await directus.request(readItems("techguides", {
-  fields: ['*'],
-}));
+import { getCollection } from 'astro:content';
+const posts = await getCollection('blog');
+const techs = await getCollection('tech');
 ---
 <footer class="w-full">
 <div class="px-4 md:py-10 bg-blue-900 sm:p-6 dark:bg-gray-800">
@@ -20,7 +15,7 @@ const techguides = await directus.request(readItems("techguides", {
                     {
       posts.slice(0, 4).map((post) => (
                       <li class="mb-4">
-                          <a href={`/posts/${post.slug}`} class="hover:underline">{post.title}</a>
+                          <a href={`/blog/${post.data.slug}`} class="hover:underline">{post.data.title}</a>
                       </li>
                     ))
                   }
@@ -30,9 +25,9 @@ const techguides = await directus.request(readItems("techguides", {
                 <h2 class="mb-6 text-md font-semibold uppercase text-white">Tech Stuff</h2>
                 <ul class="text-gray-200 text-sm">
                   {
-    techguides.slice(0, 4).map((techguide) => (
+    techs.slice(0, 4).map((tech) => (
                     <li class="mb-4">
-                        <a href={`/tech/${techguide.slug}`} class="hover:underline">{techguide.title}</a>
+                        <a href={`/tech/${tech.data.slug}`} class="hover:underline">{tech.data.title}</a>
                     </li>
                   ))
                 }

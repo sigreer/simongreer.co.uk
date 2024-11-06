@@ -1,11 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
 const posts = await getCollection('blog');
-const techs = await getCollection('tech');
+// const techs = await getCollection('tech');
 import BlogLayout from "../../layouts/BlogLayout.astro";
 import '@styles/custom.css';
 import Card from "../../components/Card.astro";
-import TechLine from "../../components/TechLine.astro";
+import TechLines from "../../components/TechLines.astro";
 ---
 
 
@@ -38,9 +38,7 @@ import TechLine from "../../components/TechLine.astro";
     
     </div>
     <div class="w-1/3">
-      {techs.map(tech => (
-        <TechLine tech={tech} />
-      ))}
+      <TechLines />
     </div>
 
 </section>

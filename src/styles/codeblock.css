@@ -1,217 +1,276 @@
-  figure:has(code) {
-    position: relative;
-    border-radius: 0.5rem;
-    border-color:white;
-    border-width: 0px;
-    border-style: solid;
-    @apply shadow-lg my-0 p-0;
-  }
-  
-  pre button.copy {
-    position: absolute;
-    right: 16px;
-    top: 16px;
-    height: 28px;
-    width: 28px;
-    padding: 0;
-    display: flex;
-  
-    & span {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
-    }
-  
-    & .ready {
-      background-image: url(/images/code-copy-icon.svg);
-    }
-  
-    & .success {
-      display: none;
-      background-image: url(/images/code-copy-success.svg); 
-    }
-  
-    &.copied {
-      & .success {
-        display: block;
-      }
-  
-      & .ready {
-        display: none;
-      }
-    }
-  }
-  
-  code {
-    counter-reset: line;
-  }
-  
-  code > [data-line]::before {
-    counter-increment: line;
-    content: counter(line);
-    display: inline-block;
-    width: 1rem;
-    margin-right: 2rem;
-    text-align: right;
-    color: gray;
-  }
-  
-  code[data-line-numbers-max-digits='2'] > [data-line]::before {
-    width: 2rem;
-  }
-  
-  code[data-line-numbers-max-digits='3'] > [data-line]::before {
-    width: 3rem;
+:root {
+  --titlebar-color: #2c2c2c;
+  --titlebar-text-color: #fff;
+  --caption-color: #fb86ff;
+  --caption-text-color: #fff;
+  --language-color: #fff;
+}
+
+figure:has(code) {
+  position: relative;
+  border-radius: 0.5rem;
+  border-color:white;
+  border-width: 0px;
+  border-style: solid;
+  @apply shadow-lg my-0 p-0;
+}
+
+pre button.copy {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  height: 28px;
+  width: 28px;
+  padding: 0;
+  display: flex;
+
+  & span {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
   }
 
-  h3 code {
-    @apply !text-lg md:!text-xl;
+  & .ready {
+    background-image: url(/images/code-copy-icon.svg);
   }
-  
-  pre {
-    @apply !px-0 rounded-lg;
+
+  & .success {
+    display: none;
+    background-image: url(/images/code-copy-success.svg); 
   }
-  
-  code {
-    @apply text-sm md:text-base !leading-normal;
+
+  &.copied {
+    & .success {
+      display: block;
+    }
+
+    & .ready {
+      display: none;
+    }
   }
-  
-  pre > code {
-    counter-reset: line;
-  }
-  
+}
+
+code {
+  counter-reset: line;
+}
+
+code > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 1rem;
+  margin-right: 2rem;
+  text-align: right;
+  color: gray;
+}
+
+code[data-line-numbers-max-digits='2'] > [data-line]::before {
+  width: 2rem;
+}
+
+code[data-line-numbers-max-digits='3'] > [data-line]::before {
+  width: 3rem;
+}
+
+h3 code {
+  @apply !text-lg md:!text-xl;
+}
+
+pre {
+  @apply !px-0 rounded-lg;
+}
+
+code {
+  @apply text-sm md:text-base !leading-normal;
+}
+
+pre > code {
+  counter-reset: line;
+}
+
+code[data-theme*=' '],
+code[data-theme*=' '] span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+@media (prefers-color-scheme: dark) {
   code[data-theme*=' '],
   code[data-theme*=' '] span {
-    color: var(--shiki-light);
-    background-color: var(--shiki-light-bg);
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
   }
-  
-  @media (prefers-color-scheme: dark) {
-    code[data-theme*=' '],
-    code[data-theme*=' '] span {
-      color: var(--shiki-dark);
-      background-color: var(--shiki-dark-bg);
-    }
-  }
-  
-  code[data-line-numbers] {
-    counter-reset: line;
-  }
-  
-  code[data-line-numbers] > [data-line]::before {
-    counter-increment: line;
-    content: counter(line);
-    @apply inline-block w-4 mr-4 text-right text-gray-500;
-  }
-  
-  .prose {
-    @apply max-w-[55rem] sm:text-lg md:text-xl !leading-7 sm:!leading-9;
-  }
-  
-  pre [data-line] {
-    @apply px-4 border-l-2 border-l-transparent;
-  }
-  
-  [data-highlighted-line] {
-    background: var(--shiki-highlighted-bg);
-    @apply border-l-blue-400;
-  }
-  
-  [data-highlighted-chars] {
-    background: var(--shiki-highlighted-bg);
-    @apply rounded;
-    box-shadow: 0 0 0 4px var(--shiki-highlighted-bg);
-  }
-  
-  [data-chars-id] {
-    @apply shadow-none p-1 border-b-2;
-  }
-  
-  [data-chars-id] span {
-    @apply !text-inherit;
-  }
-  
-  [data-chars-id='v'] {
-    @apply font-bold;
-    color: var(--shiki-token-string);
-    background: var(--shiki-highlighted-bg);
-    border-bottom-color: var(--shiki-token-string);
-  }
-  
-  [data-chars-id='s'] {
-    @apply font-bold;
-    color: var(--shiki-token-keyword);
-    background: var(--shiki-highlighted-bg);
-    border-bottom-color: var(--shiki-token-keyword);
-  }
-  
-  [data-chars-id='i'] {
-    @apply font-bold;
-    color: var(--shiki-token-function);
-    background: var(--shiki-highlighted-bg);
-    border-bottom-color: var(--shiki-token-function);
-  }
-  
-  [data-rehype-pretty-code-title] {
-    background: var(--shiki-bg);
-    color: var(--shiki-fg);
-    @apply rounded-t-lg py-2 m-0 mb-0 px-3 font-semibold text-sm;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 2.5rem;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-  
-  [data-rehype-pretty-code-title]:after {
-    content: attr(data-language);
-    font-size: 0.8rem;
-    color: #999;
-    font-weight: normal;
-  }
+}
 
-  figcaption + pre {
-    @apply !m-0;
-  }
-  
-  figcaption + pre {
-    @apply !rounded-t-none;
-  }
-  
-  figure {
-      @apply mb-6 mt-0;
-  }
-  pre,
-  code,
-  figure {
-    @apply overflow-x-auto px-2 py-0;
-  }
+code[data-line-numbers] {
+  counter-reset: line;
+}
 
-  pre:has([data-caption]), pre:has([data-title]) {
-    @apply !my-0 !py-0;
-  }
+code[data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  @apply inline-block w-4 mr-4 text-right text-gray-500;
+}
 
-  [data-caption] {
-    background: var(--shiki-bg);
-    color: var(--shiki-fg);
-    @apply rounded-b-lg py-0 px-3 text-sm;
-    display: none;
-    height: 2.5rem;
-    overflow: hidden;
-    white-space: nowrap;
-  }
+.prose {
+  @apply max-w-[55rem] sm:text-lg md:text-xl !leading-7 sm:!leading-9;
+}
 
-  [data-caption]:not([data-caption=""]) {
-    display: block;
-  }
+pre [data-line] {
+  @apply px-4 border-l-2 border-l-transparent;
+}
 
-  pre + [data-caption] {
-    @apply mt-0;
-  }
+[data-highlighted-line] {
+  background: var(--shiki-highlighted-bg);
+  @apply border-l-blue-400;
+}
 
-  pre:has(+ [data-caption]) {
-    @apply mb-0 rounded-b-none;
-  }
+[data-highlighted-chars] {
+  background: var(--shiki-highlighted-bg);
+  @apply rounded;
+  box-shadow: 0 0 0 4px var(--shiki-highlighted-bg);
+}
+
+[data-chars-id] {
+  @apply shadow-none p-1 border-b-2;
+}
+
+[data-chars-id] span {
+  @apply !text-inherit;
+}
+
+[data-chars-id='v'] {
+  @apply font-bold;
+  color: var(--shiki-token-string);
+  background: var(--shiki-highlighted-bg);
+  border-bottom-color: var(--shiki-token-string);
+}
+
+[data-chars-id='s'] {
+  @apply font-bold;
+  color: var(--shiki-token-keyword);
+  background: var(--shiki-highlighted-bg);
+  border-bottom-color: var(--shiki-token-keyword);
+}
+
+[data-chars-id='i'] {
+  @apply font-bold;
+  color: var(--shiki-token-function);
+  background: var(--shiki-highlighted-bg);
+  border-bottom-color: var(--shiki-token-function);
+}
+
+[data-rehype-pretty-code-title] {
+  background: var(--titlebar-color);
+  color: var(--titlebar-text-color);
+  @apply rounded-t-lg py-1.5 m-0 mb-0 px-3 font-semibold text-sm;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 2.5rem;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+[data-rehype-pretty-code-caption] {
+  background: var(--caption-color);
+  color: var(--caption-text-color);
+  @apply rounded-t-lg py-1.5 m-0 mb-0 px-3 font-semibold text-sm;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 2rem;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+[data-rehype-pretty-code-title]:after {
+  content: attr(data-language);
+  font-size: 0.8rem;
+  color: var(--language-color);
+  font-weight: normal;
+}
+
+figcaption + pre {
+  @apply !m-0;
+}
+
+figcaption + pre {
+  @apply !rounded-t-none;
+}
+
+figure + figcaption {
+    @apply !my-0;
+}
+pre,
+code,
+figure {
+  @apply overflow-x-auto px-2 py-0;
+}
+
+pre:has([data-caption]), pre:has([data-title]) {
+  @apply !my-0 !py-0;
+}
+
+[data-caption] {
+  background: var(--shiki-bg);
+  color: var(--caption-color);
+  @apply rounded-b-lg rounded-t-none py-0 px-3 text-sm;
+  display: none;
+  height: 2rem;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+[data-caption]:not([data-caption=""]) {
+  display: block;
+}
+
+pre + [data-caption] {
+  @apply mt-0;
+}
+
+pre:has(+ [data-rehype-pretty-code-caption]) {
+  @apply mb-0 rounded-b-none;
+}
+
+/* Override Tailwind prose margins for code blocks */
+pre:has([data-caption]), pre:has([data-rehype-pretty-code-title]) {
+  @apply !my-0 !py-0;
+}
+
+/* Ensure figure doesn't inherit prose margins */
+figure:has(code) {
+  @apply !my-0;
+}
+
+/* Ensure caption doesn't get prose margins */
+figure + figcaption {
+  @apply !my-0;
+}
+
+.prose :where(pre):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  @apply !my-0;
+}
+
+/* Add this to remove bottom rounded corners when code follows */
+[data-rehype-pretty-code-title] + pre {
+  @apply !rounded-t-none;
+}
+
+/* Update caption styles */
+[data-rehype-pretty-code-caption] {
+  @apply rounded-b-lg rounded-t-none py-0 px-3 text-sm;
+}
+
+/* Remove top rounded corners when caption follows a pre */
+pre:has(+ [data-caption]) {
+  @apply !rounded-b-none;
+}
+
+/* Remove top rounded corners when caption follows */
+[data-caption]:has(~ pre) {
+  @apply !rounded-t-none;
+}

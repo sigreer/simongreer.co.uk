@@ -12,16 +12,16 @@ const pages = defineCollection({
 });
 
 const tech = defineCollection({
-  loader: glob({ pattern: ["**\/*.md", "**\/.mdx"], base: "./src/content/tech/"}),
+  loader: glob({ pattern: ["**/*.{md,mdx}"], base: "./src/content/tech/"}),
   schema: z.object({
     title: z.string(),
     excerpt: z.string().nullable(),
     tags: z.array(z.string()).optional(),
-    vendorlogo: z.string().optional(),
-    coverimage: z.string().optional(),
-    slug: z.string(),
-    type: z.enum(['blog', 'techguide', 'project', 'page']).optional(),
     created_date: z.date(),
+    status: z.enum(['draft', 'published', 'archived']),
+    slug: z.string(),
+    coverimage: z.string().optional(),
+    vendoricon: z.string().optional(),
   })
 });
 

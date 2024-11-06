@@ -1,5 +1,5 @@
 ---
-import TechLayout from "../../layouts/BlogLayout.astro";
+import TechPostLayout from "../../layouts/TechPostLayout.astro";
 import { Image } from "astro:assets";
 import Prose from "../../components/Prose.astro";
 import { getCollection, render } from 'astro:content';
@@ -7,25 +7,31 @@ export async function getStaticPaths() {
   const techs = await getCollection('tech');
   return techs.map(tech => ({
     params: { slug: tech.id },
-    props: { tech: {...tech} },
+    props: { tech: tech },
   }));
 }
 const { tech } = Astro.props;
-const { Content } = await render(tech);
-const allImages = import.meta.glob('../../images/vendor-icons/*', { eager: true })
-const ImageSrc = tech.data.vendorlogo ? allImages[`../../images/vendor-icons/${tech.data.vendorlogo}`]?.default : null;
+const { Content, headings } = await render(tech);
+const allCoverImages = import.meta.glob('../../images/covers/*', { eager: true })
+const CoverImageSrc = tech.data.coverimage ? allCoverImages[`../../images/covers/${tech.data.coverimage}`]?.default : null;
+
 ---
 
-<TechLayout title={tech.data.title}>
-    <div class="w-full bg-purple-700 rounded-t-lg">
-      <h3 class="w-fit text-3xl font-bold relative my-2 px-4 py-3 text-white">{tech.data.title}</h3>
-    </div>
-    {ImageSrc && (
-      <Image src={ImageSrc} alt={tech.data.title} width={800} height={400} format="webp" aspectRatio="16:9" sizes="(max-width: 800px) 60vw, 500px" loading="lazy"
+<TechPostLayout title={tech.data.title} slug={tech.data.slug} toc={headings}>
+  {CoverImageSrc && (
+    <div class="relative w-full max-h-[70vh] items-center overflow-hidden rounded-b-lg border-white border-4 drop-shadow-lg">
+      <Image 
+        src={CoverImageSrc} 
+        alt={tech.data.title} 
+        width={1200} 
+        height={600} 
+        format="webp"
+        class="w-full h-full  p-0 mt-0 rounded-none"
+        loading="lazy"
       />
-    )}
-    <Prose>
-      <Content />
-    </Prose>
-  
-  </TechLayout>
+    </div>
+  )}
+
+  <Content/>
+
+</TechPostLayout>

@@ -1,14 +1,16 @@
 ---
 import { Image } from "astro:assets";
-const { tech, selectedImage } = Astro.props;
+const { title, excerpt, slug, tags, vendoricon } = Astro.props;
+const allImages = import.meta.glob('../images/vendor-icons/*', { eager: true }) as Record<string, { default: ImageMetadata }>
+const ImageSrc = vendoricon ? allImages[`../images/vendor-icons/${vendoricon}`]?.default : null;
 ---
 
-<a href={`tech/${tech.id}`} class="flex flex-row gap-x-1 p-1 relative h-full">
+<a href={`tech/${slug}`} class="flex flex-row gap-x-1 p-1 relative h-full">
     <div class="w-1/5 overflow-hidden">
-      {selectedImage && (
+      {ImageSrc && (
         <Image 
-          src={selectedImage} 
-          alt={tech.data.title} 
+          src={ImageSrc} 
+          alt={title} 
           width="100" 
           height="100" 
           class="h-full rounded-md bg-gradient-to-tl from-slate-600 via-slate-900 to-slate-500 w-full object-cover object-center rounded-l-md"
@@ -18,11 +20,11 @@ const { tech, selectedImage } = Astro.props;
 
     <div class="flex flex-col gap-y-0 py-1 px-4 w-5/6">
       <h3 class="2xl:text-2xl font-semibold line-clamp-2 py-0 line- leading-5">
-        {tech.data.title}
+        {title}
       </h3>
 
       <div class="flex flex-wrap gap-1 tag-block">
-        {tech.data.tags?.map((tag) => (
+        {tags?.map((tag) => (
           <span
             class="rounded-md px-2 py-1 text-xs md:text-sm font-semibold text-white shadow-sm-light transition tag-style" data-tag={tag}>
             {tag}

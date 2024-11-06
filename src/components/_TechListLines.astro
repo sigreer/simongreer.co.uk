@@ -15,7 +15,7 @@ const { columns } = Astro.props;
     {
     techs.slice(0, 4).map((tech) => (
 <li class="flex flex-col rounded-md bg-white hover:shadow-lg hover:scale-105 shadow-md transition h-24">
-  <TechLine tech={tech} />
+  <TechLine title={tech.data.title} excerpt={tech.data.excerpt} slug={tech.data.slug} tags={tech.data.tags} coverimage={tech.data.vendoricon} />
 </li>
       ))
     }
