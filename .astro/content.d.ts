@@ -159,6 +159,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
+"spending-too-much-time-optimising-your-time.mdx": {
+	id: "spending-too-much-time-optimising-your-time.mdx";
+  slug: "spending-too-much-time-optimising-your-time";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
 "truenas-scale-electric-eel-first-look.mdx": {
 	id: "truenas-scale-electric-eel-first-look.mdx";
   slug: "truenas-scale-electric-eel";
@@ -176,7 +183,29 @@ declare module 'astro:content' {
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
 };
+"tech copy": Record<string, {
+  id: string;
+  slug: string;
+  body: string;
+  collection: "tech copy";
+  data: any;
+  render(): Render[".md"];
+}>;
 "tech": {
+"bitfocus-companion-streamdeck-linux-guide.mdx": {
+	id: "bitfocus-companion-streamdeck-linux-guide.mdx";
+  slug: "bitfocus-companion-streamdeck-linux-guide";
+  body: string;
+  collection: "tech";
+  data: InferEntrySchema<"tech">
+} & { render(): Render[".mdx"] };
+"hetzner-cloud.mdx": {
+	id: "hetzner-cloud.mdx";
+  slug: "move-your-infrastructure-to-hetzner-cloud";
+  body: string;
+  collection: "tech";
+  data: InferEntrySchema<"tech">
+} & { render(): Render[".mdx"] };
 "opnsense.mdx": {
 	id: "opnsense.mdx";
   slug: "opnsense";
@@ -192,6 +221,14 @@ declare module 'astro:content' {
   data: InferEntrySchema<"tech">
 } & { render(): Render[".mdx"] };
 };
+"vendors": Record<string, {
+  id: string;
+  slug: string;
+  body: string;
+  collection: "vendors";
+  data: any;
+  render(): Render[".md"];
+}>;
 
 	};
 

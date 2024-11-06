@@ -49,6 +49,7 @@ const blog = defineCollection({
     status: z.enum(['draft', 'published', 'archived']),
     coverimage: z.string().optional(),
     slug: z.string(),
+    tags: z.array(z.string()).optional(),
   }),
 });
 

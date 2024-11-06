@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from "astro:assets";
+interface Props {
+  currentSlug?: string;
+}
+const { currentSlug } = Astro.props;
+
+const techs = await getCollection('tech');
+const filteredTechs = currentSlug ? techs.filter(tech => tech.data.slug !== currentSlug) : techs;
+const allVendorIcons = import.meta.glob('../../images/vendor-icons/*', { eager: true }) as Record<string, { default: ImageMetadata }>;
+
+---
+<div class="rounded-lg w-full bg-white">
+  <ul class="flex flex-col py-0">
+    {
+      filteredTechs.slice(0, 6).map((tech) => {
+        const VendorIconSrc = tech.data.vendoricon ? allVendorIcons[`../../images/vendor-icons/${tech.data.vendoricon}`]?.default : null;
+        return (
+          <li class="flex flex-col bg-white hover:shadow-lg hover:scale-105 transition max-h-10 [&:not(:last-child)]:border-b [&:not(:last-child)]:border-dotted [&:not(:last-child)]:border-gray-200">
+          <a href={`/tech/${tech.data.slug}`} class="flex flex-row gap-x-1 p-0 relative h-full">
+            {VendorIconSrc && (
+              <div class="w-10 overflow-hidden">
+                <Image src={VendorIconSrc} alt={tech.data.title} class="h-full w-full object-cover object-center rounded-l-md"/>
+              </div>
+            )}
+            <div class="flex flex-col gap-y-0 py-0 px-4 w-5/6">
+              <h3 class="text-base font-semibold line-clamp-2 py-2 line-leading-5">
+                {tech.data.title}
+              </h3>
+    </div>
+    
+
+            </a>
+          </li>
+        )
+      })
+    }
+      </ul>
+    </div>

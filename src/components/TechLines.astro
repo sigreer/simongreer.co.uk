@@ -12,7 +12,7 @@ const allVendorIcons = import.meta.glob('../images/vendor-icons/*', { eager: tru
 
 ---
 <div class="rounded-lg w-full bg-white">
-  <ul class="flex flex-col py-2">
+  <ul class="flex flex-col py-0">
     {
       filteredTechs.slice(0, 6).map((tech) => {
         const VendorIconSrc = tech.data.vendoricon ? allVendorIcons[`../images/vendor-icons/${tech.data.vendoricon}`]?.default : null;
