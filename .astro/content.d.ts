@@ -186,14 +186,14 @@ declare module 'astro:content' {
 "tech": {
 "bitfocus-companion.mdx": {
 	id: "bitfocus-companion.mdx";
-  slug: "bitfocus-companion-elgato-streamdeck";
+  slug: "bitfocus-companion";
   body: string;
   collection: "tech";
   data: InferEntrySchema<"tech">
 } & { render(): Render[".mdx"] };
 "hetzner-cloud.mdx": {
 	id: "hetzner-cloud.mdx";
-  slug: "move-your-infrastructure-to-hetzner-cloud";
+  slug: "hetzner-cloud";
   body: string;
   collection: "tech";
   data: InferEntrySchema<"tech">

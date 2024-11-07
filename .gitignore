@@ -1,7 +1,7 @@
 # build output
 dist/
 .output/
-.astro/
+.astro/*
 
 # dependencies
 node_modules/
@@ -28,3 +28,7 @@ bun.lockb
 
 _ignore*
 
+.astro/content.d.ts
+.astro/content.d.ts
+.astro/content-modules.mjs
+.astro/data-store.json

@@ -1,27 +1,27 @@
 ---
+import { getCollection, render } from 'astro:content';
 import TechPostLayout from "../../layouts/TechPostLayout.astro";
 import { Image } from "astro:assets";
 import Prose from "../../components/Prose.astro";
-import { getCollection, render } from 'astro:content';
 export async function getStaticPaths() {
   const techs = await getCollection('tech');
   return techs.map(tech => ({
-    params: { slug: tech.data.slug },
-    props: { tech: tech },
+    params: { id: tech.id },
+    props: { tech }
   }));
 }
 const { tech } = Astro.props;
-const { Content, headings } = await render(tech);
-
+console.log('this is tech', tech);
 const allCoverImages = import.meta.glob('../../images/covers/*', { eager: true })
 const CoverImageSrc = tech.data.coverimage ? allCoverImages[`../../images/covers/${tech.data.coverimage}`]?.default : null;
 
 const allVendorHorizontalLogos = import.meta.glob('../../images/vendor-horizontal-logos/*', { eager: true })
 const VendorHorizontalLogoSrc = tech.data.horizontal_logo ? allVendorHorizontalLogos[`../../images/vendor-horizontal-logos/${tech.data.horizontal_logo}`]?.default : null;
-console.log(VendorHorizontalLogoSrc);
+const { Content, headings } = await render(tech);
+
 ---
 
-<TechPostLayout title={tech.data.title} slug={tech.data.slug} toc={headings} horizontal_logo={VendorHorizontalLogoSrc} cover_image={CoverImageSrc}>
+<TechPostLayout title={tech.data.title} toc={headings} horizontal_logo={VendorHorizontalLogoSrc} cover_image={CoverImageSrc}>
   <Prose>
     <Content/>
   </Prose>  

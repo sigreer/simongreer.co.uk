@@ -9,7 +9,7 @@ import { Image } from "astro:assets";
 import '@styles/custom.css';
 import '@fontsource/poppins';
 const global = { title: 'Website' };
-const { title, slug, toc, horizontal_logo, cover_image } = Astro.props;
+const { title, slug, id, toc, horizontal_logo, cover_image } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -77,7 +77,7 @@ const { title, slug, toc, horizontal_logo, cover_image } = Astro.props;
         </div>
         
         <div class="w-1/4">
-          <BlogLines currentSlug={slug} />
+          <BlogLines currentSlug={id} />
         </div>
       </div>
       <script src="@utils/tagColors.ts"></script>

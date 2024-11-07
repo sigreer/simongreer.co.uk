@@ -7,7 +7,7 @@ interface Props {
 const { currentSlug } = Astro.props;
 
 const techs = await getCollection('tech');
-const filteredTechs = currentSlug ? techs.filter(tech => tech.data.slug !== currentSlug) : techs;
+const filteredTechs = currentSlug ? techs.filter(tech => tech.id !== currentSlug) : techs;
 const allVendorIcons = import.meta.glob('../images/vendor-icons/*', { eager: true }) as Record<string, { default: ImageMetadata }>;
 
 ---
@@ -18,7 +18,7 @@ const allVendorIcons = import.meta.glob('../images/vendor-icons/*', { eager: tru
         const VendorIconSrc = tech.data.vendoricon ? allVendorIcons[`../images/vendor-icons/${tech.data.vendoricon}`]?.default : null;
         return (
           <li class="flex flex-col bg-white hover:shadow-lg hover:scale-105 transition h-24 [&:not(:last-child)]:border-b [&:not(:last-child)]:border-dotted [&:not(:last-child)]:border-gray-200">
-          <a href={`/tech/${tech.data.slug}`} class="flex flex-row gap-x-1 p-1 relative h-full">
+          <a href={`/tech/${tech.id}`} class="flex flex-row gap-x-1 p-1 relative h-full">
             {VendorIconSrc && (
               <div class="w-1/5 overflow-hidden">
                 <Image src={VendorIconSrc} alt={tech.data.title} class="h-full w-full object-cover object-center rounded-l-md"/>

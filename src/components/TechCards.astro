@@ -16,6 +16,7 @@ const techs = await getCollection("tech");
 ">
 {techs.slice(0, 1).map((tech) => (
   <Card
+    id={tech.id}
     title={tech.data.title}
     slug={`/tech/${tech.data.slug}`}
     excerpt={tech.data.excerpt}
@@ -26,6 +27,7 @@ const techs = await getCollection("tech");
 ))}
       {techs.slice(0, 2).map((tech) => (
         <Card
+          id={tech.id}
           title={tech.data.title}
           slug={`/tech/${tech.data.slug}`}
           excerpt={tech.data.excerpt}
@@ -36,6 +38,7 @@ const techs = await getCollection("tech");
       ))}
       {techs.slice(0, 2).map((tech) => (
         <Card
+          id={tech.id}
           title={tech.data.title}
           slug={`/tech/${tech.data.slug}`}
           excerpt={tech.data.excerpt}
@@ -46,6 +49,7 @@ const techs = await getCollection("tech");
       ))}
       {techs.slice(0, 3).map((tech) => (
               <Card
+                id={tech.id}
                 title={tech.data.title}
                 slug={`/tech/${tech.data.slug}`}
                 excerpt={tech.data.excerpt}

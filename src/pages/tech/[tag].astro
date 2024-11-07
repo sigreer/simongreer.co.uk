@@ -1,0 +1,37 @@
+---
+import TagLayout from "../../layouts/TagLayout.astro";
+import TechLine from "../../components/TechLine.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const allTechs = await getCollection('tech');
+
+  const uniqueTags = [
+    ...new Set(allTechs.map((tech) => tech.data.tags).flat()),
+  ];
+
+  return uniqueTags.map((tag) => {
+    const filteredTechs = allTechs.filter((tech) =>
+      tech.data.tags.includes(tag)
+    );
+    return {
+      params: { tag },
+      props: { techs: filteredTechs },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { techs } = Astro.props;
+---
+
+<TagLayout>
+  <p>Techs tagged with {tag}</p>
+  <ul>
+    {
+      techs.map((tech) => (
+        <TechLine url={tech.url} title={tech.data.title} />
+      ))
+    }
+  </ul>
+</TagLayout>
