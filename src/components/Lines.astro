@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+import Line from './Line.astro';
+
+interface Props {
+  currentSlug?: string;
+  limit?: number;
+  type?: 'blog' | 'tech' | 'tag' | 'project' | 'vendor';
+  slice?: boolean;
+  startIndex?: number;
+}
+
+const { currentSlug, limit = 8, type, slice = false, startIndex = 0 } = Astro.props;
+const items = await getCollection(type);
+const filteredItems = currentSlug 
+  ? items.filter(item => item.data.slug !== currentSlug)
+  : items;
+
+// If slice is true, take items from startIndex up to limit
+// Otherwise, take first 'limit' items
+const displayItems = slice 
+  ? filteredItems.slice(startIndex, startIndex + limit)
+  : filteredItems.slice(0, limit);
+---
+
+<ul class="flex flex-col py-0">
+  {displayItems.map(item => (
+    <Line 
+      title={item.data.title}
+      slug={item.data.slug}
+      tags={item.data.tags}
+      coverimage={item.data.coverimage}
+      type={type}
+    />
+  ))}
+</ul>

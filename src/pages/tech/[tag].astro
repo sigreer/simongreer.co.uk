@@ -1,7 +1,7 @@
 ---
 import TagLayout from "../../layouts/TagLayout.astro";
-import TechLine from "../../components/TechLine.astro";
 import { getCollection } from "astro:content";
+import Line from "../../components/Line.astro";
 
 export async function getStaticPaths() {
   const allTechs = await getCollection('tech');
@@ -30,7 +30,7 @@ const { techs } = Astro.props;
   <ul>
     {
       techs.map((tech) => (
-        <TechLine url={tech.url} title={tech.data.title} />
+        <Line title={tech.data.title} slug={tech.data.slug} type="tech" />
       ))
     }
   </ul>

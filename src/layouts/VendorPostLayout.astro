@@ -1,6 +1,6 @@
 ---
-import TechCards from "../components/TechCards.astro";
-import VendorLines from "../components/Vendors/VendorLines.astro";
+import Cards from "../components/Cards.astro";
+import Lines from "../components/Lines.astro";
 import HeaderBar from "../components/HeaderBar.astro";
 import Footer from "../components/Footer.astro";
 import Navbar from '../components/Navbar.astro';
@@ -42,13 +42,13 @@ const { description = "Your default description here" } = Astro.props;
           <div class="w-full bg-purple-700 rounded-t-lg">
             <h3 class="w-fit text-xl font-bold relative px-4 py-2 text-white">Tech Articles</h3>
           </div>
-          <TechCards />
+          <Cards type="tech"/>
         </div>
         <div class="w-full md:w-1/2 lg:w-1/4 pt-4">
           <div class="w-full bg-purple-700 rounded-t-lg">
             <h3 class="w-fit text-xl font-bold relative px-4 py-2 text-white">Technologies &amp; Vendors</h3>
           </div>
-          <VendorLines />
+          <Lines type="tech"/>
         </div>
       </div>
     </main>

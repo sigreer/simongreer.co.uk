@@ -4,18 +4,18 @@ import HeaderBar from "../components/HeaderBar.astro";
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
 import { ClientRouter } from 'astro:transitions';
-import Prose from "../components/Prose.astro";
 import TableOfContents from "../components/TableOfContents.astro";
+import { Image } from "astro:assets";
 import '@styles/custom.css';
 import '@fontsource/poppins';
 const global = { title: 'Website' };
-const { title, slug, toc } = Astro.props;
+const { title, slug, id, toc, horizontal_logo, cover_image } = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>{global.title} - {title}</title>
+    <title>{title}</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/png" href="/favicon.png" />
@@ -34,15 +34,15 @@ const { title, slug, toc } = Astro.props;
     <main
       class="
         flex-grow
-        sm:w-full sm:max-w-full sm:px-4
-        md:w-full md:max-w-full md:px-8
-        lg:w-full lg:max-w-full lg:px-8
-        xl:w-full xl:max-w-full xl:px-16 
-        2xl:w-full 2xl:max-w-2xl 2xl:px-16
-        3xl:w-full 3xl:max-w-2xl 3xl:px-16
-        sm:text-lg font-poppins mx-auto px-3">
-      <div class="flex flex-row gap-4 my-2 py-8 ">
-        <div class="w-1/4 flex flex-col">
+        w-full
+        px-3
+        sm:px-4
+        md:px-8
+        xl:px-16 
+        2xl:max-w-2xl
+        sm:text-lg font-poppins mx-auto">
+      <div class="flex flex-col md:flex-row gap-4 my-2 py-8">
+        <div class="hidden md:flex md:w-1/4 flex-col">
           <div class="w-full bg-purple-700 rounded-t-lg">
             <h3 class="w-fit text-xl font-bold relative px-4 py-2 text-white">Contents</h3>
           </div>
@@ -50,17 +50,36 @@ const { title, slug, toc } = Astro.props;
             <TableOfContents toc={toc} />
           </div>
         </div>
-        <div class="flex flex-col w-1/2">
+        <div class="flex flex-col w-full md:w-1/2">
           <div class="w-full bg-purple-700 rounded-t-lg">
             <h3 class="w-fit text-xl font-bold relative px-4 py-2 text-white">{title}</h3>
           </div>
-          <Prose>
-            <slot />
-          </Prose>
+          {horizontal_logo && (
+            <Image 
+              src={horizontal_logo} 
+              alt={title} 
+              height={120}
+              class="w-full"
+            />
+          )}
+          {cover_image && (
+            <div class="relative w-full max-h-[70vh] items-center overflow-hidden rounded-b-lg border-white border-4 drop-shadow-lg">
+              <Image 
+                src={cover_image} 
+                alt={title} 
+                width={1200} 
+                height={600} 
+                format="webp"
+                class="w-full h-full p-0 mt-0 rounded-none"
+                loading="lazy"
+              />
+            </div>
+          )}
+          <slot />
         </div>
         
-        <div class="w-1/4">
-          <BlogLines currentSlug={slug} />
+        <div class="hidden md:block md:w-1/4">
+          <BlogLines currentSlug={id} />
         </div>
       </div>
       <script src="@utils/tagColors.ts"></script>

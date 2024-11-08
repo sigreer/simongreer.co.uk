@@ -33,13 +33,11 @@ dotenv.config();
 // https://astro.build/config
 export default defineConfig({
   image: {
-    domains: [process.env.DIRECTUS_URL],
+    domains: ['simongreer.co.uk'],
   },
   env: {
     schema: {
-      DIRECTUS_URL: envField.string({ context: "client", access: "public", optional: true}),
       SITE_URL: envField.string({ context: "client", access: "public", optional: true}),
-      DIRECTUS_API_TOKEN: envField.string({ context: "server", access: "secret", optional: true})
     }
   },
   vite: {
@@ -60,5 +58,5 @@ export default defineConfig({
     rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
     shikiConfig: { theme },
     },
-  site: process.DIRECTUS_URL
+  site: 'https://simongreer.co.uk'
 })

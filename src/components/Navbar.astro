@@ -28,7 +28,7 @@ function isActive(href: string) {
 
 
     <div class="block pr-6 md:hidden">
-      <button data-collapse-toggle="navbar-default" type="button" class="flex items-center p-2 w-16 h-16 justify-center text-white rounded-lg md:hidden hover:bg-white md:hover:bg-blue-800 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-default" aria-expanded="false">
+      <button id="mobile-menu-button" type="button" class="flex items-center p-2 w-16 h-16 justify-center text-white rounded-lg md:hidden hover:bg-white md:hover:bg-blue-800 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-default" aria-expanded="false">
         <span class="sr-only">Open main menu</span>
         <svg class="h-full aspect-w-1 aspect-h-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
@@ -36,7 +36,7 @@ function isActive(href: string) {
     </button>
     </div>
 
-    <div class="hidden w-full p-0 m-0 bg-blue-800 z-40 absolute top-36 h-full md:top-0 md:relative md:visible md:block md:w-auto md:h-full" id="navbar-default">
+    <div id="navbar-default" class="hidden w-full p-0 m-0 bg-blue-800 z-40 absolute top-36 h-full md:top-0 md:relative md:visible md:block md:w-auto md:h-full">
       <ul class="font-medium flex flex-col rtl:space-x-reverse p-0 m-0
       md:flex-row md:space-x-0 md:mt-0 md:border-0 md:bg-blue-900 md:h-full
       ">
@@ -114,3 +114,34 @@ function isActive(href: string) {
     </div>
   </div>
 </nav>
+
+<script>
+  function setupMobileMenu() {
+    const button = document.getElementById('mobile-menu-button');
+    const menu = document.getElementById('navbar-default');
+    
+    if (!button || !menu) return;
+
+    button.addEventListener('click', () => {
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', (!isExpanded).toString());
+      menu.classList.toggle('hidden');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!button.contains(e.target as Node) && 
+          !menu.contains(e.target as Node) && 
+          !menu.classList.contains('hidden')) {
+        button.setAttribute('aria-expanded', 'false');
+        menu.classList.add('hidden');
+      }
+    });
+  }
+
+  // Setup on initial load
+  setupMobileMenu();
+
+  // Setup after Astro view transitions
+  document.addEventListener('astro:page-load', setupMobileMenu);
+</script>

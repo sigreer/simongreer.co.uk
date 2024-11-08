@@ -1,0 +1,73 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Prose from '../components/Prose.astro';
+import TableOfContents from "../components/TableOfContents.astro";
+import Lines from "../components/Lines.astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  title: string;
+  slug: string;
+  toc?: any;
+  horizontal_logo?: ImageMetadata | null;
+  cover_image?: ImageMetadata | null;
+  showTOC?: boolean;
+  showRelatedPosts?: boolean;
+}
+
+const { title, slug, toc, horizontal_logo, cover_image, showTOC = false, showRelatedPosts = false } = Astro.props;
+---
+
+<BaseLayout title={title}>
+  <main class="flex-grow w-full px-3 sm:px-4 md:px-8 xl:px-16 2xl:max-w-2xl sm:text-lg font-poppins mx-auto">
+    <div class="flex flex-col md:flex-row gap-4 my-2 py-8">
+      {showTOC && toc && (
+        <div class="hidden md:flex md:w-1/4 flex-col">
+          <div class="w-full bg-purple-700 rounded-t-lg">
+            <h3 class="w-fit text-xl font-bold relative px-4 py-2 text-white">Contents</h3>
+          </div>
+          <div class="w-full sticky top-8">
+            <TableOfContents toc={toc} />
+          </div>
+        </div>
+      )}
+      <div class="flex flex-col w-full md:w-1/2">
+        <div class="w-full bg-purple-700 rounded-t-lg">
+          <h3 class="w-fit text-xl font-bold relative px-4 py-2 text-white">{title}</h3>
+        </div>
+        {horizontal_logo && (
+          <Image 
+            src={horizontal_logo} 
+            alt={title} 
+            width={200}
+            height={120}
+            format="webp"
+            class="w-full"
+            loading="lazy"
+          />
+        )}
+        {cover_image && (
+          <div class="relative w-full max-h-[70vh] items-center overflow-hidden rounded-b-lg border-white border-4 drop-shadow-lg">
+            <Image 
+              src={cover_image} 
+              alt={title} 
+              width={1200} 
+              height={600} 
+              format="webp"
+              class="w-full h-full p-0 mt-0 rounded-none"
+              loading="lazy"
+            />
+          </div>
+        )}
+        <Prose>
+          <slot />
+        </Prose>
+      </div>
+      {showRelatedPosts && (
+        <div class="hidden md:block md:w-1/4">
+          <Lines type="blog" currentSlug={slug} />
+        </div>
+      )}
+    </div>
+  </main>
+</BaseLayout> 

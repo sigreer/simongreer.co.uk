@@ -1,6 +1,7 @@
 ---
-import BlogLayout from "../../layouts/BlogLayout.astro";
-import { getCollection, render } from 'astro:content';
+import IndexLayout from "../../layouts/IndexLayout.astro";
+// @ts-ignore
+import { CollectionEntry, getCollection, render } from 'astro:content';
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
   return projects.map(project => ({
@@ -9,11 +10,22 @@ export async function getStaticPaths() {
   }));
 }
 
-const { project } = Astro.props;
-const { Content } = await render(project);
----
+const { project } = Astro.props;;
+const { item, title, slug, coverimage } = Astro.props;
+const allImages = import.meta.glob<{ default: ImageMetadata }>('../../images/covers/*', { eager: true });
+const ImageSrc = coverimage ? allImages[`../../images/covers/${coverimage}`]?.default : null;
 
-<BlogLayout title={project.title}>
-  <h1>{project.title}</h1>
+const { Content, headings } = await render(project);
+---
+<!-- title: string;
+slug: string;
+toc?: any;
+horizontal_logo?: ImageMetadata | null;
+cover_image?: ImageMetadata | null;
+showTOC?: boolean;
+showRelatedPosts?: boolean; -->
+
+<IndexLayout title={title} leftcol="project" rightcol="tech">
+  <h1>{title}</h1>
 <Content />
-</BlogLayout>
+</IndexLayout>

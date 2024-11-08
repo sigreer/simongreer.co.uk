@@ -22,9 +22,10 @@ const techs = await getCollection("tech");
     excerpt={tech.data.excerpt}
     tags={tech.data.tags}
     coverimage={tech.data.coverimage}
-    className="block sm:hidden"
-  />
-))}
+      className="block sm:hidden"
+      type="tech"
+    />
+  ))}
       {techs.slice(0, 2).map((tech) => (
         <Card
           id={tech.id}
@@ -34,6 +35,7 @@ const techs = await getCollection("tech");
           tags={tech.data.tags}
           coverimage={tech.data.coverimage}
           className="hidden sm:block md:hidden"
+          type="tech"
         />
       ))}
       {techs.slice(0, 2).map((tech) => (
@@ -45,6 +47,7 @@ const techs = await getCollection("tech");
           tags={tech.data.tags}
           coverimage={tech.data.coverimage}
           className="hidden md:block lg:hidden"
+          type="tech"
         />
       ))}
       {techs.slice(0, 3).map((tech) => (
@@ -56,6 +59,7 @@ const techs = await getCollection("tech");
                 tags={tech.data.tags}
                 coverimage={tech.data.coverimage}
                 className="hidden lg:block"
+                type="tech"
               />
             ))}
     </ul>

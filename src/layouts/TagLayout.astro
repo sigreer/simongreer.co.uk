@@ -1,5 +1,5 @@
 ---
-import TechLine from "../components/TechLine.astro";
+import Lines from "../components/Lines.astro";
 import HeaderBar from "../components/HeaderBar.astro";
 import Footer from "../components/Footer.astro";
 import Navbar from '../components/Navbar.astro';
@@ -47,7 +47,7 @@ const { description = "Your default description here" } = Astro.props;
           <div class="w-full bg-purple-700 rounded-t-lg">
             <h3 class="w-fit text-xl font-bold relative px-4 py-2 text-white">Tech Articles</h3>
           </div>
-          <TechLine />
+          <Lines type="tech"/>
         </div>
       </div>
     </main>

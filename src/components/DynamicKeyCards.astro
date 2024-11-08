@@ -1,9 +1,5 @@
 ---
-import { readItems, readSingleton } from "@directus/sdk";
-import directus from "../lib/directus";
-const keycards = await directus.request(readItems("keycards", {
-  fields: ['*'],
-}));
+
 ---
 
 <section class="flex flex-col py-6">

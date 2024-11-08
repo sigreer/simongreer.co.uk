@@ -1,7 +1,9 @@
 # build output
 dist/
 .output/
-.astro/*
+# If .astro/ was already tracked before being added to .gitignore,
+# you need to untrack it first with: git rm -r --cached .astro/
+.astro/
 
 # dependencies
 node_modules/

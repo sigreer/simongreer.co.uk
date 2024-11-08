@@ -1,17 +1,13 @@
 ---
-import HomeLayout from "../layouts/HomeLayout.astro";
-// import Introduction from "../components/Introduction.astro";
-// import DynamicKeyCards from "../components/DynamicKeyCards.astro";
-// import FixedKeyCards from "../components/FixedKeyCards.astro";
-import BlogListCards from "../components/BlogListCards.astro";
-import TechLines from "../components/TechLines.astro";
+import IndexLayout from "../layouts/IndexLayout.astro";
 const global = { title: 'Home', description: 'Home' }
-
+import Cards from "../components/Cards.astro";
 ---
 
-<HomeLayout title={global.title} description={global.description}>
-  <!-- <FixedKeyCards />
-  <DynamicKeyCards />
-  <Introduction /> -->
-
-</HomeLayout>
+<IndexLayout title="Tech" leftcol="blog" rightcol="tech">
+  <section class="py-8 px-6 md:px-0">
+    <div class="w-full">
+      <h3 class="text-black text-2xl font-bold">Test</h3>
+    </div>
+  </section>
+</IndexLayout>

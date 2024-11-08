@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+import Card from './Card.astro';
+
+interface Props {
+  currentSlug?: string;
+  limit?: number;
+  type?: 'blog' | 'tech' | 'tag' | 'project' | 'vendor';
+  slice?: boolean;
+}
+
+const { currentSlug, limit = 6, type, slice = false } = Astro.props;
+const items = await getCollection(type);
+const filteredItems = currentSlug 
+  ? items.filter(item => item.data.slug !== currentSlug)
+  : items;
+
+// When slice is true, always take first 6 items
+// When slice is false, take up to the limit
+const displayItems = slice
+  ? filteredItems.slice(0, 6)
+  : filteredItems.slice(0, limit);
+---
+
+<ul class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+  {displayItems.map(item => (
+    <Card 
+      title={item.data.title}
+      slug={item.data.slug}
+      excerpt={item.data.excerpt}
+      tags={item.data.tags}
+      coverimage={item.data.coverimage}
+      type={type}
+    />
+  ))}
+</ul>

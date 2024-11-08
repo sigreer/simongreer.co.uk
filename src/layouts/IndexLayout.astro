@@ -1,0 +1,47 @@
+---
+import { getMergedCollections } from '../utils/collections';
+import { CollectionEntry } from 'astro:content';
+import BaseInverseLayout from './BaseInverseLayout.astro';
+import Cards from "../components/Cards.astro";
+import Lines from "../components/Lines.astro";
+import TagCloud from "../components/TagCloud.astro";
+
+interface Props {
+  title: string;
+  leftcol: 'blog' | 'tech' | 'tag' | 'project' | 'vendor';
+  rightcol: 'blog' | 'tech' | 'tag' | 'project' | 'vendor';
+}
+
+const { title, leftcol, rightcol } = Astro.props;
+const isSameColumn = leftcol === rightcol;
+
+// Get all collections data
+const allCollections = await getMergedCollections([
+  'blog',
+  'tech',
+  'projects',
+]);
+
+---
+
+<BaseInverseLayout title={title}>
+  <main class="flex-grow w-full px-3 sm:px-4 md:px-8 xl:px-16 2xl:max-w-2xl sm:text-lg font-poppins mx-auto">
+    <slot/>
+   <div class="flex flex-col md:flex-row gap-4 my-2 py-8">
+        
+    <div class="w-full md:w-2/3">
+        <!-- <div class="w-full bg-purple-700 rounded-t-lg">
+          <h3 class="w-fit text-xl font-bold relative px-4 py-2 text-white">{title}</h3>
+        </div> -->
+        <Cards type={leftcol} slice={isSameColumn} />
+      </div>
+      <div class="w-full md:w-1/3">
+        <div class="w-full bg-purple-700 rounded-t-lg">
+          <h3 class="w-fit text-xl font-bold relative px-4 py-2 text-white">More {title}</h3>
+        </div>
+        <Lines type={rightcol} slice={isSameColumn} startIndex={isSameColumn ? 6 : 0} />
+        <TagCloud data={allCollections} maxTags={10} />
+      </div>
+    </div>
+  </main>
+</BaseInverseLayout> 

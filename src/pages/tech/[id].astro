@@ -1,28 +1,37 @@
 ---
-import { getCollection, render } from 'astro:content';
-import TechPostLayout from "../../layouts/TechPostLayout.astro";
+// @ts-ignore
+import { CollectionEntry, getCollection, render } from 'astro:content';
+import PostLayout from "../../layouts/PostLayout.astro";
 import { Image } from "astro:assets";
 import Prose from "../../components/Prose.astro";
+
 export async function getStaticPaths() {
   const techs = await getCollection('tech');
   return techs.map(tech => ({
-    params: { id: tech.id },
+    params: { id: tech.data.slug },
     props: { tech }
   }));
 }
-const { tech } = Astro.props;
-console.log('this is tech', tech);
-const allCoverImages = import.meta.glob('../../images/covers/*', { eager: true })
-const CoverImageSrc = tech.data.coverimage ? allCoverImages[`../../images/covers/${tech.data.coverimage}`]?.default : null;
 
-const allVendorHorizontalLogos = import.meta.glob('../../images/vendor-horizontal-logos/*', { eager: true })
-const VendorHorizontalLogoSrc = tech.data.horizontal_logo ? allVendorHorizontalLogos[`../../images/vendor-horizontal-logos/${tech.data.horizontal_logo}`]?.default : null;
+const { tech } = Astro.props;
 const { Content, headings } = await render(tech);
+const { data } = tech as CollectionEntry<'tech'>;
+const allCoverImages = import.meta.glob<{ default: ImageMetadata }>('../../images/covers/*', { eager: true })
+const CoverImageSrc = data.coverimage ? allCoverImages[`../../images/covers/${data.coverimage}`]?.default : null;
+
+const allVendorHorizontalLogos = import.meta.glob<{ default: ImageMetadata }>('../../images/vendor-horizontal-logos/*', { eager: true })
+const VendorHorizontalLogoSrc = data.horizontal_logo ? allVendorHorizontalLogos[`../../images/vendor-horizontal-logos/${data.horizontal_logo}`]?.default : null;
 
 ---
 
-<TechPostLayout title={tech.data.title} toc={headings} horizontal_logo={VendorHorizontalLogoSrc} cover_image={CoverImageSrc}>
+<PostLayout 
+  title={data.title} 
+  slug={data.slug}
+  toc={headings}
+  horizontal_logo={VendorHorizontalLogoSrc}
+  cover_image={CoverImageSrc}
+>
   <Prose>
     <Content/>
   </Prose>  
-</TechPostLayout>
+</PostLayout>

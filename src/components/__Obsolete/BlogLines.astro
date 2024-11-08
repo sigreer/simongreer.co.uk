@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+
+interface Props {
+  currentSlug?: string;
+}
+
+const { currentSlug } = Astro.props;
+const blogs = await getCollection('blog');
+const filteredBlogs = currentSlug ? blogs.filter(blog => blog.data.slug !== currentSlug) : blogs;
+
+// Import all cover images
+const allCoverImages = import.meta.glob('../images/covers/*', { eager: true });
+---
+
+<div class="rounded-lg w-full bg-white">
+  <ul class="flex flex-col py-0">
+    {
+      filteredBlogs.slice(0, 6).map((blog) => {
+        const coverImage = blog.data.coverimage ? allCoverImages[`../images/covers/${blog.data.coverimage}`]?.default : null;
+        return (
+          <li class="flex flex-col bg-white hover:shadow-lg hover:scale-105 transition h-24 [&:not(:last-child)]:border-b [&:not(:last-child)]:border-dotted [&:not(:last-child)]:border-gray-200">
+            <a href={`/blog/${blog.data.slug}`} class="flex flex-row gap-x-1 p-1 relative h-full">
+              {coverImage && (
+                <div class="w-1/5 overflow-hidden">
+                  <Image 
+                    src={coverImage} 
+                    alt={blog.data.title}
+                    width={120}
+                    height={120}
+                    class="h-full w-full object-cover object-center rounded-l-md"
+                  />
+                </div>
+              )}
+              <div class="flex flex-col gap-y-0 py-1 px-4 w-4/5">
+                <h3 class="text-base font-semibold line-clamp-2 py-0 leading-5">
+                  {blog.data.title}
+                </h3>
+                {blog.data.tags && blog.data.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-1 tag-block">
+                    {blog.data.tags.map((tag) => (
+                      <span
+                        class="rounded-md px-2 py-1 text-xs md:text-sm font-semibold text-white shadow-sm-light transition tag-style" 
+                        data-tag={tag}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</div>

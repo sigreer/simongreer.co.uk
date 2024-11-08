@@ -1,14 +1,14 @@
 ---
 import { getCollection } from 'astro:content';
 const projects = await getCollection('projects');
-import ProjectLayout from "../../layouts/ProjectLayout.astro";
+import PostLayout from "../../layouts/PostLayout.astro";
 import '@styles/custom.css';
 ---
 
-<ProjectLayout title="Projects">
+<PostLayout title="Projects" slug="projects">
 <ul>
   {projects.map(project => (
     <li><a href={`/blog/${project.data.slug}`}>{project.data.title}</a></li>
   ))}
 </ul>
-</ProjectLayout>
+</PostLayout>

@@ -1,71 +1,75 @@
 // Wrap everything in an IIFE to avoid global scope pollution
-(function() {
-  const tagColors: Record<string, string> = {};
-  const classNames: string[] = [
-    'cyan1',
-    'cyan2',
-    'cyan3',
-    'purple1',
-    'purple2',
-    'purple3',
-    'red1',
-    'red2',
-    'red3',
-    'orange1',
-    'orange2',
-    'orange3',
-    'lime1',
-    'lime2',
-    'lime3',
-    'green1',
-    'green2',
-    'green3',
-    'blue1',
-    'blue2',
-    'blue3',
-    'black1',
-    'black2',
-    'black3',
+(() => {
+  // Define colors exactly as they appear in CSS
+  const colorClasses = [
+    'gray1', 'gray3', 'slate1',  // Limited gray variants
+    'red1', 'red3',
+    'orange1', 'orange3',
+    'amber1', 'amber3',
+    'yellow1', 'yellow3',
+    'lime1', 'lime3',
+    'green1', 'green3',
+    'emerald1', 'emerald3',
+    'teal1', 'teal3',
+    'cyan1', 'cyan3',
+    'sky1', 'sky3',
+    'blue1', 'blue3',
+    'indigo1', 'indigo3',
+    'violet1', 'violet3',
+    'purple1', 'purple3',
+    'fuchsia1', 'fuchsia3',
+    'pink1', 'pink3',
+    'rose1', 'rose3'
   ];
-  let classIndex: number = 0;
 
-  function getClassNameForTag(tag: string): string {
-    if (!tagColors[tag]) {
-      // Assign a class name from the list
-      tagColors[tag] = classNames[classIndex];
-      classIndex = (classIndex + 1) % classNames.length;
+  // Hash function to get consistent number from string
+  function hashString(str: string): number {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      const char = str.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash;
     }
-    return tagColors[tag];
+    return Math.abs(hash);
+  }
+
+  function getColorForTag(tag: string): string {
+    const index = hashString(tag) % colorClasses.length;
+    return colorClasses[index];
   }
 
   function applyTagColors(): void {
-    const tags: NodeListOf<HTMLElement> = document.querySelectorAll('[data-tag]');
-    tags.forEach(tagElement => {
-      const tag: string | null = tagElement.getAttribute('data-tag');
-      if (tag) {
-        const className: string = getClassNameForTag(tag);
-        tagElement.classList.add(className);
+    document.querySelectorAll('[data-tag]').forEach((element: Element) => {
+      if (element instanceof HTMLElement) {
+        const tag = element.getAttribute('data-tag');
+        if (tag) {
+          // Remove any existing color classes
+          element.classList.remove(...colorClasses);
+          
+          // Apply the correct color
+          const colorClass = getColorForTag(tag);
+          element.classList.add(colorClass);
+        }
       }
     });
   }
 
-  // Apply colors on initial load
-  document.addEventListener('DOMContentLoaded', applyTagColors);
-
-  // Expose a method to apply colors to dynamically added tags
-  (window as any).applyTagColorsToNewElements = applyTagColors;
-
-  // Optional: Save color assignments to localStorage
-  window.addEventListener('beforeunload', () => {
-    localStorage.setItem('tagColors', JSON.stringify(tagColors));
+  // Apply colors whenever the DOM changes
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.addedNodes.length > 0) {
+        applyTagColors();
+      }
+    });
   });
 
-  // Optional: Load color assignments from localStorage
-  const savedTagColors: string | null = localStorage.getItem('tagColors');
-  if (savedTagColors) {
-    Object.assign(tagColors, JSON.parse(savedTagColors));
-  }
+  // Start observing the document
+  observer.observe(document.body, { childList: true, subtree: true });
 
-  // Example: Listen to route changes (pseudo-code, replace with actual router event)
+  // Apply colors on initial load and after navigation
+  document.addEventListener('DOMContentLoaded', applyTagColors);
   document.addEventListener('astro:page-load', applyTagColors);
+
+  // Make the function available globally
+  window.applyTagColorsToNewElements = applyTagColors;
 })();

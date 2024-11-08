@@ -1,22 +1,19 @@
 ---
-import directus from "../lib/directus";
-import { Image } from 'astro:assets';
-import { readItems } from "@directus/sdk";
-
-export async function getStaticPaths() {
-  try {
-    const authors = await directus.request(readItems("authors", {
-      fields: ['*'],
-    }));
-    return authors.map((author) => ({
-      params: { author_name: author.name, twitter: author.twitter, mastodon: author.mastodon, github: author.github },
-      props: { author }
-    }));
-  } catch (error) {
-    console.error("Error fetching pages:", error);
-    throw new Error("Failed to fetch pages from Directus");
-  }
-}
+// import { Image } from 'astro:assets';
+// export async function getStaticPaths() {
+//   try {
+//     // const authors = await directus.request(readItems("authors", {
+//     //   fields: ['*'],
+//     // }));
+//       return authors.map((author) => ({
+//       params: { author_name: author.name, twitter: author.twitter, mastodon: author.mastodon, github: author.github },
+//       props: { author }
+//     }));
+//   } catch (error) {
+//     console.error("Error fetching pages:", error);
+//     throw new Error("Failed to fetch pages from Directus");
+//   }
+// }
 
 const { author } = Astro.props;
 
