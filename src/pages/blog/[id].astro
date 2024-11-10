@@ -14,8 +14,8 @@ export async function getStaticPaths() {
       type: 'blog',
       title: post.data.title,
       slug: post.data.slug,
-      coverimage: post.data.coverimage
-
+      coverimage: post.data.coverimage,
+      toc: post.data.toc
      }
   }));
 }
@@ -24,7 +24,6 @@ const { post, title, slug, coverimage } = Astro.props;
 const { Content, headings } = await render(post);
 const allImages = import.meta.glob<{ default: ImageMetadata }>('../../images/covers/*', { eager: true });
 const ImageSrc = coverimage ? allImages[`../../images/covers/${coverimage}`]?.default : null;
-const { data } = post as CollectionEntry<'blog'>;
 ---
 
 <PostLayout title={title} slug={slug} toc={headings}>
