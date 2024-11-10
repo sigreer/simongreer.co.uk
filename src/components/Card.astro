@@ -20,7 +20,7 @@ const basePath = type === 'tech' ? '/tech' : '/blog';
 ---
 
 <li class={`rounded-md bg-white shadow-md transition hover:shadow-xl hover:scale-105 ${className}`}>
-  <a href={`${basePath}/${slug}`} class="flex flex-col h-full gap-y-2 pb-2">
+  <a href={`${basePath}/${slug}`} class="block h-full">
     {coverImage && (
       <div class="w-full h-48 rounded-t-md overflow-hidden">
         <Image 
@@ -32,25 +32,24 @@ const basePath = type === 'tech' ? '/tech' : '/blog';
         />
       </div>
     )}
-    <div class="flex flex-col gap-y-2 px-4">
-      <h3 class="text-xl font-semibold line-clamp-2">
+    <div class="p-4">
+      <h3 class="text-xl font-semibold line-clamp-2 mb-2">
         {title}
       </h3>
       {excerpt && (
-        <p class="text-gray-600 line-clamp-3">
+        <p class="text-gray-600 line-clamp-3 mb-2">
           {excerpt}
         </p>
       )}
       {tags && tags.length > 0 && (
-        <div class="flex flex-wrap gap-2 tag-block">
+        <div class="flex flex-wrap gap-2 tag-container">
           {tags.map((tag) => (
-            <a
-              href={`/${type}?tag=${encodeURIComponent(tag)}`}
-              class="inline-block rounded-md px-2 py-1 text-xs font-semibold text-white tag-style"
+            <span
+              class="tag-style rounded-md px-2 py-1 text-xs font-semibold text-white bg-purple-600 shadow-sm transition"
               data-tag={tag}
             >
               {tag}
-            </a>
+            </span>
           ))}
         </div>
       )}
@@ -59,7 +58,12 @@ const basePath = type === 'tech' ? '/tech' : '/blog';
 </li>
 
 <script>
-  // Ensure tag colors are applied after component loads
+  declare global {
+    interface Window {
+      applyTagColorsToNewElements?: () => void;
+    }
+  }
+
   document.addEventListener('astro:page-load', () => {
     if (typeof window.applyTagColorsToNewElements === 'function') {
       window.applyTagColorsToNewElements();

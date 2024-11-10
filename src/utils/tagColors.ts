@@ -1,28 +1,25 @@
 // Wrap everything in an IIFE to avoid global scope pollution
 (() => {
-  // Define colors exactly as they appear in CSS
-  const colorClasses = [
-    'gray1', 'gray3', 'slate1',  // Limited gray variants
-    'red1', 'red3',
-    'orange1', 'orange3',
-    'amber1', 'amber3',
-    'yellow1', 'yellow3',
-    'lime1', 'lime3',
-    'green1', 'green3',
-    'emerald1', 'emerald3',
-    'teal1', 'teal3',
-    'cyan1', 'cyan3',
-    'sky1', 'sky3',
-    'blue1', 'blue3',
-    'indigo1', 'indigo3',
-    'violet1', 'violet3',
-    'purple1', 'purple3',
-    'fuchsia1', 'fuchsia3',
-    'pink1', 'pink3',
-    'rose1', 'rose3'
-  ];
+  type ColorClass = {
+    bg: string;
+    text: string;
+  };
 
-  // Hash function to get consistent number from string
+  const colorClasses: Record<string, ColorClass> = {
+    'gray': { bg: 'bg-gray-600', text: 'text-white' },
+    'red': { bg: 'bg-red-600', text: 'text-white' },
+    'blue': { bg: 'bg-blue-600', text: 'text-white' },
+    'green': { bg: 'bg-green-600', text: 'text-white' },
+    'purple': { bg: 'bg-purple-600', text: 'text-white' },
+    'yellow': { bg: 'bg-yellow-600', text: 'text-white' },
+    'indigo': { bg: 'bg-indigo-600', text: 'text-white' },
+    'pink': { bg: 'bg-pink-600', text: 'text-white' },
+    'teal': { bg: 'bg-teal-600', text: 'text-white' },
+    'orange': { bg: 'bg-orange-600', text: 'text-white' },
+  };
+
+  const colorKeys = Object.keys(colorClasses);
+
   function hashString(str: string): number {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
@@ -33,9 +30,9 @@
     return Math.abs(hash);
   }
 
-  function getColorForTag(tag: string): string {
-    const index = hashString(tag) % colorClasses.length;
-    return colorClasses[index];
+  function getColorForTag(tag: string): ColorClass {
+    const index = hashString(tag) % colorKeys.length;
+    return colorClasses[colorKeys[index]];
   }
 
   function applyTagColors(): void {
@@ -44,17 +41,19 @@
         const tag = element.getAttribute('data-tag');
         if (tag) {
           // Remove any existing color classes
-          element.classList.remove(...colorClasses);
+          element.className = element.className.split(' ').filter(cls => 
+            !cls.startsWith('bg-') && !cls.startsWith('text-')
+          ).join(' ');
           
-          // Apply the correct color
-          const colorClass = getColorForTag(tag);
-          element.classList.add(colorClass);
+          // Apply new color classes
+          const { bg, text } = getColorForTag(tag);
+          element.classList.add(bg, text, 'rounded-md', 'px-2', 'py-1', 'text-xs', 'font-semibold', 'shadow-sm', 'transition');
         }
       }
     });
   }
 
-  // Apply colors whenever the DOM changes
+  // Apply colors on DOM changes
   const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       if (mutation.addedNodes.length > 0) {

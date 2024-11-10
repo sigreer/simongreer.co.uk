@@ -1,7 +1,7 @@
 ---
 import HeaderBar from "../components/HeaderBar.astro";
 import Footer from "../components/Footer.astro";
-import Navbar from '../components/Navbar.astro';
+import NavNew from '../components/NavNew.astro';
 import { ClientRouter } from 'astro:transitions';
 import '../styles/custom.css';
 import Prose from '../components/Prose.astro';
@@ -24,7 +24,7 @@ import '@fontsource/poppins';
   </head>
   <body class="bg-gray-100 font-poppins min-h-screen flex flex-col">
     
-    <Navbar />
+    <NavNew />
     <HeaderBar />
     <main
       class="
@@ -42,6 +42,5 @@ import '@fontsource/poppins';
       <script src="../utils/tagColors.ts"></script>
     </main>
     <Footer />
-    <script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
   </body>
 </html>

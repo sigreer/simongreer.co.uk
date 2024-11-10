@@ -22,7 +22,7 @@ const displayItems = slice
   : filteredItems.slice(0, limit);
 ---
 
-<ul class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+<ul class="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
   {displayItems.map(item => (
     <Card 
       title={item.data.title}

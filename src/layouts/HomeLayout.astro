@@ -1,43 +1,26 @@
 ---
-import NavNew from "../components/NavNew.astro";
+import BaseLayout from "./BaseLayout.astro";
+import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
-import Footer from "../components/Footer.astro";
-import { ClientRouter } from 'astro:transitions';
 import Card from "../components/Card.astro";
 import '../styles/custom.css';
 import '@fontsource/poppins';
-const { description, posts, techs } = Astro.props;
+const techs = await getCollection('tech');
+const posts = await getCollection('blog');
+const { description } = Astro.props;
 const currentSlug = Astro.url.pathname.split('/')[1];
 const limit = 6;
 const filteredTechs = techs.filter(tech => tech.data.slug !== currentSlug);
 const allVendorIcons = import.meta.glob<{ default: ImageMetadata }>('../images/vendor-icons/*', { eager: true });
 ---
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <meta name="generator" content={Astro.generator} />
-    <meta
-      name="description"
-      content={description}
-    />
-
-    <ClientRouter />
-  </head>
-  <body class="bg-gray-100 font-poppins min-h-screen flex flex-col">
-    <NavNew />
-    <main class="mx-auto px-3 sm:px-4 md:px-8 xl:px-16 max-w-full 2xl:max-w-2xl font-poppins sm:text-lg flex-grow">
-      <slot />
-      <div class="w-full flex flex-col gap-2 md:flex-row md:gap-6">
-        
-        <div class="w-full md:w-1/2 lg:w-2/3 pt-4">
-          <div class="w-full bg-purple-700 rounded-t-lg">
-            <h3 class="w-fit text-xl font-bold relative px-4 py-2 text-white">Tech Articles</h3>
-          </div>
-          <section class="pt-2 pb-6 px-6 md:px-0">
+<BaseLayout>
+  <main class="flex-grow w-full sm:text-lg font-poppins mx-auto">
+    <slot />
+    <div class="w-full flex flex-col gap-2">
+      <div class="w-full pt-4 flex flex-col">
+        <div class="w-full bg-purple-700 rounded-t-lg">
+        </div>
+        <section class="pt-2 pb-6 px-6 md:px-0">
             <ul class="grid gap-4
               grid-cols-1 
               sm:grid-cols-2 sm:gap-6 sm:px-0
@@ -56,51 +39,50 @@ const allVendorIcons = import.meta.glob<{ default: ImageMetadata }>('../images/v
               className="block sm:hidden"
             />
           ))}
-                {posts.slice(0, 2).map((post) => (
-                  <Card
-                    title={post.data.title}
-                    slug={`/blog/${post.data.slug}`}
-                    excerpt={post.data.excerpt}
-                    tags={post.data.tags}
-                    coverimage={post.data.coverimage}
-                    className="hidden sm:block md:hidden"
-                  />
-                ))}
-                {posts.slice(0, 2).map((post) => (
-                  <Card
-                    title={post.data.title}
-                    slug={`/blog/${post.data.slug}`}
-                    excerpt={post.data.excerpt}
-                    tags={post.data.tags}
-                    coverimage={post.data.coverimage}
-                    className="hidden md:block lg:hidden"
-                  />
-                ))}
-                {posts.slice(0, 3).map((post) => (
-                        <Card
-                          title={post.data.title}
-                          slug={`/blog/${post.data.slug}`}
-                          excerpt={post.data.excerpt}
-                          tags={post.data.tags}
-                          coverimage={post.data.coverimage}
-                          className="hidden lg:block"
-                        />
-                      ))}
-              </ul>
-              {posts.length > 3 && (
-                <div class="w-full flex justify-end">
-                  <a class="px-4 py-2 bg-purple-600 text-gray-100 mt-3 rounded-md uppercase flex flex-row items-center hover:scale-110 transition-all duration-100 shadow-md hover:shadow-gray-700/30 shadow-gray-700/30 hover:shadow-md">
-                    <div class="font-semibold text-xl">More</div>
-                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                    </svg>
-                  </a>
-                </div>
-              )}
-          </section>
-          
-          <style>
-            /* Fallback for browsers that don't support :nth-child */
+          {posts.slice(0, 2).map((post) => (
+            <Card
+              title={post.data.title}
+              slug={`/blog/${post.data.slug}`}
+              excerpt={post.data.excerpt}
+              tags={post.data.tags}
+              coverimage={post.data.coverimage}
+              className="hidden sm:block md:hidden"
+            />
+          ))}
+          {posts.slice(0, 2).map((post) => (
+            <Card
+              title={post.data.title}
+              slug={`/blog/${post.data.slug}`}
+              excerpt={post.data.excerpt}
+              tags={post.data.tags}
+              coverimage={post.data.coverimage}
+              className="hidden md:block lg:hidden"
+            />
+          ))}
+          {posts.slice(0, 3).map((post) => (
+            <Card
+              title={post.data.title}
+              slug={`/blog/${post.data.slug}`}
+              excerpt={post.data.excerpt}
+              tags={post.data.tags}
+              coverimage={post.data.coverimage}
+              className="hidden lg:block"
+            />
+          ))}
+        </ul>
+        {posts.length > 3 && (
+          <div class="w-full flex justify-end">
+            <a class="px-4 py-2 bg-purple-600 text-gray-100 mt-3 rounded-md uppercase flex flex-row items-center hover:scale-110 transition-all duration-100 shadow-md hover:shadow-gray-700/30 shadow-gray-700/30 hover:shadow-md">
+              <div class="font-semibold text-xl">More</div>
+              <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+              </svg>
+            </a>
+          </div>
+        )}
+        </section>
+        <style>
+          /* Fallback for browsers that don't support :nth-child */
             @media (max-width: 639px) {
               .sm\:hidden { display: block; }
             }
@@ -116,9 +98,9 @@ const allVendorIcons = import.meta.glob<{ default: ImageMetadata }>('../images/v
             }
           </style>
         </div>
-        <div class="w-full md:w-1/2 lg:w-1/3 pt-4">
+        <div class="w-full">
           <div class="w-full bg-purple-700 rounded-t-lg">
-            <h3 class="w-fit text-xl font-bold relative px-4 py-2 text-white">Tech Articles</h3>
+            <h3 class="w-fit text-xl font-bold relative px-4 py-2 text-white">Posts Horizontal</h3>
           </div>
           <div class="rounded-lg w-full bg-white">
             <ul class="flex flex-col py-0">
@@ -167,9 +149,4 @@ const allVendorIcons = import.meta.glob<{ default: ImageMetadata }>('../images/v
           </div>
         </div>
       </div>
-    </main>
-    <script src="../utils/tagColors.ts"></script>
-    <Footer />
-    <script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
-  </body>
-</html>
+    </BaseLayout>

@@ -1,7 +1,5 @@
 ---
-import HeaderBar from "../components/HeaderBar.astro";
 import Footer from "../components/Footer.astro";
-import Navbar from '../components/Navbar.astro';
 import { ClientRouter } from 'astro:transitions';
 import '@styles/custom.css';
 import '@fontsource/poppins';
@@ -25,13 +23,13 @@ const global = { title: 'SimonGreer.co.uk' };
     <meta name="description" content={description} />
     <ClientRouter />
   </head>
-  <body class="bg-gray-100 font-poppins min-h-screen flex flex-col max-w-md mx-auto">
+  <body class="bg-gray-100 font-poppins min-h-screen flex flex-col max-w-lg mx-auto md:py-6">
     <NavNew />
     <slot />
     <Footer />
     <script>
       import "../utils/tagColors.ts";
     </script>
-    <script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+
   </body>
 </html> 
