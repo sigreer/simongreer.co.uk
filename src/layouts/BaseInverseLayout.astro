@@ -1,7 +1,6 @@
 ---
-import HeaderBar from "../components/HeaderBar.astro";
 import Footer from "../components/Footer.astro";
-import Navbar from '../components/Navbar.astro';
+import NavNew from '../components/NavNew.astro';
 import { ClientRouter } from 'astro:transitions';
 import '@styles/custom.css';
 import '@fontsource/poppins';
@@ -26,10 +25,12 @@ const global = { title: 'SimonGreer.co.uk' };
     <meta name="description" content={description} />
     <ClientRouter />
   </head>
-  <body class="bg-gray-100 font-poppins min-h-screen flex flex-col">
-    <HeaderBar />
-    <Navbar />
-    <slot />
+  <body class="bg-gray-100 font-poppins min-h-screen flex flex-col max-w-lg mx-auto md:py-6">
+    <NavNew />
+    <main class="flex-grow max-w-xl">
+      <slot />    
+    </main>
+    
     <Footer />
     <script>
       import "../utils/tagColors.ts";

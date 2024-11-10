@@ -1,0 +1,19 @@
+---
+import { Image } from 'astro:assets';
+import Headphones from '../../images/icons/headphones.svg';
+const pathname = Astro.url.pathname;
+---
+<a href="/currently" 
+   class:list={[
+     "block antialiased font-sans text-sm leading-normal",
+     pathname === "/currently" ? "font-semibold text-purple-700" : "font-normal"
+   ]}>
+    <div role="button" 
+          tabindex="0" 
+          class="w-full p-3 rounded-lg text-start leading-tight transition-all 
+          hover:bg-opacity-80 
+          focus:text-purple-800 focus:bg-opacity-80 active:text-purple-600 active:font-semibold active:bg-opacity-80 hover:text-purple-800 outline-none flex items-center gap-2 py-2 pr-4">
+      <Image src={Headphones} alt="Headphones" class="w-[20px] h-[20px] fill-black stroke-black text-black"/>
+      Currently...
+    </div>
+  </a>
