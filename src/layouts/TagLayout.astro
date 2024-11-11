@@ -2,7 +2,7 @@
 import Lines from "../components/Lines.astro";
 import HeaderBar from "../components/HeaderBar.astro";
 import Footer from "../components/Footer.astro";
-import Navbar from '../components/Navbar.astro';
+import NavNew from '../components/NavNew.astro';
 import { ClientRouter } from 'astro:transitions';
 import '../styles/custom.css';
 import '@fontsource/poppins';
@@ -31,7 +31,7 @@ const { description = "Your default description here" } = Astro.props;
   </head>
   <body class="bg-gray-100 font-poppins min-h-screen flex flex-col">
     
-    <Navbar />
+    <NavNew />
     <HeaderBar />
     <main class="mx-auto px-3 sm:px-4 md:px-8 xl:px-16 max-w-full 2xl:max-w-2xl font-poppins sm:text-lg flex-grow">
 

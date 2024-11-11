@@ -5,8 +5,12 @@ import { Image } from 'astro:assets';
 import Card from "../components/Card.astro";
 import '../styles/custom.css';
 import '@fontsource/poppins';
-const techs = await getCollection('tech');
-const posts = await getCollection('blog');
+const techs = (await getCollection('tech')).filter(({ data }) => {
+  return data.created_date;
+}).sort((a, b) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime());
+const posts = (await getCollection('blog')).filter(({ data }) => {
+  return data.created_date;
+}).sort((a, b) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime());
 const { description } = Astro.props;
 const currentSlug = Astro.url.pathname.split('/')[1];
 const limit = 6;
@@ -32,7 +36,7 @@ const allVendorIcons = import.meta.glob<{ default: ImageMetadata }>('../images/v
           {posts.slice(0, 1).map((post) => (
             <Card
               title={post.data.title}
-              slug={`/blog/${post.data.slug}`}
+              slug={post.data.slug}
               excerpt={post.data.excerpt}
               tags={post.data.tags}
               coverimage={post.data.coverimage}
@@ -42,7 +46,7 @@ const allVendorIcons = import.meta.glob<{ default: ImageMetadata }>('../images/v
           {posts.slice(0, 2).map((post) => (
             <Card
               title={post.data.title}
-              slug={`/blog/${post.data.slug}`}
+              slug={post.data.slug}
               excerpt={post.data.excerpt}
               tags={post.data.tags}
               coverimage={post.data.coverimage}
@@ -52,7 +56,7 @@ const allVendorIcons = import.meta.glob<{ default: ImageMetadata }>('../images/v
           {posts.slice(0, 2).map((post) => (
             <Card
               title={post.data.title}
-              slug={`/blog/${post.data.slug}`}
+              slug={post.data.slug}
               excerpt={post.data.excerpt}
               tags={post.data.tags}
               coverimage={post.data.coverimage}
@@ -62,7 +66,7 @@ const allVendorIcons = import.meta.glob<{ default: ImageMetadata }>('../images/v
           {posts.slice(0, 3).map((post) => (
             <Card
               title={post.data.title}
-              slug={`/blog/${post.data.slug}`}
+              slug={post.data.slug}
               excerpt={post.data.excerpt}
               tags={post.data.tags}
               coverimage={post.data.coverimage}
@@ -82,7 +86,7 @@ const allVendorIcons = import.meta.glob<{ default: ImageMetadata }>('../images/v
         )}
         </section>
         <style>
-          /* Fallback for browsers that don't support :nth-child */
+
             @media (max-width: 639px) {
               .sm\:hidden { display: block; }
             }

@@ -7,8 +7,4 @@ declare global {
     }
 }
 
-interface ImportMetaEnv {
-    // Add any env variables here if needed
-}
-
 export {};

@@ -1,0 +1,32 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  horizontal_logo: ImageMetadata;
+  vendor_name: string;
+}
+
+const { horizontal_logo, vendor_name } = Astro.props;
+
+// Add debugging
+console.log('Debug HorizontalLogo:');
+console.log('horizontal_logo:', horizontal_logo);
+console.log('vendor_name:', vendor_name);
+---
+
+<div class="w-full">
+  {horizontal_logo ? (
+    <Image 
+      src={horizontal_logo} 
+      alt={vendor_name} 
+      width={200} 
+      height={120} 
+      format="webp"
+      class="w-full"
+      loading="lazy"
+    />
+  ) : (
+    <p class="text-red-500">No logo available</p>
+  )}
+</div>

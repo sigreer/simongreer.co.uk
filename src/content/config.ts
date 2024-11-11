@@ -13,6 +13,7 @@ const tech = defineCollection({
     coverimage: z.string().optional(),
     vendoricon: z.string().optional(),
     horizontal_logo: z.string().optional(),
+    vendor_name: z.string().optional(),
     tags: z.array(z.string()).optional(),
   })
 });
@@ -40,7 +41,11 @@ const blog = defineCollection({
     created_date: z.date(),
     status: z.enum(['draft', 'published', 'archived']),
     coverimage: z.string().optional(),
+    vendor_name: z.string().optional().describe('Vendor name for the logo'),
+    horizontal_logo: z.string().optional().describe('Path to the horizontal logo image'),
+    vendoricon: z.string().optional(),
     tags: z.array(z.string()).optional(),
+    type: z.literal('blog')
   }),
 });
 

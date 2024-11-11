@@ -1,0 +1,62 @@
+---
+title: "Use WAS-110 SFP+ Module to Bypass Virgin Media"
+excerpt: "Use WAS-110 SFP+ Module to Bypass Virgin Media"
+type: "blog"
+created_date: 2024-11-10
+status: "published"
+slug: "bypass-virgin-media-using-was-110-with-8311-firmware"
+coverimage: "was-110.jpg"
+horizontal_logo: "8311.png"
+vendor_name: "8311"
+tags: ["storage"]
+---
+
+## Introduction
+
+Virgin Media are rolling out the next generation XGS-PON network in the UK, bringing fibre speeds to the home. Upgrading from gFast (340Mbps down/80Mbps up) to Virgin's symmetrical Gig2 package (2Gbps down/2Gbps up) was not a difficult choice for me.
+
+Unfortunately, the equipment provided by Virgin has become progressively more restrictive, affording the customer less control over their own network. As a result, communities have sprung up online dedicating themselves to the art of bypassing Virgin's proprietary nightmare.
+
+This article explains the issue with Virgin's newest Hub5X and outlines how it's possible to bypass the router by using a custom SFP+ module, a low cost switch and a cable.
+
+## Hub 5X Problems
+
+### IP Addressing
+
+Out of the box you'd expect the router to be configured with fairly standard settings and the Hub 5X is no exception. Predictably, the router's IP and network is ``192.168.0.1/24``. However, it's not possible to change the network, or the IP address of the router. Neither is it possible to create a second network on a different port.
+
+### Network Isolation
+
+As a result of being restricted to a single IPv4 subnet, if you have any IoT, CCTV or similarly security-inept devices on your network and also keep anything of value on your network (such as a NAS), you're not in a good place.
+
+### DNS Assignment via DHCP
+
+It's not possible to change the DNS servers set by the router's built-in DHCP server. The existence of DNS at all is pretty much ignored by the Hub 5X and Virgin's own DNS servers refuse to resolve any domain name that has even the loosest mention of anything controversial.
+
+Using Ad-blocking DNS services like Pi-Hole, Adguard, Blocky or Technitium would need to be configured independently and all of your client devices would need to be set up manually with static IPs.
+
+## Your Options
+
+### Hidden Modem Mode
+
+There's a lot of chatter online - Reddit, Virgin Media's forums, Discord, etc. - all of the typical places for being angry and grumbling. Many point to the fact that there are signs that cable modem mode may be coming to the Hub 5X. After all, it was an option in the Hub 5's firmware from its date of release. 
+
+There is actually a hidden option on the Hub 5X. It first appeared in 2023 and was not hidden. Virgin then appeared to backtrack and removed the option from the menu in the router's admin panel. You can however, still reach the page by typing it into your browser, but for reasons mentioned below this is not a good option.
+
+
+There is a hidden option in one of the versions of firmware that will let you switch modem mode on. However, in most cases it temporarily bricks your router, requiring a factory reset to work in any capacity again. If you're lucky enough to get it working, you'll only be able to use one of the 1GbE ports. If you're on Gig2, then you'll be throwing at least 50% of your bandwidth away, and decent lump of stability.
+
+### Double NAT
+
+One option is to attach your own router's WAN port to one of the Hub 5X's LAN ports and use the Hub 5X's LAN network as your router's WAN network. If you intend to host any public-facing services or if you forward ports in any capacity, you'll need to NAT twice. Network Address Translation is a Layer 3 mechanism for defining how packets should be routed between devices in different network zones.
+
+Even with enterprise-grade networking kit, performing multiple NATs from a WAN zone can be problematic. Services that rely on end-to-end connectivity, such as WebRTC for voice and video calling invariably won't work or will work much less reliably. Generally speaking double NAT is a headache and something you look to in desperation.
+
+### Bypass the Hub5X
+
+With no reliable method of using Virgin's kit as a standalone modem and double NAT generally being a non-starter, bypassing the Hub 5X is the only genuinely viable option. Thankfully, this is made possible using community-built firmware and a custom SFP+ module known as a **WAS-110**.
+
+## The Solution
+
+### Overview
+

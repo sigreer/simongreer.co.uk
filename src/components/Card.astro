@@ -14,12 +14,10 @@ interface Props {
 const { title, slug, excerpt, tags, coverimage, className = "", type = 'blog' } = Astro.props;
 const allCoverImages = import.meta.glob<{ default: ImageMetadata }>('../images/covers/*', { eager: true });
 const coverImage = coverimage ? allCoverImages[`../images/covers/${coverimage}`]?.default : null;
-
-// Determine the base path based on the content type
 const basePath = type === 'tech' ? '/tech' : '/blog';
 ---
 
-<li class={`rounded-md bg-white shadow-md transition hover:shadow-xl hover:scale-105 ${className}`}>
+<li class={`rounded-md bg-white shadow-md transition border border-gray-500 hover:shadow-xl hover:scale-105 ${className}`}>
   <a href={`${basePath}/${slug}`} class="block h-full">
     {coverImage && (
       <div class="w-full h-48 rounded-t-md overflow-hidden">

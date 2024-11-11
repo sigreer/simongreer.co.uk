@@ -39,14 +39,15 @@ const filteredToc = toc.filter((heading: Heading) => heading.depth >= 2 && headi
   document.addEventListener('DOMContentLoaded', () => {
     const links = document.querySelectorAll('[data-toc-link]');
     const headings = Array.from(document.querySelectorAll('h2[id], h3[id]'));
-    let activeLink = null;
+    let activeLink: HTMLElement | null = null;
     
     // Handle clicks
     links.forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
         const href = link.getAttribute('href');
-        const target = document.querySelector(href);
+        if (!href) return;
+        const target = document.querySelector(href.replace('#', '\\#'));
         
         if (target) {
           target.scrollIntoView({
@@ -72,7 +73,7 @@ const filteredToc = toc.filter((heading: Heading) => heading.depth >= 2 && headi
             
             // Add active class to current link
             const href = `#${entry.target.id}`;
-            const currentLink = document.querySelector(`[data-toc-link][href="${href}"]`);
+            const currentLink = document.querySelector(`[data-toc-link][href="${href}"]`) as HTMLElement;
             if (currentLink) {
               currentLink.classList.add('text-purple-600', 'font-bold');
               activeLink = currentLink;
