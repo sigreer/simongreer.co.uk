@@ -1,328 +1,143 @@
 ---
-title: "Automate Screenshot Image Generation With Shell Script"
+title: "Magick Tricks"
 slug: 'use-open-source-cli-tools-to-generate-fancy-screenshot-thumbnails'
-excerpt: "When the time you spend optimising your time is more than the time you save"
+excerpt: "Automate screenshot to fancy cover image generation using CLI only"
 created_date: 2024-11-08
 status: published
-coverimage: "pve1-cascade-cover.png"
-tags: ["workflow", "productivity"]
+coverimage: "magick-tricks-cover-image-automation.jpg"
+tags: ["automation", "bash"]
 type: "blog"
 ---
-import { Image } from "astro:assets"
-import pveCascade from "/src/images/covers/pve1-cascade.png"
+
+import Gallery from '@components/Gallery.astro';
+
+
+
+## Examples
+
+Here's a gallery of images showing the different effects:
+
+
 
 ## Preface
 
-Whilst putting together this very website I started writing about TrueNAS SCALE's newest release - Electric Eel. Like every good blogger, I pinched a few screenshots from TrueNAS's website to repost. The image looks great, so much so that it was making every other post headed with a screenshot image look pretty poor.
+Whilst putting together this site I created several filler pages with copy-pasted screenshots, unthoughtful titles and Lorem Ipsum body text, so I could get everything laid and working properly before splurging content out.
 
-I've got plenty of experience with image editing software (Photoshop, GIMP, Inkscape, most predominantly) but am quite a long way from being a 'dab hand', and as a nuts-and-bolts kinda guy the whole design process generally takes a long time for me. So, I decided to see if I could draw inspiration from TrueNAS's cascading screenshot effect to create something similar that I could automate. That is, I take three input images and feed them into a command and get a pretty picture that I can use on this website out the other side.
+Instinctively I grabbed some images from my favourite vendors to kick things off - OPNsense, TrueNAS, Nextcloud and I think Proxmox. After grabbing two or three stock images, screenshots, logos and whatnot I set about laying out my blog page in a card view. Although it wasn't a thoughtful exercise, this ingredient list isn't too far from what you'll likely find on this page. However, after configuring my three-card slice and passing my image props through using Astro's Image optimisation component I couldn't help but notice one of the cards:
 
-I was thinking this had probably been done a million times before and would be some quick, easy and useful content for anyone like-mindedly lazy when it comes to the decorative side of content. Little did I know just how much of a rabbithole I was about to go down...
+An image I'd rather casually *saved as* and plonked onto a post as a cover image looked really good. In fact, it looked nice enough to make all of the other screenshots and quasi-brand assets look pretty ordinary. I studied the image for a bit and decided to see if I could create something similar to tart up the rest of the content. After wasting an hour rather haplessly using GIMP, instead of throwing in the towel I thought I'd double down. Toiling with graphics software shouldn't represent any sort of obstacle to rants and raves, so I decided to create a shell script that could automate the process of building slick blog covers from ordinary screenshots without evening glancing at the splash screen of a graphics suite. 
 
-## Breaking It Down
+So... after emerging from a very deep rabbithole, **Magick Tricks** came about. (Magick Tricks)[https://github.com/sigreer/magick-tricks] is an unnecessarily overbaked shell script that uses ImageMagick to generate a screenshot cover image from the command line using just three ordinary screenshots as input arguments.
 
-If you aren't interest in the ins and outs and just want to copy and paste my script, skip to '(The Solution)[#The Solution]'.
+Below this section are some examples followed by some excerpts from the README.md page created for the Github repo. So, if you spot these cover images across my site over the coming weeks and months, then I guess it passed the 'hopelessly easy to use' test!
 
-### Describing The Objective
+## Examples
 
-Firstly, although the aforementioned TrueNAS image is where I drew inspiration from, I decided I wanted my image to differ slightly. What I want:
+### Source images
 
-- Three screenshots of a software product presented in a 'cascading' style
-- Two images side by side tilting either inwards or outwards (inwards looked better)
-- A front-facing image overlaid with a shadow effect on top of the side-by-side images
-- Some subtle emboldening of each screenshot with a small, dark border
-- Some tolerance for size differences. So, size normalisation of input images.
-- A cool 'sheen' effect on each individual screenshot
-- Transparent background on the resultant image
-- Outputs of each image at each step of the transformation
-
-### AI Was Unhelpful
-
-Like any realistic technology pragmatist, I described my objectives to the LLMs I felt would be best suited to helping me generate the above. I was genuinely surprised by how hopelessly off the mark the AI suggestions were and had to get my hands dirty throughout.
-
-## The Tools
-
-### What I Didn't Use
-
-After a few hours of scoping things out I was able to whittle down my list of CLI tools pretty quickly. There's quite a lot out there, but a lot of old, unmaintained SourceForge-based projects (aka malware-ridden, unmaintained shockers that you don't go anywhere near). The two projects I looked at but didn't use were:
-
-- **GraphicsMagick** which started off life as a fork of ImageMagick before seemingly drifting into obscurity after a brief reinvention as a Node-based utility a few years ago. Reading between the lines of the comments on the Github repo it seemed that the project that it was forked from originally (ImageMagick) had surpassed GM's featureset and the project was duly abandoned. I could be wrong, but I didn't want to spend too much time on this, so I moved on.
-- **FFMPEG** - As you might notice from other sections of this site, I use FFMPEG *a lot* for video processing. I'd never considered using it for image manipulation and after having a quick look into the mechanisms involved decided to try some of the image-first CLI tools to try and keep it simple.
-
-### Image Magick (Imagick)
-
-Like most tech nerds, I've bumped into Image Magick in the past. Most PHP-driven websites (Wordpress, for instance) have ImageMagick as a dependency. There is an insane quantity of what I'd describe as web 1.0 material out there with PHP-based examples of how to use ImageMagick. The CLI tool works in the same way and accepts all of the same arguments from what I can tell, but I was genuinely aghast by just how much there is to this piece of software.
-
-### NConvert
-
-I know that I could probably have accomplished everything without using NConvert, but as a huge fan of the XN-series of products I thought I might be able to cheat a bit and use XNconvert, which is a frontend for NConvert to apply the glossy/shadow effect to each screenshot just because I could see what I was doing.
-
-## The Solution
-
-### The workflow
-
-To reach the final objective I had to work with the images in the following states:
-
-1. Each image in its original form.
-2. Size normalisation of flat images.
-3. Gloss/shadow and borders added to flat images.
-4. Perspective-distortion effect added to the left ahd righthand images.
-5. Merge of left and righthand images.
-6. Drop-shadow of left and righthand images.
-7. Drop-shadow of front-facing image.
-8. Placement of front-facing image over the merged, tilted images.
-
-### Size Normalisation
-
-I had issues with size inference and wasn't happy with having to ensure every input image was exactly the same size, so after capturing three similarly-sized screenshots of a software product I want to work with, I applied a size normalisation using *ImageMagick*:
-
-```bash showLineNumbers title="Size Normalisation function" caption="ImageMagick function"
-normalize_height() {
-    local target_height=768  # Same as the height used in perspective calculations
-    local input_file="$1"
-    local output_file="${input_file%.*}_normalised.png"
-    local current_height=$(magick identify -format "%h" "$input_file")
-    if [ "$current_height" -ne "$target_height" ]; then
-        echo "Normalizing height of $input_file..."
-        magick "$input_file" -resize "x${target_height}" "$output_file"
-    else
-        cp "$input_file" "$output_file"
-    fi
-}
-
-normalize_height "$input_image_1"
-normalize_height "$input_image_2"
-normalize_height "$input_image_3"
-```
-
-This outputs a set of images with the same height (768px) whilst maintaining their aspect ratios. This should work fine with most standard aspect ratios, eg. *16:9* and *4:3*. If using images of different ratios, one of the images will be slightly longer than the other. This doesn't detract overly from the effect and works much better than the alternative of having one of the images taller than the other.
-
-### Gloss/shadow effect & Border
-
-It took me quite a while to replicate this effect. I didn't want to outright plagiarise the TrueNAS cascade effect so didn't look at the images at all whilst I was working on this part. I just remembered that there was a 'sheen' on each of the images in their screenshot cascade which seemed to be a shadow with a gradient fade-out overlaid onto the original image. After trying and failing miserably I ended up creating a png file with a transparent background that fades out downwards using a linear gradient. I then used *NConvert* to set this as a watermark over the top of the original image.
-
-As part of the same command I also added a border to make lighter-coloured images stand out sufficiently and increase the visual impact.
-
-```bash showLineNumbers title="Gloss/shadow effect and border" caption="NConvert function"
-shadow() {
-  nconvert -wmopacity 70 \
-    -wmflag top-center \
-    -wmfile "$shadow_file" \
-    -o "${1%.*}_shadow.png" \
-    -overwrite \
-    -out png -q 72 \
-    "$1"
-}
-
-shadow "$input_image_1_norm"
-shadow "$input_image_2_norm"
-shadow "$input_image_3_norm"
-```
-
-### Tilt/Perspective distortion
-
-```bash showLineNumbers title="Tilt/perspective distortion caption="ImageMagick function"
-
-right_perspective() {
-    echo "Tilting right image..."
-    magick "$input_image_1_shadow" \
-        -alpha set -background none \
-        -virtual-pixel transparent \
-        +distort Perspective \
-        '0,0,0,0 0,768,0,768 1200,768,1080,668 1200,0,1080,100' \
-        "$input_image_1_tilted"
-}
-
-left_perspective() {
-    echo "Tilting left image..."
-    magick "$input_image_2_shadow" \
-        -alpha set -background none \
-        -virtual-pixel transparent \
-        +distort Perspective \
-        '0,0,120,100 0,768,120,668 1200,768,1200,768 1200,0,1200,0' \
-        "$input_image_2_tilted"
-}
-
-# Create the transformations
-left_perspective
-right_perspective
-```
-
-### Merge Tilted images & Add Shadows
-
-Stitch the two images together and then apply a drop shadow using *ImageMagick*
-
-```bash showLineNumbers title="Merge tilted images & add shadows" caption="ImageMagick function"
-magick "$input_image_1_tilted" "$input_image_2_tilted" -background none +append "temp_combined.png"
-
-magick "temp_combined.png" \
-    \( +clone -background black -shadow "80x20+15+15" \) \
-    +swap -background none -layers merge \
-    "$combined_tilted"
-```
-
-### Calculate Overlay Dimensions
-
-```bash showLineNumbers title="Calculate dimensions for overlaying original image" caption="ImageMagick function"
-original_width=$(magick identify -format "%w" "$input_image_3")
-original_height=$(magick identify -format "%h" "$input_image_3")
-combined_width=$(magick identify -format "%w" "$combined_tilted")
-combined_height=$(magick identify -format "%h" "$combined_tilted")
-
-x_offset=$(( (combined_width - original_width) / 2 ))
-y_offset=0
-```
-
-### Add Drop Shadow to Flate Image
-
-```bash showLineNumbers title="Add drop shadow to original image" caption="ImageMagick function"
-magick "$input_image_3" \
-    \( +clone -background black -shadow "60x10+8+8" \) \
-    +swap -background none -layers merge \
-    "temp_center_shadow.png"
-```
-
-### Overlay Flag Image
-
-```bash showLineNumbers title="Overlay the flat image and shadow" caption="ImageMagick function"
-magick "$combined_tilted" "temp_center_shadow.png" \
-    -background none -geometry "+${x_offset}+${y_offset}" \
-    -composite "$output_image"
-```
-
-## Full Script
-
-```bash showLineNumbers title="Full script" caption="Shell script"
-#!/bin/bash
-
-# Input file
-input_image_1="$1"
-input_image_2="$2"
-input_image_3="$3"
-output_image="${input_image_1%.*}_cascade.png"
-input_image_1_shadow="./${input_image_1%.*}_shadow.png"
-input_image_2_shadow="./${input_image_2%.*}_shadow.png"
-input_image_3_shadow="./${input_image_3%.*}_shadow.png"
-combined_tilted="./combined_tilted.png"
-input_image_1_tilted="./${input_image_1%.*}_tilted.png"
-input_image_2_tilted="./${input_image_2%.*}_tilted.png"
-shadow_file="./shadow.png"
-
-# nconvert -wmopacity 70 -wmflag top-center -wmfile "shadow.png" -o "1_NEWshadow.png" -overwrite -out png -q 72 "1.png"
-# magick "1_NEWshadow.png" -alpha Set +distort Perspective '0,0,0,0 0,768,0,768 1200,768,1080,668 1200,0,1080,100' "1_NEWtilted.png"
-
-normalize_height() {
-    local target_height=768  # Same as the height used in perspective calculations
-    local input_file="$1"
-    local output_file="${input_file%.*}_normalised.png"
-    local current_height=$(magick identify -format "%h" "$input_file")
-    if [ "$current_height" -ne "$target_height" ]; then
-        echo "Normalizing height of $input_file..."
-        magick "$input_file" -resize "x${target_height}" "$output_file"
-    else
-        cp "$input_file" "$output_file"
-    fi
-}
-
-# Update input paths to use normalized versions
-input_image_1_norm="./${input_image_1%.*}_normalised.png"
-input_image_2_norm="./${input_image_2%.*}_normalised.png"
-input_image_3_norm="./${input_image_3%.*}_normalised.png"
-
-# Normalize heights before any other operations
-normalize_height "$input_image_1"
-normalize_height "$input_image_2"
-normalize_height "$input_image_3"
-
-shadow() {
-    nconvert    -wmopacity 70 \
-            -wmflag top-center \
-            -wmfile "$shadow_file" \
-            -o "${1%.*}_shadow.png" \
-            -overwrite \
-            -out png -q 72 \
-            "$1"
-}
-
-# Update shadow operations to use normalized files
-shadow "$input_image_1_norm"
-shadow "$input_image_2_norm"
-shadow "$input_image_3_norm"
-
-# Update input paths for perspective operations
-input_image_1_shadow="./${input_image_1%.*}_normalised_shadow.png"
-input_image_2_shadow="./${input_image_2%.*}_normalised_shadow.png"
-input_image_3_shadow="./${input_image_3%.*}_normalised_shadow.png"
-
-echo "Finished adding shadows, now tilting right and left images..."
-
-right_perspective() {
-    echo "Tilting right image..."
-    magick "$input_image_1_shadow" \
-        -alpha set -background none \
-        -virtual-pixel transparent \
-        +distort Perspective \
-        '0,0,0,0 0,768,0,768 1200,768,1080,668 1200,0,1080,100' \
-        "$input_image_1_tilted"
-}
-
-left_perspective() {
-    echo "Tilting left image..."
-    magick "$input_image_2_shadow" \
-        -alpha set -background none \
-        -virtual-pixel transparent \
-        +distort Perspective \
-        '0,0,120,100 0,768,120,668 1200,768,1200,768 1200,0,1200,0' \
-        "$input_image_2_tilted"
-}
-
-# Create the transformations
-left_perspective
-right_perspective
-echo "Finished tilting image. Now merging left and right images..."
-
-# Combine tilted images side by side first
-magick "$input_image_1_tilted" "$input_image_2_tilted" -background none +append "temp_combined.png"
-
-# Add drop shadow to the side-by-side images
-magick "temp_combined.png" \
-    \( +clone -background black -shadow "80x20+15+15" \) \
-    +swap -background none -layers merge \
-    "$combined_tilted"
-
-# Get dimensions for overlay
-original_width=$(magick identify -format "%w" "$input_image_3")
-original_height=$(magick identify -format "%h" "$input_image_3")
-combined_width=$(magick identify -format "%w" "$combined_tilted")
-combined_height=$(magick identify -format "%h" "$combined_tilted")
-
-x_offset=$(( (combined_width - original_width) / 2 ))
-y_offset=0
-
-# Add drop shadow to the center image before overlaying
-magick "$input_image_3" \
-    \( +clone -background black -shadow "60x10+8+8" \) \
-    +swap -background none -layers merge \
-    "temp_center_shadow.png"
-
-# Overlay the shadowed center image
-magick "$combined_tilted" "temp_center_shadow.png" \
-    -background none -geometry "+${x_offset}+${y_offset}" \
-    -composite "$output_image"
-
-# Clean up temporary files
-rm "temp_combined.png" "temp_center_shadow.png"
-
-echo "Done"
-echo "Created cascade image: $output_image"
-```
-
-## The Results
-
-<Image 
-  src={pveCascade} 
-  alt="Proxmox Cascade Effect" 
-  width={800} 
-  height={600} 
+<Gallery 
+  dir="galleries/magick-tricks/source-inputs" 
+  alt="Screenshot showing Magick Tricks effects"
+  layout="triple"
+  gap="small"
+  padding="small"
 />
+
+### Horizontal Perspective Effect
+
+<Gallery
+  dir="galleries/magick-tricks/perspective" 
+  alt="Source input screenshots"
+  layout="double"
+  gap="small"
+  padding="small"
+/>
+
+### Horizontal mirrored Tilt Effect
+
+<Gallery
+  dir="galleries/magick-tricks/mirrortilt" 
+  alt="Source input screenshots"
+  layout="double"
+  gap="small"
+  padding="small"
+/>
+
+### Elements of the Effect
+
+- Flat with shadow effect applied
+- Single panel titles
+- Merged tilted panels
+
+<Gallery
+  dir="galleries/magick-tricks/elements" 
+  alt="Source input screenshots"
+  layout="double"
+  gap="small"
+  padding="small"
+/>
+
+## Info & Usage (from GH)
+
+### Features
+
+- Works with three images - centre, left and right.
+- Horizontal vanishing point perpsective preset
+- Vertical mirror tilt preset
+- Generates two variants of each effect (inward and outward facing side images)
+- Customizable cover shadow effects with 3 presets (3 looks the slickest)
+- Adjustable background colours and opacity
+- Compact, standard or wide layout (wide is default as the others don't cut the mustard yet)
+- Preserves image quality with automatic height normalization
+
+### Usage
+
+```bash showLineNumbers=false caption="Magick Tricks Usage"
+./tricks.sh <perspective|mirrortilt> image1 image2 image3 [options]
+```
+
+### Subcommands
+
+- `perspective`: Creates a collage with a central vanishing point effect
+- `mirrortilt`: Creates a collage with mirrored tilt effects
+
+### Options
+
+- `--compact`: Overlap the background images for a more compact layout
+- `--wide`: Add spacing between images (default)
+- `--cover-shadow=N`: Use cover shadow preset (1, 2, or 3), defaults to 1
+- `--cover-shadow-opacity=N`: Set shadow opacity (0-1 or 0-100%), defaults to 70%
+- `--background-color=HEX`: Set background color (defaults to #000000)
+- `--background-opacity=N`: Set background opacity (0-1 or 0-100%), defaults to 0
+- `--no-cleanup`: Keep temporary files for debugging
+- `--output-dir=PATH`: Specify output directory (defaults to current directory)
+
+### Example Commands
+
+Check the GitHub repo for the outputs to each of these commands.
+
+```bash title="perspective" caption="cover shadow preset style 1"
+./tricks.sh perspective input_1.png input_2.png input_3.png --cover-shadow=1
+```
+
+```bash title="mirror tilt" caption="compact output with cover-shadow preset 2"
+./tricks.sh mirrortilt input_1.png input_2.png input_3.png --cover-shadow=2 --compact
+```
+
+```bash title="perspective with custom options" caption="wide mode with custom background, no post-processing file removal and custom output dir"
+./tricks.sh \
+    perspective \
+      input_1.png input_2.png input_3.png \
+        --background-color=#2a2a2a \
+        --background-opacity=0.8 \
+        --wide \
+        --cover-shadow=3 \
+        --cover-shadow-opacity=50% \
+        --no-cleanup \
+        --output-dir="./output-images"
+```
+
+### Input images:
+
+{/* ![Input 1](examples/input_1.png) ![Input 2](examples/input_2.png) ![Input 3](examples/input_3.png) */}
 

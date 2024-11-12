@@ -45,6 +45,21 @@ export default defineConfig({
       postcss: {
         plugins: [tailwindcssNesting]
       }
+    },
+    resolve: {
+      alias: {
+        '@': '/src',
+        '@components': '/src/components',
+        '@icons': '/src/components/Icons',
+        '@content': '/src/content',
+        '@images': '/src/images',
+        '@styles': '/src/styles',
+        '@assets': '/src/assets',
+        '@layouts': '/src/layouts',
+        '@pages': '/src/pages',
+        '@utils': '/src/utils',
+        '@lib': '/src/lib',
+      }
     }
   },
   integrations: [

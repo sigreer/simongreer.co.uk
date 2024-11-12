@@ -4,7 +4,7 @@ import { Image } from 'astro:assets';
 interface Props {
   title: string;
   slug: string;
-  excerpt?: string;
+  excerpt?: string | null;
   tags?: string[];
   coverimage?: string;
   className?: string;

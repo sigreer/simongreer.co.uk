@@ -1,0 +1,33 @@
+---
+import PostLayout from "../layouts/PostLayout.astro";
+const global = { title: 'Currently', description: 'Currently' }
+---
+
+<PostLayout title="IAmCurrently..." slug="iamcurrently">
+  <section class="py-8 px-6 md:px-0">
+    <div class="w-full">
+      <p>This is the seat</p>
+      <div class="flex flex-grow">
+        <div class="flex-1">
+          <h2>I am Currently</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Bish bash bosh.</p>
+            <form action="/iamcurrently" method="POST">
+            <div>
+              <input type="text" name="name" placeholder="Name" />
+            </div>
+           <div>
+              <input type="email" name="email" placeholder="Email" />
+            </div>
+            <div>
+              <textarea name="message" placeholder="Message"></textarea>
+            </div>  
+            <div>
+              <button type="submit">Submit</button>
+            </div>
+            </form>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</PostLayout>

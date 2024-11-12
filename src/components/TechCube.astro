@@ -1,0 +1,112 @@
+---
+import { Image } from 'astro:assets';
+import { tailwindColorMap } from '@utils/tailwindColorMap';
+interface Props {
+    slug: string;
+    excerpt?: string | null;
+    title: string;
+    vendoricon?: string;
+    tags?: string[];
+    className?: string;
+    vendor_primary_color?: string;
+    vendor_secondary_color?: string;
+}
+
+const tailwindColors = await tailwindColorMap;
+
+
+
+const { title, vendoricon, excerpt, tags, className = "", slug, vendor_primary_color = "gray-100", vendor_secondary_color = "gray-900" } = Astro.props;
+
+console.log('Color Debug:', {
+  requested_primary: vendor_primary_color,
+  requested_secondary: vendor_secondary_color,
+  mapped_primary: tailwindColors[vendor_primary_color as keyof typeof tailwindColors],
+  mapped_secondary: tailwindColors[vendor_secondary_color as keyof typeof tailwindColors]
+});
+
+const allVendorIcons = import.meta.glob<{ default: ImageMetadata }>('../images/vendor-icons/*', { eager: true });
+const vendorImage = vendoricon ? allVendorIcons[`../images/vendor-icons/${vendoricon}`]?.default : null;
+
+// Convert Tailwind color classes to hex colors with fallbacks
+const primaryColor = tailwindColors[vendor_primary_color as keyof typeof tailwindColors] || tailwindColors['gray-100'];
+const secondaryColor = tailwindColors[vendor_secondary_color as keyof typeof tailwindColors] || tailwindColors['gray-900'];
+
+// Create array of panels and shuffle them
+const panels = [
+  {
+    id: 'image',
+    content: vendorImage && (
+      `<div class="w-full aspect-square overflow-hidden">
+        <img 
+          src="${vendorImage.src}"
+          alt="${title}"
+          width="200"
+          height="200"
+          class="w-full h-full object-contain p-2"
+        />
+      </div>`
+    )
+  },
+  {
+    id: 'title',
+    content: (
+      `<div class="w-full aspect-square flex items-center justify-center p-2" style="background-color: var(--vendor-primary); color: var(--vendor-secondary);">
+        <h2 class="text-lg font-bold text-center">${title}</h2>
+      </div>`
+    )
+  },
+  {
+    id: 'excerpt',
+    content: (
+      `<div class="w-full aspect-square p-2">
+        <p class="text-sm line-clamp-4 overflow-hidden">
+          ${excerpt}
+        </p>
+      </div>`
+    )
+  },
+  {
+    id: 'tags',
+    content: (
+      `<div class="w-full aspect-square p-2">
+        <div class="flex flex-wrap gap-1 h-full overflow-hidden">
+          ${tags?.map((tag) => `
+            <span
+              class="rounded-md px-2 py-1 text-xs font-semibold text-white shadow-sm-light transition tag-style"
+              data-tag="${tag}"
+            >
+              ${tag}
+            </span>
+          `).join('')}
+        </div>
+      </div>`
+    )
+  }
+].sort(() => Math.random() - 0.5);
+---
+
+<div 
+  class={`grid grid-cols-2 grid-rows-2 w-full aspect-square border-8 m-2 border-solid border-gray-200 ${className}`}
+  style={`--vendor-primary: ${primaryColor}; --vendor-secondary: ${secondaryColor};
+  border-color: var(--vendor-primary);`}
+>
+  {panels.map((panel, index) => (
+    <div class:list={[
+      "w-full aspect-square",
+      index % 2 !== 0 && "border-l",
+      index > 1 && "border-t",
+      "border-dotted border-gray-200"
+    ]}>
+      <Fragment set:html={panel.content} />
+    </div>
+  ))}
+</div>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    if (typeof window.applyTagColorsToNewElements === 'function') {
+      window.applyTagColorsToNewElements();
+    }
+  });
+</script>

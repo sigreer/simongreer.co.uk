@@ -1,22 +1,20 @@
 ---
-import Blocks from './Navbar/Blocks.astro';
-import Currently from './Navbar/Currently.astro';
-import Tech from './Navbar/Tech.astro';
-import BlogPosts from './Navbar/BlogPosts.astro';
-import Projects from './Navbar/Projects.astro';
-import AboutMe from './Navbar/AboutMe.astro';
-import Icon from './Navbar/Icon.astro';
+import Tech from '@components/Navbar/Tech.astro';
+import BlogPosts from '@components/Navbar/BlogPosts.astro';
+import Projects from '@components/Navbar/Projects.astro';
+import AboutMe from '@components/Navbar/AboutMe.astro';
+import LogoIcon from '@components/Navbar/LogoIcon.astro';
+import Currently from '@components/Navbar/Currently.astro';
 ---
-<nav class="bg-white flex-grow flex-col w-full px-3 sm:px-4 md:px-4 2xl:max-w-2xl sm:text-lg font-poppins mx-auto border-gray-600 border rounded-lg drop-shadow-[0_3px_3px_rgb(0,0,0,0.3)] max-w-lg py-3">
+<nav class="bg-white flex-grow flex-col w-full px-3 sm:px-4 md:px-4 2xl:max-w-2xl sm:text-lg font-poppins mx-auto border-gray-600 border rounded-lg drop-shadow-[0_3px_3px_rgb(0,0,0,0.3)] max-w-lg py-3 md:max-h-16 md:min-h-16">
     <div class="flex items-center justify-between flex-row gap-2">
       <div class="flex items-center shrink-0">
-      <Icon/>
+      <LogoIcon class="w-[24px] h-[24px]"/>
       <a href="/" class="mr-4 cursor-pointer py-1.5 text-base">
           SimonGreer.co.uk
         </a>
       </div>
       <div class="flex items-center flex-grow gap-x-2 justify-end">
-        <Blocks/>
         <Currently/>
         <Tech/>
         <BlogPosts/>

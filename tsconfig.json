@@ -11,7 +11,7 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["src/components/*"],
-      "@components/": ["src/components/"],
+      "@icons/*": ["src/components/Icons/*"],
       "@content/*": ["src/content/*"],
       "@images/*": ["src/images/*"],
       "@styles/*": ["src/styles/*"],
@@ -28,8 +28,7 @@
     ],
     "allowJs": true,
     "outDir": "./public/js",
-    "rootDir": "./src"
   },
-  "include": [".astro/types.d.ts", "src/**/*.ts*", "src/**/*.mdx"],
+  "include": [".astro/types.d.ts", "src/**/*.ts*", "src/**/*.mdx", "src/**/*.astro", "src/components/**/*", "@components/**/*"],
   "exclude": ["dist"]
 }

@@ -14,6 +14,8 @@ const tech = defineCollection({
     vendoricon: z.string().optional(),
     horizontal_logo: z.string().optional(),
     vendor_name: z.string().optional(),
+    vendor_primary_color: z.string().optional(),
+    vendor_secondary_color: z.string().optional(),
     tags: z.array(z.string()).optional(),
   })
 });
