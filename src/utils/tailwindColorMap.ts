@@ -130,6 +130,7 @@ export const tailwindColorMap = {
     'blue-700': '#1D4ED8',
     'blue-800': '#1E40AF',
     'blue-900': '#1E3A8A',
+    'blue-950': '#172554',
   
     // Indigo
     'indigo-50': '#EEF2FF',

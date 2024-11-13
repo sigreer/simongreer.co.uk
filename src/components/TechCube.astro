@@ -32,12 +32,15 @@ const vendorImage = vendoricon ? allVendorIcons[`../images/vendor-icons/${vendor
 const primaryColor = tailwindColors[vendor_primary_color as keyof typeof tailwindColors] || tailwindColors['gray-100'];
 const secondaryColor = tailwindColors[vendor_secondary_color as keyof typeof tailwindColors] || tailwindColors['gray-900'];
 
+// Determine if the primary color is darker than Tailwind 700
+const isPrimaryColorDark = vendor_primary_color.includes('700') || vendor_primary_color.includes('800') || vendor_primary_color.includes('900');
+
 // Create array of panels and shuffle them
 const panels = [
   {
     id: 'image',
     content: vendorImage && (
-      `<div class="w-full aspect-square overflow-hidden">
+      `<div class="w-full aspect-square overflow-hidden drop-shadow-md drop-shadow-black">
         <img 
           src="${vendorImage.src}"
           alt="${title}"
@@ -60,7 +63,7 @@ const panels = [
     id: 'excerpt',
     content: (
       `<div class="w-full aspect-square p-2">
-        <p class="text-sm line-clamp-4 overflow-hidden">
+        <p class="text-sm line-clamp-4 overflow-hidden ${isPrimaryColorDark ? 'text-white' : ''}">
           ${excerpt}
         </p>
       </div>`
@@ -87,17 +90,18 @@ const panels = [
 ---
 
 <div 
-  class={`grid grid-cols-2 grid-rows-2 w-full aspect-square border-8 m-2 border-solid border-gray-200 ${className}`}
+  class={`grid grid-cols-2 grid-rows-2 w-full aspect-square border-8 m-0 border-solid rounded-lg border-gray-200 ${className}`}
   style={`--vendor-primary: ${primaryColor}; --vendor-secondary: ${secondaryColor};
-  border-color: var(--vendor-primary);`}
+  border-color: var(--vendor-primary); background-color: var(--vendor-primary);`}
 >
   {panels.map((panel, index) => (
     <div class:list={[
       "w-full aspect-square",
       index % 2 !== 0 && "border-l",
       index > 1 && "border-t",
-      "border-dotted border-gray-200"
-    ]}>
+      "border-solid border-gray-200"
+    ]} style={`border-color: var(--vendor-primary); border-width: 2px;`}>
+    
       <Fragment set:html={panel.content} />
     </div>
   ))}

@@ -5,7 +5,6 @@ import { Image } from 'astro:assets';
 import Card from "../components/Card.astro";
 import '../styles/custom.css';
 import '@fontsource/poppins';
-import TechCube from "../components/TechCube.astro";
 
 const techs = (await getCollection('tech')).filter(({ data }) => {
   return data.created_date;
@@ -24,6 +23,7 @@ const allVendorIcons = import.meta.glob<{ default: ImageMetadata }>('../images/v
     <slot />
     <div class="w-full flex flex-col gap-2">
       <div class="w-full pt-4 flex flex-col">
+        
         <div class="w-full bg-purple-700 rounded-t-lg">
         </div>
         <section class="pt-2 pb-6 px-6 md:px-0">
@@ -104,118 +104,5 @@ const allVendorIcons = import.meta.glob<{ default: ImageMetadata }>('../images/v
             }
           </style>
         </div>
-        <div class="w-full">
-          <div class="w-full bg-purple-700 rounded-t-lg">
-            <h3 class="w-fit text-xl font-bold relative px-4 py-2 text-white">Posts Horizontal</h3>
-          </div>
-          <div class="rounded-lg w-full bg-white">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <ul class="flex flex-col py-0">
-                {filteredTechs.slice(0, 4).map((tech) => {
-                  const vendorIcon = tech.data.vendoricon 
-                    ? allVendorIcons[`../images/vendor-icons/${tech.data.vendoricon}`]?.default 
-                    : null;
-                  return (
-                    <li class="flex flex-col bg-white hover:shadow-lg hover:scale-105 transition h-24 [&:not(:last-child)]:border-b [&:not(:last-child)]:border-dotted [&:not(:last-child)]:border-gray-200">
-                      <a href={`/tech/${tech.data.slug}`} class="flex flex-row gap-x-1 p-1 relative h-full">
-                        {vendorIcon && (
-                          <div class="w-1/5 overflow-hidden">
-                            <Image 
-                              src={vendorIcon}
-                              alt={tech.data.title}
-                              width={120}
-                              height={120}
-                              class="h-full w-full object-cover object-center rounded-l-md"
-                            />
-                          </div>
-                        )}
-                        <div class="flex flex-col gap-y-0 py-1 px-4 w-4/5">
-                          <h3 class="text-base font-semibold line-clamp-2 py-0 leading-5">
-                            {tech.data.title}
-                          </h3>
-                          {tech.data.tags && tech.data.tags.length > 0 && (
-                            <div class="flex flex-wrap gap-1 tag-block">
-                              {tech.data.tags.map((tag) => (
-                                <span
-                                  class="rounded-md px-2 py-1 text-xs md:text-sm font-semibold text-white shadow-sm-light transition tag-style" 
-                                  data-tag={tag}
-                                >
-                                  {tag}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                      </a>
-                    </li>
-                  );
-                })}
-              </ul>
-              <ul class="flex flex-col py-0">
-                {filteredTechs.slice(4, 8).map((tech) => {
-                  const vendorIcon = tech.data.vendoricon 
-                    ? allVendorIcons[`../images/vendor-icons/${tech.data.vendoricon}`]?.default 
-                    : null;
-                  return (
-                    <li class="flex flex-col bg-white hover:shadow-lg hover:scale-105 transition h-24 [&:not(:last-child)]:border-b [&:not(:last-child)]:border-dotted [&:not(:last-child)]:border-gray-200">
-                      <a href={`/tech/${tech.data.slug}`} class="flex flex-row gap-x-1 p-1 relative h-full">
-                        {vendorIcon && (
-                          <div class="w-1/5 overflow-hidden">
-                            <Image 
-                              src={vendorIcon}
-                              alt={tech.data.title}
-                              width={120}
-                              height={120}
-                              class="h-full w-full object-cover object-center rounded-l-md"
-                            />
-                          </div>
-                        )}
-                        <div class="flex flex-col gap-y-0 py-1 px-4 w-4/5">
-                          <h3 class="text-base font-semibold line-clamp-2 py-0 leading-5">
-                            {tech.data.title}
-                          </h3>
-                          {tech.data.tags && tech.data.tags.length > 0 && (
-                            <div class="flex flex-wrap gap-1 tag-block">
-                              {tech.data.tags.map((tag) => (
-                                <span
-                                  class="rounded-md px-2 py-1 text-xs md:text-sm font-semibold text-white shadow-sm-light transition tag-style" 
-                                  data-tag={tag}
-                                >
-                                  {tag}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                      </a>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="w-full">
-          <div class="w-full bg-purple-700 rounded-t-lg">
-            <h3 class="w-fit text-xl font-bold relative px-4 py-2 text-white">Tech Cubes</h3>
-          </div>
-          <div class="rounded-lg w-full bg-white p-4">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2">
-              {techs.slice(0, 8).map((tech) => (
-                <a href={`/tech/${tech.data.slug}`} class="hover:scale-105 transition-transform duration-200">
-                  <TechCube
-                    title={tech.data.vendor_name || tech.data.title}
-                    vendoricon={tech.data.vendoricon}
-                    excerpt={tech.data.excerpt}
-                    tags={tech.data.tags}
-                    slug={tech.data.slug}
-                    vendor_primary_color={tech.data.vendor_primary_color}
-                    vendor_secondary_color={tech.data.vendor_secondary_color}
-                  />
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+
     </BaseLayout>

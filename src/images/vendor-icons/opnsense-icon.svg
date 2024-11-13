@@ -29,11 +29,11 @@
    inkscape:deskcolor="#d1d1d1"
    inkscape:zoom="1.7654099"
    inkscape:cx="497.33492"
-   inkscape:cy="120.65186"
+   inkscape:cy="120.65187"
    inkscape:window-width="3832"
    inkscape:window-height="1104"
    inkscape:window-x="0"
-   inkscape:window-y="0"
+   inkscape:window-y="864"
    inkscape:window-maximized="1"
    inkscape:current-layer="cvfy" /><title
    id="title1">OPNsense Logo Icon</title><metadata
@@ -69,7 +69,7 @@
 	.st20{fill:#808183;}
 </style>
 <g
-   transform="matrix(0.89924397,0,0,0.90312742,-5.4984155,31.438745)"
+   transform="matrix(1.2005489,0,0,1.2057334,-32.088568,-67.089783)"
    id="g28">
 	
 		<defs
@@ -114,7 +114,7 @@
 		</linearGradient>
 		<polygon
    class="st1"
-   points="137.5,284.2 133.8,277 147,269.9 150.7,277.1 "
+   points="147,269.9 150.7,277.1 137.5,284.2 133.8,277 "
    clip-path="url(#cvfb)"
    style="fill:url(#cvfj)"
    id="polygon3" />
@@ -138,7 +138,7 @@
 		</linearGradient>
 		<polygon
    class="st2"
-   points="28.2,278.4 31.9,271.1 42.6,276.9 38.9,284.1 "
+   points="42.6,276.9 38.9,284.1 28.2,278.4 31.9,271.1 "
    clip-path="url(#cvfb)"
    style="fill:url(#cvfi)"
    id="polygon5" />
@@ -200,7 +200,7 @@
 		</linearGradient>
 		<polygon
    class="st5"
-   points="39,367.1 42.7,374.4 29.5,381.5 25.8,374.2 "
+   points="29.5,381.5 25.8,374.2 39,367.1 42.7,374.4 "
    clip-path="url(#cvfa)"
    style="fill:url(#cvfh)"
    id="polygon8" />
@@ -224,7 +224,7 @@
 		</linearGradient>
 		<polygon
    class="st6"
-   points="148.4,372.9 144.7,380.2 133.9,374.4 137.6,367.2 "
+   points="133.9,374.4 137.6,367.2 148.4,372.9 144.7,380.2 "
    clip-path="url(#cvfa)"
    style="fill:url(#cvfg)"
    id="polygon10" />
@@ -274,7 +274,7 @@
 		</linearGradient>
 		<polygon
    class="st8"
-   points="73.5,311.8 69.7,319.2 38.4,302.4 42.1,295 "
+   points="38.4,302.4 42.1,295 73.5,311.8 69.7,319.2 "
    clip-path="url(#cvff)"
    style="fill:url(#cvfr)"
    id="polygon12" />
@@ -324,7 +324,7 @@
 		</linearGradient>
 		<polygon
    class="st10"
-   points="103.1,311.8 106.8,319.2 138.2,302.4 134.4,295 "
+   points="138.2,302.4 134.4,295 103.1,311.8 106.8,319.2 "
    clip-path="url(#cvfe)"
    style="fill:url(#cvfq)"
    id="polygon14" />
@@ -374,7 +374,7 @@
 		</linearGradient>
 		<polygon
    class="st12"
-   points="103.1,339.5 106.8,332.1 138.2,348.9 134.4,356.3 "
+   points="138.2,348.9 134.4,356.3 103.1,339.5 106.8,332.1 "
    clip-path="url(#cvfd)"
    style="fill:url(#cvfp)"
    id="polygon16" />
@@ -424,7 +424,7 @@
 		</linearGradient>
 		<polygon
    class="st14"
-   points="73.5,339.5 69.7,332.1 38.4,348.9 42.1,356.3 "
+   points="38.4,348.9 42.1,356.3 73.5,339.5 69.7,332.1 "
    clip-path="url(#cvfc)"
    style="fill:url(#cvfo)"
    id="polygon18" />
@@ -447,7 +447,7 @@
 	</linearGradient>
 	<polygon
    class="st15"
-   points="29.8,279.3 73.4,302.6 73.4,311.8 29.8,288.5 "
+   points="73.4,311.8 29.8,288.5 29.8,279.3 73.4,302.6 "
    style="fill:url(#cvfn)"
    id="polygon20" />
 	
@@ -470,7 +470,7 @@
 	</linearGradient>
 	<polygon
    class="st16"
-   points="146.7,279.3 103.1,302.6 103.1,311.8 146.7,288.5 "
+   points="103.1,311.8 146.7,288.5 146.7,279.3 103.1,302.6 "
    style="fill:url(#cvfm)"
    id="polygon22" />
 	
@@ -493,7 +493,7 @@
 	</linearGradient>
 	<polygon
    class="st17"
-   points="146.7,372.1 103.1,348.8 103.1,339.5 146.7,362.8 "
+   points="103.1,339.5 146.7,362.8 146.7,372.1 103.1,348.8 "
    style="fill:url(#cvfl)"
    id="polygon24" />
 	
@@ -516,16 +516,16 @@
 	</linearGradient>
 	<polygon
    class="st18"
-   points="29.8,372.1 73.4,348.8 73.4,339.5 29.8,362.8 "
+   points="73.4,339.5 29.8,362.8 29.8,372.1 73.4,348.8 "
    style="fill:url(#cvfk)"
    id="polygon26" />
 	<polygon
    class="st19"
-   points="128.7,307.4 103.1,321 103.1,330.3 128.7,344 128.7,334.7 120.4,330.3 146.7,330.3 146.7,321 120.4,321 128.7,316.6 "
+   points="103.1,330.3 128.7,344 128.7,334.7 120.4,330.3 146.7,330.3 146.7,321 120.4,321 128.7,316.6 128.7,307.4 103.1,321 "
    id="polygon27" />
 	<polygon
    class="st19"
-   points="29.8,321 29.8,330.3 56.1,330.3 47.8,334.7 47.8,344 73.4,330.3 73.4,321 47.8,307.4 47.8,316.6 56.2,321 "
+   points="56.1,330.3 47.8,334.7 47.8,344 73.4,330.3 73.4,321 47.8,307.4 47.8,316.6 56.2,321 29.8,321 29.8,330.3 "
    id="polygon28" />
 </g>
 
