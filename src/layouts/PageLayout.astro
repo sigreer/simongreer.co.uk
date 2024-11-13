@@ -1,10 +1,10 @@
 ---
-import HeaderBar from "../components/HeaderBar.astro";
-import Footer from "../components/Footer.astro";
-import NavNew from '../components/NavNew.astro';
+import HeaderBar from "@components/HeaderBar.astro";
+import Footer from "@components/Footer.astro";
+import NavNew from "@components/NavNew.astro";
 import { ClientRouter } from 'astro:transitions';
-import '../styles/custom.css';
-import Prose from '../components/Prose.astro';
+import '@styles/custom.css';
+import Prose from '@components/Prose.astro';
 import '@fontsource/poppins';
 ---
 
@@ -39,7 +39,7 @@ import '@fontsource/poppins';
       <Prose>
         <slot />
       </Prose>
-      <script src="../utils/tagColors.ts"></script>
+      <script src="@utils/tagColors.ts"></script>
     </main>
     <Footer />
   </body>

@@ -1,10 +1,11 @@
 ---
-import CrosswordIcon from "@icons/CrosswordIcon.astro";
-import TauntIcon from "@icons/TauntIcon.astro";
-import TheaterComedyIcon from "@icons/TheaterComedyIcon.astro";
-import ServerEngineerIcon from "@icons/ServerEngineerIcon.astro";
-import ChatIcon from "@icons/ChatIcon.astro";
-import RobotIcon from "@icons/RobotIcon.astro";
+import CrosswordIcon from '@icons/CrosswordIcon.astro';
+import ServerEngineerIcon from '@icons/ServerEngineerIcon.astro';
+import ChatIcon from '@icons/ChatIcon.astro';
+import RobotIcon from '@icons/RobotIcon.astro';
+import Robot2Icon from '@icons/Robot2Icon.astro';
+import SdkIcon from '@icons/SdkIcon.astro';
+import FamilyStarIcon from '@icons/FamilyStarIcon.astro';
 ---
 
 <div class="grid grid-cols-3 gap-x-12 gap-y-8 px-0 pt-8 pb-16">
@@ -13,26 +14,30 @@ import RobotIcon from "@icons/RobotIcon.astro";
     <p class="text-sm px-4">I've no idea, but feel obliged to justify my clickbaited decision to visit by doing something before I leave.</p>
   </a>
   <a class="block bg-gray-200 hover:bg-gray-300 transition-colors duration-300 p-4 min-h-32 max-h-32 rounded-lg">
-    <TauntIcon  class="w-5 h-5 mb-2" />
+    <FamilyStarIcon  class="w-5 h-5 mb-2" />
     <p class="text-sm px-4">You're looking for something to do</p>
   </a>
-  <div class="block bg-white p-4 min-h-44 rounded-lg border border-gray-800 row-span-3">
-    <p class="text-sm px-4">You crashed our entire infrastructure and I need a way to verbally assault you as quickly as possible.</p>
+  <div class="bg-white p-4 min-h-44 rounded-lg border border-gray-800 row-span-3 flex flex-col justify-between">
+    <div class="w-full place-items-center">
+      <Robot2Icon class="w-16 h-16 mb-2" />
+      <p class="text-xs">SuggestoBot</p>
+    </div>
+      <p class="text-sm px-4">You crashed our entire infrastructure and I need a way to verbally assault you as quickly as possible.</p>
   </div>
   <a class="block bg-gray-200 hover:bg-gray-300 transition-colors duration-300 p-4 min-h-32 max-h-32 rounded-lg">
-    <TheaterComedyIcon  class="w-5 h-5 mb-2" />
+    <ServerEngineerIcon  class="w-5 h-5 mb-2" />
     <p class="text-sm px-4">You're looking for something to do</p>
   </a>
   <a class="block bg-gray-200 hover:bg-gray-300 transition-colors duration-300 p-4 min-h-32 max-h-32 rounded-lg">
-    <ServerEngineerIcon  class="w-5 h-5 mb-2" />
+    <SdkIcon  class="w-5 h-5 mb-2" />
+    <p class="text-sm px-4">I'm considering hiring you for a project but need evidence that you've actually recreated the Matrix.</p>
+  </a>
+  <a class="block bg-gray-200 hover:bg-gray-300 transition-colors duration-300 p-4 min-h-32 max-h-32 rounded-lg">
+    <ChatIcon  class="w-5 h-5 mb-2" />
     <p class="text-sm px-4">I'm considering hiring you for a project but need evidence that you've actually recreated the Matrix.</p>
   </a>
   <a class="block bg-gray-200 hover:bg-gray-300 transition-colors duration-300 p-4 min-h-32 max-h-32 rounded-lg">
     <RobotIcon  class="w-5 h-5 mb-2" />
     <p class="text-sm px-4">I'm a bot and don't much care for robots.txt. Just leave me to it whilst I harvest your witty prose for AI training.</p>
-  </a>
-  <a class="block bg-gray-200 hover:bg-gray-300 transition-colors duration-300 p-4 min-h-32 max-h-32 rounded-lg">
-    <ServerEngineerIcon  class="w-5 h-5 mb-2" />
-    <p class="text-sm px-4">I'm considering hiring you for a project but need evidence that you've actually recreated the Matrix.</p>
   </a>
 </div>

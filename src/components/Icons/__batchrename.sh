@@ -1,66 +1,78 @@
 #!/bin/bash
 
-#!/bin/bash
-
-# Directory containing the .astro files (use "." for the current directory)
-# ICON_DIR="."
-
-# # Loop through each .astro file in the directory
-# for astro_file in "$ICON_DIR"/*.astro; do
-#     # Create a temporary file to store modifications
-#     tmp_file="${astro_file}.tmp"
+addFrontmatter() {
+    ICON_DIR="."
+    for svg_file in "$ICON_DIR"/*.svg; do
     
-#     # Insert Astro frontmatter and modify the <svg> tag
-#     {
-#         # Add Astro frontmatter
-#         echo "---"
-#         echo "interface Props {"
-#         echo "  fill?: string;"
-#         echo "  class?: string;"
-#         echo "}"
-#         echo ""
-#         echo "const { fill = \"#000000\", class: className } = Astro.props;"
-#         echo "---"
+        # Check if the file already contains a frontmatter fence
+        if grep -q "^---" "$svg_file"; then
+            echo "Frontmatter already exists in $svg_file, skipping..."
+            continue
+        fi
+
+        tmp_file="${svg_file}.tmp"
         
-#         # Replace the <svg> tag in the original file
-#         sed 's/<svg[^>]*>/<svg xmlns="http:\/\/www.w3.org\/2000\/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill={fill} class={className}>/' "$astro_file"
-#     } > "$tmp_file"
-    
-#     # Replace the original file with the modified version
-#     mv "$tmp_file" "$astro_file"
-# done
+        {
+            echo "---"
+            echo "interface Props {"
+            echo "  fill?: string;"
+            echo "  class?: string;"
+            echo "}"
+            echo ""
+            echo "const { fill = \"#000000\", class: className } = Astro.props;"
+            echo "---"
+            
+            sed 's/<svg[^>]*>/<svg xmlns="http:\/\/www.w3.org\/2000\/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill={fill} class={className}>/' "$svg_file"
+        } > "$tmp_file"
+        
+        base_name="${svg_file%.svg}"
+        if [[ ! "$base_name" =~ Icon$ ]]; then
+            base_name="${base_name}Icon"
+        fi
+        mv "$tmp_file" "${base_name}.astro"
+    done
 
-# echo "Frontmatter addition and <svg> tag modification completed!"
+    echo "Frontmatter addition and <svg> tag modification completed. File saved as .astro."
+}
 
+addIconSuffix() {
+    DIR="./"
+    for file in "$DIR"/*.astro; do
+    base_name=$(basename "$file" .astro)
+        
+    # Capitalize the first letter and add 'Icon' to the end
+    new_name="${base_name}Icon.astro"
 
-# DIR="./"
-# for file in "$DIR"/*.astro; do
-#     # Get the base filename without path or extension
-#     base_name=$(basename "$file" .astro)
-    
-#     # Capitalize the first letter
-#     new_name="$(tr '[:lower:]' '[:upper:]' <<< ${base_name:0:1})${base_name:1}.astro"
-    
-#     # Rename the file if the new name is different
-#     if [[ "$file" != "$DIR/$new_name" ]]; then
-#         mv "$file" "$DIR/$new_name"
-#         echo "Renamed $file to $new_name"
-#     fi
-# done
+    if [[ "$file" != "$DIR/$new_name" ]]; then
+        mv "$file" "$DIR/$new_name"
+        echo "Renamed $file to $new_name"
+        fi
+    done
 
-# echo "Renaming completed!"
+    echo "Renaming completed!"
+}
 
-DIR="./"
- for file in "$DIR"/*.astro; do
-base_name=$(basename "$file" .astro)
-    
-# Capitalize the first letter and add 'Icon' to the end
-new_name="${base_name}Icon.astro"
+removeExtraIconSuffix() {
+    DIR="./"
+    for file in "$DIR"/*.astro; do
+        base_name=$(basename "$file" .astro)
+        
+        # Remove only the last 'Icon' from the end if present
+        if [[ "$base_name" =~ IconIcon$ ]]; then
+            new_name="${base_name%IconIcon}Icon.astro"
+        else
+            new_name="${base_name}.astro"
+        fi
 
-if [[ "$file" != "$DIR/$new_name" ]]; then
-    mv "$file" "$DIR/$new_name"
-       echo "Renamed $file to $new_name"
-    fi
-done
+        if [[ "$file" != "$DIR/$new_name" ]]; then
+            mv "$file" "$DIR/$new_name"
+            echo "Renamed $file to $new_name"
+        fi
+    done
 
-echo "Renaming completed!"
+    echo "Renaming completed!"
+}
+
+# addIconSuffix
+removeExtraIconSuffix
+#addFrontmatter

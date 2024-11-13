@@ -29,6 +29,6 @@
     "allowJs": true,
     "outDir": "./public/js",
   },
-  "include": [".astro/types.d.ts", "src/**/*.ts*", "src/**/*.mdx", "src/**/*.astro", "src/components/**/*", "@components/**/*"],
+  "include": [".astro/types.d.ts", "src/**/*.ts*", "src/**/*.mdx", "src/**/*.astro", "src/components/**/*", "@components/**/*", "@icons/**/*"],
   "exclude": ["dist"]
 }
