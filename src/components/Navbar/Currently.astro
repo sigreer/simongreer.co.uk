@@ -3,11 +3,11 @@ import HeadphonesIcon from '@icons/HeadphonesIcon.astro';
 const currentPath = Astro.url.pathname;
 const isActive = currentPath === '/iamcurrently';
 ---
-<a href="/iamcurrently" class:list={[
-    "block antialiased font-sans text-sm leading-normal font-normal",
+<a  href="/currently" 
+    class:list={["block antialiased font-sans text-sm leading-normal font-normal",
     isActive ? "rounded-lg" : "text-black"
 ]}>
-    <div role="button" tabindex="0" class:list={["w-full group p-3 rounded-lg text-start leading-tight transition-all outline-none flex items-center gap-2 py-2 pr-4 hover:bg-purple-200 hover:bg-opacity-80 hover:text-purple-900",
+    <div role="button" tabindex="0" class:list={["w-full group pl-3 pr-4 py-2 rounded-lg text-start leading-tight transition-all outline-none flex items-center gap-2 hover:bg-purple-200 hover:bg-opacity-80 hover:text-purple-900",
     isActive && "bg-pink-700 text-white focus:bg-pink-500 focus:text-white"
     ]}>
         <HeadphonesIcon
@@ -16,6 +16,6 @@ const isActive = currentPath === '/iamcurrently';
                 isActive && "!focus:fill-white group-focus:!fill-white group-hover:!fill-purple-900 fill-white"
             ]}
         />
-        I Am Currently...
+        Currently
     </div>
 </a>

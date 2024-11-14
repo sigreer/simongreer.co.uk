@@ -6,15 +6,21 @@ import AboutMe from '@components/Navbar/AboutMe.astro';
 import LogoIcon from '@components/Navbar/LogoIcon.astro';
 import Currently from '@components/Navbar/Currently.astro';
 ---
+
 <nav class="bg-white flex-grow flex-col w-full px-3 sm:px-4 md:px-4 2xl:max-w-2xl sm:text-lg font-poppins mx-auto border-gray-600 border rounded-lg drop-shadow-[0_3px_3px_rgb(0,0,0,0.3)] max-w-lg py-3 md:max-h-16 md:min-h-16">
-    <div class="flex items-center justify-between flex-row gap-2">
+    <div class="flex items-center justify-between flex-row gap-1">
       <div class="flex items-center shrink-0">
-      <LogoIcon class="w-[24px] h-[24px]"/>
-      <a href="/" class="mr-4 cursor-pointer py-1.5 text-base">
+        <LogoIcon class="w-[24px] h-[24px]"/>
+        <a href="/" class="mr-4 cursor-pointer py-1.5 text-base">
           SimonGreer.co.uk
         </a>
       </div>
-      <div class="flex items-center flex-grow gap-x-2 justify-end">
+      <div class="flex items-center flex-grow gap-x-1 justify-end md:hidden">
+        <button id="burger-menu-button" class="burger-menu-icon">
+          ☰
+        </button>
+      </div>
+      <div id="menu-items" class="flex items-center flex-grow gap-x-1 justify-end hidden md:flex">
         <Currently/>
         <Tech/>
         <BlogPosts/>
@@ -22,5 +28,30 @@ import Currently from '@components/Navbar/Currently.astro';
         <AboutMe/>
       </div>
     </div>
-  </div>
+    <div id="mobile-menu" class="fixed top-0 right-0 w-2/3 h-full bg-white z-50 flex flex-col items-start p-4 md:hidden">
+      <button id="close-menu-button" class="close-menu-icon">
+        ✕
+      </button>
+      <Currently/>
+      <Tech/>
+      <BlogPosts/>
+      <Projects/>
+      <AboutMe/>
+    </div>
 </nav>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const burgerMenuButton = document.getElementById('burger-menu-button');
+    const closeMenuButton = document.getElementById('close-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    burgerMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    closeMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+    });
+  });
+</script>

@@ -1,43 +1,137 @@
 ---
-import CrosswordIcon from '@icons/CrosswordIcon.astro';
+
 import ServerEngineerIcon from '@icons/ServerEngineerIcon.astro';
 import ChatIcon from '@icons/ChatIcon.astro';
 import RobotIcon from '@icons/RobotIcon.astro';
 import Robot2Icon from '@icons/Robot2Icon.astro';
 import SdkIcon from '@icons/SdkIcon.astro';
 import FamilyStarIcon from '@icons/FamilyStarIcon.astro';
----
+import CrosswordIcon from '@icons/CrosswordIcon.astro';
+import { answers } from '@utils/suggestoBotDialog';
+import '../styles/suggestobot.css';
 
-<div class="grid grid-cols-3 gap-x-12 gap-y-8 px-0 pt-8 pb-16">
-  <a class="block bg-gray-200 hover:bg-gray-300 transition-colors duration-300 p-4 min-h-32 max-h-32 rounded-lg">
-    <CrosswordIcon class="w-5 h-5 mb-2" />
-    <p class="text-sm px-4">I've no idea, but feel obliged to justify my clickbaited decision to visit by doing something before I leave.</p>
-  </a>
-  <a class="block bg-gray-200 hover:bg-gray-300 transition-colors duration-300 p-4 min-h-32 max-h-32 rounded-lg">
-    <FamilyStarIcon  class="w-5 h-5 mb-2" />
-    <p class="text-sm px-4">You're looking for something to do</p>
-  </a>
-  <div class="bg-white p-4 min-h-44 rounded-lg border border-gray-800 row-span-3 flex flex-col justify-between">
-    <div class="w-full place-items-center">
-      <Robot2Icon class="w-16 h-16 mb-2" />
+const getRandomText = (texts: { text: string }[]) => {
+  const index = Math.floor(Math.random() * texts.length);
+  return texts[index].text;
+};
+
+const iconComponents = {
+  ServerEngineerIcon,
+  ChatIcon,
+  RobotIcon,
+  SdkIcon,
+  FamilyStarIcon,
+  CrosswordIcon
+} as const;
+---
+<div class="grid grid-cols-3 gap-x-12">
+<div class="grid grid-cols-2 col-span-2 gap-x-12 gap-y-8 px-0 pt-8 pb-16">
+
+  {answers.map(answer => {
+    const IconComponent = iconComponents[answer.icon as keyof typeof iconComponents];
+    return (
+      <a 
+        class="block bg-gray-200 hover:bg-gray-300 transition-colors duration-300 p-4 min-h-32 max-h-32 rounded-lg cursor-pointer"
+        data-premise={answer.premise}
+        data-id={answer.id}
+      >
+        <IconComponent class="w-5 h-5 mb-2" />
+        <p class="text-sm px-4">{getRandomText(answer.text)}</p>
+      </a>
+    );
+    })}
+  </div>
+  <div class="bg-white mt-8 pt-2 mb-16 min-h-36 rounded-lg border border-gray-800 flex flex-col">
+    <div class="w-full place-items-center text-center">
+      <Robot2Icon class="w-16 h-16 mb-2 mx-auto" />
       <p class="text-xs">SuggestoBot</p>
     </div>
-      <p class="text-sm px-4">You crashed our entire infrastructure and I need a way to verbally assault you as quickly as possible.</p>
+    <div class="chat-container p-4 text-sm" id="chatContainer">
+      <div class="chat-content" id="chatContent"></div>
+    </div>
   </div>
-  <a class="block bg-gray-200 hover:bg-gray-300 transition-colors duration-300 p-4 min-h-32 max-h-32 rounded-lg">
-    <ServerEngineerIcon  class="w-5 h-5 mb-2" />
-    <p class="text-sm px-4">You're looking for something to do</p>
-  </a>
-  <a class="block bg-gray-200 hover:bg-gray-300 transition-colors duration-300 p-4 min-h-32 max-h-32 rounded-lg">
-    <SdkIcon  class="w-5 h-5 mb-2" />
-    <p class="text-sm px-4">I'm considering hiring you for a project but need evidence that you've actually recreated the Matrix.</p>
-  </a>
-  <a class="block bg-gray-200 hover:bg-gray-300 transition-colors duration-300 p-4 min-h-32 max-h-32 rounded-lg">
-    <ChatIcon  class="w-5 h-5 mb-2" />
-    <p class="text-sm px-4">I'm considering hiring you for a project but need evidence that you've actually recreated the Matrix.</p>
-  </a>
-  <a class="block bg-gray-200 hover:bg-gray-300 transition-colors duration-300 p-4 min-h-32 max-h-32 rounded-lg">
-    <RobotIcon  class="w-5 h-5 mb-2" />
-    <p class="text-sm px-4">I'm a bot and don't much care for robots.txt. Just leave me to it whilst I harvest your witty prose for AI training.</p>
-  </a>
 </div>
+</div>
+<script>
+  import { answers, responses } from '@utils/suggestoBotDialog';
+
+  /**
+   * @param {{ text: string }[]} texts
+   */
+  function getRandomText(texts) {
+    const index = Math.floor(Math.random() * texts.length);
+    return texts[index].text;
+  }
+
+  function createMessage(text, isUser = false) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `chat-message ${isUser ? 'user-message' : 'bot-message'}`;
+    messageDiv.textContent = text;
+    return messageDiv;
+  }
+
+  function createSuggestionLinks(suggestions) {
+    const linksDiv = document.createElement('div');
+    linksDiv.className = 'mt-4';
+    
+    suggestions.forEach(suggestion => {
+      const link = document.createElement('a');
+      link.href = suggestion.link;
+      link.className = 'suggestion-link';
+      link.textContent = suggestion.label;
+      linksDiv.appendChild(link);
+    });
+    
+    return linksDiv;
+  }
+
+  function handlePremiseClick(e) {
+    const premiseElement = e.target.closest('[data-premise]');
+    if (!premiseElement) return;
+
+    const id = parseInt(premiseElement.dataset.id);
+    const chatContent = document.getElementById('chatContent');
+    
+    // Clear previous chat
+    chatContent.innerHTML = '';
+    
+    // Add user message with fade-in effect
+    const userText = premiseElement.querySelector('p').textContent;
+    const userMessage = createMessage(userText, true);
+    userMessage.style.opacity = 0;
+    chatContent.appendChild(userMessage);
+    setTimeout(() => {
+      userMessage.style.transition = 'opacity 0.5s';
+      userMessage.style.opacity = 1;
+    }, 0);
+
+    // Find and add bot response with typing animation
+    const response = responses.find(r => r.id === id);
+    if (response) {
+      setTimeout(() => {
+        const botMessage = createMessage('', false);
+        chatContent.appendChild(botMessage);
+        let index = 0;
+        const text = getRandomText(response.text);
+        const typingInterval = setInterval(() => {
+          if (index < text.length) {
+            botMessage.textContent += text[index];
+            index++;
+          } else {
+            clearInterval(typingInterval);
+            if (response.suggestions?.length) {
+              chatContent.appendChild(createSuggestionLinks(response.suggestions));
+            }
+          }
+        }, 50); // Adjust typing speed here
+      }, 2500); // 2 seconds delay after user message
+    }
+  }
+
+  // Add click event listeners
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('[data-premise]').forEach(element => {
+      element.addEventListener('click', handlePremiseClick);
+    });
+  });
+</script>
