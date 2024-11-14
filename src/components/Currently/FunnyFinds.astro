@@ -1,0 +1,29 @@
+---
+const funnyLinks = [
+    {
+        title: "Funny Link 1",
+        url: "#"
+    },
+    {
+        title: "Funny Link 2",
+        url: "#"
+    },
+    {
+        title: "Funny Link 3",
+        url: "#"
+    }
+];
+---
+
+<div class="space-y-3">
+    {funnyLinks.map((link) => (
+        <div>
+            <a 
+                href={link.url}
+                class="text-purple-700 hover:text-purple-900 underline decoration-2 decoration-purple-200 hover:decoration-purple-400 transition-colors duration-300"
+            >
+                {link.title}
+            </a>
+        </div>
+    ))}
+</div> 

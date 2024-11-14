@@ -6,13 +6,17 @@
   --language-color: #fff;
 }
 
+div:has(figure:has(code)) {
+  @apply my-4;
+}
+
 figure:has(code) {
   position: relative;
   border-radius: 0.5rem;
   border-color:white;
   border-width: 0px;
   border-style: solid;
-  @apply shadow-lg my-0 p-0;
+  @apply shadow-lg my-4;
 }
 
 pre button.copy {
@@ -194,19 +198,15 @@ pre [data-line] {
 }
 
 figcaption + pre {
-  @apply !m-0;
+  @apply !my-2 !rounded-t-none;
 }
 
-figcaption + pre {
-  @apply !rounded-t-none;
-}
-
-figure + figcaption {
-    @apply !my-0;
-}
-pre,
-code,
 figure {
+  @apply !mt-2 !mb-8;
+}
+
+pre,
+code {
   @apply overflow-x-auto px-2 py-0;
 }
 
@@ -239,11 +239,6 @@ pre:has(+ [data-rehype-pretty-code-caption]) {
 /* Override Tailwind prose margins for code blocks */
 pre:has([data-caption]), pre:has([data-rehype-pretty-code-title]) {
   @apply !my-0 !py-0;
-}
-
-/* Ensure figure doesn't inherit prose margins */
-figure:has(code) {
-  @apply !my-0;
 }
 
 /* Ensure caption doesn't get prose margins */

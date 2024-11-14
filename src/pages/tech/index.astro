@@ -1,45 +1,55 @@
 ---
 import { getCollection } from 'astro:content';
-import IndexLayout from "../../layouts/IndexLayout.astro";
+import PageLayout from "@layouts/PageLayout.astro";
 import '@styles/custom.css';
-import TechCube from "../../components/TechCube.astro";
-import { tailwindColors } from "../../utils/tailwindColors";
+import ElevatorIcon from "@components/Icons/ElevatorIcon.astro";
+import TechCube from "@components/TechCube.astro";
 const techs = (await getCollection('tech')).filter(({ data }) => {
   return data.created_date;
 }).sort((a, b) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime());
-const posts = (await getCollection('blog')).filter(({ data }) => {
-  return data.created_date;
-}).sort((a, b) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime());
-const { description } = Astro.props;
-const currentSlug = Astro.url.pathname.split('/')[1];
-const limit = 6;
-const filteredTechs = techs.filter(tech => tech.data.slug !== currentSlug);
-const allVendorIcons = import.meta.glob<{ default: ImageMetadata }>('../images/vendor-icons/*', { eager: true });
 ---
 
-<IndexLayout title="Tech" leftcol="tech" rightcol="tech">
+<PageLayout title="Tech Stuff">
+  
   <section class="py-8 px-6 md:pr-2 pl-0">
-    <div class="w-full">
-      <div class="w-full">
-   
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2">
-            {techs.slice(0, 8).map((tech) => (
-              <a href={`/tech/${tech.data.slug}`} class="hover:scale-105 transition-transform duration-200">
-                <TechCube
-                  title={tech.data.vendor_name || tech.data.title}
-                  vendoricon={tech.data.vendoricon}
-                  excerpt={tech.data.excerpt}
-                  tags={tech.data.tags}
-                  slug={tech.data.slug}
-                  vendor_primary_color={tech.data.vendor_primary_color}
-                  vendor_secondary_color={tech.data.vendor_secondary_color}
-                />
-              </a>
-            ))}
-          </div>
-
-      </div>
+    <div class="w-full flex flex-col">
+      <h2 class="text-2xl font-bold mb-4">
+        Tech Stuff
+      </h2>
+      <p class="text-sm mb-4">
+        This page aims to highlight the technologies and vendors I've worked with both professionally and personally. My time is split pretty evenly between development and systems admin/integration work.
+      </p>
     </div>
+    <div class="w-full border-gray-700 rounded-lg bg-gray-700 text-white p-4 my-8 flex flex-row">
+      <div class="w-1/12">
+        <ElevatorIcon class="w-20 h-20 mt-2 !fill-white" fill="#ffffff" />
+      </div>
+      <div class="w-11/12">
+        <h2 class="text-xl font-bold mb-4">
+        Elevator Pitch
+      </h2>
+      <p class="text-sm mb-4">
+        I'm a full stack developer with a passion for building products that are both functional and beautiful. I'm also a systems administrator with a passion for building infrastructure that is both reliable and scalable.
+      </p>
+    </div>
+    </div>
+    <h2 class="text-xl font-bold mb-4">
+      Vendors I Work With
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6">
+          {techs.slice(0, 8).map((tech) => (
+            // <a href={`/tech/${tech.data.slug}`} class="hover:scale-105 transition-transform duration-200">
+              <TechCube
+                title={tech.data.vendor_name || tech.data.title}
+                vendoricon={tech.data.vendoricon}
+                excerpt={tech.data.excerpt}
+                tags={tech.data.tags}
+                slug={tech.data.slug}
+                vendor_primary_color={tech.data.vendor_primary_color}
+                vendor_secondary_color={tech.data.vendor_secondary_color}
+              />
+            // </a>
+      ))}
     </div>
   </section>
-</IndexLayout>
+</PageLayout>

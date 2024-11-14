@@ -5,10 +5,10 @@ const posts = await getCollection('blog');
 const techs = await getCollection('tech');
 ---
 <footer class="w-full">
-<div class="px-4 md:py-10 bg-blue-900 sm:p-6 dark:bg-gray-800">
+<div class="px-4 md:py-10 bg-blue-900 sm:p-6 dark:bg-gray-800 rounded-t-lg">
   <div class="mx-auto max-w-screen-xl">
       <div class="md:flex md:justify-between">
-          <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-6 md:grid-cols-3">
               <div class="px-4">
                   <h2 class="mb-6 text-md font-semibold uppercase text-white">Blog Posts</h2>
                   <ul class="text-gray-200 text-sm">
@@ -51,7 +51,7 @@ const techs = await getCollection('tech');
                 </ul>
             </div>
           </div>
-          <div class="p-4"><PoweredBy /></div>
+          <div class="hidden md:block md:p-4"><PoweredBy /></div>
       </div>
 
   </div>

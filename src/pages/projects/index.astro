@@ -1,14 +1,49 @@
 ---
 import { getCollection } from 'astro:content';
 const projects = await getCollection('projects');
-import PostLayout from "../../layouts/PostLayout.astro";
+import  BaseLayout from "../../layouts/BaseLayout.astro";
 import '@styles/custom.css';
+import { Image } from 'astro:assets';
+import ProjectPic from '@images/covers/lbwebrtc.jpg';
 ---
 
-<PostLayout title="Projects" slug="projects">
-<ul>
-  {projects.map(project => (
-    <li><a href={`/blog/${project.data.slug}`}>{project.data.title}</a></li>
-  ))}
-</ul>
-</PostLayout>
+<BaseLayout title="Projects">
+  <div class="max-w-7xl mx-auto px-0 py-8">
+    <h1 class="text-4xl font-bold mb-12 text-purple-900">Featured Projects</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 w-full max-w-full min-w-full">
+      {projects.map(project => (
+        <a href={`/projects/${project.slug}`} class="group relative w-[300px] aspect-[3/4] overflow-hidden rounded-lg object-cover md:aspect-[3/4]">
+          <Image
+            src={ProjectPic}
+            alt={`project.data.title`}
+            class="absolute inset-0 h-full w-full md:h-[230px] md:w-[345px] object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+            <div class="absolute bottom-0 p-6 text-white">
+              <h3 class="text-xl font-semibold mb-2">{project.data.title}</h3>
+              <p class="text-sm text-gray-200 mb-3">{project.data.description}</p>
+              
+              <div class="flex flex-wrap gap-2">
+                {project.data.tags?.map(tag => (
+                  <span class="px-2 py-1 text-xs bg-white/20 rounded-full">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              
+              <div class="mt-3 text-sm text-gray-300">
+                {project.data.client && (
+                  <p>Client: {project.data.client}</p>
+                )}
+                {project.data.vendor && (
+                  <p>Tech: {project.data.vendor}</p>
+                )}
+              </div>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

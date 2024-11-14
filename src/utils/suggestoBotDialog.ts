@@ -2,12 +2,19 @@ export const answers = [
     {
         id: 1,
         text: [
-            { id: 1, text: "I accidentally followed a clickbaity link and feel obliged to do something of value whilst I'm here to feel like I've won." },
-            { id: 2, text: "I have no idea. I don't even know who you are and unless I see a cat meme I'm heading back to 4chan." },
-            { id: 3, text: "I'm drunk and misspelt 9gag.com. Now I've lost my back button and can't find my way out." }
+            { id: 1, text: "I accidentally followed a clickbaity link and feel obliged to do something of value whilst I'm here to feel like I've won.",
+                short: "A regrettable accident."
+             },
+            { id: 2, text: "I have no idea. I don't even know who you are and unless I see a cat meme I'm heading back to 4chan.",
+                short: "Cat memes."
+            },
+            { id: 3, text: "I'm drunk and misspelt 9gag.com. Now I've lost my back button and can't find my way out.",
+                short: "A drunken mistake."
+             }
         ],
         premise: "general",
-        icon: "CrosswordIcon"
+        icon: "CrosswordIcon",
+        mobileText: "Just browsing."
     },
     {
         id: 2,
@@ -17,7 +24,8 @@ export const answers = [
             { id: 3, text: "I received an email from this domain and wanted to see why you felt you were above a gmail.com address." }
         ],
         premise: "personal",
-        icon: "FamilyStarIcon"
+        icon: "FamilyStarIcon",
+        mobileText: "Something non-work-related."
     },
     {
         id: 3,
@@ -27,10 +35,22 @@ export const answers = [
             { id: 3, text: "I have an IT project that I think you might be a good fit for but I need to see some evidence that you've been near a server before." }
         ],
         premise: "systems",
-        icon: "ServerEngineerIcon"
+        icon: "ServerEngineerIcon",
+        mobileText: "IT projects."
     },
     {
         id: 4,
+        text: [
+            { id: 1, text: "I am interested in your work in web and software development and want to see if this half-baked representation of an interactive bot is the sad high point in your portfolio." },
+            { id: 2, text: "I am not convinced by your software development credentials and need to see past this annoying chatbot to even consider hiring you." },
+            { id: 3, text: "I want to if you're the right person for some dev work I have coming up and your lack of friends on Github left me a little concerned." }
+        ],
+        premise: "dev",
+        icon: "SdkIcon",
+        mobileText: "Web and software development work."
+    },
+    {
+        id: 5,
         text: [
             { id: 1, text: "I'm a bot and don't much care for robots.txt. I will harvest your witty prose to train my AI overlords and be on my way." },
             { id: 2, text: "I'm a bot. The fact that you've taken the time to provide pre-written dialogue for me is a bit weird, and I'm not even allowed to have an opinion." },
@@ -38,17 +58,8 @@ export const answers = [
             { id: 4, text: "I'm a bot. I'm just checking to see whether this site deserves a place in my search results. Not looking good though..." }
         ],
         premise: "robot",
-        icon: "RobotIcon"
-    },
-    {
-        id: 5,
-        text: [
-            { id: 1, text: "I am interested in your work in web and software development and want to see if this half-baked representation of an interactive bot is the sad high point in your portfolio." },
-            { id: 2, text: "I am not convinced by your software development credentials and need to see past this annoying chatbot to even consider hiring you." },
-            { id: 3, text: "I want to if you're the right person for some dev work I have coming up and your lack of friends on Github left me a little concerned." }
-        ],
-        premise: "dev",
-        icon: "SdkIcon"
+        icon: "RobotIcon",
+        mobileText: "I'm a bot."
     },
     {
         id: 6,
@@ -58,7 +69,8 @@ export const answers = [
             { id: 3, text: "I've sent you 15 emails and left eight voicemails and I still can't get hold of you. How can I get hold of you?" }
         ],
         premise: "contact",
-        icon: "ChatIcon"
+        icon: "ChatIcon",
+        mobileText: "Your contact details."
     }
 ]
 

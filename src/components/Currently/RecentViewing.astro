@@ -1,0 +1,25 @@
+---
+const placeholderShows = Array(5).fill({
+    title: "Show Title",
+    image: "/placeholder.svg"
+});
+---
+
+<div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+    {placeholderShows.map((show) => (
+        <div class="relative group">
+            <div class="aspect-[2/3] bg-purple-100 rounded-lg overflow-hidden transition-transform duration-300 group-hover:scale-110">
+                <svg 
+                    class="w-full h-full text-purple-300" 
+                    viewBox="0 0 100 150" 
+                    fill="currentColor"
+                >
+                    <rect width="100" height="150" />
+                </svg>
+            </div>
+            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-50 rounded-lg">
+                <span class="text-white font-medium">{show.title}</span>
+            </div>
+        </div>
+    ))}
+</div> 

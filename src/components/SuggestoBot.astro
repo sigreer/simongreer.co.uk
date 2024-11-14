@@ -24,24 +24,31 @@ const iconComponents = {
   CrosswordIcon
 } as const;
 ---
-<div class="grid grid-cols-3 gap-x-12">
-<div class="grid grid-cols-2 col-span-2 gap-x-12 gap-y-8 px-0 pt-8 pb-16">
+<div class="md:grid md:grid-cols-3 md:gap-x-4 lg:gap-x-12">
+<div class="pt-4 md:pb-16 grid gap-3 md:gap-y-8 md:grid-cols-2 md:col-span-2 md:gap-x-12px-0 ">
 
   {answers.map(answer => {
     const IconComponent = iconComponents[answer.icon as keyof typeof iconComponents];
     return (
       <a 
-        class="block bg-gray-200 hover:bg-gray-300 transition-colors duration-300 p-4 min-h-32 max-h-32 rounded-lg cursor-pointer"
+        class="bg-gray-200 hover:bg-gray-300 transition-colors duration-300 
+        p-0 min-h-8 max-h-14 flex flex-row
+        md:p-4 md:pl-0 md:min-h-32 md:max-h-32 rounded-lg cursor-pointer"
         data-premise={answer.premise}
         data-id={answer.id}
       >
-        <IconComponent class="w-5 h-5 mb-2" />
-        <p class="text-sm px-4">{getRandomText(answer.text)}</p>
+        <div class="md:w-8 p-0 m-0">
+          <IconComponent class="w-auto mt-1 ml-1 mr-0 pl-1 h-auto md:mb-2" />
+        </div>
+        <p class="text-sm px-4">
+          <span class="md:hidden">{answer.mobileText}</span>
+          <span class="hidden md:inline">{getRandomText(answer.text)}</span>
+        </p>
       </a>
     );
     })}
   </div>
-  <div class="bg-white mt-8 pt-2 mb-16 min-h-36 rounded-lg border border-gray-800 flex flex-col">
+  <div id="SuggestoBot"class="bg-white md:mt-4 mt-8 pt-2 mb-16 md:pt-0 min-h-36 rounded-lg border border-gray-800 flex flex-col">
     <div class="w-full place-items-center text-center">
       <Robot2Icon class="w-16 h-16 mb-2 mx-auto" />
       <p class="text-xs">SuggestoBot</p>
@@ -55,83 +62,89 @@ const iconComponents = {
 <script>
   import { answers, responses } from '@utils/suggestoBotDialog';
 
-  /**
-   * @param {{ text: string }[]} texts
-   */
-  function getRandomText(texts) {
-    const index = Math.floor(Math.random() * texts.length);
-    return texts[index].text;
-  }
-
-  function createMessage(text, isUser = false) {
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `chat-message ${isUser ? 'user-message' : 'bot-message'}`;
-    messageDiv.textContent = text;
-    return messageDiv;
-  }
-
-  function createSuggestionLinks(suggestions) {
-    const linksDiv = document.createElement('div');
-    linksDiv.className = 'mt-4';
-    
-    suggestions.forEach(suggestion => {
-      const link = document.createElement('a');
-      link.href = suggestion.link;
-      link.className = 'suggestion-link';
-      link.textContent = suggestion.label;
-      linksDiv.appendChild(link);
-    });
-    
-    return linksDiv;
-  }
-
-  function handlePremiseClick(e) {
-    const premiseElement = e.target.closest('[data-premise]');
-    if (!premiseElement) return;
-
-    const id = parseInt(premiseElement.dataset.id);
+  function initializeSuggestoBot() {
     const chatContent = document.getElementById('chatContent');
-    
-    // Clear previous chat
+    if (!chatContent) return;
+      
     chatContent.innerHTML = '';
-    
-    // Add user message with fade-in effect
-    const userText = premiseElement.querySelector('p').textContent;
-    const userMessage = createMessage(userText, true);
-    userMessage.style.opacity = 0;
-    chatContent.appendChild(userMessage);
-    setTimeout(() => {
-      userMessage.style.transition = 'opacity 0.5s';
-      userMessage.style.opacity = 1;
-    }, 0);
+    const isMobile = window.innerWidth < 768;
 
-    // Find and add bot response with typing animation
-    const response = responses.find(r => r.id === id);
-    if (response) {
-      setTimeout(() => {
-        const botMessage = createMessage('', false);
-        chatContent.appendChild(botMessage);
-        let index = 0;
-        const text = getRandomText(response.text);
-        const typingInterval = setInterval(() => {
-          if (index < text.length) {
-            botMessage.textContent += text[index];
-            index++;
-          } else {
-            clearInterval(typingInterval);
-            if (response.suggestions?.length) {
-              chatContent.appendChild(createSuggestionLinks(response.suggestions));
-            }
-          }
-        }, 50); // Adjust typing speed here
-      }, 2500); // 2 seconds delay after user message
+    function getRandomText(texts: { text: string }[]) {
+      const index = Math.floor(Math.random() * texts.length);
+      return texts[index].text;
     }
+
+    function createMessage(text: string, isUser = false) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `chat-message ${isUser ? 'user-message' : 'bot-message'}`;
+      messageDiv.textContent = text;
+      return messageDiv;
+    }
+
+    function createSuggestionLinks(suggestions: { link: string; label: string }[]) {
+      const linksDiv = document.createElement('div');
+      linksDiv.className = 'mt-4';
+      
+      suggestions.forEach(suggestion => {
+        const link = document.createElement('a');
+        link.href = suggestion.link;
+        link.className = 'suggestion-link';
+        link.textContent = suggestion.label;
+        linksDiv.appendChild(link);
+      });
+      
+      return linksDiv;
+    }
+
+    function handlePremiseClick(e: MouseEvent) {
+      const premiseElement = (e.target as HTMLElement).closest('[data-premise]');
+      if (!premiseElement) return;
+
+      const id = parseInt((premiseElement as HTMLElement).dataset.id || '0');
+      
+      const chatContent = document.getElementById('chatContent');
+      if (!chatContent) return;
+      
+      chatContent.innerHTML = '';
+
+      const isMobile = window.innerWidth < 768;
+      const userText = isMobile 
+        ? answers.find(a => a.id === id)?.mobileText || ''
+        : premiseElement.querySelector('p')?.textContent || '';
+      const userMessage = createMessage(userText, true);
+      userMessage.style.opacity = '0';
+      chatContent.appendChild(userMessage);
+      setTimeout(() => {
+        userMessage.style.transition = 'opacity 0.5s';
+        userMessage.style.opacity = '1';
+      }, 0);
+
+      const response = responses.find(r => r.id === id);
+      if (response) {
+        setTimeout(() => {
+          const botMessage = createMessage('', false);
+          chatContent.appendChild(botMessage);
+          let index = 0;
+          const text = getRandomText(response.text);
+          const typingInterval = setInterval(() => {
+            if (index < text.length) {
+              botMessage.textContent += text[index];
+              index++;
+            } else {
+              clearInterval(typingInterval);
+              if (response.suggestions?.length) {
+                chatContent.appendChild(createSuggestionLinks(response.suggestions));
+              }
+            }
+          }, 50);
+        }, 2500);
+      }
+    }
+
+    document.querySelectorAll('[data-premise]').forEach((element) => {
+      element.addEventListener('click', (e: Event) => handlePremiseClick(e as MouseEvent));
+    });
   }
 
-  // Add click event listeners
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('[data-premise]').forEach(element => {
-      element.addEventListener('click', handlePremiseClick);
-    });
-  });
+  document.addEventListener('astro:page-load', initializeSuggestoBot);
 </script>

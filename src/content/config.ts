@@ -30,6 +30,8 @@ const projects = defineCollection({
     status: z.enum(['draft', 'published', 'archived']),
     coverimage: z.string().optional(),
     tags: z.array(z.string()).optional(),
+    client: z.string().optional(),
+    vendor: z.string().optional(),
   }),
 });
 
@@ -47,7 +49,8 @@ const blog = defineCollection({
     horizontal_logo: z.string().optional().describe('Path to the horizontal logo image'),
     vendoricon: z.string().optional(),
     tags: z.array(z.string()).optional(),
-    type: z.literal('blog')
+    type: z.literal('blog'),
+    category: z.string().optional()
   }),
 });
 
