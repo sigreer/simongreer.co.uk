@@ -1,11 +1,11 @@
 ---
-import PlainLayout from "../layouts/PlainLayout.astro";
-import ContactForm from "../components/ContactForm.astro";
-import ContactInfo from "../components/ContactInfo.astro";
-import AboutInfo from "../components/AboutInfo.astro";
+import PageLayout from "@layouts/PageLayout.astro";
+import ContactForm from "@components/ContactForm.astro";
+import ContactInfo from "@components/ContactInfo.astro";
+import AboutInfo from "@components/AboutInfo.astro";
 ---
 
-<PlainLayout>
+<PageLayout title="Get In Touch">
   <div class="w-full bg-purple-700 rounded-t-lg mt-8">
     <h3 class="w-fit text-3xl font-bold relative my-2 px-4 py-3 text-white">Get In Touch</h3>
   </div>
@@ -20,4 +20,4 @@ import AboutInfo from "../components/AboutInfo.astro";
       <ContactInfo />
     </div>
   </div>
-</PlainLayout>
+</PageLayout>

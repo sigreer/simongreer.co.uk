@@ -2,6 +2,7 @@ import { defineConfig, envField } from 'astro/config'
 import react from '@astrojs/react';
 import preact from '@astrojs/preact';
 import tailwind from '@astrojs/tailwind';
+// import cloudflare from '@astrojs/cloudflare';
 import mdx from '@astrojs/mdx';
 import theme from './src/syntaxtheme.json';
 import robotsTxt from 'astro-robots-txt';
@@ -32,9 +33,6 @@ const prettyCodeOptions = {
 dotenv.config();
 // https://astro.build/config
 export default defineConfig({
-  image: {
-    domains: ['simongreer.co.uk'],
-  },
   env: {
     schema: {
       SITE_URL: envField.string({ context: "client", access: "public", optional: true}),
@@ -73,5 +71,5 @@ export default defineConfig({
     rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
     shikiConfig: { theme },
     },
-  site: 'https://simongreer.co.uk'
+  site: 'https://simongreer.co.uk',
 })
