@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 
 interface Props {
+  
   title: string;
   slug: string;
   excerpt?: string | null;
@@ -10,17 +11,28 @@ interface Props {
   coverimage?: string;
   className?: string;
   type?: 'blog' | 'tech' | 'tag' | 'project' | 'vendor';
+  created_date?: Date;
 }
 
-const { title, slug, excerpt, tags, coverimage, className = "", type = 'blog', dataTags } = Astro.props;
+const { title, slug, excerpt, tags, coverimage, className = "", type = 'blog', dataTags, created_date } = Astro.props;
 const allCoverImages = import.meta.glob<{ default: ImageMetadata }>('../images/covers/*', { eager: true });
 const coverImage = coverimage ? allCoverImages[`../images/covers/${coverimage}`]?.default : null;
 const basePath = type === 'tech' ? '/tech' : '/blog';
 ---
 
-<li class={`rounded-md bg-white shadow-md transition border border-gray-500 hover:shadow-xl hover:scale-105 ${className}`}
+<li class={`rounded-md bg-white shadow-md transition border border-gray-700 hover:shadow-xl hover:scale-105 ${className} relative`}
     data-tags={dataTags}>
+
   <a href={`${basePath}/${slug}`} class="block h-full">
+    {created_date && (
+      <div class="absolute top-0 right-0 bg-gray-800 text-white px-3 py-0 rounded-bl-lg text-xs z-10">
+        {created_date.toLocaleDateString('en-US', { 
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        })}
+      </div>
+    )}
     {coverImage && (
       <div class="w-full h-48 rounded-t-md overflow-hidden">
         <Image 

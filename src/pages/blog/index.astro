@@ -27,6 +27,7 @@ const posts = await getCollection('blog', ({ data }) => {
             excerpt={post.data.excerpt}
             tags={post.data.tags}
             coverimage={post.data.coverimage}
+            created_date={post.data.created_date}
             dataTags={JSON.stringify(post.data.tags || [])}
             type="blog"
           />
