@@ -1,34 +1,30 @@
 ---
-import IndexLayout from "../../layouts/IndexLayout.astro";
+import PageLayout from "@layouts/PageLayout.astro";
 import { getCollection } from 'astro:content';
 import '@styles/custom.css';
-
-// Get ALL blog posts without filtering first
+import Card from '@components/Card.astro';
 const allPosts = await getCollection('blog');
-console.log('All blog posts (unfiltered):', allPosts.map(post => ({
-  title: post.data.title,
-  slug: post.data.slug,
-  status: post.data.status,
-  has_logo: !!post.data.horizontal_logo
-})));
-
-// Then get filtered posts
 const posts = await getCollection('blog', ({ data }) => {
   return data.status === 'published';
 });
 
-console.log('Filtered blog posts:', posts.map(post => ({
-  title: post.data.title,
-  slug: post.data.slug,
-  status: post.data.status,
-  has_logo: !!post.data.horizontal_logo
-})));
 ---
-<IndexLayout title="Blog" leftcol="blog" rightcol="tech">
+<PageLayout title="Blog">
   <section class="py-8 px-6 md:px-0">
     <div class="w-full">
-      <slot />
+      <ul class="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        {posts.map(post => (
+          <Card 
+            title={post.data.title}
+            slug={post.data.slug}
+            excerpt={post.data.excerpt}
+            tags={post.data.tags}
+            coverimage={post.data.coverimage}
+            type="blog"
+          />
+        ))}
+      </ul>
     </div>
   </section>
-</IndexLayout>
+</PageLayout>
 

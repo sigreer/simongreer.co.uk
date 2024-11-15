@@ -29,9 +29,6 @@ const tags = await directus.request(readItems("tags", {
           content={project.excerpt}
           tags={project.tags.map(tagId => {
             const foundTag = tags.find(t => t.id === tagId);
-            console.log('Processing tag:', tagId);
-            console.log('Found tag:', foundTag);
-            console.log('Techguide tags:', project.tags);
             return foundTag?.name;
           }).filter(Boolean) as string[]}
           vendorlogo_icon={project.vendorlogo_icon}

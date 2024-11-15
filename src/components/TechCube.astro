@@ -18,13 +18,6 @@ const tailwindColors = await tailwindColorMap;
 
 const { title, vendoricon, excerpt, className = "", slug, vendor_primary_color = "gray-100", vendor_secondary_color = "gray-900" } = Astro.props;
 
-console.log('Color Debug:', {
-  requested_primary: vendor_primary_color,
-  requested_secondary: vendor_secondary_color,
-  mapped_primary: tailwindColors[vendor_primary_color as keyof typeof tailwindColors],
-  mapped_secondary: tailwindColors[vendor_secondary_color as keyof typeof tailwindColors]
-});
-
 const allVendorIcons = import.meta.glob<{ default: ImageMetadata }>('../images/vendor-icons/*', { eager: true });
 const vendorImage = vendoricon ? allVendorIcons[`../images/vendor-icons/${vendoricon}`]?.default : null;
 
