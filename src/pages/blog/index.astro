@@ -22,15 +22,15 @@ const posts = await getCollection('blog', ({ data }) => {
       <ul class="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {posts.map(post => (
           <Card 
-              title={post.data.title}
-              slug={post.data.slug}
-              excerpt={post.data.excerpt}
-              tags={post.data.tags}
-              coverimage={post.data.coverimage}
-              data-tags={JSON.stringify(post.data.tags || [])}
-              type="blog"
-            />
-          ))}
+            title={post.data.title}
+            slug={post.data.slug}
+            excerpt={post.data.excerpt}
+            tags={post.data.tags}
+            coverimage={post.data.coverimage}
+            dataTags={JSON.stringify(post.data.tags || [])}
+            type="blog"
+          />
+        ))}
       </ul>
     </div>
   </section>

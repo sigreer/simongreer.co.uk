@@ -1,5 +1,6 @@
 ---
 import Footer from "@components/Footer.astro";
+import PreHeader from "@components/PreHeader.astro";
 import { ClientRouter } from 'astro:transitions';
 import '@styles/custom.css';
 import '@fontsource/poppins';
@@ -8,6 +9,7 @@ interface Props {
   title?: string;
   description?: string;
 }
+
 const { title = "SimonGreer.co.uk", description = "A website about beats, beeps and other feats" } = Astro.props;
 const global = { title: 'SimonGreer.co.uk' };
 ---
@@ -25,6 +27,7 @@ const global = { title: 'SimonGreer.co.uk' };
     <ClientRouter />
   </head>
   <body class="bg-gray-100 font-poppins min-h-screen flex flex-col max-w-lg mx-auto md:py-6">
+    <PreHeader />
     <NavNew />
     <slot />
     <Footer />

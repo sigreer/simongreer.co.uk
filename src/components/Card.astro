@@ -18,7 +18,8 @@ const coverImage = coverimage ? allCoverImages[`../images/covers/${coverimage}`]
 const basePath = type === 'tech' ? '/tech' : '/blog';
 ---
 
-<li class={`rounded-md bg-white shadow-md transition border border-gray-500 hover:shadow-xl hover:scale-105 ${className}`}>
+<li class={`rounded-md bg-white shadow-md transition border border-gray-500 hover:shadow-xl hover:scale-105 ${className}`}
+    data-tags={dataTags}>
   <a href={`${basePath}/${slug}`} class="block h-full">
     {coverImage && (
       <div class="w-full h-48 rounded-t-md overflow-hidden">
