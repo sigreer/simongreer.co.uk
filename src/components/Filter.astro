@@ -1,0 +1,12 @@
+---
+interface Props {
+  type?: 'tag' | 'category' | 'date';
+}
+
+const { type = 'tag' } = Astro.props;
+---
+<h3 class="text-sm font-normal uppercase">Filter:</h3>
+<div class="flex flex-wrap gap-1 filter-container mb-8">
+    
+  {type === 'tag' && <slot />}
+</div>

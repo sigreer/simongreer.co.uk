@@ -3,26 +3,34 @@ import PageLayout from "@layouts/PageLayout.astro";
 import { getCollection } from 'astro:content';
 import '@styles/custom.css';
 import Card from '@components/Card.astro';
+import Filter from '@components/Filter.astro';
+import TagFilter from '@components/Filter/Tag.astro';
+
 const allPosts = await getCollection('blog');
 const posts = await getCollection('blog', ({ data }) => {
   return data.status === 'published';
 });
-
 ---
+
 <PageLayout title="Blog">
   <section class="py-8 px-6 md:px-0">
+    <Filter type="tag">
+      <TagFilter posts={posts} />
+    </Filter>
     <div class="w-full">
+
       <ul class="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {posts.map(post => (
           <Card 
-            title={post.data.title}
-            slug={post.data.slug}
-            excerpt={post.data.excerpt}
-            tags={post.data.tags}
-            coverimage={post.data.coverimage}
-            type="blog"
-          />
-        ))}
+              title={post.data.title}
+              slug={post.data.slug}
+              excerpt={post.data.excerpt}
+              tags={post.data.tags}
+              coverimage={post.data.coverimage}
+              data-tags={JSON.stringify(post.data.tags || [])}
+              type="blog"
+            />
+          ))}
       </ul>
     </div>
   </section>

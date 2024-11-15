@@ -6,12 +6,13 @@ interface Props {
   slug: string;
   excerpt?: string | null;
   tags?: string[];
+  dataTags?: string;
   coverimage?: string;
   className?: string;
   type?: 'blog' | 'tech' | 'tag' | 'project' | 'vendor';
 }
 
-const { title, slug, excerpt, tags, coverimage, className = "", type = 'blog' } = Astro.props;
+const { title, slug, excerpt, tags, coverimage, className = "", type = 'blog', dataTags } = Astro.props;
 const allCoverImages = import.meta.glob<{ default: ImageMetadata }>('../images/covers/*', { eager: true });
 const coverImage = coverimage ? allCoverImages[`../images/covers/${coverimage}`]?.default : null;
 const basePath = type === 'tech' ? '/tech' : '/blog';
@@ -41,7 +42,7 @@ const basePath = type === 'tech' ? '/tech' : '/blog';
       )}
       {tags && tags.length > 0 && (
         <div class="flex flex-wrap gap-2 tag-container">
-          {tags.map((tag) => (
+          {dataTags && JSON.parse(dataTags).map((tag: string) => (
             <span
               class="tag-style rounded-md px-2 py-1 text-xs font-semibold text-white bg-purple-600 shadow-sm transition"
               data-tag={tag}
@@ -58,7 +59,7 @@ const basePath = type === 'tech' ? '/tech' : '/blog';
 <script>
   declare global {
     interface Window {
-      applyTagColorsToNewElements?: () => void;
+      applyTagColorsToNewElements: () => void;
     }
   }
 
