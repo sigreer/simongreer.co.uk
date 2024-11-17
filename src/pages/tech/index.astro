@@ -36,7 +36,7 @@ const techs = (await getCollection('tech')).filter(({ data }) => {
     <h2 class="text-xl font-bold mb-4">
       Vendors I Work With
     </h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6">
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
           {techs.slice(0, 8).map((tech) => (
             // <a href={`/tech/${tech.data.slug}`} class="hover:scale-105 transition-transform duration-200">
               <TechCube

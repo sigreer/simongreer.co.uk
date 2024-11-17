@@ -1,9 +1,8 @@
 ---
 // @ts-ignore
 import { CollectionEntry, getCollection, render } from 'astro:content';
-import PostLayout from "../../layouts/PostLayout.astro";
-import { Image } from "astro:assets";
-import Prose from "../../components/Prose.astro";
+import PostLayout from "@layouts/PostLayout.astro";
+import Prose from "@components/Prose.astro";
 
 export async function getStaticPaths() {
   const techs = await getCollection('tech');

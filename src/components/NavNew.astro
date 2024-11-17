@@ -5,15 +5,17 @@ import Projects from '@components/Navbar/Projects.astro';
 import AboutMe from '@components/Navbar/AboutMe.astro';
 import LogoIcon from '@components/Navbar/LogoIcon.astro';
 import Currently from '@components/Navbar/Currently.astro';
+const attachedLayout = "my-0 md:rounded-t-none md:rounded-b-lg md:mb-0"
+const floatingLayout = "mt-2 md:space-y-0 md:my-0 md:rounded-lg"
 ---
 
 <nav class="bg-white">
-    <div class="md:flex-row gap-1 flex flex-grow flex-col items-center justify-between font-poppins md:rounded-lg w-full max-w-lg border-gray-600 border 
+    <div class={`md:flex-row gap-0 space-y-0 flex flex-grow flex-col items-center justify-between font-poppins w-full max-w-lg border-gray-600 border ${attachedLayout}
   mx-auto py-3 px-3
   sm:px-4 sm:text-lg
   md:h-24 md:max-h-16 md:min-h-16 md:px-4
   lg:h-28
-  2xl:max-w-2xl">
+  2xl:max-w-2xl`}>
       <div class="flex items-center shrink-0">
         <LogoIcon class="w-[24px] h-[24px]"/>
         <a href="/" class="mr-4 cursor-pointer py-1.5 text-base">
