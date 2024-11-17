@@ -1,24 +1,53 @@
 ---
-const placeholderShows = Array(5).fill({
-    title: "Show Title",
-    image: "/placeholder.svg"
+import { Image } from 'astro:assets';
+const allVideo = import.meta.glob<{ default: ImageMetadata }>('/src/images/currently/video/*.{jpg,jpeg,png}', { eager: true });
+
+const recentlyWatched = [
+    {
+        name: "The Punk Singer",
+        image: "/src/images/currently/video/the-punk-singer.jpg"
+    },
+    {
+        name: "Filmage: The Story of Descendents",
+        image: "/src/images/currently/video/filmage-the-story-of-descendents.jpg"
+    },
+    {
+        name: "Aqua Teen Hunger Force",
+        image: "/src/images/currently/video/aqua-teen-hunger-force.jpg"
+    },
+    {
+        name: "Flight of the Conchords",
+        image: "/src/images/currently/video/flight-of-the-conchords.jpg"
+    },
+    {
+        name: "Arcane",
+        image: "/src/images/currently/video/arcane.jpg"
+    }
+];
+
+const videoPics = recentlyWatched.map((video) => {
+    const videoPic = allVideo[video.image]?.default;
+    if (!videoPic) {
+        console.error(`Image not found for ${video.name}: ${video.image}`);
+    }
+    return {
+        ...video,
+        image: videoPic
+    };
 });
+
 ---
 
+
+
 <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-    {placeholderShows.map((show) => (
+    {videoPics.map((video) => (
         <div class="relative group">
             <div class="aspect-[2/3] bg-purple-100 rounded-lg overflow-hidden transition-transform duration-300 group-hover:scale-110">
-                <svg 
-                    class="w-full h-full text-purple-300" 
-                    viewBox="0 0 100 150" 
-                    fill="currentColor"
-                >
-                    <rect width="100" height="150" />
-                </svg>
+                <Image src={video.image} alt={video.name} width={300} height={300} />
             </div>
-            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-50 rounded-lg">
-                <span class="text-white font-medium">{show.title}</span>
+            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-50 rounded-lg group-hover:scale-110">
+                <span class="text-white font-medium">{video.name}</span>
             </div>
         </div>
     ))}

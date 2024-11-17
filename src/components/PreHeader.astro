@@ -2,6 +2,9 @@
 import GithubIcon from './SocialIcons/GithubIcon.astro';
 import XIcon from './SocialIcons/XIcon.astro';
 import MastadonIcon from './SocialIcons/MastadonIcon.astro';
+import BlueSkyIcon from './SocialIcons/BlueSkyIcon.astro';
+import { Image } from 'astro:assets';
+import BlueSkyWhiteIcon from '../images/bluesky-white.svg';
 const transparentStyle = "bg-transparent border-none"
 const blueStyle = "border-gray-600 border bg-blue-900"
 const grayStyle = "bg-gray-900 border-gray-600"
@@ -15,10 +18,10 @@ const floatingLayout = "mb-2 rounded-lg space-y-0 my-0 md:rounded-lg"
   lg:h-10
   2xl:max-w-2xl`}>
 <div class="hidden sm:flex items-center gap-x-2">
-  <a href="https://github.com/sigreer" target="_blank" class="text-gray-200"><GithubIcon class="w-6 h-6 hover:scale-125 text-white"/></a>
-  <a href="https://x.com/sigreer" target="_blank" class="text-gray-200"><XIcon class="w-6 h-6 hover:scale-125 text-white"/></a>
-  <a href="https://fosstodon.org/@simongreer" target="_blank" class="text-gray-200"><MastadonIcon class="w-6 h-6 hover:scale-125 text-white"/></a>
+  <GithubIcon class="w-6 h-6 hover:scale-125 text-white" href="https://github.com/sigreer"/>
+  <XIcon class="w-6 h-6 hover:scale-125 text-white" href="https://x.com/sigreer"/>
+  <MastadonIcon class="w-6 h-6 hover:scale-125 text-white" href="https://fosstodon.org/@simongreer"/>
+  <BlueSkyIcon class="w-8 h-7 hover:scale-125 text-white" href="https://bsky.social/sigreer"/>
 </div>
 </div>
 
-</section>

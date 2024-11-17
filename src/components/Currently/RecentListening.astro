@@ -1,21 +1,68 @@
 ---
-const placeholderArtists = Array(10).fill({
-    name: "Artist Name",
-    image: "/placeholder.svg"
+import { Image } from 'astro:assets';
+const allMusicArtists = import.meta.glob<{ default: ImageMetadata }>('/src/images/currently/music/artists/*.{jpg,jpeg,png}', { eager: true });
+
+const musicArtists = [
+    {
+        name: "Arc De Soleil",
+        image: "/src/images/currently/music/artists/arc-de-soleil.jpg"
+    },
+    {
+        name: "Balthvs",
+        image: "/src/images/currently/music/artists/balthvs.jpg"
+    },
+    {
+        name: "Bubble Love",
+        image: "/src/images/currently/music/artists/bubble-love.jpg"
+    },
+    {
+        name: "Bodega",
+        image: "/src/images/currently/music/artists/bodega.jpg"
+    },
+    {
+        name: "Ciao Ciao Marigold",
+        image: "/src/images/currently/music/artists/ciao-ciao-marigold.jpg"
+    },
+    {
+        name: "CLD.RAN",
+        image: "/src/images/currently/music/artists/cld.ran.jpg"
+    },
+    {
+        name: "Delicate Steve",
+        image: "/src/images/currently/music/artists/delicate-steve.jpg"
+    },
+    {
+        name: "Maribou State",
+        image: "/src/images/currently/music/artists/maribou-state.jpg"
+    },
+    {
+        name: "Shigeto",
+        image: "/src/images/currently/music/artists/shigeto.jpg"
+    },
+    {
+        name: "Teleman",
+        image: "/src/images/currently/music/artists/teleman.jpg"
+    }
+    // Add more artists as needed
+];
+
+const musicArtistPics = musicArtists.map((artist) => {
+    const musicArtist = allMusicArtists[artist.image]?.default;
+    if (!musicArtist) {
+        console.error(`Image not found for ${artist.name}: ${artist.image}`);
+    }
+    return {
+        ...artist,
+        image: musicArtist
+    };
 });
 ---
 
 <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-    {placeholderArtists.map((artist) => (
+    {musicArtistPics.map((artist) => (
         <div class="relative group">
             <div class="aspect-square bg-purple-100 rounded-lg overflow-hidden transition-transform duration-300 group-hover:scale-110">
-                <svg 
-                    class="w-full h-full text-purple-300" 
-                    viewBox="0 0 100 100" 
-                    fill="currentColor"
-                >
-                    <rect width="100" height="100" />
-                </svg>
+                <Image src={artist.image} alt={artist.name} width={300} height={300} />
             </div>
             <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-50 rounded-lg">
                 <span class="text-white font-medium">{artist.name}</span>

@@ -8,9 +8,9 @@ const techs = await getCollection('tech');
 <div class="px-4 md:py-10 bg-blue-900 sm:p-6 dark:bg-gray-800 rounded-t-lg">
   <div class="mx-auto max-w-screen-xl">
       <div class="md:flex md:justify-between">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-6 md:grid-cols-3">
-              <div class="px-4">
-                  <h2 class="mb-6 text-md font-semibold uppercase text-white">Blog Posts</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-6 md:grid-cols-9 w-full">
+              <div class="px-4 w-full col-span-4">
+                  <h2 class="mb-6 text-md font-semibold uppercase text-white">Recent Blog Posts</h2>
                   <ul class="text-gray-200 text-sm">
                     {
       posts.slice(0, 4).map((post) => (
@@ -21,19 +21,8 @@ const techs = await getCollection('tech');
                   }
                   </ul>
               </div>
-              <div class="px-4">
-                <h2 class="mb-6 text-md font-semibold uppercase text-white">Tech Stuff</h2>
-                <ul class="text-gray-200 text-sm">
-                  {
-    techs.slice(0, 4).map((tech) => (
-                    <li class="mb-4">
-                        <a href={`/tech/${tech.data.slug}`} class="hover:underline">{tech.data.title}</a>
-                    </li>
-                  ))
-                }
-                </ul>
-            </div>
-            <div class="px-4">
+            
+            <div class="px-4 w-full col-span-3">
               <h2 class="mb-6 text-md font-semibold uppercase text-white">Links</h2>
               <ul class="text-gray-200 text-sm">
                   <li class="mb-4">
@@ -50,8 +39,9 @@ const techs = await getCollection('tech');
                 </li>
                 </ul>
             </div>
+            <div class="hidden md:block md:p-4 col-span-2"><PoweredBy /></div>
           </div>
-          <div class="hidden md:block md:p-4"><PoweredBy /></div>
+          
       </div>
 
   </div>
