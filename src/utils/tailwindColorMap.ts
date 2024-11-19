@@ -204,6 +204,71 @@ export const tailwindColorMap = {
     'gray-800': '#1F2937',
     'gray-900': '#111827',
 
+    // Slate
+    'slate-50': '#F8FAFC',
+    'slate-100': '#F1F5F9',
+    'slate-200': '#E2E8F0',
+    'slate-300': '#CBD5E1',
+    'slate-400': '#94A3B8',
+    'slate-500': '#64748B',
+    'slate-600': '#475569',
+    'slate-700': '#334155',
+    'slate-800': '#1E293B',
+    'slate-900': '#0F172A',
+    'slate-950': '#020617',
+
+    // Zinc
+    'zinc-50': '#FAFAFA',
+    'zinc-100': '#F4F4F5',
+    'zinc-200': '#E4E4E7',
+    'zinc-300': '#D4D4D8',
+    'zinc-400': '#A1A1AA',
+    'zinc-500': '#71717A',
+    'zinc-600': '#52525B',
+    'zinc-700': '#3F3F46',
+    'zinc-800': '#27272A',
+    'zinc-900': '#18181B',
+    'zinc-950': '#09090B',
+
+    // Neutral
+    'neutral-50': '#FAFAFA',
+    'neutral-100': '#F5F5F5',
+    'neutral-200': '#E5E5E5',
+    'neutral-300': '#D4D4D4',
+    'neutral-400': '#A3A3A3',
+    'neutral-500': '#737373',
+    'neutral-600': '#525252',
+    'neutral-700': '#404040',
+    'neutral-800': '#262626',
+    'neutral-900': '#171717',
+    'neutral-950': '#0A0A0A',
+
+    // Stone
+    'stone-50': '#FAFAF9',
+    'stone-100': '#F5F5F4',
+    'stone-200': '#E7E5E4',
+    'stone-300': '#D6D3D1',
+    'stone-400': '#A8A29E',
+    'stone-500': '#78716C',
+    'stone-600': '#57534E',
+    'stone-700': '#44403C',
+    'stone-800': '#292524',
+    'stone-900': '#1C1917',
+    'stone-950': '#0C0A09',
+
+    // Fuchsia
+    'fuchsia-50': '#FDF4FF',
+    'fuchsia-100': '#FAE8FF',
+    'fuchsia-200': '#F5D0FE',
+    'fuchsia-300': '#F0ABFC',
+    'fuchsia-400': '#E879F9',
+    'fuchsia-500': '#D946EF',
+    'fuchsia-600': '#C026D3',
+    'fuchsia-700': '#A21CAF',
+    'fuchsia-800': '#86198F',
+    'fuchsia-900': '#701A75',
+    'fuchsia-950': '#4A044E',
+
     // Base colors
     'white': '#FFFFFF',
     'black': '#000000'
