@@ -7,7 +7,38 @@ import TechCube from "@components/TechCube.astro";
 const techs = (await getCollection('tech')).filter(({ data }) => {
   return data.created_date;
 }).sort((a, b) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime());
+const systems = techs.filter((tech) => tech.data.category === 'systems');
+const development = techs.filter((tech) => tech.data.category === 'development');
+const cloud = techs.filter((tech) => tech.data.category === 'cloud');
+const business = techs.filter((tech) => tech.data.category === 'business');
+const aiautomation = techs.filter((tech) => tech.data.category === 'ai-automation');
+const xsSlice = 4;
+const smSlice = 3;
+const mdSlice = 4;
+const lgSlice = 5;
 ---
+
+<script>
+  function getSliceSize() {
+    if (window.innerWidth < 640) return 4; // xs
+    if (window.innerWidth < 768) return 3; // sm
+    if (window.innerWidth < 1024) return 4; // md
+    return 5; // lg
+  }
+
+  function updateVisibleItems() {
+    const sliceSize = getSliceSize();
+    document.querySelectorAll('.tech-grid').forEach(grid => {
+      const items = grid.querySelectorAll('.tech-item');
+      items.forEach((item, index) => {
+        (item as HTMLElement).style.display = index < sliceSize ? 'block' : 'none';
+      });
+    });
+  }
+
+  window.addEventListener('resize', updateVisibleItems);
+  updateVisibleItems();
+</script>
 
 <PageLayout title="Tech Stuff">
   
@@ -27,29 +58,128 @@ const techs = (await getCollection('tech')).filter(({ data }) => {
       <div class="w-11/12">
         <h2 class="text-xl font-bold mb-4">
         Elevator Pitch
-      </h2>
-      <p class="text-sm mb-4">
-        I'm a full stack developer with a passion for building products that are both functional and beautiful. I'm also a systems administrator with a passion for building infrastructure that is both reliable and scalable.
-      </p>
+        </h2>
+        <p class="text-sm mb-4">
+          I'm a full stack developer with a passion for building products that are both functional and beautiful. I'm also a systems administrator with a passion for building infrastructure that is both reliable and scalable.
+        </p>
+      </div>
     </div>
+
+    <div class="flex flex-col gap-6">
+      <div class="w-full flex flex-col">
+        <div class="flex justify-between items-center">
+          <h2 class="text-xl font-bold mb-2">
+            Vendors I Work With
+          </h2>
+          <a href="/tech/systems" class="text-sm text-blue-500 hover:text-blue-600">
+            Show All →
+          </a>
+        </div>
+        <div class="tech-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+          {systems.map((tech) => (
+            <div class="tech-item">
+            <TechCube
+              title={tech.data.vendor_name || tech.data.title}
+              vendoricon={tech.data.vendoricon}
+              excerpt={tech.data.excerpt}
+              tags={tech.data.tags}
+              slug={tech.data.slug}
+              vendor_primary_color={tech.data.vendor_primary_color}
+              vendor_secondary_color={tech.data.vendor_secondary_color}
+              category={tech.data.category}
+            />
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="w-full flex flex-col">
+      <div class="flex justify-between items-center">
+        <h2 class="text-xl font-bold mb-2">Cloud Services</h2>
+        <a href="/tech/cloud" class="text-sm text-blue-500 hover:text-blue-600">Show All →</a>
+      </div>
+      <div class="tech-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+        {cloud.map((tech) => (
+        <div class="tech-item">
+          <TechCube
+            title={tech.data.vendor_name || tech.data.title}
+            vendoricon={tech.data.vendoricon}
+            excerpt={tech.data.excerpt}
+            tags={tech.data.tags}
+            slug={tech.data.slug}
+            vendor_primary_color={tech.data.vendor_primary_color}
+            vendor_secondary_color={tech.data.vendor_secondary_color}
+            category={tech.data.category}
+          />
+        </div>
+        ))}
+      </div>
     </div>
-    <h2 class="text-xl font-bold mb-4">
-      Vendors I Work With
-    </h2>
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
-          {techs.slice(0, 8).map((tech) => (
-            // <a href={`/tech/${tech.data.slug}`} class="hover:scale-105 transition-transform duration-200">
-              <TechCube
-                title={tech.data.vendor_name || tech.data.title}
-                vendoricon={tech.data.vendoricon}
-                excerpt={tech.data.excerpt}
-                tags={tech.data.tags}
-                slug={tech.data.slug}
-                vendor_primary_color={tech.data.vendor_primary_color}
-                vendor_secondary_color={tech.data.vendor_secondary_color}
+    <div class="w-full flex flex-col">
+      <div class="flex justify-between items-center">
+        <h2 class="text-xl font-bold mb-2">Business Apps</h2>
+        <a href="/tech/business-apps" class="text-sm text-blue-500 hover:text-blue-600">Show All →</a>
+      </div>
+      <div class="tech-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+        {business.map((tech) => (
+        <div class="tech-item">
+          <TechCube
+            title={tech.data.vendor_name || tech.data.title}
+            vendoricon={tech.data.vendoricon}
+            excerpt={tech.data.excerpt}
+            tags={tech.data.tags}
+            slug={tech.data.slug}
+            vendor_primary_color={tech.data.vendor_primary_color}
+            vendor_secondary_color={tech.data.vendor_secondary_color}
+            category={tech.data.category}
+          />
+        </div>
+        ))}
+      </div>
+    </div>
+    <div class="w-full flex flex-col">
+      <div class="flex justify-between items-center">
+        <h2 class="text-xl font-bold mb-2">Development</h2>
+        <a href="/tech/development" class="text-sm text-blue-500 hover:text-blue-600">Show All →</a>
+      </div>
+      <div class="tech-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+        {development.map((tech) => (
+        <div class="tech-item">
+          <TechCube
+            title={tech.data.vendor_name || tech.data.title}
+            vendoricon={tech.data.vendoricon}
+            excerpt={tech.data.excerpt}
+            tags={tech.data.tags}
+            slug={tech.data.slug}
+            vendor_primary_color={tech.data.vendor_primary_color}
+            vendor_secondary_color={tech.data.vendor_secondary_color}
+            category={tech.data.category}
+            />
+          </div>
+          ))}
+        </div>  
+      </div>
+      <div class="w-full flex flex-col">
+        <div class="flex justify-between items-center">
+          <h2 class="text-xl font-bold mb-2">AI & Automation</h2>
+          <a href="/tech/ai-automation" class="text-sm text-blue-500 hover:text-blue-600">Show All →</a>
+        </div>
+        <div class="tech-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+          {aiautomation.map((tech) => (
+          <div class="tech-item">
+            <TechCube
+              title={tech.data.vendor_name || tech.data.title}
+              vendoricon={tech.data.vendoricon}
+              excerpt={tech.data.excerpt}
+              tags={tech.data.tags}
+              slug={tech.data.slug}
+              vendor_primary_color={tech.data.vendor_primary_color}
+              vendor_secondary_color={tech.data.vendor_secondary_color}
+              category={tech.data.category}
               />
-            // </a>
-      ))}
+            </div>
+            ))}
+          </div>  
+        </div>
     </div>
   </section>
 </PageLayout>
