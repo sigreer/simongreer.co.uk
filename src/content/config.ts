@@ -17,7 +17,7 @@ const tech = defineCollection({
     vendor_primary_color: z.string().optional(),
     vendor_secondary_color: z.string().optional(),
     tags: z.array(z.string()).optional(),
-    category: z.enum(['development', 'cloud', 'systems', 'business', 'ai-automation', 'data'])
+    category: z.enum(['development', 'cloud', 'systems', 'business', 'ai-automation', 'data', 'media'])
   })
 });
 

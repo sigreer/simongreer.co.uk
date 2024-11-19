@@ -12,6 +12,8 @@ const development = techs.filter((tech) => tech.data.category === 'development')
 const cloud = techs.filter((tech) => tech.data.category === 'cloud');
 const business = techs.filter((tech) => tech.data.category === 'business');
 const aiautomation = techs.filter((tech) => tech.data.category === 'ai-automation');
+const media = techs.filter((tech) => tech.data.category === 'media');
+const data = techs.filter((tech) => tech.data.category === 'data');
 const xsSlice = 3;
 const smSlice = 4;
 const mdSlice = 4;
@@ -73,7 +75,7 @@ const lgSlice = 5;
           </h2>
       </div>
         <div class="tech-grid grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-2">
-          {techs.map((tech) => (
+          {systems.map((tech) => (
             <div class="tech-item">
             <TechCube
               title={tech.data.vendor_name || tech.data.title}
@@ -173,6 +175,48 @@ const lgSlice = 5;
             ))}
           </div>  
         </div>
+        <div class="w-full flex flex-col">
+          <div class="flex justify-between items-center">
+            <h2 class="text-xl font-bold mb-2">Data</h2>
+          </div>
+        <div class="tech-grid grid grid-cols-2 sm:grid-cols-5 md:grid-cols-7 lg:grid-cols-9 gap-6">
+          {data.map((tech) => (
+          <div class="tech-item">
+            <TechCube
+              title={tech.data.vendor_name || tech.data.title}
+              vendoricon={tech.data.vendoricon}
+              excerpt={tech.data.excerpt}
+              tags={tech.data.tags}
+              slug={tech.data.slug}
+              vendor_primary_color={tech.data.vendor_primary_color}
+              vendor_secondary_color={tech.data.vendor_secondary_color}
+              category={tech.data.category}
+              />
+            </div>
+            ))}
+        </div>  
+      </div>
+      <div class="w-full flex flex-col">
+        <div class="flex justify-between items-center">
+          <h2 class="text-xl font-bold mb-2">Media & Broadcasting</h2>
+        </div>
+      <div class="tech-grid grid grid-cols-2 sm:grid-cols-5 md:grid-cols-7 lg:grid-cols-9 gap-6">
+        {media.map((tech) => (
+        <div class="tech-item">
+          <TechCube
+            title={tech.data.vendor_name || tech.data.title}
+            vendoricon={tech.data.vendoricon}
+            excerpt={tech.data.excerpt}
+            tags={tech.data.tags}
+            slug={tech.data.slug}
+            vendor_primary_color={tech.data.vendor_primary_color}
+            vendor_secondary_color={tech.data.vendor_secondary_color}
+            category={tech.data.category}
+            />
+          </div>
+          ))}
+        </div>  
+      </div>
     </div>
   </section>
 </PageLayout>
