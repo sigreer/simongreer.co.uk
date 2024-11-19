@@ -1,0 +1,56 @@
+---
+import { getEntry, render } from 'astro:content';
+import Prose from '@components/Prose.astro';
+import { Image } from 'astro:assets';
+const { post } = Astro.props;
+const entry = await getEntry('blog', post.id);
+
+import type { ImageMetadata } from 'astro';
+const allImages = import.meta.glob<{ default: ImageMetadata }>('../images/covers/*', { eager: true });
+const ImageSrc = entry?.data.coverimage ? allImages[`../images/covers/${entry.data.coverimage}`]?.default : null;
+console.log('ImageSrc:', ImageSrc, '\nentry.data.coverimage:', entry?.data.coverimage, '\nallImages:', allImages);
+
+const { Content } = await render(entry);
+
+const formattedDate = new Date(post.data.created_date).toLocaleDateString('en-GB', {
+  day: '2-digit',
+  month: '2-digit',
+  year: '2-digit'
+});
+---
+<article
+  class="prose dark:prose-invert
+  prose-h1:font-bold
+  prose-h1:text-xl prose-h1:text-gray-800
+  prose-h2:mt-2 prose-h2:mb-2 prose-h2:text-xl prose-h2:text-gray-800
+prose-h3:text-gray-700 prose-h3:text-lg
+prose-a:text-blue-600 prose-p:text-justify
+  prose-headings:underline
+  prose-li:leading-4
+  prose-p:leading-6
+  prose-p:text-gray-700
+  prose-strong:text-gray-700
+  prose-figure:my-4
+  ">
+  {ImageSrc && (
+    <a href={`/blog/${post.id}`} class="block relative min-w-[1024px] max-h-[40vh] items-center overflow-hidden rounded-b-lg border-gray-800 border drop-shadow-lg rounded-lg bg-blue-900">
+      <Image 
+        src={ImageSrc} 
+        alt={post.data.title ?? 'Nice cover image'} 
+        width={1200} 
+        height={600} 
+        format="webp"
+        class="w-full h-full p-0 mt-0 rounded-none"
+        loading="lazy"
+      />
+      <div class="absolute bottom-4 left-4 prose-h1:text-white prose-h1:text-3xl prose-h1:font-bold [text-shadow:0px_1px_8px_rgb(0_0_0/_0.7)] prose-h1:no-underline px-4 drop-shadow-[0px_1px_3px_rgb(0_0_0/_1)] ">
+        <h1>{post.data.title}</h1>
+      </div>
+      <div class="absolute top-4 left-4 prose-h1:text-pink-300 prose-h1:text-3xl prose-h1:font-bold prose-h1:no-underline px-4">
+        <h1>{formattedDate}</h1>
+      </div>
+    </a>
+  )}
+
+
+</article>

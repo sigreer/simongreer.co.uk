@@ -1,0 +1,95 @@
+---
+import { Image } from 'astro:assets';
+import { tailwindColorMap } from '@utils/tailwindColorMap';
+interface Props {
+    slug: string;
+    excerpt?: string | null;
+    title: string;
+    vendoricon?: string;
+    tags?: string[];
+    className?: string;
+    vendor_primary_color?: string;
+    vendor_secondary_color?: string;
+    category?: string;
+}
+
+const tailwindColors = await tailwindColorMap;
+
+const { title, vendoricon, excerpt, className = "", slug, vendor_primary_color = "gray-100", vendor_secondary_color = "gray-900", category } = Astro.props;
+
+const allVendorIcons = import.meta.glob<{ default: ImageMetadata }>('../../images/vendor-icons/*', { eager: true });
+const vendorImage = vendoricon ? allVendorIcons[`../../images/vendor-icons/${vendoricon}`]?.default : null;
+
+const primaryColor = tailwindColors[vendor_primary_color as keyof typeof tailwindColors] || tailwindColors['gray-100'];
+const secondaryColor = tailwindColors[vendor_secondary_color as keyof typeof tailwindColors] || tailwindColors['gray-900'];
+
+const isPrimaryColorDark = vendor_primary_color.includes('700') || vendor_primary_color.includes('800') || vendor_primary_color.includes('900') || vendor_primary_color.includes('950') || vendor_primary_color.includes('black');
+
+const panels = [
+  {
+    id: 'image',
+    content: vendorImage && (
+      `<div class="w-full aspect-square overflow-hidden drop-shadow-md drop-shadow-black">
+        <img 
+          src="${vendorImage.src}"
+          alt="${title}"
+          width="200"
+          height="200"
+          class="w-full h-full object-contain p-0"
+        />
+      </div>`
+    )
+  },
+  {
+    id: 'title',
+    content: (
+      `<div class="w-full aspect-square flex items-center justify-center p-2" style="background-color: var(--vendor-primary); color: var(--vendor-secondary);">
+        <h2 class="text-lg font-bold text-center">${title}</h2>
+      </div>`
+    )
+  },
+  {
+    id: 'excerpt',
+    content: (
+      `<div class="w-full h-full p-2">
+        <p class="text-sm line-clamp-4 overflow-hidden ${isPrimaryColorDark ? 'text-white' : ''}">
+          ${excerpt}
+        </p>
+      </div>`
+    )
+  }
+];
+---
+
+<div 
+  class={`group relative w-20 h-20 p-0 m-0${className}`}
+>
+  <div 
+    class="grid grid-cols-2 grid-rows-2 w-20 h-20 border-8 m-0 border-solid rounded-lg border-gray-200 overflow-hidden absolute 
+    transition-all duration-300 ease-in-out group-hover:w-[200px] group-hover:h-[200px] group-hover:z-50
+    left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+    style={`--vendor-primary: ${primaryColor}; --vendor-secondary: ${secondaryColor};
+    border-color: var(--vendor-primary); background-color: var(--vendor-primary);`}
+  >
+    <div class="w-full aspect-square border-solid border-gray-200 col-span-2 row-span-2 group-hover:col-span-1 group-hover:row-span-1 transition-all duration-300" 
+         style="border-color: var(--vendor-primary); border-width: 2px;">
+      <Fragment set:html={panels[0].content} />
+    </div>
+    <div class="w-full aspect-square border-l border-solid border-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
+         style="border-color: var(--vendor-primary); border-width: 2px;">
+      <Fragment set:html={panels[1].content} />
+    </div>
+    <div class="col-span-2 border-t border-solid border-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
+         style="border-color: var(--vendor-primary); border-width: 2px;">
+      <Fragment set:html={panels[2].content} />
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    if (typeof window.applyTagColorsToNewElements === 'function') {
+      window.applyTagColorsToNewElements();
+    }
+  });
+</script>

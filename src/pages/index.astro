@@ -1,13 +1,97 @@
 ---
+import { getCollection } from 'astro:content';
 import HomeLayout from "@layouts/HomeLayout.astro";
-import SuggestoBot from "@components/SuggestoBot.astro";
+// import SuggestoBot from "@components/SuggestoBot.astro";
+import TechCube from "@components/Cubes/TechCube.astro";
+import Card from '@components/Card.astro';
+import Post from '@components/Post.astro';
+const techs = (await getCollection('tech')).filter(({ data }) => {
+  return data.created_date;
+}).sort((a, b) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime());
+const posts = (await getCollection('blog'))
+  .filter(({ data }) => data.status === 'published')
+  .sort((a, b) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime())
+  .slice(0, 4);
 ---
 
+<script>
+  function getSliceSize() {
+    if (window.innerWidth < 640) return 6; // xs
+    if (window.innerWidth < 768) return 8; // sm
+    if (window.innerWidth < 1024) return 10; // md
+    return 12; // lg
+  }
+
+  function updateVisibleItems() {
+    const sliceSize = getSliceSize();
+    document.querySelectorAll('.tech-grid').forEach(grid => {
+      const items = grid.querySelectorAll('.tech-item');
+      items.forEach((item, index) => {
+        (item as HTMLElement).style.display = index < sliceSize ? 'block' : 'none';
+      });
+    });
+  }
+
+  window.addEventListener('resize', updateVisibleItems);
+  updateVisibleItems();
+</script>
 <HomeLayout title="Tech" leftcol="blog" rightcol="tech">
-  <section class="py-2 md:py-8 px-6 md:px-0">
-    <div class="w-full">
-      <h3 class="text-black text-base md:text-2xl font-semibold md:font-bold"><span class="hidden md:inline">Why Are You Here?</span><span class="md:hidden">Let me know what you're looking for and I'll find something suitable.</span></h3>
-      <SuggestoBot />
+  <section class="md:py-8 px-6 md:px-0">
+    <div class="flex flex-col gap-6">
+      <Post post={posts[0]} />
+      <div class="w-full">
+        <div class="flex justify-between items-center">
+          <h2 class="text-xl font-bold mb-2">
+            Recent Blog Posts
+          </h2>
+          <a href="/tech/systems" class="text-sm text-blue-500 hover:text-blue-600">
+            SHOW ALL >
+          </a>
+        </div>
+        <ul class="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 overflow-hidden">
+          {posts.map(post => (
+            <Card 
+              title={post.data.title}
+              slug={post.data.slug}
+              excerpt={post.data.excerpt}
+              tags={post.data.tags}
+              coverimage={post.data.coverimage}
+              created_date={post.data.created_date}
+              dataTags={JSON.stringify(post.data.tags || [])}
+              type="blog"
+            />
+          ))}
+        </ul>
+      </div>
+      <div class="w-full flex flex-col">
+        <div class="flex justify-between items-center">
+            <h2 class="text-xl font-bold mb-2">
+              Some of the Technologies I work with
+            </h2>
+            <a href="/tech/systems" class="text-sm text-blue-500 hover:text-blue-600">
+              SHOW ALL >
+            </a>
+          </div>
+          <div class="tech-grid grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-2">
+            {techs.map((tech) => (
+              <div class="tech-item">
+              <TechCube
+                title={tech.data.vendor_name || tech.data.title}
+                vendoricon={tech.data.vendoricon}
+                excerpt={tech.data.excerpt}
+                tags={tech.data.tags}
+                slug={tech.data.slug}
+                vendor_primary_color={tech.data.vendor_primary_color}
+                vendor_secondary_color={tech.data.vendor_secondary_color}
+                category={tech.data.category}
+              />
+              </div>
+            ))}
+        </div>
+      </div>
+        
+      <!-- <h3 class="text-black text-base md:text-2xl font-semibold md:font-bold"><span class="hidden md:inline">Why Are You Here?</span><span class="md:hidden">Let me know what you're looking for and I'll find something suitable.</span></h3> -->
+      <!-- <SuggestoBot /> -->
     </div>
   </section>
 </HomeLayout>

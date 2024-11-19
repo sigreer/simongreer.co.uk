@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import PageLayout from "@layouts/PageLayout.astro";
 import '@styles/custom.css';
 import ElevatorIcon from "@components/Icons/ElevatorIcon.astro";
-import TechCube from "@components/TechCube.astro";
+import TechCube from "@components/Cubes/TechCube.astro";
 const techs = (await getCollection('tech')).filter(({ data }) => {
   return data.created_date;
 }).sort((a, b) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime());
@@ -12,18 +12,18 @@ const development = techs.filter((tech) => tech.data.category === 'development')
 const cloud = techs.filter((tech) => tech.data.category === 'cloud');
 const business = techs.filter((tech) => tech.data.category === 'business');
 const aiautomation = techs.filter((tech) => tech.data.category === 'ai-automation');
-const xsSlice = 4;
-const smSlice = 3;
+const xsSlice = 3;
+const smSlice = 4;
 const mdSlice = 4;
 const lgSlice = 5;
 ---
 
 <script>
   function getSliceSize() {
-    if (window.innerWidth < 640) return 4; // xs
-    if (window.innerWidth < 768) return 3; // sm
-    if (window.innerWidth < 1024) return 4; // md
-    return 5; // lg
+    if (window.innerWidth < 640) return 6; // xs
+    if (window.innerWidth < 768) return 8; // sm
+    if (window.innerWidth < 1024) return 10; // md
+    return 12; // lg
   }
 
   function updateVisibleItems() {
@@ -75,8 +75,8 @@ const lgSlice = 5;
             Show All →
           </a>
         </div>
-        <div class="tech-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-          {systems.map((tech) => (
+        <div class="tech-grid grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-2">
+          {techs.map((tech) => (
             <div class="tech-item">
             <TechCube
               title={tech.data.vendor_name || tech.data.title}
@@ -97,7 +97,7 @@ const lgSlice = 5;
         <h2 class="text-xl font-bold mb-2">Cloud Services</h2>
         <a href="/tech/cloud" class="text-sm text-blue-500 hover:text-blue-600">Show All →</a>
       </div>
-      <div class="tech-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+      <div class="tech-grid grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-2">
         {cloud.map((tech) => (
         <div class="tech-item">
           <TechCube
@@ -119,7 +119,7 @@ const lgSlice = 5;
         <h2 class="text-xl font-bold mb-2">Business Apps</h2>
         <a href="/tech/business-apps" class="text-sm text-blue-500 hover:text-blue-600">Show All →</a>
       </div>
-      <div class="tech-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+      <div class="tech-grid grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-2">
         {business.map((tech) => (
         <div class="tech-item">
           <TechCube
@@ -141,7 +141,7 @@ const lgSlice = 5;
         <h2 class="text-xl font-bold mb-2">Development</h2>
         <a href="/tech/development" class="text-sm text-blue-500 hover:text-blue-600">Show All →</a>
       </div>
-      <div class="tech-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+      <div class="tech-grid grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-2">
         {development.map((tech) => (
         <div class="tech-item">
           <TechCube
@@ -163,7 +163,7 @@ const lgSlice = 5;
           <h2 class="text-xl font-bold mb-2">AI & Automation</h2>
           <a href="/tech/ai-automation" class="text-sm text-blue-500 hover:text-blue-600">Show All →</a>
         </div>
-        <div class="tech-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+        <div class="tech-grid grid grid-cols-2 sm:grid-cols-5 md:grid-cols-7 lg:grid-cols-9 gap-6">
           {aiautomation.map((tech) => (
           <div class="tech-item">
             <TechCube
