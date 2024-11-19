@@ -1,19 +1,19 @@
 ---
 import { Image } from 'astro:assets';
-import bunIcon from '../images/bunicon.svg';
-import tailWindIcon from '../images/tailwindicon.svg';
-import reactIcon from '../images/reacticon.svg';
-import directusIcon from '../images/directusicon.svg';
-import astroIcon from '../images/astroicon.svg';
-import typescriptIcon from '../images/typescripticon.svg';
+import bunIcon from '../images/vendor-icons/bun-icon-white.svg';
+import tailWindIcon from '../images/vendor-icons/tailwind-icon-white.svg';
+import reactIcon from '../images/vendor-icons/react-icon-white.svg';
+import directusIcon from '../images/vendor-icons/directus-icon-white.svg';
+import astroIcon from '../images/vendor-icons/astrojs-icon-white.svg';
+import typescriptIcon from '../images/vendor-icons/typescript-icon-white.svg';
 interface Props {
     iconFill?: string;
     socialIconSize?: string;
 }
-const { iconFill = 'white', socialIconSize = 'w-10 h-10' } = Astro.props as Props;
+const { iconFill = 'white', socialIconSize = 'h-14 w-14 max-w-14 max-h-14' } = Astro.props as Props;
 ---
-<div class="flex flex-wrap justify-items-start gap-5">
-    <Image src={astroIcon} alt="Astro" class={`${iconFill} ${socialIconSize}`} />
+<div class="flex flex-wrap justify-center gap-3">
+    <Image src={astroIcon} alt="Astro" class={`${iconFill} ${socialIconSize}`}/>
     <Image src={bunIcon} alt="Bun" class={`${iconFill} ${socialIconSize}`} />
     <Image src={tailWindIcon} alt="TailWind" class={`${iconFill} ${socialIconSize}`} />
     <Image src={reactIcon} alt="React" class={`${iconFill} ${socialIconSize}`} />
