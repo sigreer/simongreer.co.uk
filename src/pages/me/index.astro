@@ -1,7 +1,32 @@
 ---
-import PostLayout from '@layouts/PostLayout.astro';
-import About from "@components/About.astro";
+import PageLayout from '@layouts/PageLayout.astro';
+import About from "@components/Me/About.astro";
+import RecentListening from "@components/Me/RecentListening.astro";
+import RecentViewing from "@components/Me/RecentViewing.astro";
+import FunnyFinds from "@components/Me/FunnyFinds.astro";
 ---
-<PostLayout title="Me" slug="me">
-    <About />
-</PostLayout>
+<PageLayout title="Me">
+    <main class="flex flex-col gap-6 py-6">
+        <About />   
+        <div class="flex flex-col gap-6 mt-10">
+            
+    <h1 class="text-2xl font-bold text-gray-900">Recent Culture Consumption...</h1>
+        
+    <section class="mb-16">
+        <h2 class="text-2xl font-semibold mb-6 text-gray-800">Recent Listening</h2>
+        <RecentListening />
+    </section>
+
+    <section class="mb-16">
+        <h2 class="text-2xl font-semibold mb-6 text-gray-800">Recent Viewing</h2>
+        <RecentViewing />
+    </section>
+
+    <section class="mb-16">
+        <h2 class="text-2xl font-semibold mb-6 text-gray-800">Some Things I Found Funny</h2>
+        <FunnyFinds />
+    </section>
+
+</main>
+</div>
+</PageLayout>

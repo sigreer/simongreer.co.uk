@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="349.779px"
+   height="349.779px"
+   viewBox="0 0 349.779 349.779"
+   enable-background="new 0 0 349.779 349.779"
+   xml:space="preserve"
+   sodipodi:docname="mautic-white-icon.svg"
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs2" /><sodipodi:namedview
+   id="namedview2"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   inkscape:zoom="2.5730533"
+   inkscape:cx="174.8895"
+   inkscape:cy="174.8895"
+   inkscape:window-width="3832"
+   inkscape:window-height="1104"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1" />
+<path
+   fill="#FFFFFF"
+   d="M174.89,349.779C78.612,349.779,0,271.462,0,174.89S78.612,0,174.89,0c23.26,0,45.931,4.417,67.129,13.543  c5.889,2.65,8.833,9.422,6.478,15.605c-2.649,5.888-9.421,8.833-15.604,6.477c-18.549-7.655-37.98-11.482-58.002-11.482  c-83.323,0-151.041,67.718-151.041,151.041S91.567,326.225,174.89,326.225c83.323,0,151.041-67.718,151.041-151.041  c0-17.96-2.944-35.332-9.127-51.819c-2.355-6.183,0.883-12.955,7.066-15.31c6.183-2.355,12.954,0.883,15.31,7.066  c7.066,19.138,10.6,39.453,10.6,60.063C349.779,271.167,271.462,349.779,174.89,349.779"
+   id="path1" />
+<g
+   id="g1"
+   style="fill:#ffffff;fill-opacity:1">
+	<polygon
+   fill="#FDB933"
+   points="251.44,156.93 224.354,185.194 239.369,248.496 273.522,248.496  "
+   id="polygon1"
+   style="fill:#ffffff;fill-opacity:1" />
+</g>
+<polygon
+   fill="#FDB933"
+   points="240.253,73.312 249.674,82.734 174.89,161.935 110.999,96.277 74.196,248.496 108.35,248.496   128.665,163.996 174.89,214.343 273.817,106.583 283.239,116.299 292.66,63.007 "
+   id="polygon2"
+   style="fill:#ffffff;fill-opacity:1" />
+</svg>
