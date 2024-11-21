@@ -74,5 +74,5 @@ removeExtraIconSuffix() {
 }
 
 # addIconSuffix
-removeExtraIconSuffix
-#addFrontmatter
+# removeExtraIconSuffix
+addFrontmatter
