@@ -4,16 +4,18 @@ import PageLayout from "@layouts/PageLayout.astro";
 import '@styles/custom.css';
 import ElevatorIcon from "@components/Icons/ElevatorIcon.astro";
 import TechCube from "@components/Cubes/TechCube.astro";
-const techs = (await getCollection('tech')).filter(({ data }) => {
+import type { CollectionEntry } from 'astro:content';
+
+const techs = (await getCollection('tech')).filter(({ data }: { data: { created_date: string } }) => {
   return data.created_date;
-}).sort((a, b) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime());
-const systems = techs.filter((tech) => tech.data.category === 'systems');
-const development = techs.filter((tech) => tech.data.category === 'development');
-const cloud = techs.filter((tech) => tech.data.category === 'cloud');
-const business = techs.filter((tech) => tech.data.category === 'business');
-const aiautomation = techs.filter((tech) => tech.data.category === 'ai-automation');
-const media = techs.filter((tech) => tech.data.category === 'media');
-const data = techs.filter((tech) => tech.data.category === 'data');
+}).sort((a: CollectionEntry<'tech'>, b: CollectionEntry<'tech'>) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime());
+const systems = techs.filter((tech: CollectionEntry<'tech'>) => tech.data.category === 'systems');
+const development = techs.filter((tech: CollectionEntry<'tech'>) => tech.data.category === 'development');
+const cloud = techs.filter((tech: CollectionEntry<'tech'>) => tech.data.category === 'cloud');
+const business = techs.filter((tech: CollectionEntry<'tech'>) => tech.data.category === 'business');
+const aiautomation = techs.filter((tech: CollectionEntry<'tech'>) => tech.data.category === 'ai-automation');
+const media = techs.filter((tech: CollectionEntry<'tech'>) => tech.data.category === 'media');
+const data = techs.filter((tech: CollectionEntry<'tech'>) => tech.data.category === 'data');
 ---
 
 <PageLayout title="Tech Stuff">
@@ -49,7 +51,7 @@ const data = techs.filter((tech) => tech.data.category === 'data');
           </h2>
       </div>
         <div class="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-2">
-          {systems.map((tech) => (
+          {systems.map((tech: CollectionEntry<'tech'>) => (
             <div>
               <TechCube
                 title={tech.data.vendor_name || tech.data.title}
@@ -70,7 +72,7 @@ const data = techs.filter((tech) => tech.data.category === 'data');
         <h2 class="text-xl font-bold mb-2">Cloud Services</h2>
       </div>
       <div class="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-2">
-        {cloud.map((tech) => (
+        {cloud.map((tech: CollectionEntry<'tech'>) => (
         <div>
           <TechCube
             title={tech.data.vendor_name || tech.data.title}
@@ -91,7 +93,7 @@ const data = techs.filter((tech) => tech.data.category === 'data');
         <h2 class="text-xl font-bold mb-2">Business Apps</h2>
       </div>
       <div class="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-2">
-        {business.map((tech) => (
+        {business.map((tech: CollectionEntry<'tech'>) => (
         <div>
           <TechCube
             title={tech.data.vendor_name || tech.data.title}
@@ -112,7 +114,7 @@ const data = techs.filter((tech) => tech.data.category === 'data');
         <h2 class="text-xl font-bold mb-2">Development</h2>
       </div>
       <div class="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-2">
-        {development.map((tech) => (
+        {development.map((tech: CollectionEntry<'tech'>) => (
         <div>
           <TechCube
             title={tech.data.vendor_name || tech.data.title}
@@ -133,7 +135,7 @@ const data = techs.filter((tech) => tech.data.category === 'data');
           <h2 class="text-xl font-bold mb-2">AI & Automation</h2>
         </div>
         <div class="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-2">
-          {aiautomation.map((tech) => (
+          {aiautomation.map((tech: CollectionEntry<'tech'>) => (
           <div>
             <TechCube
               title={tech.data.vendor_name || tech.data.title}
@@ -154,7 +156,7 @@ const data = techs.filter((tech) => tech.data.category === 'data');
             <h2 class="text-xl font-bold mb-2">Data</h2>
           </div>
           <div class="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-2">
-          {data.map((tech) => (
+          {data.map((tech: CollectionEntry<'tech'>) => (
           <div>
             <TechCube
               title={tech.data.vendor_name || tech.data.title}
@@ -175,7 +177,7 @@ const data = techs.filter((tech) => tech.data.category === 'data');
           <h2 class="text-xl font-bold mb-2">Media & Broadcasting</h2>
         </div>
         <div class="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-2">
-        {media.map((tech) => (
+        {media.map((tech: CollectionEntry<'tech'>) => (
         <div>
           <TechCube
             title={tech.data.vendor_name || tech.data.title}

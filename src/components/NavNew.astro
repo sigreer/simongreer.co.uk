@@ -1,10 +1,8 @@
 ---
 import Tech from '@components/Navbar/Tech.astro';
 import BlogPosts from '@components/Navbar/BlogPosts.astro';
-import Projects from '@components/Navbar/Projects.astro';
 import AboutMe from '@components/Navbar/AboutMe.astro';
 import LogoIcon from '@components/Navbar/LogoIcon.astro';
-import Currently from '@components/Navbar/Currently.astro';
 const attachedLayout = "my-0 md:rounded-t-none md:rounded-b-lg md:mb-0"
 const floatingLayout = "mt-2 md:space-y-0 md:my-0 md:rounded-lg"
 ---
@@ -27,9 +25,8 @@ const floatingLayout = "mt-2 md:space-y-0 md:my-0 md:rounded-lg"
 
       <div id="navbar-default" 
           class="items-center flex-grow gap-x-1 justify-end hidden md:flex w-full p-0 m-0 mt-16 md:mt-0 bg-white absolute top-0 h-[100vh] min-h-[100vh] md:min-h-full md:top-0 md:relative md:visible md:w-auto md:h-full">
-        <Tech/>
         <BlogPosts/>
-        <Projects/>
+        <Tech/>
         <AboutMe/>
       </div>
       
