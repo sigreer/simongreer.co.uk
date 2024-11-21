@@ -6,9 +6,9 @@ import HomeLayout from "@layouts/HomeLayout.astro";
 import TechCube from "@components/Cubes/TechCube.astro";
 import Card from '@components/Card.astro';
 import Post from '@components/Post.astro';
-const techs = (await getCollection('tech')).filter(({ data }: { data: { created_date: string } }) => {
-  return data.created_date;
-}).sort((a: CollectionEntry<'tech'>, b: CollectionEntry<'tech'>) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime());
+const techs = (await getCollection('tech'))
+  .filter((tech: CollectionEntry<'tech'>) => Boolean(tech.data.created_date))
+  .sort((a: CollectionEntry<'tech'>, b: CollectionEntry<'tech'>) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime());
 const posts = (await getCollection('blog'))
   .filter(({ data }: { data: { status: string } }) => data.status === 'published')
   .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime())
