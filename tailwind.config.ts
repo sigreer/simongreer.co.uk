@@ -1,26 +1,9 @@
 import type { Config } from 'tailwindcss';
-import flowbite from 'flowbite/plugin';
-import flowbiteTypography from 'flowbite-typography';
 import typography from '@tailwindcss/typography';
 
 const config: Config = {
 	content: [
 		'./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue,scss}',
-		'./node_modules/flowbite/**/*.js',
-	],
-	safelist: [
-		'blue1', 'blue2', 'blue3',
-		'purple1', 'purple2', 'purple3',
-		'green1', 'green2', 'green3',
-		'orange1', 'orange2', 'orange3',
-		'red1', 'red2', 'red3',
-		'yellow1', 'yellow2', 'yellow3',
-		'cyan1', 'cyan2', 'cyan3',
-		'lime1', 'lime2', 'lime3',
-		'pink1', 'pink2', 'pink3',
-		'black1', 'black2', 'black3',
-		'teal1', 'teal2', 'teal3',
-		'gray1', 'gray2', 'gray3',
 	],
 	theme: {
 		extend: {
@@ -48,6 +31,15 @@ const config: Config = {
 				},
 				'navbar-blue': 'rgba(32, 85, 149, 1)',
 			},
+			keyframes: {
+				'arrow-fade': {
+					'0%, 100%': { transform: 'translateX(0)', opacity: '1' },
+					'50%': { transform: 'translateX(8px)', opacity: '0.5' },
+				}
+			},
+			animation: {
+				'arrow-fade': 'arrow-fade 1.5s ease-in-out infinite',
+			}
 		},
 		screens: {
 			sm: '640px',
@@ -95,9 +87,7 @@ const config: Config = {
 		},
 	},
 	plugins: [
-		flowbite,
-		flowbiteTypography,
-		typography,
+		typography
 	],
 };
 

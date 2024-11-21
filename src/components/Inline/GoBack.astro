@@ -1,0 +1,13 @@
+---
+interface Props {
+  link: string;
+}
+
+const { link } = Astro.props;
+---
+
+<a href={link} class="text-sm font-bold text-blue-500 hover:text-pink-400 transition-colors duration-300 group flex items-center pr-2 uppercase">
+    <span class="inline-block mr-1 group-hover:animate-arrow-fade">&lt;</span>
+    <span>Go Back</span>
+
+</a>

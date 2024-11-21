@@ -1,37 +1,17 @@
 ---
 import { getEntry, render } from 'astro:content';
-import Prose from '@components/Prose.astro';
 import { Image } from 'astro:assets';
 const { post } = Astro.props;
 const entry = await getEntry('blog', post.id);
-
 import type { ImageMetadata } from 'astro';
 const allImages = import.meta.glob<{ default: ImageMetadata }>('../images/covers/*', { eager: true });
 const ImageSrc = entry?.data.coverimage ? allImages[`../images/covers/${entry.data.coverimage}`]?.default : null;
-console.log('ImageSrc:', ImageSrc, '\nentry.data.coverimage:', entry?.data.coverimage, '\nallImages:', allImages);
-
-const { Content } = await render(entry);
-
 const formattedDate = new Date(post.data.created_date).toLocaleDateString('en-GB', {
   day: '2-digit',
   month: '2-digit',
   year: '2-digit'
 });
 ---
-<article
-  class="prose dark:prose-invert
-  prose-h1:font-bold
-  prose-h1:text-xl prose-h1:text-gray-800
-  prose-h2:mt-2 prose-h2:mb-2 prose-h2:text-xl prose-h2:text-gray-800
-prose-h3:text-gray-700 prose-h3:text-lg
-prose-a:text-blue-600 prose-p:text-justify
-  prose-headings:underline
-  prose-li:leading-4
-  prose-p:leading-6
-  prose-p:text-gray-700
-  prose-strong:text-gray-700
-  prose-figure:my-4
-  ">
   {ImageSrc && (
     <a href={`/blog/${post.id}`} class="block relative min-w-[1024px] max-h-[40vh] items-center overflow-hidden rounded-b-lg border-gray-800 border drop-shadow-lg rounded-lg bg-blue-900">
       <Image 
@@ -51,6 +31,3 @@ prose-a:text-blue-600 prose-p:text-justify
       </div>
     </a>
   )}
-
-
-</article>

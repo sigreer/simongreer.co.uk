@@ -19,7 +19,6 @@ const prettyCodeOptions = {
       : (node.properties.className = ["highlighted"]);
   },
   onVisitHighlightedChars(node) {
-    console.log(node);
     node?.properties?.className
       ? node.properties.className.push("highlighted-chars")
       : (node.properties.className = ["highlighted-chars"]);
