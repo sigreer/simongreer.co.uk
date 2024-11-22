@@ -1,8 +1,6 @@
 import { defineConfig, envField } from 'astro/config'
 import react from '@astrojs/react';
-import preact from '@astrojs/preact';
 import tailwind from '@astrojs/tailwind';
-// import cloudflare from '@astrojs/cloudflare';
 import mdx from '@astrojs/mdx';
 import theme from './src/syntaxtheme.json';
 import robotsTxt from 'astro-robots-txt';
@@ -10,6 +8,7 @@ import tailwindcssNesting from 'tailwindcss/nesting';
 import { transformerCopyButton } from '@rehype-pretty/transformers';
 import rehypePrettyCode from 'rehype-pretty-code';
 import dotenv from 'dotenv';
+import autoprefixer from 'autoprefixer';
 import remarkGfm from 'remark-gfm';
 
 const prettyCodeOptions = {
@@ -41,7 +40,7 @@ export default defineConfig({
   vite: {
     css: {
       postcss: {
-        plugins: [tailwindcssNesting]
+        plugins: [tailwind, autoprefixer, tailwindcssNesting]
       }
     },
     resolve: {
@@ -63,14 +62,24 @@ export default defineConfig({
   integrations: [
     tailwind({ applyBaseStyles: false }),
     robotsTxt(),
-    mdx(),
-    react(),
-    preact()],
+    mdx({
+      jsx: true,
+      jsxImportSource: 'react',
+    }),
+    react()],
   markdown: {
     syntaxHighlight: false,
     rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
     shikiConfig: { theme },
     remarkPlugins: [remarkGfm],
-    },
+  },
   site: 'https://simongreer.co.uk',
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+      tailwind: {},
+      tailwindcssNesting: {}
+    },
+  }
 })

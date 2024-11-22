@@ -6,9 +6,11 @@ import { Image } from "astro:assets";
 import "@styles/codeblock.css";
 import type { ImageMetadata } from 'astro';
 import Prose from "../../components/Prose.astro";
+import type { CollectionEntry } from 'astro:content';
+
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map(post => {
+  return posts.map((post: CollectionEntry<'blog'>) => {
     return {
       params: { id: post.data.slug },
       props: { 

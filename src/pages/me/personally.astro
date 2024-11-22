@@ -5,13 +5,16 @@ import RecentViewing from "@components/Me/RecentViewing.astro";
 import { Image } from 'astro:assets';
 import SimonBackwardsHead from '@images/simon-backwards-head.png';
 import ChatIcon from '@components/Icons/ChatIcon.astro';
+import ScreenshotCarousel from '@/components/Media/_ScreenshotCarousel.jsx';
 ---
 <PageLayout title="Me">
     <main class="flex flex-col gap-6 py-6">
+        <ScreenshotCarousel client:load />
         <div class="flex-col flex">
     <div class="flex flex-row">
         <div class="flex flex-col p-0 mx-0 gap-y-3 spacing md:min-w-56">
             <div class="flex max-h-56 max-w-56">
+               
                 <Image 
                     src={SimonBackwardsHead} 
                     alt="My Backwards Head"

@@ -6,10 +6,11 @@
     "moduleResolution": "Bundler",
     "module": "ESNext",
     "jsx": "react-jsx",
-    "jsxImportSource": "preact",
+    "jsxImportSource": "react",
     "strictNullChecks": true,
     "baseUrl": ".",
     "paths": {
+      "@/*": ["./src/*"],
       "@components/*": ["src/components/*"],
       "@icons/*": ["src/components/Icons/*"],
       "@content/*": ["src/content/*"],
@@ -29,6 +30,6 @@
     "allowJs": true,
     "outDir": "./public/js",
   },
-  "include": [".astro/types.d.ts", "src/**/*.ts*", "src/**/*.mdx", "src/**/*.astro", "src/components/**/*", "@components/**/*", "@icons/**/*"],
+  "include": [".astro/types.d.ts", "src/**/*.ts*", "src/**/*.mdx", "src/**/*.astro", "src/components/**/*", "@components/**/*", "@icons/**/*", "**/*"],
   "exclude": ["dist"]
 }

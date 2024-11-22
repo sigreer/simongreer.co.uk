@@ -1,4 +1,5 @@
 ---
+import '@/styles/globals.css';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import HomeLayout from "@layouts/HomeLayout.astro";
@@ -15,7 +16,6 @@ const posts = (await getCollection('blog'))
   .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime())
   .slice(0, 5);
 ---
-
 <script>
   function getSliceSize() {
     if (window.innerWidth < 640) return 6; // xs

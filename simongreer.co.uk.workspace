@@ -6,5 +6,8 @@
 	],
 	"settings": {
 		"astro.trace.server": "off"
-	}
+	}.
+	"files.associations": {
+  "*.css": "tailwindcss"
+}
 }
