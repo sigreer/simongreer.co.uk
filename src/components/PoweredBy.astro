@@ -12,11 +12,15 @@ interface Props {
 }
 const { iconFill = 'white', socialIconSize = 'h-14 w-14 max-w-14 max-h-14' } = Astro.props as Props;
 ---
-<div class="flex flex-wrap justify-center gap-3">
-    <Image src={astroIcon} alt="Astro" class={`${iconFill} ${socialIconSize}`}/>
-    <Image src={bunIcon} alt="Bun" class={`${iconFill} ${socialIconSize}`} />
-    <Image src={tailWindIcon} alt="TailWind" class={`${iconFill} ${socialIconSize}`} />
-    <Image src={reactIcon} alt="React" class={`${iconFill} ${socialIconSize}`} />
-    <Image src={directusIcon} alt="Directus" class={`${iconFill} ${socialIconSize}`} />
-    <Image src={typescriptIcon} alt="TypeScript" class={`${iconFill} ${socialIconSize}`} />
-</div>
+
+<div class="hidden md:p-4 col-span-2 md:flex md:flex-col md:items-center">
+    <div class="w-full h-6 bg-transparent rounded-sm text-center text-xs p-1 mb-1 text-white font-bold">POWERED BY</div>
+    <div class="flex flex-wrap justify-center gap-3">
+        <Image src={astroIcon} alt="Astro" class={`${iconFill} ${socialIconSize}`}/>
+        <Image src={bunIcon} alt="Bun" class={`${iconFill} ${socialIconSize}`} />
+        <Image src={tailWindIcon} alt="TailWind" class={`${iconFill} ${socialIconSize}`} />
+        <Image src={reactIcon} alt="React" class={`${iconFill} ${socialIconSize}`} />
+        <Image src={directusIcon} alt="Directus" class={`${iconFill} ${socialIconSize}`} />
+        <Image src={typescriptIcon} alt="TypeScript" class={`${iconFill} ${socialIconSize}`} />
+    </div>
+    </div>
