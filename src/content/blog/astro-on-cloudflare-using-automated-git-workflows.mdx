@@ -1,5 +1,5 @@
 ---
-title: "Astro on Cloudflare using automated Git workflows"
+title: "Astro on Cloudflare Using Automated Git Workflows"
 slug: astro-on-cloudflare-using-automated-git-workflows
 excerpt: "Automate your Astro site deployment to Cloudflare Pages using Git workflow automation"
 created_date: 2024-11-14
@@ -19,12 +19,36 @@ Cloudflare Pages is a powerful platform for hosting static websites and serverle
 
 ## Steps
 
-### 1. Create a new Cloudflare Pages project
+1. Create Pages project
+2. Add Cloudflare Astro plugin
+3. Configure Git repository
+4. Set up build and deployment settings
+5. Push Astro code to repository
 
-### 2. Add Cloudflare Astro plugin
+### Add Cloudflare Astro plugin
 
-### 3. Configure Git repository
+This step is optional if you're generating static content only. If you're using server-side rendering, you'll need to add the Cloudflare plugin.
 
-### 4. Set up build and deployment settings
+```bash caption="Install Cloudflare Astro plugin"
+npm install @astrojs/cloudflare
+```
 
-### 5. Push your Astro code to the repository
+### Configure Git repository
+
+There's very little involved in this step as Cloudflare now authenticates with GitHub and pulls the repository info over after you've granted permission. Simply select the repository you want to deploy from and you're good to go.
+
+### Set up build and deployment settings
+
+You need to select the package manager you use locally to ensure the package lock file is generated correctly. I use Bun, so for me it was `bun run build` as the build command using the main branch of the repository. The steps are pretty much identical for the other package managers (npm, pnpm, yarn, etc.).
+
+Select a push action as the trigger for the workflow so the site is redeployed each time a change is made.
+
+### Push Astro code to repository
+
+```bash caption="Push Astro code to repository"
+git add .
+git commit -m "Deploy Astro site to Cloudflare Pages"
+git push
+```
+
+You can watch the build process in the Cloudflare dashboard. You may find it fails to build even though it completes locally. I found I had to remove some files that were prefixed with an underscore (ignored by Astro) as it was trying to build them. After that you should able to access your site using the URL entered in the Cloudflare dashboard when you created the project.

@@ -18,6 +18,7 @@
     "@astrojs/mdx": "^4.0.0-beta.3",
     "@astrojs/preact": "^3.5.3",
     "@astrojs/react": "^3.6.2",
+    "@astrojs/rss": "^4.0.9",
     "@astrojs/tailwind": "^5.1.2",
     "@astrojs/ts-plugin": "^1.10.4",
     "@designbycode/tailwindcss-text-stroke": "^1.2.1",

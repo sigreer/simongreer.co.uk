@@ -14,7 +14,10 @@ const techs = await getCollection('tech');
                   <h2 class="mb-6 text-md font-semibold uppercase text-white">Recent Blog Posts</h2>
                   <ul class="text-gray-200 text-sm">
                     {
-      posts.slice(0, 4).map((post: import('astro:content').CollectionEntry<'blog'>) => (
+      posts
+        .sort((a, b) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime())
+        .slice(0, 4)
+        .map((post: import('astro:content').CollectionEntry<'blog'>) => (
                       <li class="mb-4">
                           <a href={`/blog/${post.data.slug}`} class="hover:underline">{post.data.title}</a>
                       </li>
@@ -27,16 +30,13 @@ const techs = await getCollection('tech');
               <h2 class="mb-6 text-md font-semibold uppercase text-white">Links</h2>
               <ul class="text-gray-200 text-sm">
                   <li class="mb-4">
-                      <a href="https://flowbite.com" class="hover:underline">Couple of words</a>
+                      <a href="/me/get-in-touch" class="hover:underline">Get In Touch</a>
                   </li>
                   <li class="mb-4">
-                      <a href="https://tailwindcss.com/" class="hover:underline">Short link</a>
+                      <a href="/tech/projects" class="hover:underline">Recent Projects</a>
                   </li>
                   <li class="mb-4">
-                    <a href="https://flowbite.com" class="hover:underline">Some text</a>
-                </li>
-                <li class="mb-0">
-                    <a href="https://tailwindcss.com/" class="hover:underline">A link</a>
+                    <a href="https://github.com/sigreer/simongreer.co.uk" class="hover:underline">GitHub for this site</a>
                 </li>
                 </ul>
             </div>
