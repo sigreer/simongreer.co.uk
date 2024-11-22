@@ -21,3 +21,11 @@
 .toc::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.toc-item {
+  @apply text-gray-900 uppercase;
+}
+
+.toc-item:hover {
+  @apply text-gray-900;
+}

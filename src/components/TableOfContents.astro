@@ -20,10 +20,10 @@ const filteredToc = toc.filter((heading: Heading) => heading.depth >= 2 && headi
             class={`
               block transition-colors duration-200 
               ${heading.depth === 3 
-                ? 'ml-4 text-sm normal-case' 
-                : 'font-medium text-base normal-case'
+                ? 'ml-4 text-xs' 
+                : 'font-medium !uppercase text-xs'
               } 
-              text-gray-600 hover:text-purple-600 hover:underline leading-tight
+              text-gray-600 hover:text-purple-600 hover:underline leading-tight 
             `}
             data-toc-link
           >

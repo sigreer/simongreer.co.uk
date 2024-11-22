@@ -15,22 +15,6 @@ const config: Config = {
 				'2xl': '1536px',
 				'3xl': '1920px',
 			},
-			colors: {
-				primary: {
-					50: '#f0fdf4',
-					100: '#dcfce7',
-					200: '#bbf7d0',
-					300: '#86efac',
-					400: '#4ade80',
-					500: '#22c55e',
-					600: '#16a34a',
-					700: '#15803d',
-					800: '#166534',
-					900: '#14532d',
-					950: '#052e16',
-				},
-				'navbar-blue': 'rgba(32, 85, 149, 1)',
-			},
 			keyframes: {
 				'arrow-fade': {
 					'0%, 100%': { transform: 'translateX(0)', opacity: '1' },

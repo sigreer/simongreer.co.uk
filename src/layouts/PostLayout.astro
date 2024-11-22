@@ -28,15 +28,12 @@ const { title, slug, toc, horizontal_logo, vendor_name, showRelatedPosts = false
               <HorizontalLogo horizontal_logo={horizontal_logo} vendor_name={vendor_name} />
             </div>
           )}
-          <div class="w-full sticky top-8">
+          <div class="w-full sticky top-8 max-h-[calc(100vh-4rem)] overflow-y-auto">
             <TableOfContents toc={toc} />
           </div>
         </div>
       )}
       <div class="flex flex-col w-full md:w-full">
-        <div class="w-full bg-purple-700 rounded-t-lg">
-          <h3 class="w-fit text-xl font-bold relative px-4 py-2 text-white">{title}</h3>
-        </div>
 
 
           <slot />

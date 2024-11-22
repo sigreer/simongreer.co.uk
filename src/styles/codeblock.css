@@ -269,3 +269,7 @@ pre:has(+ [data-caption]) {
 [data-caption]:has(~ pre) {
   @apply !rounded-t-none;
 }
+
+code:not(pre code) {
+  @apply bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-sm font-['ui-monospace','SFMono-Regular','Menlo','Monaco','Consolas','Liberation_Mono','Courier_New',monospace];
+}

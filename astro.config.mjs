@@ -10,6 +10,7 @@ import tailwindcssNesting from 'tailwindcss/nesting';
 import { transformerCopyButton } from '@rehype-pretty/transformers';
 import rehypePrettyCode from 'rehype-pretty-code';
 import dotenv from 'dotenv';
+import remarkGfm from 'remark-gfm';
 
 const prettyCodeOptions = {
   theme,
@@ -69,6 +70,7 @@ export default defineConfig({
     syntaxHighlight: false,
     rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
     shikiConfig: { theme },
+    remarkPlugins: [remarkGfm],
     },
   site: 'https://simongreer.co.uk',
 })
