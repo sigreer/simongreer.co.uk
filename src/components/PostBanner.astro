@@ -13,7 +13,7 @@ const formattedDate = new Date(post.data.created_date).toLocaleDateString('en-GB
 });
 ---
   {ImageSrc && (
-    <a href={`/blog/${post.id}`} class="block relative min-w-[1024px] max-h-[400px] items-center overflow-hidden rounded-b-lg border-gray-800 border drop-shadow-lg rounded-lg bg-gradient-to-b from-blue-900 from-25% via-blue-950 via-50% to-85% to-blue-900 before:absolute before:inset-0 before:bg-gradient-to-b before:from-blue-900 before:via-blue-950 before:to-blue-900 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 group">
+    <a href={`/blog/${post.id}`} class="block relative mt-4 md:mt-0 lg:min-w-[1024px] max-h-[400px] items-center overflow-hidden rounded-b-lg border-gray-800 border drop-shadow-lg rounded-lg bg-gradient-to-b from-blue-900 from-25% via-blue-950 via-50% to-85% to-blue-900 before:absolute before:inset-0 before:bg-gradient-to-b before:from-blue-900 before:via-blue-950 before:to-blue-900 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 group">
       <Image 
         src={ImageSrc} 
         alt={post.data.title ?? 'Nice cover image'} 
@@ -23,7 +23,7 @@ const formattedDate = new Date(post.data.created_date).toLocaleDateString('en-GB
         class="w-full h-full max-h-[400px] p-0 mt-0 rounded-none relative z-10 object-cover"
         loading="lazy"
       />
-      <div class="absolute bottom-4 left-4 prose-h1:text-white prose-h1:!text-3xl prose-h1:font-bold [text-shadow:0px_1px_8px_rgb(0_0_0/_0.7)] prose-h1:no-underline px-4 drop-shadow-[0px_1px_3px_rgb(0_0_0/_0.8)] z-10">
+      <div class="absolute bottom-4 left-4 prose-h1:text-white prose-h1:text-xl prose-h1:sm:text-2xl md:prose-h1:!text-3xl prose-h1:font-bold [text-shadow:0px_1px_8px_rgb(0_0_0/_0.7)] prose-h1:no-underline px-4 drop-shadow-[0px_1px_3px_rgb(0_0_0/_0.8)] z-10">
         <h1>{post.data.title}</h1>
       </div>
       <div class="absolute top-4 left-4 prose-h3:text-pink-400 prose-h3:text-2xl prose-h3:font-bold prose-h3:no-underline px-4 z-10">
