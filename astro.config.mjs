@@ -81,5 +81,8 @@ export default defineConfig({
       tailwind: {},
       tailwindcssNesting: {}
     },
+  },
+  experimental: {
+    svg: true,
   }
 })

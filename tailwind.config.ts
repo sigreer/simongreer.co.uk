@@ -17,6 +17,10 @@ const config: Config = {
     			'3xl': '1920px'
     		},
     		keyframes: {
+				'arrow-fade': {
+					'0%, 100%': { transform: 'translateX(0)', opacity: '1' },
+					'50%': { transform: 'translateX(8px)', opacity: '0.5' },
+				},
     			fadeIn: {
     				'0%': { opacity: '0' },
     				'100%': { opacity: '1' },
@@ -29,6 +33,7 @@ const config: Config = {
     		animation: {
     			fadeIn: 'fadeIn 500ms ease-in-out forwards',
     			fadeOut: 'fadeOut 500ms ease-in-out forwards',
+				'arrow-fade': 'arrow-fade 1.5s ease-in-out infinite',
     		},
     		borderRadius: {
     			lg: 'var(--radius)',
