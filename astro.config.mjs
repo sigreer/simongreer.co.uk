@@ -10,6 +10,7 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import dotenv from 'dotenv';
 import autoprefixer from 'autoprefixer';
 import remarkGfm from 'remark-gfm';
+import path from 'path';
 
 const prettyCodeOptions = {
   theme,
@@ -49,7 +50,7 @@ export default defineConfig({
         '@components': '/src/components',
         '@icons': '/src/components/Icons',
         '@content': '/src/content',
-        '@images': '/src/images',
+        '@images': path.resolve('./src/images'),
         '@styles': '/src/styles',
         '@assets': '/src/assets',
         '@layouts': '/src/layouts',

@@ -3,17 +3,17 @@ import { getCollection } from 'astro:content';
 import PageLayout from "@layouts/PageLayout.astro";
 import '@styles/custom.css';
 import ElevatorIcon from "@components/Icons/ElevatorIcon.astro";
-import TechCube from "@components/Cubes/TechCube.astro";
-const techs = (await getCollection('tech')).filter(({ data }) => {
+import TechCube from "@components/ContentBoxes/TechCube.astro";
+const techs = (await getCollection('tech')).filter(({ data }: { data: { created_date: Date } }) => {
   return data.created_date;
-}).sort((a, b) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime());
-const systems = techs.filter((tech) => tech.data.category === 'systems');
-const development = techs.filter((tech) => tech.data.category === 'development');
-const cloud = techs.filter((tech) => tech.data.category === 'cloud');
-const business = techs.filter((tech) => tech.data.category === 'business');
-const aiautomation = techs.filter((tech) => tech.data.category === 'ai-automation');
-const media = techs.filter((tech) => tech.data.category === 'media');
-const data = techs.filter((tech) => tech.data.category === 'data');
+}).sort((a: { data: { created_date: Date } }, b: { data: { created_date: Date } }) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime());
+const systems = techs.filter((tech: { data: { category: string } }) => tech.data.category === 'systems');
+const development = techs.filter((tech: { data: { category: string } }) => tech.data.category === 'development');
+const cloud = techs.filter((tech: { data: { category: string } }) => tech.data.category === 'cloud');
+const business = techs.filter((tech: { data: { category: string } }) => tech.data.category === 'business');
+const aiautomation = techs.filter((tech: { data: { category: string } }) => tech.data.category === 'ai-automation');
+const media = techs.filter((tech: { data: { category: string } }) => tech.data.category === 'media');
+const data = techs.filter((tech: { data: { category: string } }) => tech.data.category === 'data');
 const xsSlice = 3;
 const smSlice = 4;
 const mdSlice = 4;

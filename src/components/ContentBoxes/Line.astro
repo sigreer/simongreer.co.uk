@@ -10,8 +10,8 @@ interface Props {
 }
 
 const { title, slug, tags, coverimage, type = 'blog' } = Astro.props;
-const allCoverImages = import.meta.glob<{ default: ImageMetadata }>('../images/covers/*', { eager: true });
-const coverImage = coverimage ? allCoverImages[`../images/covers/${coverimage}`]?.default : null;
+const allCoverImages = import.meta.glob<{ default: ImageMetadata }>('../../images/covers/*', { eager: true });
+const coverImage = coverimage ? allCoverImages[`../../images/covers/${coverimage}`]?.default : null;
 
 // Determine the base path based on the content type
 const basePath = type === 'tech' ? '/tech' : '/blog';

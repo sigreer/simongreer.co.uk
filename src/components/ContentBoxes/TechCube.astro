@@ -11,8 +11,11 @@ interface Props {
     vendor_primary_color?: string;
     vendor_secondary_color?: string;
     category?: string;
+    iconWidth?: number;
+    iconHeight?: number;
 }
 
+const { iconWidth = 200, iconHeight = 200 } = Astro.props;
 const tailwindColors = await tailwindColorMap;
 
 const { title, vendoricon, excerpt, className = "", slug, vendor_primary_color = "gray-100", vendor_secondary_color = "gray-900", category } = Astro.props;
@@ -31,10 +34,10 @@ const panels = [
     content: vendorImage && (
       `<div class="w-full aspect-square overflow-hidden drop-shadow-md drop-shadow-black">
         <img 
-          src="${vendorImage.src}"
-          alt="${title}"
-          width="200"
-          height="200"
+          src=${vendorImage.src}
+          alt=${title}
+          width=${iconWidth}
+          height=${iconHeight}
           class="w-full h-full object-contain p-0"
         />
       </div>`
@@ -59,6 +62,7 @@ const panels = [
     )
   }
 ];
+console.log(panels[0].content);
 ---
 
 <div 

@@ -15,9 +15,9 @@ const techs = await getCollection('tech');
                   <ul class="text-gray-200 text-sm">
                     {
       posts
-        .sort((a, b) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime())
+        .sort((a: { data: { created_date: Date } }, b: { data: { created_date: Date } }) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime())
         .slice(0, 4)
-        .map((post: import('astro:content').CollectionEntry<'blog'>) => (
+        .map((post: { data: { title: string, slug: string } }) => (
                       <li class="mb-4">
                           <a href={`/blog/${post.data.slug}`} class="hover:underline">{post.data.title}</a>
                       </li>

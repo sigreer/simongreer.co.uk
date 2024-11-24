@@ -3,12 +3,12 @@ import { getCollection } from 'astro:content';
 import PageLayout from "@layouts/PageLayout.astro";
 import '@styles/custom.css';
 import ElevatorIcon from "@components/Icons/ElevatorIcon.astro";
-import TechCube from "@components/Cubes/TechCube.astro";
+import TechCube from "@components/ContentBoxes/TechCube.astro";
 import type { CollectionEntry } from 'astro:content';
 
-const techs = (await getCollection('tech')).filter(({ data }: { data: { created_date: string } }) => {
-  return data.created_date;
-}).sort((a: CollectionEntry<'tech'>, b: CollectionEntry<'tech'>) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime());
+const techs = (await getCollection('tech')).filter((tech: { data: { created_date: Date } }) => tech.data.created_date).sort((a: { data: { created_date: Date } }, b: { data: { created_date: Date } }) => 
+  new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime()
+);
 const systems = techs.filter((tech: CollectionEntry<'tech'>) => tech.data.category === 'systems');
 const development = techs.filter((tech: CollectionEntry<'tech'>) => tech.data.category === 'development');
 const cloud = techs.filter((tech: CollectionEntry<'tech'>) => tech.data.category === 'cloud');

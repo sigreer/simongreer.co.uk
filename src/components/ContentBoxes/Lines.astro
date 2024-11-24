@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import Line from './Line.astro';
-
 interface Props {
   currentSlug?: string;
   limit?: number;
@@ -11,9 +10,9 @@ interface Props {
 }
 
 const { currentSlug, limit = 8, type, slice = false, startIndex = 0 } = Astro.props;
-const items = await getCollection(type);
+const items = await getCollection('blog');
 const filteredItems = currentSlug 
-  ? items.filter(item => item.data.slug !== currentSlug)
+  ? items.filter((item: { data: { slug: string } }) => item.data.slug !== currentSlug)
   : items;
 
 // If slice is true, take items from startIndex up to limit
@@ -24,7 +23,7 @@ const displayItems = slice
 ---
 
 <ul class="flex flex-col py-0">
-  {displayItems.map(item => (
+  {displayItems.map((item) => (
     <Line 
       title={item.data.title}
       slug={item.data.slug}

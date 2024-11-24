@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import PageLayout from "@layouts/PageLayout.astro";
 import '@styles/custom.css';
 import ElevatorIcon from "@components/Icons/ElevatorIcon.astro";
-import TechCube from "@components/TechCube.astro";
+import TechCube from "@components/ContentBoxes/TechCube.astro";
 const techs = (await getCollection('tech')).filter(({ data }) => {
   return data.created_date;
 }).sort((a, b) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime());

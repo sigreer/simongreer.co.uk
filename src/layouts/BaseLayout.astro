@@ -1,11 +1,11 @@
 ---
-import Footer from "@/components/Footer.astro";
-import PreHeader from "@/components/Header/PreHeader.astro";
+import Footer from "@components/Footer/Footer.astro";
+import PreHeader from "@components/Header/PreHeader.astro";
 import { ClientRouter } from 'astro:transitions';
 import '@styles/custom.css';
 import '@styles/globals.css';
 import '@fontsource/poppins';
-import NavNew from "@/components/Header/Navbar/NavNew.astro";
+import NavBar from "@components/Header/Navbar/NavBar.astro";
 interface Props {
   title?: string;
   description?: string;
@@ -34,7 +34,7 @@ const global = { title: 'SimonGreer.co.uk' };
   </head>
   <body class="bg-gray-100 font-poppins min-h-screen flex flex-col max-w-lg mx-auto md:py-6 space-y-0">
     <div class="hidden md:visible md:block md:w-full"><PreHeader /></div>
-    <NavNew />
+    <NavBar />
     <slot />
     <Footer />
 

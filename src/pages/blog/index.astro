@@ -2,15 +2,15 @@
 import PageLayout from "@layouts/PageLayout.astro";
 import { getCollection } from 'astro:content';
 import '@styles/custom.css';
-import Card from '@components/Card.astro';
-import Filter from '@components/Filter.astro';
+import Card from '@components/ContentBoxes/Card.astro';
+import Filter from '@components/Filter/Filter.astro';
 import TagFilter from '@components/Filter/Tag.astro';
 
 const allPosts = await getCollection('blog');
-const posts = (await getCollection('blog', ({ data }) => {
+const posts = (await getCollection('blog', ({ data }: { data: { status: string, created_date: Date } }) => {
   return data.status === 'published';
 }))
-.sort((a, b) => 
+.sort((a: { data: { created_date: Date } }, b: { data: { created_date: Date } }) => 
   new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime()
 );
 ---
@@ -23,7 +23,7 @@ const posts = (await getCollection('blog', ({ data }) => {
     <div class="w-full">
 
       <ul class="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {posts.map(post => (
+        {posts.map((post) => (
           <Card 
             title={post.data.title}
             slug={post.data.slug}
