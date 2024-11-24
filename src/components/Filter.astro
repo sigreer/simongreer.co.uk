@@ -5,41 +5,6 @@ interface Props {
 
 const { type = 'tag' } = Astro.props;
 ---
-<h3 class="text-sm font-normal uppercase">Filter:</h3>
 <div class="flex flex-wrap gap-1 filter-container mb-8" id="filter-container">
   {type === 'tag' && <slot />}
 </div>
-
-<script>
-  function handleTagFilter() {
-    const filterContainer = document.getElementById('filter-container');
-    if (!filterContainer) return;
-    const posts = document.querySelectorAll('[data-tags]');
-    
-    filterContainer.addEventListener('click', (e) => {
-      const target = e.target as HTMLElement;
-      const selectedTag = target.getAttribute('data-tag');
-      
-      if (!selectedTag) return;
-      
-      if (selectedTag === 'all') {
-        posts.forEach(post => {
-          post.classList.remove('hidden');
-        });
-        return;
-      }
-      
-      posts.forEach(post => {
-        const tags = JSON.parse(post.getAttribute('data-tags') || '[]');
-        if (tags.includes(selectedTag)) {
-          post.classList.remove('hidden');
-        } else {
-          post.classList.add('hidden');
-        }
-      });
-    });
-  }
-
-  document.addEventListener('astro:page-load', handleTagFilter);
-  handleTagFilter();
-</script>

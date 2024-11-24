@@ -7,9 +7,12 @@ import Filter from '@components/Filter.astro';
 import TagFilter from '@components/Filter/Tag.astro';
 
 const allPosts = await getCollection('blog');
-const posts = await getCollection('blog', ({ data }) => {
+const posts = (await getCollection('blog', ({ data }) => {
   return data.status === 'published';
-});
+}))
+.sort((a, b) => 
+  new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime()
+);
 ---
 
 <PageLayout title="Blog">

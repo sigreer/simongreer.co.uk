@@ -5,17 +5,25 @@ interface Props {
 
 const { posts } = Astro.props;
 
-// Extract unique tags from posts
-const tags = [...new Set(posts.flatMap(post => post.data.tags || []))];
+const tags = [...new Set(posts
+  .filter(post => !post.data.draft)
+  .flatMap(post => post.data.tags || []))];
 ---
 
-<div class="flex flex-wrap gap-2 tag-block">
+<div class="flex items-center gap-2">
+  <span class="font-semibold">FILTER:</span>
+  <span id="active-tag" class="hidden cursor-pointer hover:opacity-75 !bg-transparent !text-black !border-2 !py-0 !border-gray-700 !shadow-none !drop-shadow-none" data-tag="all">
+    <span class="text-sm">× </span><span id="tag-name" class="!text-sm"></span>
+  </span>
+</div>
+<div class="flex flex-wrap gap-2 tag-block mt-2">
   <button
     class="tag-style rounded-md px-2 py-1 text-xs md:text-sm font-semibold text-white transition-all hover:scale-105"
     data-tag="all"
   >
     All
   </button>
+  
   {tags.map((tag) => (
     <button
       class="tag-style rounded-md px-2 py-1 text-xs md:text-sm font-semibold text-white transition-all hover:scale-105"
@@ -27,41 +35,61 @@ const tags = [...new Set(posts.flatMap(post => post.data.tags || []))];
 </div>
 
 <script>
-  function filterPosts() {
-    const activeTag = document.querySelector('.tag-style.active')?.getAttribute('data-tag') || 'all';
-    const posts = document.querySelectorAll('.post-card');
-    
-    posts.forEach(post => {
-      if (activeTag === 'all') {
-        post.classList.remove('hidden');
+  function handleFilter() {
+    const posts = document.querySelectorAll('[data-tags]');
+    const tagButtons = document.querySelectorAll('.tag-style');
+    const activeTagDisplay = document.getElementById('active-tag');
+    const tagNameElement = document.getElementById('tag-name');
+
+    function filterPosts(selectedTag: string) {
+      if (selectedTag === 'all') {
+        posts.forEach(post => post.classList.remove('hidden'));
+        activeTagDisplay?.classList.add('hidden');
         return;
       }
 
-      const postTags = JSON.parse(post.getAttribute('data-tags') || '[]');
-      if (postTags.includes(activeTag)) {
-        post.classList.remove('hidden');
-      } else {
-        post.classList.add('hidden');
+      posts.forEach(post => {
+        const tags = JSON.parse(post.getAttribute('data-tags') || '[]');
+        if (tags.includes(selectedTag)) {
+          post.classList.remove('hidden');
+        } else {
+          post.classList.add('hidden');
+        }
+      });
+
+      activeTagDisplay?.classList.remove('hidden');
+      if (tagNameElement) tagNameElement.textContent = selectedTag;
+    }
+
+    // Handle tag button clicks
+    tagButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const selectedTag = button.getAttribute('data-tag') || 'all';
+        tagButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        filterPosts(selectedTag);
+      });
+    });
+
+    // Handle filter label click
+    activeTagDisplay?.addEventListener('click', () => {
+      const allButton = document.querySelector('[data-tag="all"]') as HTMLElement;
+      if (allButton) {
+        tagButtons.forEach(btn => btn.classList.remove('active'));
+        allButton.classList.add('active');
+        filterPosts('all');
       }
     });
   }
 
-  document.addEventListener('astro:page-load', () => {
-    const tagButtons = document.querySelectorAll('.tag-style');
-    
-    tagButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        tagButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-        filterPosts();
-      });
-    });
+  // Setup on initial load and after navigation
+  document.addEventListener('astro:page-load', handleFilter);
+  handleFilter();
 
-    // Apply tag colors
-    if (typeof window.applyTagColorsToNewElements === 'function') {
-      window.applyTagColorsToNewElements();
-    }
-  });
+  // Apply tag colors
+  if (typeof window.applyTagColorsToNewElements === 'function') {
+    window.applyTagColorsToNewElements();
+  }
 </script>
 
 <style>
