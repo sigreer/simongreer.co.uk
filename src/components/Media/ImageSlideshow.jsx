@@ -29,30 +29,28 @@ export default function ImageSlideshow({ images }) {
 
   return (
     <div className="relative w-full h-[600px] overflow-hidden rounded-b-lg border-white border-4 drop-shadow-lg my-8">
-      <div className="relative w-full h-full">
-        {/* Exiting image */}
-        <div
-          key={`exit-${previousIndex}`}
-          className={`absolute inset-0 ${isAnimating ? 'animate-fadeOut' : ''}`}
-        >
-          <img
-            src={images[previousIndex].src}
-            alt={images[previousIndex].alt}
-            className="w-full h-full object-cover bg-gradient-to-br from-pink-400 to-pink-900"
-          />
-        </div>
+    <div className="relative w-full h-full">
 
-        {/* Entering image */}
-        <div
-          key={`enter-${currentIndex}`}
-          className={`absolute inset-0 ${isAnimating ? 'animate-fadeIn' : ''}`}
-          onAnimationEnd={() => setIsAnimating(false)}
-        >
-          <img
-            src={images[currentIndex].src}
-            alt={images[currentIndex].alt}
-            className="w-full h-full object-cover bg-gradient-to-br from-pink-400 to-pink-900"
-          />
+    <div
+      key={`exit-${previousIndex}`}
+      className={`absolute inset-0 ${isAnimating ? 'animate-fadeOut' : ''}`}
+    >
+      <img
+        src={images[previousIndex].src}
+        alt={images[previousIndex].alt}
+        className="w-full h-full object-cover bg-gradient-to-br from-pink-400 to-pink-900"
+      />
+    </div>
+    <div
+      key={`enter-${currentIndex}`}
+      className={`absolute inset-0 ${isAnimating ? 'animate-fadeIn' : ''}`}
+      onAnimationEnd={() => setIsAnimating(false)}
+    >
+      <img
+        src={images[currentIndex].src}
+        alt={images[currentIndex].alt}
+        className="w-full h-full object-cover bg-gradient-to-br from-pink-400 to-pink-900"
+      />
           <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4 text-center">
             {images[currentIndex].alt}
           </div>
@@ -72,5 +70,6 @@ export default function ImageSlideshow({ images }) {
         </button>
       </div>
     </div>
+    
   );
 } 

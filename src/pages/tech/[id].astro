@@ -7,7 +7,7 @@ import Prose from "@components/Prose.astro";
 
 export async function getStaticPaths() {
   const techs = await getCollection('tech');
-  return techs.map(tech => ({
+  return techs.map((tech: CollectionEntry<'tech'>) => ({
     params: { id: tech.data.slug },
     props: { tech }
   }));

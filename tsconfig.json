@@ -31,6 +31,5 @@
     "outDir": "./public/js",
   },
   "include": [".astro/types.d.ts", "src/**/*.ts*", "src/**/*.mdx", "src/**/*.astro", "src/components/**/*", "@components/**/*", "@icons/**/*", "**/*"],
-  "types": ["@cloudflare/workers-types"],
   "exclude": ["dist"]
 }

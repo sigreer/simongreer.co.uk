@@ -12,6 +12,7 @@ import remarkGfm from 'remark-gfm';
 import path from 'path';
 import cloudflare from '@astrojs/cloudflare';
 import dotenv from 'dotenv';
+import { visualizer } from 'rollup-plugin-visualizer';
 dotenv.config();
 const prettyCodeOptions = {
   theme,
@@ -55,7 +56,6 @@ export default defineConfig({
         'child_process',
         'util',
         'net',
-        'nodemailer'
       ]
     },
     css: {
@@ -69,7 +69,7 @@ export default defineConfig({
         '@components': '/src/components',
         '@icons': '/src/components/Icons',
         '@content': '/src/content',
-        '@images': path.resolve('./src/images'),
+        '@images': '/src/images',
         '@styles': '/src/styles',
         '@assets': '/src/assets',
         '@layouts': '/src/layouts',
@@ -77,7 +77,17 @@ export default defineConfig({
         '@utils': '/src/utils',
         '@lib': '/src/lib',
       }
-    }
+    },
+    build: {
+      sourcemap: true,
+      profile: true,
+    },
+    plugins: [
+      visualizer({
+        open: true,
+        filename: 'dist/stats.html',
+      })
+    ]
   },
   integrations: [
     tailwind({ applyBaseStyles: false }),
@@ -86,7 +96,7 @@ export default defineConfig({
       jsx: true,
       jsxImportSource: 'react',
     }),
-    react()],
+    react({ include: ['**/react/*'] })],
   markdown: {
     syntaxHighlight: false,
     rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
@@ -101,16 +111,16 @@ export default defineConfig({
       autoprefixer()
     ]
   },
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+      config: {
+        format: 'avif'
+      }
+    }
+  },
   experimental: {
     svg: false,
   },
-  output: 'server',
-  adapter: cloudflare({
-    imageService: 'cloudflare',
-    mode: 'directory',
-    platformProxy: {
-      enabled: true,
-      imageService: 'cloudflare'
-    }
-  }),
+
 })

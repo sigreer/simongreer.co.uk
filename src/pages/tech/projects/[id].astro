@@ -3,19 +3,22 @@ import PageLayout from "@layouts/PageLayout.astro";
 export const prerender = true;
 // @ts-ignore
 import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
-  return projects.map(project => ({
+  return projects.map((project: CollectionEntry<'projects'>) => ({
     params: { id: project.id },
     props: { project }
   }));
 }
 
-const { project } = Astro.props;;
+const { project } = Astro.props;
 const { Content, headings } = await render(project);
+const { data } = project as CollectionEntry<'projects'>;
 ---
 
-<PageLayout title={project.data.title}>
-  <h1>{project.data.title}</h1>
+<PageLayout title={data.title}>
+  <h1>{data.title}</h1>
 <Content />
 </PageLayout>
