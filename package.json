@@ -3,18 +3,18 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "wrangler types && astro dev",
+    "dev": "astro dev",
     "start": "wrangler types && astro dev",
-    "build": "astro check && astro sync --clear && astro build --clear",
+    "build": "astro sync --clear && astro build --clear",
     "buildw": "wrangler types && astro sync --clear && astro build --clear",
     "preview": "astro build && wrangler pages dev",
     "astro": "astro",
     "deploy": "wrangler types && astro build && wrangler pages deploy",
     "dump": "wrangler types && wrangler deploy --dry-run",
-    "sync": "astro sync --clear && wrangler types",
+    "sync": "astro sync --clear",
     "lint": "prettier --write  \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\" && eslint --fix \"src/**/*.{js,ts,jsx,tsx,astro}\"",
     "clean": "rm -rf ./node_modules && rm bun.lockb && rm -rf ./.astro && rm -rf ./.wrangler && bun pm cache rm && rm -rf ./dist",
-    "regen": "bun install && astro sync --clear && wrangler types"
+    "regen": "bun install && astro sync --clear"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^11.2.0",
@@ -37,13 +37,13 @@
     "embla-carousel-autoplay": "^8.5.1",
     "embla-carousel-react": "^8.5.1",
     "lucide-react": "^0.460.0",
+    "path": "^0.12.7",
     "postcss-nesting": "^13.0.1",
     "rehype-pretty-code": "^0.14.0",
     "remark-gfm": "^4.0.0",
     "remark-rehype": "^11.1.1",
     "remark-toc": "^9.0.0",
     "sass": "^1.81.0",
-    "sharp": "^0.32.6",
     "shiki-transformer-copy-button": "^0.0.3",
     "tailwind-merge": "^2.5.5",
     "tailwindcss": "^3.4.15",
@@ -53,9 +53,9 @@
     "@astrojs/check": "^0.9.4",
     "@cloudflare/workers-types": "^4.20241112.0",
     "@tailwindcss/typography": "^0.5.15",
-    "@types/node": "^22.9.3",
-    "@typescript-eslint/eslint-plugin": "^8.15.0",
-    "@typescript-eslint/parser": "^8.15.0",
+    "@types/node": "^22.9.4",
+    "@typescript-eslint/eslint-plugin": "^8.16.0",
+    "@typescript-eslint/parser": "^8.16.0",
     "astro-robots-txt": "^0.3.12",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.15.0",
@@ -74,5 +74,10 @@
     "typescript": "^5.7.2",
     "wrangler": "^3.90.0"
   },
-  "type": "module"
+  "type": "module",
+  "trustedDependencies": [
+    "@parcel/watcher",
+    "esbuild",
+    "workerd"
+  ]
 }

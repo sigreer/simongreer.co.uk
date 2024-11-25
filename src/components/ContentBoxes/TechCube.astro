@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import { tailwindColorMap } from '@utils/tailwindColorMap';
 interface Props {
     slug: string;
@@ -16,9 +15,9 @@ interface Props {
 }
 
 const { iconWidth = 200, iconHeight = 200 } = Astro.props;
-const tailwindColors = await tailwindColorMap;
+const tailwindColors = tailwindColorMap;
 
-const { title, vendoricon, excerpt, className = "", slug, vendor_primary_color = "gray-100", vendor_secondary_color = "gray-900", category } = Astro.props;
+const { title, vendoricon, excerpt, className = "", vendor_primary_color = "gray-100", vendor_secondary_color = "gray-900" } = Astro.props;
 
 const allVendorIcons = import.meta.glob<{ default: ImageMetadata }>('../../images/vendor-icons/*', { eager: true });
 const vendorImage = vendoricon ? allVendorIcons[`../../images/vendor-icons/${vendoricon}`]?.default : null;

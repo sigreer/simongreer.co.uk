@@ -1,25 +1,24 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
+// import { getCollection } from 'astro:content';
+// import { Image } from 'astro:assets';
 import '@styles/custom.css';
 import '@fontsource/poppins';
 
-const techs = (await getCollection('tech')).filter(({ data }: { data: { created_date: Date } }) => {
-  return data.created_date;
-}).sort((a: { data: { created_date: Date } }, b: { data: { created_date: Date } }) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime());
-const posts = (await getCollection('blog')).filter(({ data }: { data: { created_date: Date } }) => {
-  return data.created_date;
-}).sort((a: { data: { created_date: Date } }, b: { data: { created_date: Date } }) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime());
-const { description } = Astro.props;
-const currentSlug = Astro.url.pathname.split('/')[1];
-const limit = 6;
-const filteredTechs = techs.filter((tech: { data: { slug: string } }) => tech.data.slug !== currentSlug);
-const allVendorIcons = import.meta.glob<{ default: ImageMetadata }>('../../images/vendor-icons/*', { eager: true });
+// const techs = (await getCollection('tech')).filter(({ data }: { data: { created_date: Date } }) => {
+//   return data.created_date;
+// }).sort((a: { data: { created_date: Date } }, b: { data: { created_date: Date } }) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime());
+// // const posts = (await getCollection('blog')).filter(({ data }: { data: { created_date: Date } }) => {
+// //   return data.created_date;
+// // }).sort((a: { data: { created_date: Date } }, b: { data: { created_date: Date } }) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime());
+// const { description } = Astro.props;
+// const currentSlug = Astro.url.pathname.split('/')[1];
+// // const limit = 6;
+// // const filteredTechs = techs.filter((tech: { data: { slug: string } }) => tech.data.slug !== currentSlug);
+// // const allVendorIcons = import.meta.glob<{ default: ImageMetadata }>('../../images/vendor-icons/*', { eager: true });
 ---
 <BaseLayout>
   <main class="flex-grow w-full sm:text-lg font-poppins mx-auto">
     <slot />
-    
-
-    </BaseLayout>
+  </main>
+</BaseLayout>

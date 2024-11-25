@@ -5,7 +5,7 @@
   import rehypeStringify from 'rehype-stringify'
   import rehypePrettyCode from 'rehype-pretty-code'
   import { transformerCopyButton } from '@rehype-pretty/transformers' with { type: 'json' };
-  const { lang, code, ...props } = Astro.props;
+  const { lang, code } = Astro.props;
   async function highlightCode(code: string) {
     const file = await unified()
       .use(remarkParse)

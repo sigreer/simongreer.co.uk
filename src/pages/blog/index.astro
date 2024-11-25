@@ -7,7 +7,7 @@ import Card from '@components/ContentBoxes/Card.astro';
 import Filter from '@components/Filter/Filter.astro';
 import TagFilter from '@components/Filter/Tag.astro';
 
-const allPosts = await getCollection('blog');
+// const allPosts = await getCollection('blog');
 const posts = (await getCollection('blog', ({ data }: { data: { status: string, created_date: Date } }) => {
   return data.status === 'published';
 }))

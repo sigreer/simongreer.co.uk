@@ -1,18 +1,16 @@
 import { defineConfig, envField } from 'astro/config'
 import react from '@astrojs/react';
+import cloudflare from '@astrojs/cloudflare';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
-import theme from './src/syntaxtheme.json' assert { type: 'json' };
+import theme from './src/lib/syntaxtheme.json';
 import robotsTxt from 'astro-robots-txt';
 import postcssNesting from 'postcss-nesting';
 import { transformerCopyButton } from '@rehype-pretty/transformers';
 import rehypePrettyCode from 'rehype-pretty-code';
 import autoprefixer from 'autoprefixer';
 import remarkGfm from 'remark-gfm';
-import path from 'path';
-import cloudflare from '@astrojs/cloudflare';
 import dotenv from 'dotenv';
-import { visualizer } from 'rollup-plugin-visualizer';
 dotenv.config();
 const prettyCodeOptions = {
   theme,
@@ -82,12 +80,6 @@ export default defineConfig({
       sourcemap: true,
       profile: true,
     },
-    plugins: [
-      visualizer({
-        open: true,
-        filename: 'dist/stats.html',
-      })
-    ]
   },
   integrations: [
     tailwind({ applyBaseStyles: false }),
@@ -96,7 +88,7 @@ export default defineConfig({
       jsx: true,
       jsxImportSource: 'react',
     }),
-    react({ include: ['**/react/*'] })],
+    react()],
   markdown: {
     syntaxHighlight: false,
     rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
@@ -111,16 +103,15 @@ export default defineConfig({
       autoprefixer()
     ]
   },
-  image: {
-    service: {
-      entrypoint: 'astro/assets/services/sharp',
-      config: {
-        format: 'avif'
-      }
-    }
-  },
-  experimental: {
+experimental: {
     svg: false,
   },
+  output: 'server',
+
+  adapter: cloudflare({ output: 'hybrid', mode: 'directory', imageService: 'passthrough', }),
+  platformProxy: {
+    enabled: true,
+    imageService: 'cloudflare'
+  }
 
 })

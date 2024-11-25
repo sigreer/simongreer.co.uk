@@ -1,8 +1,8 @@
 import { getCollection } from 'astro:content';
-import type { CollectionEntry } from 'astro:content';
+// import type { CollectionEntry } from 'astro:content';
 
 type SupportedCollections = 'blog' | 'tech' | 'projects';
-type CollectionWithTags = CollectionEntry<SupportedCollections>;
+// type CollectionWithTags = CollectionEntry<SupportedCollections>;
 
 export async function getMergedCollections(collections: SupportedCollections[]) {
   const results = await Promise.all(
