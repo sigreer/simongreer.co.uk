@@ -11,7 +11,7 @@ import dotenv from 'dotenv';
 import autoprefixer from 'autoprefixer';
 import remarkGfm from 'remark-gfm';
 import path from 'path';
-
+import cloudflare from '@astrojs/cloudflare';
 const prettyCodeOptions = {
   theme,
   onVisitHighlightedLine(node) {
@@ -85,5 +85,7 @@ export default defineConfig({
   },
   experimental: {
     svg: false,
-  }
+  },
+  output: 'server',
+  adapter: cloudflare(),
 })
