@@ -6,25 +6,15 @@ export async function getStaticPaths() {
   const projects = await getCollection('projects');
   return projects.map(project => ({
     params: { id: project.id },
-    props: { project: {...project.data} }
+    props: { project }
   }));
 }
 
 const { project } = Astro.props;;
-const allImages = import.meta.glob<{ default: ImageMetadata }>('../../images/covers/*', { eager: true });
-const ImageSrc = project.coverimage ? allImages[`../../images/covers/${project.coverimage}`]?.default : null;
-
 const { Content, headings } = await render(project);
 ---
-<!-- title: string;
-slug: string;
-toc?: any;
-horizontal_logo?: ImageMetadata | null;
-cover_image?: ImageMetadata | null;
-showTOC?: boolean;
-showRelatedPosts?: boolean; -->
 
-<PageLayout title={project.title}>
-  <h1>{project.title}</h1>
+<PageLayout title={project.data.title}>
+  <h1>{project.data.title}</h1>
 <Content />
 </PageLayout>

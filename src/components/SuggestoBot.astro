@@ -7,7 +7,7 @@ import Robot2Icon from '@icons/Robot2Icon.astro';
 import SdkIcon from '@icons/SdkIcon.astro';
 import FamilyStarIcon from '@icons/FamilyStarIcon.astro';
 import CrosswordIcon from '@icons/CrosswordIcon.astro';
-import { answers } from '@utils/suggestoBotDialog';
+import { answers } from '@utils/suggestoBotDialog.ts';
 import '../styles/suggestobot.css';
 
 const getRandomText = (texts: { text: string }[]) => {
@@ -60,7 +60,7 @@ const iconComponents = {
 </div>
 </div>
 <script>
-  import { answers, responses } from '@utils/suggestoBotDialog';
+  import { answers, responses } from '@utils/suggestoBotDialog.ts';
 
   function initializeSuggestoBot() {
     const chatContent = document.getElementById('chatContent');

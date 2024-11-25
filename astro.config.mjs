@@ -36,6 +36,12 @@ export default defineConfig({
   env: {
     schema: {
       SITE_URL: envField.string({ context: "client", access: "public", optional: true}),
+      MAILTRAP_API_KEY: envField.string({ context: "server", access: "secret", optional: false }),
+      MAILTRAP_HOST: envField.string({ context: "server", access: "secret", optional: false }),
+      MAILTRAP_API_USER: envField.string({ context: "server", access: "secret", optional: false }),
+      MAILTRAP_PORT: envField.string({ context: "server", access: "secret", optional: false }),
+      MAILTRAP_FROM_EMAIL: envField.string({ context: "server", access: "secret", optional: false }),
+      MAILTRAP_TO_EMAIL: envField.string({ context: "server", access: "secret", optional: false })
     }
   },
   vite: {
@@ -74,7 +80,7 @@ export default defineConfig({
     shikiConfig: { theme },
     remarkPlugins: [remarkGfm],
   },
-  site: 'https://simongreer.co.uk',
+  site: process.env.SITE_URL,
   postcss: {
     plugins: {
       tailwindcss: {},

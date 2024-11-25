@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Dialog, DialogContent } from '@/components/ui/dialog'
+import { Dialog, DialogContent } from '@components/ui/dialog'
 import input1 from '@images/galleries/magick-tricks/input1.png'
 import input2 from '@images/galleries/magick-tricks/input2.png'
 import flash1 from '@images/galleries/magick-tricks/flash1.png'

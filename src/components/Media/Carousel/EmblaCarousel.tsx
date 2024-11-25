@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react'
 import type { EmblaOptionsType, EmblaCarouselType } from 'embla-carousel'
-import { DotButton, useDotButton } from '@/components/Media/Carousel/EmblaCarouselDotButton'
+import { DotButton, useDotButton } from '@components/Media/Carousel/EmblaCarouselDotButton.tsx'
 import {
   PrevButton,
   NextButton,
   usePrevNextButtons
-} from './EmblaCarouselArrowButtons'
+} from '@components/Media/Carousel/EmblaCarouselArrowButtons.tsx'
 import Autoplay from 'embla-carousel-autoplay'
 import Autoheight from 'embla-carousel-auto-height'
 import useEmblaCarousel from 'embla-carousel-react'

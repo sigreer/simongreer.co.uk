@@ -1,6 +1,6 @@
-import EmblaCarousel from '@/components/Media/Carousel/EmblaCarousel';
+import EmblaCarousel from '@components/Media/Carousel/EmblaCarousel.tsx';
 import type { EmblaOptionsType } from 'embla-carousel';
-import '@/styles/embla.css';
+import '@styles/embla.css';
 
 type CarouselProps = {
   slides: Array<{

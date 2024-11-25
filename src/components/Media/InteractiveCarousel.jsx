@@ -4,8 +4,8 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel";
-import { Card, CardContent } from "@/components/ui/card";
+} from "@components/ui/carousel";
+import { Card, CardContent } from "@components/ui/card";
 import Autoplay from "embla-carousel-autoplay"
 
 const InteractiveCarousel = ({ items, slideSize, carouselSize, opts }) => {

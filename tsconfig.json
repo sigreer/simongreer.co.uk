@@ -3,8 +3,8 @@
   "compilerOptions": {
     "target": "ESNext",
     "lib": ["dom", "ES2015", "ESNext", "DOM", "DOM.Iterable"],
-    "moduleResolution": "Node",
-    "module": "ESNext",
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext",
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "strictNullChecks": true,
