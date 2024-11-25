@@ -1,9 +1,7 @@
 ---
-import fs from "node:fs";
-import path from "node:path";
-
 interface Props {
   dir: string;
+  images: string[];
   alt?: string;
   aspectRatio?: "square" | "wide" | "custom";
   customRatio?: string;
@@ -15,7 +13,8 @@ interface Props {
 }
 
 const { 
-  dir, 
+  dir,
+  images,
   alt = "", 
   aspectRatio = "square",
   customRatio = "aspect-[2/1]",
@@ -25,23 +24,6 @@ const {
   padding = "medium",
   customPadding = "p-4"
 } = Astro.props;
-
-// Get list of images from both potential directories
-const publicDir = path.join(process.cwd(), "public", "images", dir);
-const srcDir = path.join(process.cwd(), "src", "images", dir);
-
-let images: string[] = [];
-
-// Check public directory first
-if (fs.existsSync(publicDir)) {
-  images = fs.readdirSync(publicDir)
-    .filter(file => /\.(jpg|jpeg|png|gif|webp)$/i.test(file));
-}
-// If no images found, check src directory
-else if (fs.existsSync(srcDir)) {
-  images = fs.readdirSync(srcDir)
-    .filter(file => /\.(jpg|jpeg|png|gif|webp)$/i.test(file));
-}
 
 // Determine grid layout class
 const getGridClass = (layout: string) => {

@@ -5,11 +5,11 @@ export const prerender = false;
 
 dotenv.config();
 const transport = nodemailer.createTransport({
-  host: process.env.MAILTRAP_HOST,
-  port: parseInt(process.env.MAILTRAP_PORT || '587'),
+  host: import.meta.env.MAILTRAP_HOST,
+  port: parseInt(import.meta.env.MAILTRAP_PORT || '587'),
   auth: {
-    user: process.env.MAILTRAP_API_USER,
-    pass: process.env.MAILTRAP_API_KEY
+    user: import.meta.env.MAILTRAP_API_USER,
+    pass: import.meta.env.MAILTRAP_API_KEY
   }
 })
 
@@ -19,15 +19,15 @@ export const POST: APIRoute = async ({ request }) => {
     const { email, message } = data
 
     const mainMailOptions = {
-      from: process.env.MAILTRAP_FROM_EMAIL,
-      to: process.env.MAILTRAP_TO_EMAIL,
+      from: import.meta.env.MAILTRAP_FROM_EMAIL,
+      to: import.meta.env.MAILTRAP_TO_EMAIL,
       subject: `website form submission from ${email}`,
       text: message,
       replyTo: email
     }
 
     const acknowledgmentMailOptions = {
-      from: process.env.MAILTRAP_FROM_EMAIL,
+      from: import.meta.env.MAILTRAP_FROM_EMAIL,
       to: email,
       subject: 'Thank you for your message',
       text: `Thank you for reaching out! This email confirms that I've received your message and will get back to you soon.

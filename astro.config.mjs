@@ -2,12 +2,11 @@ import { defineConfig, envField } from 'astro/config'
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
-import theme from './src/syntaxtheme.json';
+import theme from './src/syntaxtheme.json' assert { type: 'json' };
 import robotsTxt from 'astro-robots-txt';
-import tailwindcssNesting from 'tailwindcss/nesting';
+import postcssNesting from 'postcss-nesting';
 import { transformerCopyButton } from '@rehype-pretty/transformers';
 import rehypePrettyCode from 'rehype-pretty-code';
-import dotenv from 'dotenv';
 import autoprefixer from 'autoprefixer';
 import remarkGfm from 'remark-gfm';
 import path from 'path';
@@ -30,7 +29,6 @@ const prettyCodeOptions = {
   tokensMap: {},
 };
 
-dotenv.config();
 // https://astro.build/config
 export default defineConfig({
   env: {
@@ -45,9 +43,25 @@ export default defineConfig({
     }
   },
   vite: {
+    ssr: {
+      noExternal: ['dotenv', '@astrojs/cloudflare'],
+      target: 'webworker',
+      external: [
+        'path',
+        'fs',
+        'url',
+        'module',
+        'crypto',
+        'os',
+        'child_process',
+        'util',
+        'net',
+        'nodemailer'
+      ]
+    },
     css: {
       postcss: {
-        plugins: [tailwind, autoprefixer, tailwindcssNesting]
+        plugins: [tailwind, autoprefixer, postcssNesting]
       }
     },
     resolve: {
@@ -82,16 +96,18 @@ export default defineConfig({
   },
   site: process.env.SITE_URL,
   postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
-      tailwind: {},
-      tailwindcssNesting: {}
-    },
+    plugins: [
+      postcssNesting(),
+      tailwind(),
+      autoprefixer()
+    ]
   },
   experimental: {
     svg: false,
   },
   output: 'server',
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    imageService: 'cloudflare',
+    mode: 'directory'
+  }),
 })
