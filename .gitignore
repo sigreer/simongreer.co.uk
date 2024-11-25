@@ -33,3 +33,4 @@ _ignore*
 .astro/content.d.ts
 .astro/content-modules.mjs
 .astro/data-store.json
+.dev.vars
