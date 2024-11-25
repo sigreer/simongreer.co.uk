@@ -41,9 +41,9 @@
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ 
+          name: email,
           email, 
-          message,
-          sendAcknowledgment: true
+          message
         }),
       });
 

@@ -11,6 +11,8 @@ import autoprefixer from 'autoprefixer';
 import remarkGfm from 'remark-gfm';
 import path from 'path';
 import cloudflare from '@astrojs/cloudflare';
+import dotenv from 'dotenv';
+dotenv.config();
 const prettyCodeOptions = {
   theme,
   onVisitHighlightedLine(node) {
@@ -35,9 +37,6 @@ export default defineConfig({
     schema: {
       SITE_URL: envField.string({ context: "client", access: "public", optional: true}),
       MAILTRAP_API_KEY: envField.string({ context: "server", access: "secret", optional: false }),
-      MAILTRAP_HOST: envField.string({ context: "server", access: "secret", optional: false }),
-      MAILTRAP_API_USER: envField.string({ context: "server", access: "secret", optional: false }),
-      MAILTRAP_PORT: envField.string({ context: "server", access: "secret", optional: false }),
       MAILTRAP_FROM_EMAIL: envField.string({ context: "server", access: "secret", optional: false }),
       MAILTRAP_TO_EMAIL: envField.string({ context: "server", access: "secret", optional: false })
     }

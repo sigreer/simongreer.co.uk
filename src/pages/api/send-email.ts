@@ -1,59 +1,55 @@
-import type { APIRoute } from 'astro'
-import nodemailer from 'nodemailer'
-import dotenv from 'dotenv';
-export const prerender = false;
+import type { APIRoute } from 'astro';
 
-dotenv.config();
-const transport = nodemailer.createTransport({
-  host: import.meta.env.MAILTRAP_HOST,
-  port: parseInt(import.meta.env.MAILTRAP_PORT || '587'),
-  auth: {
-    user: import.meta.env.MAILTRAP_API_USER,
-    pass: import.meta.env.MAILTRAP_API_KEY
-  }
-})
+export const POST: APIRoute = async ({ request, locals }) => {
+    // @ts-ignore
+    const runtime = locals.runtime;
+    
+    const formData = await request.json();
+    const { name, email, message } = formData;
+  
+    const emailData = {
+      from: {
+        email: runtime.env.MAILTRAP_FROM_EMAIL,
+        name: "SimonGreer.co.uk MailBot",
+      },
+      to: [
+        {
+          email: runtime.env.MAILTRAP_TO_EMAIL,
+          name: "Simon Greer",
+        },
+      ],
+      subject: "New Contact Form Submission",
+      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+    };
+  
+    try {
+      const response = await fetch("https://send.api.mailtrap.io/api/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${await runtime.env.MAILTRAP_API_KEY}`,
+        },
+        body: JSON.stringify(emailData),
+      });
+  
+      if (!response.ok) {
+        const error = await response.json();
+        return new Response(JSON.stringify({ error }), { 
+          status: response.status,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
 
-export const POST: APIRoute = async ({ request }) => {
-  try {
-    const data = await request.json()
-    const { email, message } = data
-
-    const mainMailOptions = {
-      from: import.meta.env.MAILTRAP_FROM_EMAIL,
-      to: import.meta.env.MAILTRAP_TO_EMAIL,
-      subject: `website form submission from ${email}`,
-      text: message,
-      replyTo: email
+      return new Response(JSON.stringify({ message: "Email sent successfully" }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    } catch (error) {
+      console.error("Unexpected error:", error);
+      return new Response(JSON.stringify({ error: "Server error" }), { 
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
-
-    const acknowledgmentMailOptions = {
-      from: import.meta.env.MAILTRAP_FROM_EMAIL,
-      to: email,
-      subject: 'Thank you for your message',
-      text: `Thank you for reaching out! This email confirms that I've received your message and will get back to you soon.
-
-Your message:
-${message}
-
-Best regards,
-[Your Name]`
-    }
-
-    await Promise.all([
-      transport.sendMail(mainMailOptions),
-      transport.sendMail(acknowledgmentMailOptions)
-    ])
-
-    return new Response(JSON.stringify({
-      message: 'Email sent successfully'
-    }), {
-      status: 200
-    })
-  } catch (error) {
-    return new Response(JSON.stringify({
-      message: 'Failed to send email'
-    }), {
-      status: 500
-    })
-  }
-} 
+}
+  
