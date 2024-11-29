@@ -1,10 +1,13 @@
 // 1. Import utilities from `astro:content`
 import { defineCollection, z, reference } from 'astro:content';
-import { glob } from 'astro/loaders';
+import { file, glob } from 'astro/loaders';
 
 const tech = defineCollection({
-  loader: glob({ pattern: ["**/*.{md,mdx}"], base: "./src/content/tech/"}),
-  schema: ({ image }) => z.object({
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "./src/content/tech/"
+  }),
+  schema: z.object({
     title: z.string(),
     slug: z.string(),
     excerpt: z.string().nullable(),
@@ -22,8 +25,11 @@ const tech = defineCollection({
 });
 
 const projects = defineCollection({
-  loader: glob({ pattern: ["**/*.{md,mdx}"], base: "./src/content/projects/"}),
-  schema: ({ image }) => z.object({
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "./src/content/projects/"
+  }),
+  schema: z.object({
     title: z.string(),
     slug: z.string(),
     excerpt: z.string().nullable(),
@@ -37,8 +43,11 @@ const projects = defineCollection({
 });
 
 const blog = defineCollection({
-  loader: glob({ pattern: ["**/*.{md,mdx}"], base: "./src/content/blog/"}),
-  schema: ({ image }) => z.object({
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "./src/content/blog/"
+  }),
+  schema: z.object({
     title: z.string(),
     slug: z.string(),
     excerpt: z.string().nullable(),
@@ -49,17 +58,15 @@ const blog = defineCollection({
     horizontal_logo: z.string().optional().describe('Path to the horizontal logo image'),
     vendoricon: z.string().optional(),
     tags: z.array(reference('tags')).optional(),
-    type: z.literal('blog'),
     category: z.string().optional()
   }),
 });
 
 const tags = defineCollection({
-  type: 'data',
+  loader: file("src/content/tags.json"),
   schema: z.object({
     name: z.string(),
     description: z.string().optional(),
-    category: z.enum(['development', 'cloud', 'systems', 'business', 'ai-automation', 'data', 'media']).optional(),
     color: z.string().optional()
   })
 });
