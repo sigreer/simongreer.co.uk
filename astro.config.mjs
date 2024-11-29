@@ -106,12 +106,18 @@ export default defineConfig({
 experimental: {
     svg: false,
   },
+  prefetch: {
+    defaultStrategy: 'viewport'
+  },
   output: 'server',
 
-  adapter: cloudflare({ output: 'hybrid', mode: 'directory', imageService: 'passthrough', }),
-  platformProxy: {
-    enabled: true,
-    imageService: 'cloudflare'
-  }
-
+  adapter: cloudflare({ 
+    output: 'hybrid', 
+    mode: 'directory', 
+    imageService: 'cloudflare',  
+    platformProxy: {
+      enabled: true,
+      configPath: './wrangler.toml'
+    }
+  })
 })

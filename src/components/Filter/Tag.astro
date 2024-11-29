@@ -1,4 +1,6 @@
 ---
+import tagsData from '../../content/tags.json';
+
 interface Props {
   posts: any[];
 }
@@ -7,7 +9,12 @@ const { posts } = Astro.props;
 
 const tags = [...new Set(posts
   .filter(post => !post.data.draft)
-  .flatMap(post => post.data.tags || []))];
+  .flatMap(post => post.data.tags?.map((tag: {id: string}) => tag.id) || []))];
+
+const resolvedTags = tags.map((tag: string) => {
+  const tagData = tagsData[tag as keyof typeof tagsData];
+  return { id: tag, data: tagData };
+});
 ---
 
 <div class="flex items-center gap-2">
@@ -24,12 +31,13 @@ const tags = [...new Set(posts
     All
   </button>
   
-  {tags.map((tag) => (
+  {resolvedTags.map((tag) => (
     <button
       class="tag-style rounded-md px-2 py-1 text-xs md:text-sm font-semibold text-white transition-all hover:scale-105"
-      data-tag={tag}
+      data-tag={tag.id}
+      style={`background-color: ${tag.data?.color || '#6B7280'}`}
     >
-      {tag}
+      {tag.id}
     </button>
   ))}
 </div>
@@ -49,7 +57,12 @@ const tags = [...new Set(posts
       }
 
       posts.forEach(post => {
-        const tags = JSON.parse(post.getAttribute('data-tags') || '[]');
+        const tagsAttr = post.getAttribute('data-tags');
+        const tags = tagsAttr ? tagsAttr.split(',') : [];
+        
+        // Debug log to see what's being compared
+        console.log('Post tags:', tags, 'Selected tag:', selectedTag);
+        
         if (tags.includes(selectedTag)) {
           post.classList.remove('hidden');
         } else {
@@ -57,8 +70,11 @@ const tags = [...new Set(posts
         }
       });
 
+      const selectedTagData = document.querySelector(`[data-tag="${selectedTag}"]`);
       activeTagDisplay?.classList.remove('hidden');
-      if (tagNameElement) tagNameElement.textContent = selectedTag;
+      if (tagNameElement && selectedTagData) {
+        tagNameElement.textContent = selectedTagData.textContent?.trim() || selectedTag;
+      }
     }
 
     // Handle tag button clicks
@@ -86,10 +102,6 @@ const tags = [...new Set(posts
   document.addEventListener('astro:page-load', handleFilter);
   handleFilter();
 
-  // Apply tag colors
-  if (typeof window.applyTagColorsToNewElements === 'function') {
-    window.applyTagColorsToNewElements();
-  }
 </script>
 
 <style>

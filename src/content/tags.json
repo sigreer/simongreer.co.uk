@@ -1,0 +1,212 @@
+{
+    "javascript": {
+      "name": "JavaScript",
+      "description": "A programming language that powers the web",
+      "category": "development",
+      "color": "#8B7B0D"
+    },
+    "aws": {
+      "name": "AWS",
+      "description": "Amazon Web Services cloud platform",
+      "category": "cloud",
+      "color": "#A65E00"
+    },
+    "cloud": {
+      "name": "Cloud",
+      "description": "Cloud computing and infrastructure",
+      "category": "cloud",
+      "color": "#2563A7"
+    },
+    "hetzner": {
+      "name": "Hetzner",
+      "description": "Hetzner hosting services",
+      "category": "cloud",
+      "color": "#d32f2f"
+    },
+    "hosting": {
+      "name": "Hosting",
+      "description": "Web and application hosting",
+      "category": "cloud",
+      "color": "#2196f3"
+    },
+    "vps": {
+      "name": "VPS",
+      "description": "Virtual Private Servers",
+      "category": "cloud",
+      "color": "#64b5f6"
+    },
+    "storage": {
+      "name": "Storage",
+      "description": "Data storage solutions",
+      "category": "systems",
+      "color": "#000000"
+    },
+    "nas": {
+      "name": "NAS",
+      "description": "Network Attached Storage",
+      "category": "systems",
+      "color": "#2e7d32"
+    },
+    "truenas": {
+      "name": "TrueNAS",
+      "description": "Open source storage platform",
+      "category": "systems",
+      "color": "#1a237e"
+    },
+    "firewall": {
+      "name": "Firewall",
+      "description": "Network security",
+      "category": "systems",
+      "color": "#f44336"
+    },
+    "opnsense": {
+      "name": "OPNsense",
+      "description": "Open source firewall platform",
+      "category": "systems",
+      "color": "#ff5722"
+    },
+    "pfsense": {
+      "name": "pfSense",
+      "description": "Open source firewall platform",
+      "category": "systems",
+      "color": "#0d47a1"
+    },
+    "virtualisation": {
+      "name": "Virtualisation",
+      "description": "Virtual machine technology",
+      "category": "systems",
+      "color": "#673ab7"
+    },
+    "open-source": {
+      "name": "Open Source",
+      "description": "Open source software",
+      "category": "development",
+      "color": "#4caf50"
+    },
+    "linux": {
+      "name": "Linux",
+      "description": "Linux operating system",
+      "category": "systems",
+      "color": "#977d0a"
+    },
+    "embedded": {
+      "name": "Embedded",
+      "description": "Embedded systems",
+      "category": "systems",
+      "color": "#ff9800"
+    },
+    "development": {
+      "name": "Development",
+      "description": "Software development",
+      "category": "development",
+      "color": "#2196f3"
+    },
+    "shell": {
+      "name": "Shell",
+      "description": "Command line shell",
+      "category": "development",
+      "color": "#757575"
+    },
+    "flutter": {
+      "name": "Flutter",
+      "description": "Cross-platform development framework",
+      "category": "development",
+      "color": "#0277BD"
+    },
+    "webrtc": {
+      "name": "WebRTC",
+      "description": "Real-time communication",
+      "category": "development",
+      "color": "#008494"
+    },
+    "obs": {
+      "name": "OBS",
+      "description": "Open Broadcaster Software",
+      "category": "media",
+      "color": "#9c27b0"
+    },
+    "automation": {
+      "name": "Automation",
+      "description": "Process automation",
+      "category": "ai-automation",
+      "color": "#831c00"
+    },
+    "bash": {
+      "name": "Bash",
+      "description": "Command line scripting",
+      "category": "development",
+      "color": "#1a791d"
+    },
+    "astro": {
+      "name": "Astro",
+      "description": "Web framework",
+      "category": "development",
+      "color": "#7c3aed"
+    },
+    "cloudflare": {
+      "name": "Cloudflare",
+      "description": "Web infrastructure and security",
+      "category": "cloud",
+      "color": "#B35A0F"
+    },
+    "git": {
+      "name": "Git",
+      "description": "Version control system",
+      "category": "development",
+      "color": "#991800"
+    },
+    "ai": {
+      "name": "AI",
+      "description": "Artificial Intelligence",
+      "category": "ai-automation",
+      "color": "#9333ea"
+    },
+    "funny": {
+      "name": "Funny",
+      "description": "Humorous content",
+      "category": "content",
+      "color": "#ec4899"
+    },
+    "fails": {
+      "name": "Fails",
+      "description": "Failure cases and lessons",
+      "category": "content",
+      "color": "#ef4444"
+    },
+    "workflow": {
+      "name": "Workflow",
+      "description": "Process and workflow management",
+      "category": "business",
+      "color": "#0A6B98"
+    },
+    "productivity": {
+      "name": "Productivity",
+      "description": "Productivity tools and methods",
+      "category": "business",
+      "color": "#087F54"
+    },
+    "wordpress": {
+      "name": "WordPress",
+      "description": "WordPress CMS",
+      "category": "content",
+      "color": "#0073aa"
+    },
+    "web": {
+      "name": "Web",
+      "description": "Web development",
+      "category": "development",
+      "color": "#78003f"
+    },
+    "docker": {
+      "name": "Docker",
+      "description": "Docker containerization",
+      "category": "cloud",
+      "color": "#303030"
+    },
+    "audio": {
+      "name": "Audio",
+      "description": "Audio processing and production",
+      "category": "media",
+      "color": "#ac0077"
+    }
+  }

@@ -6,8 +6,6 @@ import '@styles/custom.css';
 import Card from '@components/ContentBoxes/Card.astro';
 import Filter from '@components/Filter/Filter.astro';
 import TagFilter from '@components/Filter/Tag.astro';
-
-// const allPosts = await getCollection('blog');
 const posts = (await getCollection('blog', ({ data }: { data: { status: string, created_date: Date } }) => {
   return data.status === 'published';
 }))
@@ -32,7 +30,6 @@ const posts = (await getCollection('blog', ({ data }: { data: { status: string, 
             tags={post.data.tags}
             coverimage={post.data.coverimage}
             created_date={post.data.created_date}
-            dataTags={JSON.stringify(post.data.tags || [])}
             type="blog"
           />
         ))}
