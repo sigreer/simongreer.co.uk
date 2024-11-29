@@ -87,7 +87,7 @@
       "name": "Linux",
       "description": "Linux operating system",
       "category": "systems",
-      "color": "#977d0a"
+      "color": "#675400"
     },
     "embedded": {
       "name": "Embedded",
