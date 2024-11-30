@@ -111,13 +111,14 @@ experimental: {
   },
   output: 'server',
 
+  image: {
+    formats: ['avif', 'webp', 'png', 'jpeg']
+  },
+
   adapter: cloudflare({ 
     output: 'hybrid', 
     mode: 'directory', 
     imageService: 'cloudflare',
-    image: {
-      format: ['avif', 'webp', 'png', 'jpeg'],
-    },  
     platformProxy: {
       enabled: true,
       configPath: './wrangler.toml'
