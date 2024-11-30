@@ -76,10 +76,6 @@ export default defineConfig({
         '@lib': '/src/lib',
       }
     },
-    build: {
-      sourcemap: true,
-      profile: true,
-    },
   },
   integrations: [
     tailwind({ applyBaseStyles: false }),
@@ -88,7 +84,9 @@ export default defineConfig({
       jsx: true,
       jsxImportSource: 'react',
     }),
-    react()],
+    react(),
+    sitemap()
+  ],
   markdown: {
     syntaxHighlight: false,
     rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
