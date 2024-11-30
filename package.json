@@ -5,16 +5,16 @@
   "scripts": {
     "dev": "astro dev",
     "start": "wrangler types && astro dev",
-    "build": "astro sync --clear && astro build --clear",
-    "buildw": "wrangler types && astro sync --clear && astro build --clear",
+    "build": "wrangler types && astro sync --clear && astro build --clear",
     "preview": "astro build && wrangler pages dev",
     "astro": "astro",
-    "deploy": "wrangler types && astro build && wrangler pages deploy",
-    "dump": "wrangler types && wrangler deploy --dry-run",
+    "deploy": "echo 'Make sure you have committed all changes before deploying' && wrangler types && astro sync --clear && astro build && git push",
+    "dump": "wrangler types && astro sync --clear && astro build && wrangler deploy --dry-run",
     "sync": "astro sync --clear",
     "lint": "prettier --write  \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\" && eslint --fix \"src/**/*.{js,ts,jsx,tsx,astro}\"",
-    "clean": "rm -rf ./node_modules && rm bun.lockb && rm -rf ./.astro && rm -rf ./.wrangler && bun pm cache rm && rm -rf ./dist",
-    "regen": "bun install && astro sync --clear"
+    "purge": "rm -rf ./node_modules && rm bun.lockb && rm -rf ./.astro && rm -rf ./.wrangler && bun pm cache rm && rm -rf ./dist",
+    "update": "bun install && bun update && bun upgrade",
+    "pagespeed": "node scripts/pagespeed-report.js"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^11.2.0",

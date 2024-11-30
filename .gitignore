@@ -1,8 +1,6 @@
 # build output
 dist/
 .output/
-# If .astro/ was already tracked before being added to .gitignore,
-# you need to untrack it first with: git rm -r --cached .astro/
 .astro/
 
 # dependencies
@@ -28,6 +26,9 @@ bun.lockb
 .vscode/
 
 _ignore*
+
+# Wrangler dry run output
+wrangler-output/
 
 .astro/content.d.ts
 .astro/content.d.ts
