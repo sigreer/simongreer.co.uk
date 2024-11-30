@@ -14,7 +14,7 @@
     "lint": "prettier --write  \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\" && eslint --fix \"src/**/*.{js,ts,jsx,tsx,astro}\"",
     "purge": "rm -rf ./node_modules && rm bun.lockb && rm -rf ./.astro && rm -rf ./.wrangler && bun pm cache rm && rm -rf ./dist",
     "update": "bun install && bun update && bun upgrade",
-    "pagespeed": "node scripts/pagespeed-report.js"
+    "pagespeed": "node scripts/pagespeed-report.cjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^11.2.0",
