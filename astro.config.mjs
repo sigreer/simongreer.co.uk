@@ -1,5 +1,6 @@
 import { defineConfig, envField } from 'astro/config'
 import react from '@astrojs/react';
+import sitemap from '@astrojs/sitemap';
 import cloudflare from '@astrojs/cloudflare';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
@@ -76,6 +77,10 @@ export default defineConfig({
         '@lib': '/src/lib',
       }
     },
+    build: {
+      sourcemap: true,
+      profile: true,
+    },
   },
   integrations: [
     tailwind({ applyBaseStyles: false }),
@@ -85,8 +90,7 @@ export default defineConfig({
       jsxImportSource: 'react',
     }),
     react(),
-    sitemap()
-  ],
+    sitemap()],
   markdown: {
     syntaxHighlight: false,
     rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
