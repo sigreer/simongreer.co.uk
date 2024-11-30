@@ -12,6 +12,21 @@ const posts = (await getCollection('blog', ({ data }: { data: { status: string, 
 .sort((a: { data: { created_date: Date } }, b: { data: { created_date: Date } }) => 
   new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime()
 );
+
+const tagsWithData = await Promise.all(posts.map(async post => ({
+  ...post,
+  data: {
+    ...post.data,
+    tags: post.data.tags 
+      ? (await getCollection('tags', ({ id }) => post.data.tags?.map(t => t.id).includes(id)))
+        .map(tag => ({
+          id: tag.id,
+          collection: tag.collection,
+          data: { color: tag.data.color || '#000000' }
+        }))
+      : undefined
+  }
+})));
 ---
 
 <PageLayout title="Blog">
@@ -22,7 +37,7 @@ const posts = (await getCollection('blog', ({ data }: { data: { status: string, 
     <div class="w-full">
 
       <ul class="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {posts.map((post: CollectionEntry<'blog'>) => (
+        {tagsWithData.map((post) => (
           <Card 
             title={post.data.title}
             slug={post.data.slug}
