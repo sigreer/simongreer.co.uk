@@ -1,7 +1,9 @@
 name: PageSpeed Analysis
 
 on:
-  page_build
+  push:
+    branches:
+      - main
 
 jobs:
   analyze:
@@ -18,8 +20,8 @@ jobs:
       - name: Install Dependencies
         run: npm ci
         
-      - name: Wait for deployment propagation
-        run: sleep 60
+      - name: Wait for Cloudflare deployment
+        run: sleep 180
         
       - name: Run PageSpeed Analysis
         env:
