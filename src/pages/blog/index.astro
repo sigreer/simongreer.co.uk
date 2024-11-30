@@ -13,13 +13,13 @@ const posts = (await getCollection('blog', ({ data }: { data: { status: string, 
   new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime()
 );
 
-const tagsWithData = await Promise.all(posts.map(async post => ({
+const tagsWithData = await Promise.all(posts.map(async (post: CollectionEntry<'blog'>) => ({
   ...post,
   data: {
     ...post.data,
     tags: post.data.tags 
-      ? (await getCollection('tags', ({ id }) => post.data.tags?.map(t => t.id).includes(id)))
-        .map(tag => ({
+      ? (await getCollection('tags', ({ id }: { id: string }) => post.data.tags?.map((t: { id: string }) => t.id).includes(id)))
+        .map((tag: CollectionEntry<'tags'>) => ({
           id: tag.id,
           collection: tag.collection,
           data: { color: tag.data.color || '#000000' }
