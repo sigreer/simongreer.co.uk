@@ -9,6 +9,7 @@ jobs:
   analyze:
     runs-on: ubuntu-latest
     name: Run PageSpeed Analysis
+    environment: simongreercouk
     steps:
       - uses: actions/checkout@v4
       
