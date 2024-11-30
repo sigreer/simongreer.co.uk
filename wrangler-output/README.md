@@ -1,1 +1,0 @@
-This folder contains the built output assets for the worker "simongreer" generated at 2024-11-25T23:27:22.855Z.
