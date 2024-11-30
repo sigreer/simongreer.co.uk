@@ -22,11 +22,11 @@ jobs:
         run: bun install
         
       - name: Wait for Cloudflare deployment
-        run: sleep 180
+        run: sleep 20
         
       - name: Run PageSpeed Analysis
         env:
           PAGESPEED_API_KEY: ${{ secrets.PAGESPEED_API_KEY }}
           PAGESPEED_WEBHOOK_URL: ${{ secrets.PAGESPEED_WEBHOOK_URL }}
-          SITE_URL: ${{ env.SITE_URL }}
+          SITE_URL: ${{ vars.SITE_URL }}
         run: bun run pagespeed
