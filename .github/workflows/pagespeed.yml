@@ -22,7 +22,7 @@ jobs:
         run: bun install
         
       - name: Wait for Cloudflare deployment
-        run: sleep 20
+        run: sleep 60
         
       - name: Run PageSpeed Analysis
         env:
