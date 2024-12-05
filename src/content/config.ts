@@ -10,8 +10,8 @@ const tech = defineCollection({
   schema: z.object({
     title: z.string(),
     slug: z.string(),
-    excerpt: z.string().nullable(),
-    created_date: z.date(),
+    description: z.string().nullable(),
+    pubDate: z.date(),
     status: z.enum(['draft', 'published', 'archived']),
     coverimage: z.string().optional(),
     vendoricon: z.string().optional(),
@@ -32,8 +32,8 @@ const projects = defineCollection({
   schema: z.object({
     title: z.string(),
     slug: z.string(),
-    excerpt: z.string().nullable(),
-    created_date: z.date(),
+    description: z.string().nullable(),
+    pubDate: z.date(),
     status: z.enum(['draft', 'published', 'archived']),
     coverimage: z.string().optional(),
     tags: z.array(reference('tags')).optional(),
@@ -50,8 +50,8 @@ const blog = defineCollection({
   schema: z.object({
     title: z.string(),
     slug: z.string(),
-    excerpt: z.string().nullable(),
-    created_date: z.date(),
+    description: z.string().nullable(),
+    pubDate: z.date(),
     status: z.enum(['draft', 'published', 'archived']),
     coverimage: z.string().optional(),
     vendor_name: z.string().optional().describe('Vendor name for the logo'),

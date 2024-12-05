@@ -13,7 +13,7 @@ type TechWithStringTags = Omit<CollectionEntry<'tech'>, 'data'> & {
 };
 
 const techs = (await getCollection('tech'))
-  .filter((tech: { data: { created_date: Date } }) => tech.data.created_date)
+  .filter((tech: { data: { pubDate: Date } }) => tech.data.pubDate)
   .map(tech => ({
     ...tech,
     data: {
@@ -69,7 +69,7 @@ const data = techs.filter((tech: TechWithStringTags) => tech.data.category === '
               <TechCube
                 title={tech.data.vendor_name || tech.data.title}
                 vendoricon={tech.data.vendoricon}
-                excerpt={tech.data.excerpt}
+                description={tech.data.description}
                 tags={tech.data.tags}
                 slug={tech.data.slug}
                 vendor_primary_color={tech.data.vendor_primary_color}
@@ -90,7 +90,7 @@ const data = techs.filter((tech: TechWithStringTags) => tech.data.category === '
           <TechCube
             title={tech.data.vendor_name || tech.data.title}
             vendoricon={tech.data.vendoricon}
-            excerpt={tech.data.excerpt}
+            description={tech.data.description}
             tags={tech.data.tags}
             slug={tech.data.slug}
             vendor_primary_color={tech.data.vendor_primary_color}
@@ -111,7 +111,7 @@ const data = techs.filter((tech: TechWithStringTags) => tech.data.category === '
           <TechCube
             title={tech.data.vendor_name || tech.data.title}
             vendoricon={tech.data.vendoricon}
-            excerpt={tech.data.excerpt}
+            description={tech.data.description}
             tags={tech.data.tags}
             slug={tech.data.slug}
             vendor_primary_color={tech.data.vendor_primary_color}
@@ -132,7 +132,7 @@ const data = techs.filter((tech: TechWithStringTags) => tech.data.category === '
           <TechCube
             title={tech.data.vendor_name || tech.data.title}
             vendoricon={tech.data.vendoricon}
-            excerpt={tech.data.excerpt}
+            description={tech.data.description}
             tags={tech.data.tags}
             slug={tech.data.slug}
             vendor_primary_color={tech.data.vendor_primary_color}
@@ -153,7 +153,7 @@ const data = techs.filter((tech: TechWithStringTags) => tech.data.category === '
             <TechCube
               title={tech.data.vendor_name || tech.data.title}
               vendoricon={tech.data.vendoricon}
-              excerpt={tech.data.excerpt}
+              description={tech.data.description}
               tags={tech.data.tags}
               slug={tech.data.slug}
               vendor_primary_color={tech.data.vendor_primary_color}
@@ -174,7 +174,7 @@ const data = techs.filter((tech: TechWithStringTags) => tech.data.category === '
             <TechCube
               title={tech.data.vendor_name || tech.data.title}
               vendoricon={tech.data.vendoricon}
-              excerpt={tech.data.excerpt}
+              description={tech.data.description}
               tags={tech.data.tags}
               slug={tech.data.slug}
               vendor_primary_color={tech.data.vendor_primary_color}
@@ -195,7 +195,7 @@ const data = techs.filter((tech: TechWithStringTags) => tech.data.category === '
           <TechCube
             title={tech.data.vendor_name || tech.data.title}
             vendoricon={tech.data.vendoricon}
-            excerpt={tech.data.excerpt}
+            description={tech.data.description}
             tags={tech.data.tags}
             slug={tech.data.slug}
             vendor_primary_color={tech.data.vendor_primary_color}

@@ -7,15 +7,14 @@ export async function GET(context) {
   });
 
   return rss({
-    title: 'SimonGreer.co.uk | Blog',
-    description: 'The latest from my blog',
+    title: 'Simon Greer',
+    description: 'Technical articles and project updates',
     site: context.site,
     items: blog.map((post) => ({
       title: post.data.title,
-      pubDate: new Date(post.data.created_date),
-      description: post.data.excerpt,
-      link: `/blog/${post.id}/`,
-      categories: post.data.tags,
+      pubDate: post.data.pubDate,
+      description: post.data.description,
+      link: `/blog/${post.slug}/`,
     })),
     customData: `<language>en-gb</language>`,
   });

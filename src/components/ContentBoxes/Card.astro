@@ -7,15 +7,15 @@ interface Props {
   
   title: string;
   slug: string;
-  excerpt?: string | null;
+  description?: string | null;
   tags?: { id: string; collection: string; data: { color: string } }[];
   coverimage?: string;
   className?: string;
   type?: 'blog' | 'tech' | 'tag' | 'project' | 'vendor';
-  created_date?: Date;
+  pubDate?: Date;
 }
 
-const { title, slug, excerpt, tags, coverimage, className = "", type = 'blog', created_date } = Astro.props;
+const { title, slug, description, tags, coverimage, className = "", type = 'blog', pubDate } = Astro.props;
 
 
 
@@ -35,9 +35,9 @@ const resolvedTags = tags?.map(tag => {
     data-tags={tags?.map(tag => tag.id).join(',')}>
 
   <a href={`${basePath}/${slug}`} class="group h-full flex flex-col">
-    {created_date && (
+    {pubDate && (
       <div class="absolute top-0 right-0 bg-gray-800 text-white px-3 py-0 rounded-bl-lg text-xs z-10">
-        {created_date.toLocaleDateString('en-GB', { 
+        {pubDate.toLocaleDateString('en-GB', { 
           year: 'numeric',
           month: 'short',
           day: 'numeric'
@@ -65,9 +65,9 @@ const resolvedTags = tags?.map(tag => {
       <h3 class="text-base font-semibold line-clamp-2 mb-2">
         {title}
       </h3>
-      {excerpt && (
+      {description && (
         <p class="text-gray-600 line-clamp-5 text-sm mb-2">
-          {excerpt}
+          {description}
         </p>
       )}
       {resolvedTags && resolvedTags.length > 0 && (

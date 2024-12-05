@@ -5,12 +5,12 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import '@styles/custom.css';
 import '@fontsource/poppins';
 
-// const techs = (await getCollection('tech')).filter(({ data }: { data: { created_date: Date } }) => {
-//   return data.created_date;
-// }).sort((a: { data: { created_date: Date } }, b: { data: { created_date: Date } }) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime());
-// // const posts = (await getCollection('blog')).filter(({ data }: { data: { created_date: Date } }) => {
-// //   return data.created_date;
-// // }).sort((a: { data: { created_date: Date } }, b: { data: { created_date: Date } }) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime());
+// const techs = (await getCollection('tech')).filter(({ data }: { data: { pubDate: Date } }) => {
+//   return data.pubDate;
+// }).sort((a: { data: { pubDate: Date } }, b: { data: { pubDate: Date } }) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
+// // const posts = (await getCollection('blog')).filter(({ data }: { data: { pubDate: Date } }) => {
+// //   return data.pubDate;
+// // }).sort((a: { data: { pubDate: Date } }, b: { data: { pubDate: Date } }) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
 // const { description } = Astro.props;
 // const currentSlug = Astro.url.pathname.split('/')[1];
 // // const limit = 6;

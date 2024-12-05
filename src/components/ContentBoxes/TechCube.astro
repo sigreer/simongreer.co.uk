@@ -2,7 +2,7 @@
 import { tailwindColorMap } from '@utils/tailwindColorMap';
 interface Props {
     slug: string;
-    excerpt?: string | null;
+    description?: string | null;
     title: string;
     vendoricon?: string;
     tags?: string[];
@@ -17,7 +17,7 @@ interface Props {
 const { iconWidth = 200, iconHeight = 200 } = Astro.props;
 const tailwindColors = tailwindColorMap;
 
-const { title, vendoricon, excerpt, className = "", vendor_primary_color = "gray-100", vendor_secondary_color = "gray-900" } = Astro.props;
+const { title, vendoricon, description, className = "", vendor_primary_color = "gray-100", vendor_secondary_color = "gray-900" } = Astro.props;
 
 const allVendorIcons = import.meta.glob<{ default: ImageMetadata }>('../../images/vendor-icons/*', { eager: true });
 const vendorImage = vendoricon ? allVendorIcons[`../../images/vendor-icons/${vendoricon}`]?.default : null;
@@ -51,11 +51,11 @@ const panels = [
     )
   },
   {
-    id: 'excerpt',
+    id: 'description',
     content: (
       `<div class="w-full h-full p-2">
         <p class="text-sm line-clamp-4 overflow-hidden ${isPrimaryColorDark ? 'text-white' : ''}">
-          ${excerpt}
+          ${description}
         </p>
       </div>`
     )

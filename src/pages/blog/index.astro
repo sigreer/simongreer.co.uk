@@ -6,11 +6,11 @@ import '@styles/custom.css';
 import Card from '@components/ContentBoxes/Card.astro';
 import Filter from '@components/Filter/Filter.astro';
 import TagFilter from '@components/Filter/Tag.astro';
-const posts = (await getCollection('blog', ({ data }: { data: { status: string, created_date: Date } }) => {
+const posts = (await getCollection('blog', ({ data }: { data: { status: string, pubDate: Date } }) => {
   return data.status === 'published';
 }))
-.sort((a: { data: { created_date: Date } }, b: { data: { created_date: Date } }) => 
-  new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime()
+.sort((a: { data: { pubDate: Date } }, b: { data: { pubDate: Date } }) => 
+  new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
 );
 
 const tagsWithData = await Promise.all(posts.map(async (post: CollectionEntry<'blog'>) => ({
@@ -41,10 +41,10 @@ const tagsWithData = await Promise.all(posts.map(async (post: CollectionEntry<'b
           <Card 
             title={post.data.title}
             slug={post.data.slug}
-            excerpt={post.data.excerpt}
+            description={post.data.description}
             tags={post.data.tags}
             coverimage={post.data.coverimage}
-            created_date={post.data.created_date}
+            pubDate={post.data.pubDate}
             type="blog"
           />
         ))}

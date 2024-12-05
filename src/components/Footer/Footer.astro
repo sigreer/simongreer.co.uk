@@ -13,7 +13,7 @@ const posts = await getCollection('blog');
                   <ul class="text-white text-sm">
                     {
       posts
-        .sort((a: { data: { created_date: Date } }, b: { data: { created_date: Date } }) => new Date(b.data.created_date).getTime() - new Date(a.data.created_date).getTime())
+        .sort((a: { data: { pubDate: Date } }, b: { data: { pubDate: Date } }) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime())
         .slice(0, 4)
         .map((post: { data: { title: string, slug: string } }) => (
                       <li class="mb-4">
