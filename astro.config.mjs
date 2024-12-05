@@ -106,13 +106,12 @@ export default defineConfig({
   prefetch: {
     defaultStrategy: 'viewport'
   },
-  output: 'server',
+  output: 'static',
   image: {
     formats: ['avif', 'webp', 'png', 'jpeg']
   },
 
   adapter: cloudflare({ 
-    output: 'hybrid', 
     mode: 'directory', 
     imageService: 'cloudflare',
     platformProxy: {

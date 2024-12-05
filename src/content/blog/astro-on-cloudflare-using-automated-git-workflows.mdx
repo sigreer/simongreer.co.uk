@@ -12,6 +12,10 @@ tags: ["astro", "cloudflare", "git", "automation"]
 category: "DevOps"
 ---
 
+import '@styles/lightbox.css';
+import LightBox from '../../components/Media/LightBox.astro';
+import cloudflarePagesDashboard from '@images/galleries/astro-on-cloudflare/cloudflare-pages-dashboard.png'; 
+
 ## Overview
 
 Cloudflare Pages is a powerful platform for hosting static sites - edge caching, image manipulation, page rules and with some configuration, server-side rendering. If you're an Astro user, you can automate the build and deployment process using Git workflow automation. If your site is pure static, you can configure everything in just a few clicks.
@@ -20,15 +24,48 @@ If you site includes server-side rendered pages it's a bit more work to get thin
 
 In this post I cover the process for automating both static and server-side rendered (hybrid) sites and highlight some of the gotchas I bumped into when setting this site up on Cloudflare Pages.
 
-### Static, Client-Side Rendering and Server-Side Rendering
+## Static, CSR and SSR
+
+### Static
+
+Static pages are built at build-time and as the name suggests, are static files that don't provide any iteractivity. Static content is lightning fast but not suited to content that changes. It's a good idea to generate as many static pages as possible to improve performance and reduce overhead & complexity.
+
+### Server-Side Rendering
+
+Each page is generated on the server on a per-request basis. This is most commonly used for sides that have dynamic content, such as ecommerce websites, sites where users log in, etc.
+
+### Client-Side Rendering
+
+Pages are generated in the browser using Javascript and can be updated in real time. This would typically be used where data is live-updated. A page that displays the current exchange rate would be a half-decent example of a use case for CSR.
+
+### Which To Use?
+
+Astro is geared towards content and in most cases the vast majority of pages can be generated ahead of time as static. However, most sites will often need to provide some degree of interactivity. One of the most common use cases is the processing of form data. If you want users to be able to fill in a contact form, as is the case for me on this site, you need to ensure that the form is able to send data and that data is processed accordingly.
+
+For now, let's leave that one, annoying page to the side and let's concentrate on first getting a workflow to automatically build a static-only website and publish it on Cloudflare Pages using their free tier.
 
 ## Automating a Static-Only Astro Build with Cloudflare Pages and Github
 
-1. Create Pages project
-2. Add Cloudflare Astro plugin
-3. Configure Git repository
-4. Set up build and deployment settings
-5. Push Astro code to repository
+I'll not cover creating an Astro site or initialising its Git repo. I'm assuming that a site already exists locally and is linked to a Github respositor. With that in mind, this is all you need to do to get up and running with Cloudflare Pages:
+
+1. Create a Pages project on Cloudflare
+2. Authenticate Cloudflare's access to Github
+3. Configure build preferences and set the workflow trigger
+4. Push Astro code to repository
+
+### Create a Pages Project on Cloudflare
+
+> **NOTE:** Pages are configured at account level, not at domain or 'website' level. You'll find the option in your account dashboard under the 'Workers & Pages' node.
+
+<div class="not-prose">
+<LightBox 
+  src={cloudflarePagesDashboard}
+  alt="Cloudflare Pages"
+  width={300}
+  class="my-4"
+  caption="Cloudflare Pages dashboard showing the Workers & Pages section"
+/>
+</div>
 
 ### Add Cloudflare Astro plugin
 
@@ -57,3 +94,5 @@ git push
 ```
 
 You can watch the build process in the Cloudflare dashboard. You may find it fails to build even though it completes locally. I found I had to remove some files that were prefixed with an underscore (ignored by Astro) as it was trying to build them. After that you should able to access your site using the URL entered in the Cloudflare dashboard when you created the project.
+
+

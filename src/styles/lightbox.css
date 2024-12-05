@@ -1,0 +1,59 @@
+.lightbox-wrapper {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.lightbox-wrapper figure {
+  margin: 0;
+}
+
+.lightbox-thumbnail {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.lightbox-caption {
+  text-align: center;
+  margin-top: 0.5rem;
+  font-style: italic;
+  color: var(--text-color);
+  font-size: 0.9rem;
+}
+
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  padding: 2rem;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.lightbox-overlay.active {
+  display: flex;
+}
+
+.lightbox-figure {
+  margin: 0;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.lightbox-full {
+  max-width: 100%;
+  max-height: calc(90vh - 3rem);
+  object-fit: contain;
+}
+
+.lightbox-caption-overlay {
+  color: white;
+  margin-top: 1rem;
+}

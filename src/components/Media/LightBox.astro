@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  width?: number;
+  class?: string;
+  caption?: string;
+}
+
+const { src, alt, width, class: className, caption } = Astro.props;
+---
+
+<div class="lightbox-wrapper">
+  <figure class="leading-tight">
+    <Image 
+      src={src} 
+      alt={alt} 
+      width={width} 
+      class={`lightbox-thumbnail ${className || ''}`}
+    />
+    {caption && <figcaption class="lightbox-caption leading-tight" style={`max-width: ${width}px`}>{caption}</figcaption>}
+  </figure>
+  <div class="lightbox-overlay">
+    <figure class="lightbox-figure">
+      <Image 
+        src={src} 
+        alt={alt} 
+        width={1920} 
+        class="lightbox-full leading-tight"
+      />
+      {caption && <figcaption class="lightbox-caption lightbox-caption-overlay leading-tight !text-2xl">{caption}</figcaption>}
+    </figure>
+  </div>
+</div>
+
+<script src="../../utils/lightBox.client.ts"></script>
