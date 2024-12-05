@@ -47,14 +47,9 @@ export default defineConfig({
       target: 'webworker',
       external: [
         'path',
-        'fs',
         'url',
-        'module',
         'crypto',
-        'os',
-        'child_process',
         'util',
-        'net',
       ]
     },
     css: {
