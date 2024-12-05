@@ -214,5 +214,17 @@
       "description": "Business applications",
       "category": "business",
       "color": "#0073aa"
+    },
+    "vector art": {
+      "name": "Vector Art",
+      "description": "Vector art and icon design",
+      "category": "design",
+      "color": "#007bb5"
+    },
+    "inkscape": {
+      "name": "Inkscape",
+      "description": "Inkscape vector graphics editor",
+      "category": "design",
+      "color": "#007bb5"
     }
   }
