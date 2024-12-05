@@ -77,7 +77,7 @@
       "category": "systems",
       "color": "#673ab7"
     },
-    "open-source": {
+    "open source": {
       "name": "Open Source",
       "description": "Open source software",
       "category": "development",
@@ -208,5 +208,11 @@
       "description": "Audio processing and production",
       "category": "media",
       "color": "#ac0077"
+    },
+    "business apps": {
+      "name": "Business Apps",
+      "description": "Business applications",
+      "category": "business",
+      "color": "#0073aa"
     }
   }

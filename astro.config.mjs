@@ -82,6 +82,7 @@ export default defineConfig({
       profile: true,
     },
   },
+  site: 'https://simongreer.co.uk',
   integrations: [
     tailwind({ applyBaseStyles: false }),
     robotsTxt(),
@@ -97,7 +98,6 @@ export default defineConfig({
     shikiConfig: { theme },
     remarkPlugins: [remarkGfm],
   },
-  site: process.env.SITE_URL,
   postcss: {
     plugins: [
       postcssNesting(),
@@ -105,14 +105,13 @@ export default defineConfig({
       autoprefixer()
     ]
   },
-experimental: {
+  experimental: {
     svg: false,
   },
   prefetch: {
     defaultStrategy: 'viewport'
   },
   output: 'server',
-
   image: {
     formats: ['avif', 'webp', 'png', 'jpeg']
   },

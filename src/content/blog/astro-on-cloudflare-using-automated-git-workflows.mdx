@@ -14,9 +14,15 @@ category: "DevOps"
 
 ## Overview
 
-Cloudflare Pages is a powerful platform for hosting static websites and serverless functions. It offers a seamless way to deploy your Astro site, benefiting from Cloudflare's global infrastructure, edge caching, and security features.
+Cloudflare Pages is a powerful platform for hosting static sites - edge caching, image manipulation, page rules and with some configuration, server-side rendering. If you're an Astro user, you can automate the build and deployment process using Git workflow automation. If your site is pure static, you can configure everything in just a few clicks.
 
-## Steps
+If you site includes server-side rendered pages it's a bit more work to get things properly configured, but once set up it works flawlessly and the site's performance is blisteringly fast.
+
+In this post I cover the process for automating both static and server-side rendered (hybrid) sites and highlight some of the gotchas I bumped into when setting this site up on Cloudflare Pages.
+
+### Static, Client-Side Rendering and Server-Side Rendering
+
+## Automating a Static-Only Astro Build with Cloudflare Pages and Github
 
 1. Create Pages project
 2. Add Cloudflare Astro plugin

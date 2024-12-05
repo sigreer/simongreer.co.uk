@@ -17,9 +17,10 @@ const formattedDate = new Date(post.data.created_date).toLocaleDateString('en-GB
       <Image 
         src={ImageSrc} 
         alt={post.data.title ?? 'Nice cover image'} 
-        width={1024} 
-        height={400} 
-        format="webp"
+        width={1024}
+        height={400}
+        quality={80}
+        format="avif"
         class="w-full h-full max-h-[400px] p-0 mt-0 rounded-none relative z-10 object-cover"
         loading="eager"
         fetchpriority="high"
