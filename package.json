@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "wrangler types && astro dev",
-    "build": "wrangler types && astro sync --clear && astro build --clear",
+    "build": "wrangler types && astro build",
     "preview": "astro build && wrangler pages dev",
     "astro": "astro",
     "deploy": "echo 'Make sure you have committed all changes before deploying' && wrangler types && astro sync --clear && astro build && git push",
