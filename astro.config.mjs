@@ -47,9 +47,14 @@ export default defineConfig({
       target: 'webworker',
       external: [
         'path',
+        'fs',
         'url',
+        'module',
         'crypto',
+        'os',
+        'child_process',
         'util',
+        'net',
       ]
     },
     css: {
@@ -111,7 +116,7 @@ export default defineConfig({
     formats: ['avif', 'webp', 'png', 'jpeg']
   },
 
-  adapter: cloudflare({ 
+  adapter: cloudflare({  
     mode: 'directory', 
     imageService: 'cloudflare',
     platformProxy: {
