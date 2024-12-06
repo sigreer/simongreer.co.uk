@@ -2,7 +2,7 @@
 title: "Astro on Cloudflare Using Automated Git Workflows"
 slug: astro-on-cloudflare-using-automated-git-workflows
 description: "Automate your Astro site deployment to Cloudflare Pages using Git workflow automation"
-pubDate: 2024-11-14
+pubDate: 2024-12-06
 status: published
 coverimage: "astro-cloudflare-pages-workflow.png"
 vendor_name: "Cloudflare"
@@ -14,7 +14,8 @@ category: "DevOps"
 
 import '@styles/lightbox.css';
 import LightBox from '../../components/Media/LightBox.astro';
-import cloudflarePagesDashboard from '@images/galleries/astro-on-cloudflare/cloudflare-pages-dashboard.png'; 
+import cloudflarePagesDashboard from '@images/galleries/astro-on-cloudflare/cloudflare-pages-dashboard-min.png'; 
+import cloudflarePagesBuildPreferences from '@images/galleries/astro-on-cloudflare/cloudflare-static-build-preferences-min.png'; 
 
 ## Overview
 
@@ -44,27 +45,67 @@ Astro is geared towards content and in most cases the vast majority of pages can
 
 For now, let's leave that one, annoying page to the side and let's concentrate on first getting a workflow to automatically build a static-only website and publish it on Cloudflare Pages using their free tier.
 
-## Automating a Static-Only Astro Build with Cloudflare Pages and Github
+## Static-Only automation
 
-I'll not cover creating an Astro site or initialising its Git repo. I'm assuming that a site already exists locally and is linked to a Github respositor. With that in mind, this is all you need to do to get up and running with Cloudflare Pages:
+I'll not cover creating an Astro site or initialising its Git repo. I'm assuming that a site already exists locally and is linked to a Github repo. With that in mind, you just have these steps to complete to get your site up and running on Cloudflare Pages:
 
 1. Create a Pages project on Cloudflare
 2. Authenticate Cloudflare's access to Github
-3. Configure build preferences and set the workflow trigger
-4. Push Astro code to repository
+3. Configure build preferences
+4. Create deploy hook
+5. Push code to repo
 
 ### Create a Pages Project on Cloudflare
 
 > **NOTE:** Pages are configured at account level, not at domain or 'website' level. You'll find the option in your account dashboard under the 'Workers & Pages' node.
 
 <div class="not-prose">
-<LightBox 
-  src={cloudflarePagesDashboard}
+<LightBox src={cloudflarePagesDashboard}
   alt="Cloudflare Pages"
   width={300}
   class="my-4"
   caption="Cloudflare Pages dashboard showing the Workers & Pages section"
 />
+</div>
+
+### Authenticate GitHub
+
+Enter the repo details, click add and you'll be whisked away to GitHub to authenticate Cloudflare via OAuth. Once complete, you'll be automatically returned to the Cloudflare dashboard where you can select the repository you want to deploy from.
+
+### Configure Build Preferences
+
+Set the build command. I use bun, so it's a nice simple `bun run build`. Cloudflare includes a framework preset for Astro which just changes it to `npm run build`.
+
+<div class="not-prose">
+<LightBox src={cloudflarePagesBuildPreferences}
+  alt="Cloudflare build preferences"
+  width={300}
+  class="my-4"
+  caption="Build preferences"
+/>
+</div>
+
+### Create Deploy hook
+
+To enable automated deployments, you need to create a deploy hook. This opens an HTTP endpoint that Cloudflare listens on. To complete the configuration, add this URL to the Github Actions workflow as a trigger.
+
+<div class="flex flex-row">
+    <div class="not-prose flex">
+    <LightBox src={cloudflarePagesDeployHook}
+    alt="Cloudflare deploy hook"
+    width={300}
+    class="my-4"
+    caption="Cloudflare Pages deploy hook"
+    />
+    </div>
+    <div class="not-prose flex">
+    <LightBox src={githubActionsWorkflowTrigger}
+    alt="Cloudflare deploy hook"
+    width={300}
+    class="my-4"
+    caption="GitHub Actions workflow trigger configuration"
+    />
+    </div>
 </div>
 
 ### Add Cloudflare Astro plugin

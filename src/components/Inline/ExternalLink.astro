@@ -1,0 +1,90 @@
+---
+import GithubIcon from '@components/Icons/GithubIcon.astro';
+import YouTubeIcon from '@components/Icons/YouTubeIcon.astro';
+import BlueSkyIcon from '@components/Icons/BlueSkyIcon.astro';
+import XIcon from '@components/Icons/XIcon.astro';
+import MastodonIcon from '@components/Icons/MastodonIcon.astro';
+
+const { link, text } = Astro.props;
+
+type LinkType = 'github' | 'youtube' | 'bluesky' | 'x' | 'mastodon' | 'default';
+
+const normalizeLink = (inputLink: string): { type: LinkType; href: string; linkText: string } => {
+    if (inputLink.includes('github.com')) {
+        const githubPrefix = 'https://github.com/';
+        const cleanLink = inputLink.replace(githubPrefix, '');
+        const [user, repo] = cleanLink.split('/');
+        return {
+            type: 'github',
+            href: `${githubPrefix}${user}/${repo}`,
+            linkText: `${user}/${repo}`
+        };
+    }
+    if (inputLink.includes('youtube.com') || inputLink.includes('youtu.be')) {
+        const videoId = inputLink.split('/').pop()?.split('?v=').pop();
+        return {
+            type: 'youtube',
+            href: `https://youtube.com/watch?v=${videoId}`,
+            linkText: 'YouTube Video'
+        };
+    }
+    if (inputLink.includes('bsky.app')) {
+        const username = inputLink.split('/').pop();
+        return {
+            type: 'bluesky',
+            href: inputLink,
+            linkText: `@${username}`
+        };
+    }
+    if (inputLink.includes('twitter.com') || inputLink.includes('x.com')) {
+        const username = inputLink.split('/').pop();
+        return {
+            type: 'x',
+            href: inputLink,
+            linkText: `@${username}`
+        };
+    }
+    if (inputLink.match(/\w+\.social/) || inputLink.includes('mastodon.')) {
+        const parts = inputLink.split('@').pop()?.split('/');
+        const username = parts?.[0];
+        const instance = new URL(inputLink).hostname;
+        return {
+            type: 'mastodon',
+            href: inputLink,
+            linkText: `@${username}@${instance}`
+        };
+    }
+    return {
+        type: 'default',
+        href: inputLink,
+        linkText: inputLink
+    };
+};
+
+const { type, href, linkText } = normalizeLink(link);
+
+const IconMap = {
+    github: GithubIcon,
+    youtube: YouTubeIcon,
+    bluesky: BlueSkyIcon,
+    x: XIcon,
+    mastodon: MastodonIcon,
+    default: GithubIcon
+} as const;
+
+const IconComponent = IconMap[type];
+---
+
+<div class="flex flex-row py-2">
+    <div class="flex">
+        <a href={href}>
+            {type && <IconComponent class="h-8 w-8 flex" fill="#171717" />}
+        </a>
+    </div>
+    <div class="text-xl pl-2 flex  mb-1 leading-tight flex-col">
+        <a href={href} class="block transition-colors duration-300 hover:text-pink-600">{linkText}</a>
+        <p class="leading-tight m-0 p-0">
+            <span class="text-gray-500 italic !text-[14px]">{text}</span>
+        </p>    
+    </div>
+</div>
