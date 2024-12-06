@@ -13,13 +13,22 @@ const { src, alt, width = 300, class: className, caption } = Astro.props;
 ---
 
 <div class="lightbox-wrapper">
-  <figure class="leading-tight">
+  <figure class="leading-tight relative group">
     <Image 
       src={src} 
       alt={alt} 
       width={width} 
-      class={`lightbox-thumbnail ${className || ''}`}
+      class={`lightbox-thumbnail ${className || ''} hover:outline hover:outline-[6px] hover:outline-pink-600 hover:shadow-lg`}
     />
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      height="48px" 
+      viewBox="0 -960 960 960" 
+      width="48px" 
+      class="absolute top-2 right-2 fill-white opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200"
+    >
+      <path d="M200-200v-240h60v180h180v60H200Zm500-320v-180H520v-60h240v240h-60Z"/>
+    </svg>
     {caption && <figcaption class="lightbox-caption leading-tight" style={`max-width: ${width}px`}>{caption}</figcaption>}
   </figure>
   <div class="lightbox-overlay">
@@ -34,5 +43,4 @@ const { src, alt, width = 300, class: className, caption } = Astro.props;
     </figure>
   </div>
 </div>
-
 <script src="../../utils/lightBox.client.ts"></script>

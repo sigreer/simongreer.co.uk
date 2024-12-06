@@ -1,6 +1,6 @@
 ---
-title: "Astro on Cloudflare Using Automated Git Workflows"
-slug: astro-on-cloudflare-using-automated-git-workflows
+title: "Astro on Cloudflare Fully Automated"
+slug: astro-on-cloudflare-fully-automated
 description: "Automate your Astro site deployment to Cloudflare Pages using Git workflow automation"
 pubDate: 2024-12-06
 status: published
@@ -24,7 +24,7 @@ Cloudflare Pages is a powerful platform for hosting static sites - edge caching,
 
 If you site includes server-side rendered pages it's a bit more work to get things properly configured, but once set up it works flawlessly and the site's performance is blisteringly fast.
 
-In this post I cover the process for automating both static and server-side rendered (hybrid) sites and highlight some of the gotchas I bumped into when setting this site up on Cloudflare Pages.
+In this post I cover the process for automating a static-only site using Github and Cloudflare Pages. Subsequent posts will expand to cover server-side rendered builds for form processing, automated notifications and automated post-build Pagespeed analysis.
 
 ## Static, CSR and SSR
 
@@ -85,45 +85,25 @@ Set the build command. I use bun, so it's a nice simple `bun run build`. Cloudfl
 />
 </div>
 
-### Push code
+### Push Code &amp; Watch Build
 
 When configured via the Cloudflare dashboard, the trigger is set up automatically. All that's left to do is push the site to Github and observe the build process.
+
+```bash caption="Push Astro code to repository"
+bun run astro sync --clear
+bun run astro build
+git add .
+git commit -m "Deploy Astro site to Cloudflare Pages"
+git push
+```
 
 <div class="not-prose">
 <LightBox src={cloudflarePagesBuildProcess}
   alt="Cloudflare build process"
   width={300}
   class="my-4"
-  caption="Cloudflare dashboard showing an automated build"
+  caption="Watch the build process"
 />
 </div>
 
-### Add Cloudflare Astro plugin
-
-This step is optional if you're generating static content only. If you're using server-side rendering, you'll need to add the Cloudflare plugin.
-
-```bash caption="Install Cloudflare Astro plugin"
-npm install @astrojs/cloudflare
-```
-
-### Configure Git repository
-
-There's very little involved in this step as Cloudflare now authenticates with GitHub and pulls the repository info over after you've granted permission. Simply select the repository you want to deploy from and you're good to go.
-
-### Set up build and deployment settings
-
-You need to select the package manager you use locally to ensure the package lock file is generated correctly. I use Bun, so for me it was `bun run build` as the build command using the main branch of the repository. The steps are pretty much identical for the other package managers (npm, pnpm, yarn, etc.).
-
-Select a push action as the trigger for the workflow so the site is redeployed each time a change is made.
-
-### Push Astro code to repository
-
-```bash caption="Push Astro code to repository"
-git add .
-git commit -m "Deploy Astro site to Cloudflare Pages"
-git push
-```
-
-You can watch the build process in the Cloudflare dashboard. You may find it fails to build even though it completes locally. I found I had to remove some files that were prefixed with an underscore (ignored by Astro) as it was trying to build them. After that you should able to access your site using the URL entered in the Cloudflare dashboard when you created the project.
-
-
+**That's it! I'll be posting about deploying Astro v5 to Cloudflare as static with a server-side rendered API endpoint for mail processing in the next part of this series of posts. Stay tuned!**
