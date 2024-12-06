@@ -16,6 +16,7 @@ import '@styles/lightbox.css';
 import LightBox from '../../components/Media/LightBox.astro';
 import cloudflarePagesDashboard from '@images/galleries/astro-on-cloudflare/cloudflare-pages-dashboard-min.png'; 
 import cloudflarePagesBuildPreferences from '@images/galleries/astro-on-cloudflare/cloudflare-static-build-preferences-min.png'; 
+import cloudflarePagesBuildProcess from '@images/galleries/astro-on-cloudflare/cloudflare-static-build-view.png';
 
 ## Overview
 
@@ -52,8 +53,7 @@ I'll not cover creating an Astro site or initialising its Git repo. I'm assuming
 1. Create a Pages project on Cloudflare
 2. Authenticate Cloudflare's access to Github
 3. Configure build preferences
-4. Create deploy hook
-5. Push code to repo
+4. Push code to repo
 
 ### Create a Pages Project on Cloudflare
 
@@ -85,27 +85,17 @@ Set the build command. I use bun, so it's a nice simple `bun run build`. Cloudfl
 />
 </div>
 
-### Create Deploy hook
+### Push code
 
-To enable automated deployments, you need to create a deploy hook. This opens an HTTP endpoint that Cloudflare listens on. To complete the configuration, add this URL to the Github Actions workflow as a trigger.
+When configured via the Cloudflare dashboard, the trigger is set up automatically. All that's left to do is push the site to Github and observe the build process.
 
-<div class="flex flex-row">
-    <div class="not-prose flex">
-    <LightBox src={cloudflarePagesDeployHook}
-    alt="Cloudflare deploy hook"
-    width={300}
-    class="my-4"
-    caption="Cloudflare Pages deploy hook"
-    />
-    </div>
-    <div class="not-prose flex">
-    <LightBox src={githubActionsWorkflowTrigger}
-    alt="Cloudflare deploy hook"
-    width={300}
-    class="my-4"
-    caption="GitHub Actions workflow trigger configuration"
-    />
-    </div>
+<div class="not-prose">
+<LightBox src={cloudflarePagesBuildProcess}
+  alt="Cloudflare build process"
+  width={300}
+  class="my-4"
+  caption="Cloudflare dashboard showing an automated build"
+/>
 </div>
 
 ### Add Cloudflare Astro plugin
