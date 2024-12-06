@@ -113,9 +113,10 @@ export default defineConfig({
   },
   output: 'static',
   image: {
+    
     formats: ['avif', 'webp', 'png', 'jpeg']
   },
-
+  imageService: 'cloudflare',
   adapter: cloudflare({  
     mode: 'directory', 
     imageService: 'cloudflare',
