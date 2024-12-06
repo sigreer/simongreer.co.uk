@@ -9,7 +9,7 @@ interface Props {
   caption?: string;
 }
 
-const { src, alt, width, class: className, caption } = Astro.props;
+const { src, alt, width = 300, class: className, caption } = Astro.props;
 ---
 
 <div class="lightbox-wrapper">
