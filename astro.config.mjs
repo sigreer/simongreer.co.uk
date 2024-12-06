@@ -116,10 +116,10 @@ export default defineConfig({
     
     formats: ['avif', 'webp', 'png', 'jpeg']
   },
-  imageService: 'cloudflare',
+
   adapter: cloudflare({  
     mode: 'directory', 
-    imageService: 'cloudflare',
+
     platformProxy: {
       enabled: true,
       configPath: './wrangler.toml'
