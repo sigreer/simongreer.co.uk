@@ -1,0 +1,24 @@
+---
+import GithubIcon from '@components/Icons/GithubIcon.astro';
+const { link, text } = Astro.props;
+const normalizeGitHubLink = (githubLink: string) => {
+    const githubPrefix = 'https://github.com/';
+    const cleanLink = githubLink.replace(githubPrefix, '');
+    const [user, repo] = cleanLink.split('/');
+    return {
+        href: `${githubPrefix}${user}/${repo}`,
+        linkText: `${user}/${repo}`
+    };
+}
+const { href, linkText } = normalizeGitHubLink(link);
+---
+<div class="flex flex-row">
+    <div class="flex">
+        <a href={href}>
+            <GithubIcon class="h-6 w-6 flex" fill="#cccccc;" />
+        </a>
+    </div>
+    <div class="text-xl pl-2">
+        <a href={href}>{linkText}</a>&nbsp;<span class="text-gray-500 italic !text-[14px]">{text}</span>
+    </div>
+</div>
