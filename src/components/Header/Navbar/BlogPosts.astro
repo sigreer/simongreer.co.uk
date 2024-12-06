@@ -1,7 +1,7 @@
 ---
 import NewspaperIcon from '@icons/NewspaperIcon.astro';
 const currentPath = Astro.url.pathname;
-const isActive = currentPath === '/blog';
+const isActive = currentPath.startsWith('/blog');
 ---
 
 <a href="/blog" class:list={[

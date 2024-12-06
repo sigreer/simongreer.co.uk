@@ -2,6 +2,7 @@
 import AccountCircleIcon from '@icons/AccountCircleIcon.astro';
 import IdentityIcon from '@components/Icons/IdentityIcon.astro'
 import FaceIcon from '@components/Icons/FaceIcon.astro'
+import ChatIcon from '@components/Icons/ChatIcon.astro'
 const currentPath = Astro.url.pathname;
 const isActive = currentPath === '/me/professionally' || currentPath === '/me/personally';
 ---
@@ -44,6 +45,16 @@ const isActive = currentPath === '/me/professionally' || currentPath === '/me/pe
                     ]}
                 />
                 Me Personally
+            </a>
+        </div>
+        <div class="hidden group-hover:block w-48 bg-white rounded-b-md shadow-lg">
+            <a href="/get-in-touch" class="group/item px-4 py-2 text-sm text-gray-700 hover:bg-purple-200 hover:text-purple-900 text-left flex flex-row rounded-b-md antialiased font-sans">
+                <ChatIcon
+                    class:list={[
+                        "mr-2 w-10 h-10 md:w-[18px] md:h-[18px] fill-black group-hover/item:fill-purple-900"
+                    ]}
+                />
+                Get In Touch
             </a>
         </div>
     </div>

@@ -8,7 +8,7 @@
     "build": "wrangler types && astro build",
     "preview": "astro build && wrangler pages dev",
     "astro": "astro",
-    "deploy": "echo 'Make sure you have committed all changes before deploying' && wrangler types && astro sync --clear && astro build && git push",
+    "deploy": "echo 'THIS PREPARES THE SITE FOR DEPLOYMENT. YOU STILL NEED TO PUSH TO GITHUB!!' && wrangler types && astro sync --clear && astro build",
     "dump": "wrangler types && astro sync --clear && astro build && wrangler deploy --dry-run",
     "sync": "astro sync --clear",
     "lint": "prettier --write  \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\" && eslint --fix \"src/**/*.{js,ts,jsx,tsx,astro}\"",
