@@ -1,0 +1,58 @@
+---
+title: "Is Wordpress Still a Viable Choice In 2025?"
+slug: "is-wordpress-still-a-viable-choice-in-2025"
+description: "Wordpress powers over 40% of the web, but does that make it the right choice for your website in 2025?"
+pubDate: 2024-11-21
+status: "published"
+coverimage: "astro-or-wordpress-for-a-new-website.png"
+vendor_name: "Astro"
+horizontal_logo: "astro-horizontal-logo.svg"
+vendoricon: "cloudflare-favicon.svg"
+tags: ["astro", "wordpress", "web"]
+category: "Web"
+---
+
+In the vast majority of cases the answer is a resounding **NO!**
+
+Wordpress accounts for a huge portion of the worldwide web. I first bumped into Wordpress when I was a university student in the mid-2000s. I was heavily into Joomla at the time, having gotten into web development on the back of its forebearer, '[Mambo](https://en.wikipedia.org/wiki/Mambo_(software))'. I didn't quite understand what all the fuss was about with Wordpress at the time - Joomla had a thriving eco-system, was infinitely more customisable and had a seemingly limitless number of use cases.
+
+Wordpress on the other hand, had a very limited backend that was only really there to manage blog posts. Themes didn't really exist - you had to copy the entire Wordpress directory and then modify the stylesheets and editable HTML parts of the PHP files. Here's a post from 2004 where the Wordpress team were sponsoring a CSS styles competition with a first place price of $70. It's funny to think that this was (probably) written by Matt Wollenweg, the CEO of Auttomatic, Wordpress.com's $1B+ parent company. It's the same  guy that's been making headlines over the last few months for calling WPengine, a giant in the Wordpress hosting space, a cancer after a very childish and very public fallout.
+
+Anyway, there was clearly a lot to be said for the idea of making it really easy for anyone to post content to the web and I eventually jumped on the bandwagon a couple of years later as Wordpress started to make inroads in the SMB/SME space due to its low barrier for entry. Since then I've probably built twenty or so websites on Wordpress for businesses and projects I've been directly involved in and managed many hundreds of client websites and the infrastructure they sit on.
+
+For a long time I was bedazzled by the enormity of the Wordpress eco-system and bought into the narrative that its global proliferation somehow rubberstamped it as the only serious choice for content-based websites outside of the enterprise. It wasn't until the mid-2010s as Nodejs started to grow in popularity and some of the earlier SSGs and JAMstack apps popped up that I realised there was life beyond Wordpress.
+
+## PHP vs JS Runtimes
+
+Wordpress is powered by PHP and despite its persistence as the most used server-side language globally (by a huge margin, too), there are simply better options available that provide a richer end user experience, faster load times, improved security and a much better developer experience. Although PHP won't be going anywhere anytime soon, Javascript frameworks powered by Node, Deno, Bun, etc. provide a vastly superior technology stack, making it very difficult to argue the case for Wordpress hunched atop PHP.
+
+## Plugins
+
+Originally one of the most lauded features of Wordpress, the plugin eco-system provides a foolproof way to slow your site down, fill it with useless and annoying ads, introduce myriad security vulnerabilities and leave you with buggy code whilst simultaneously charging you for the privilege. Plugins are so deeply ingrained into Wordpress that it would be inconceivable to remodel their implementation to any great effect. As a developer, this was one of the main headaches for me and something that put a bad taste in my mouth more than ten years ago.
+
+## Performance
+
+It doesn't matter how many plugins containing words like 'super', 'rocket' and 'lightning' you add. If you were to compare a Wordpress site that's undergone intense optimisation, it will still not come close to most modern JS frameworks when it comes to performance. Although attempts have been made to introduce static asset generation to Wordpess, unless you design your site from scratch to conform to a strict set of technology principles that the platform doesn't lend itself to naturally, you're not going to be able to utilise static content in any meaningful way.
+
+## Wordpress's Place
+
+As you've probably figured by now, Wordpress isn't my go-to when building a modern website. In my humble opinion there are better options for both the frontend and the backend. However, there is a place for Wordpress. In particular for the backend where you have non-technical staff who have been trained on and understand how Wordpress's backend works. Although there are more modern choices with equivalent levels of simplicity, in some cases sticking with what you know is worth more than changing things up and bringing things up to date.
+
+However, Wordpress can be expensive to host, insecure and cumbersome, so at the very least you should be doing your research on the alternatives to Wordpress before diving in with what you know and feel comfortable with.
+
+## Alternatives
+
+### Headless CMS
+
+If you've done anything more than a cursory look into alternatives you'll have bumped into the term 'headless CMS'. A headless CMS is essentially the admin/management side without the frontend website. Wordpress for instance, is a content management system (CMS) and a website bundled together. The more modern approach is to choose an appropriate tool to manage your content (a headless CMS) and tailor a frontend framework to display the content as desired. Some of the best open source options include:
+- [Directus](https://directus.io/)
+- [Payload](https://payloadcms.com/)
+- [Strapi](https://strapi.io/)
+
+### Modern Frontend Frameworks
+
+The modern frontend framework is Javascript-based, static-first and headless CMS-powered. There are lots of options out there, each with their pros and cons but my frontend framework of choice is [Astro](https://astro.build). Although it can seem a little daunting to newcomers, Astro is purpose-built for predominantly content-based website and is intrinsically optimised for creating optimised static, client-side rendered and server-side rendered content. You can easily publish your applications for free using [Github Pages](https://pages.github.io), [Cloudflare Pages](https://pages.cloudflare.com) and many more platforms for free.
+
+## In Summary
+
+Unless you have a really good reason to choose Wordpress, you should opt for a more modern headless CMS/JS-based frontend framework combination. It might seem confusing at first, but will save you time and money in the long run and will leave you with a performant, low footprint, SEO-friendly website in the long run.
