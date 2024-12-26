@@ -1,0 +1,107 @@
+---
+title: "Astro on Cloudflare Fully Automated"
+slug: astro-on-cloudflare-fully-automated
+description: "Automate your Astro site deployment to Cloudflare Pages using Git workflow automation"
+pubDate: 2024-12-23
+status: draft
+coverimage: "astro-cloudflare-pages-workflow.png"
+vendor_name: "Cloudflare"
+horizontal_logo: "cloudflare-horizontal-logo.svg"
+vendoricon: "cloudflare-favicon.svg"
+tags: ["astro", "cloudflare", "git", "automation"]
+category: "DevOps"
+---
+
+import '@styles/lightbox.css';
+import LightBox from '@components/Media/LightBox.astro';
+// import cloudflarePagesDashboard from '@images/galleries/astro-on-cloudflare/cloudflare-pages-dashboard-min.png'; 
+// import cloudflarePagesBuildPreferences from '@images/galleries/astro-on-cloudflare/cloudflare-static-build-preferences-min.png'; 
+// import cloudflarePagesBuildProcess from '@images/galleries/astro-on-cloudflare/cloudflare-static-build-view.png';
+
+## Overview
+
+This is a follow-on from my previous post about [how to deploy an Astro site onto Cloudflare Pages](/blog/astro-on-cloudflare-fully-automated). Last time I covered some basic principles relating to static, client-side and server-side rendered sites. I then gave a quick walkthrough of the process involved in setting up a static-only Astro site on Cloudflare Pages.
+
+Although most pages from most sites could quite easily exist as static, if you want to include a form that gets emailed upon submission or serve any sort of dynamic content then you need to include some capacity for your site to process these requests. Luckily, there is a Cloudflare adapter for Astro that opens up Cloudflare Workers functionality and Edge processing capabilities, allowing you to create API endpoints that can be processed by Cloudflare's Workers.
+
+## Static, CSR and SSR
+
+### Static
+
+Static pages are built at build-time and as the name suggests, are static files that don't provide any iteractivity. Static content is lightning fast but not suited to content that changes. It's a good idea to generate as many static pages as possible to improve performance and reduce overhead & complexity.
+
+### Server-Side Rendering
+
+Each page is generated on the server on a per-request basis. This is most commonly used for sides that have dynamic content, such as ecommerce websites, sites where users log in, etc.
+
+### Client-Side Rendering
+
+Pages are generated in the browser using Javascript and can be updated in real time. This would typically be used where data is live-updated. A page that displays the current exchange rate would be a half-decent example of a use case for CSR.
+
+### Which To Use?
+
+Astro is geared towards content and in most cases the vast majority of pages can be generated ahead of time as static. However, most sites will often need to provide some degree of interactivity. One of the most common use cases is the processing of form data. If you want users to be able to fill in a contact form, as is the case for me on this site, you need to ensure that the form is able to send data and that data is processed accordingly.
+
+For now, let's leave that one, annoying page to the side and let's concentrate on first getting a workflow to automatically build a static-only website and publish it on Cloudflare Pages using their free tier.
+
+## Static-Only automation
+
+I'll not cover creating an Astro site or initialising its Git repo. I'm assuming that a site already exists locally and is linked to a Github repo. With that in mind, you just have these steps to complete to get your site up and running on Cloudflare Pages:
+
+1. Create a Pages project on Cloudflare
+2. Authenticate Cloudflare's access to Github
+3. Configure build preferences
+4. Push code to repo
+
+### Create a Pages Project on Cloudflare
+
+> **NOTE:** Pages are configured at account level, not at domain or 'website' level. You'll find the option in your account dashboard under the 'Workers & Pages' node.
+
+<div class="not-prose">
+<LightBox src={cloudflarePagesDashboard}
+  alt="Cloudflare Pages"
+  width={300}
+  class="my-4"
+  caption="Cloudflare Pages dashboard showing the Workers & Pages section"
+/>
+</div>
+
+### Authenticate GitHub
+
+Enter the repo details, click add and you'll be whisked away to GitHub to authenticate Cloudflare via OAuth. Once complete, you'll be automatically returned to the Cloudflare dashboard where you can select the repository you want to deploy from.
+
+### Configure Build Preferences
+
+Set the build command. I use bun, so it's a nice simple `bun run build`. Cloudflare includes a framework preset for Astro which just changes it to `npm run build`.
+
+<div class="not-prose">
+<LightBox src={cloudflarePagesBuildPreferences}
+  alt="Cloudflare build preferences"
+  width={300}
+  class="my-4"
+  caption="Build preferences"
+/>
+</div>
+
+### Push Code &amp; Watch Build
+
+When configured via the Cloudflare dashboard, the trigger is set up automatically. All that's left to do is push the site to Github and observe the build process.
+
+```bash caption="Push Astro code to repository"
+bun run astro sync --clear
+bun run astro build
+git add .
+git commit -m "Deploy Astro site to Cloudflare Pages"
+git push
+```
+
+<div class="not-prose">
+<LightBox src={cloudflarePagesBuildProcess}
+  alt="Cloudflare build process"
+  width={300}
+  class="my-4"
+  caption="Watch the build process"
+/>
+</div>
+
+**That's it! I'll be posting about deploying Astro v5 to Cloudflare as static with a server-side rendered API endpoint for mail processing in the next part of this series of posts. Stay tuned!**

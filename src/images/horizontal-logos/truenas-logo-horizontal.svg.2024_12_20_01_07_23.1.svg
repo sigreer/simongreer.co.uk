@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="553.13739"
+   height="140.32391"
+   viewBox="0 0 146.35093 37.127369"
+   version="1.1"
+   id="svg5"
+   sodipodi:docname="truenas-logo-horizontal.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
+  <title
+     id="title1">TrueNAS Corporate Logo Blue Horitzontal</title>
+  <defs
+     id="defs2" />
+  <g
+     id="layer1"
+     transform="matrix(0.54539039,0,0,0.54539039,-14.740293,-16.830038)">
+    <g
+       id="g974"
+       transform="translate(-29.384275,16.227434)">
+      <path
+         id="rect4"
+         style="fill:#afadae;fill-rule:evenodd;stroke-width:0.894453;stroke-linecap:square;stroke-miterlimit:0;paint-order:markers stroke fill"
+         d="m 89.107325,-1.0842574 5.58e-4,9.823488 9.82256,-3.699e-4 3.7e-4,-9.8225598 z m 29.295835,-1.7320664 5.5e-4,9.8234879 9.82256,-3.699e-4 3.7e-4,-9.8225598 z m -29.958618,32.0971808 5.58e-4,9.823488 9.82256,-3.7e-4 3.7e-4,-9.82256 z m 29.539528,-1.25919 5.5e-4,9.823488 9.82256,-3.7e-4 9.2e-4,-9.823111 z"
+         transform="matrix(0.85993447,0.51040446,-0.85993447,0.51040446,29.384275,-16.227434)" />
+      <path
+         id="path1"
+         style="display:inline;fill:#0094d4;stroke-width:0.47502"
+         d="m 79.523043,30.971453 -0.01137,9.628624 11.110534,6.367286 8.579728,-4.921381 z m -25.951425,15.267272 -0.01042,9.628625 11.110534,6.367285 8.579728,-4.921381 z m 52.548102,0.17908 -0.0104,9.628624 11.11054,6.367286 8.57972,-4.921381 z m -79.094566,14.761301 0.0019,10.195236 22.013563,12.819847 0.03032,-10.408427 z m 52.751823,0.337314 -0.01042,9.628624 11.110534,6.367286 8.579727,-4.921381 z m -26.148508,14.818151 0.0028,9.986784 21.560652,12.557386 0.03032,-10.195237 z"
+         transform="translate(29.384275,-16.227434)" />
+      <path
+         id="path1-9-8"
+         style="display:inline;fill:#30beec;fill-opacity:1;stroke-width:0.484959"
+         d="M 75.571915,31.343826 55.892076,42.418354 64.471804,47.339735 75.582338,40.97245 Z M 49.738929,46.382747 30.05909,57.457276 l 8.579728,4.921381 11.110534,-6.367286 z m 52.029821,0.606408 -19.679842,11.074529 8.579727,4.921381 11.110535,-6.367285 z m 26.62226,13.947387 -22.04578,12.606657 0.0313,10.408427 22.01262,-12.819847 z m -52.697813,0.72769 -19.679839,11.074529 8.579728,4.921381 11.110533,-6.367286 z M 102.0729,76.096746 80.02712,88.703402 80.058388,99.111829 102.071,86.291982 Z"
+         transform="translate(29.384275,-16.227434)" />
+    </g>
+  </g>
+  <metadata
+     id="metadata1">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <cc:license
+           rdf:resource="https://simongreer.co.uk" />
+        <dc:title>TrueNAS Corporate Logo Blue Horitzontal</dc:title>
+        <dc:date>23/10/2024</dc:date>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Simon Greer</dc:title>
+          </cc:Agent>
+        </dc:creator>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>

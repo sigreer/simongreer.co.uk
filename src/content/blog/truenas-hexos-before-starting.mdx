@@ -1,0 +1,43 @@
+---
+title: "HexOS Statement of Intent"
+slug: "truenas-hexos-before-starting"
+description: "My thoughts, expectations and guesswork after having acquired an early access HexOS licence but before trying it out"
+pubDate: 2024-12-21
+status: "draft"
+coverimage: "truenas-hexos-before-starting.png"
+vendor_name: "HexOS"
+horizontal_logo: "hexos-horizontal-logo.svg"
+vendoricon: "hexos-icon.svg"
+tags: ["storage", "media"]
+category: "Storage"
+---
+
+I've been a TrueNAS junkie for years, having stumbled upon the 11.0 release of FreeNAS (its original denomination) in 2017 when reviewing non-Microsoft storage system options. That was also the first time I'd heard of ZFS, the filesystem that powers TrueNAS. It looked like it was ideal for my use case:
+
+- [x] Open source
+- [x] Supported multiple network storage protocols - **NFS**, **SMB** and **iSCSI** being the important ones for me at the time.
+- [x] Granular control over permissions with optional...
+- [x] Active directory integration
+- [x] Highly Performant
+- [x] Intrinsically resilient (*_when configured to basic best practice principles_)
+- [x] Not Microsoft
+
+I'd been using Linux as my desktop OS for about six months at this point, and had loads of Linux-based server experience under my belt. I hadn't touched BSD before but was aware of the shared history between the projects and felt that I wouldn't have any issues working under the hood where necessary.
+
+Wow, was I wrong.
+
+## Permissions
+
+Permissions are perhaps second only to DNS when it comes to cliches for things not working, and this is totally justified. Anyone who's spent more than a few weeks in the IT industry will not just recognise, but be able to recite word-for-word the error messages encountered when a permission is not correctly site.
+
+> Windows cannot access \\server\storage
+> You do not have permission to access \\server\storage. Contact your network administrator to request access.
+
+Muttering "I am the fucking administrator" under your breath whilst berating Microsoft for building bad software. Still, I can't say I've ever clicked any of the self-help links but they're probably terrible because... Microsoft!
+
+However, until you've endured the hardship, misery and despair of FreeNAS storage and share permissions, you don't know what pain is.
+
+<Image src={freenasTearsOfJoy} alt="Tears of joy" />
+
+tustled and toiled with permissions in some form or another. However, until you've endured the misery, despair and hopelessness of a TruNAS Core network share with incorrectly configured permissions, you don't know pain.
+
