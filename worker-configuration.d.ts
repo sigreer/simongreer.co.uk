@@ -10,4 +10,6 @@ interface Env {
 	MAILTRAP_TO_EMAIL: string;
 	PAGESPEED_API_KEY: string;
 	PAGESPEED_WEBHOOK_URL: string;
+	CLOUDFLARE_API_TOKEN: string;
+	CLOUDFLARE_ACCOUNT_ID: string;
 }
