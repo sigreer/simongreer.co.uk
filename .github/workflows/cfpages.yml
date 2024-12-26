@@ -1,0 +1,43 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+    
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+          
+      - name: Install dependencies
+        run: bun install
+        
+      - name: Build site
+        env:
+          MAILTRAP_API_KEY: ${{ secrets.MAILTRAP_API_KEY }}
+          MAILTRAP_API_USER: ${{ secrets.MAILTRAP_API_USER }}
+          MAILTRAP_FROM_EMAIL: ${{ secrets.MAILTRAP_FROM_EMAIL }}
+          MAILTRAP_HOST: ${{ vars.MAILTRAP_HOST }}
+          MAILTRAP_PORT: ${{ vars.MAILTRAP_PORT }}
+          MAILTRAP_TO_EMAIL: ${{ secrets.MAILTRAP_TO_EMAIL }}
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: bun run astro build
+        
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=simongreer --compatibility-date=2024-11-14 --compatibility-flag=nodejs_compat
