@@ -1,8 +1,10 @@
 #:schema node_modules/wrangler/config-schema.json
 
-main = "dist/_worker.js/index.js"
 name = "simongreer"
-type = "javascript"
-compatibility_date = "2024-11-25"
+compatibility_date = "2024-12-24"
 compatibility_flags = ["nodejs_compat"]
-mode = "smart"
+main = "./dist/_worker.js/index.js"
+assets = { directory = "./dist", binding = "ASSETS" }
+
+[observability]
+enabled = true

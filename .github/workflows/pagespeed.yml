@@ -12,21 +12,11 @@ jobs:
     environment: simongreercouk
     steps:
       - uses: actions/checkout@v4
-      
       - name: Set Up Bun
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
-          
       - name: Install Dependencies
         run: bun install
-        
       - name: Wait for Cloudflare deployment
         run: sleep 60
-        
-      - name: Run PageSpeed Analysis
-        env:
-          PAGESPEED_API_KEY: ${{ secrets.PAGESPEED_API_KEY }}
-          PAGESPEED_WEBHOOK_URL: ${{ secrets.PAGESPEED_WEBHOOK_URL }}
-          SITE_URL: ${{ vars.SITE_URL }}
-        run: bun run pagespeed

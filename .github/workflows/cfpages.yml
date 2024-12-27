@@ -42,3 +42,14 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist --project-name=simongreer
+  analyze:
+    runs-on: ubuntu-latest
+    name: Run Pagespeed Analysis 
+    environment: simongreercouk
+    steps:
+      - name: Run PageSpeed Analysis
+        env:
+          PAGESPEED_API_KEY: ${{ secrets.PAGESPEED_API_KEY }}
+          PAGESPEED_WEBHOOK_URL: ${{ secrets.PAGESPEED_WEBHOOK_URL }}
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: bun run pagespeed

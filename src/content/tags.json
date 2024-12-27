@@ -1,4 +1,16 @@
 {
+  "virtualization": {
+    "name": "Virtualization",
+    "description": "Virtual machine technology",
+    "category": "systems",
+    "color": "#8B7B0D"
+  },
+  "vdi": {
+    "name": "VDI",
+    "description": "Virtual Desktop Infrastructure",
+    "category": "systems",
+    "color": "#8B7B0D"
+  },
     "javascript": {
       "name": "JavaScript",
       "description": "A programming language that powers the web",
@@ -225,6 +237,36 @@
       "name": "Inkscape",
       "description": "Inkscape vector graphics editor",
       "category": "design",
+      "color": "#007bb5"
+    },
+    "llm": {
+      "name": "LLM",
+      "description": "Large Language Models",
+      "category": "ai-automation",
+      "color": "#007bb5"
+    },
+    "anthropic": {
+      "name": "Anthropic",
+      "description": "Anthropic AI",
+      "category": "ai-automation",
+      "color": "#007bb5"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "description": "Enterprise solutions",
+      "category": "business",
+      "color": "#007bb5"
+    },
+    "ansible": {
+      "name": "Ansible",
+      "description": "Ansible automation tool",
+      "category": "ai-automation",
+      "color": "#007bb5"
+    },
+    "devops": {
+      "name": "DevOps",
+      "description": "DevOps tools and practices",
+      "category": "development",
       "color": "#007bb5"
     }
   }

@@ -6,7 +6,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const runtime = locals.runtime;
     
     const formData = await request.json();
-    const { name, email, message } = formData;
+    const { name, email, message } = formData as { name: string; email: string; message: string };
   
     const emailData = {
       from: {
@@ -53,4 +53,3 @@ export const POST: APIRoute = async ({ request, locals }) => {
       });
     }
 }
-  

@@ -1,9 +1,9 @@
 ---
-title: "Astro on Cloudflare Fully Automated"
-slug: astro-on-cloudflare-fully-automated
+title: "Astro on Cloudflare Fully Automated Part 2"
+slug: astro-on-cloudflare-fully-automated-part-2
 description: "Automate your Astro site deployment to Cloudflare Pages using Git workflow automation"
 pubDate: 2024-12-23
-status: draft
+status: published
 coverimage: "astro-cloudflare-pages-workflow.png"
 vendor_name: "Cloudflare"
 horizontal_logo: "cloudflare-horizontal-logo.svg"
@@ -14,7 +14,7 @@ category: "DevOps"
 
 import '@styles/lightbox.css';
 import LightBox from '@components/Media/LightBox.astro';
-// import cloudflarePagesDashboard from '@images/galleries/astro-on-cloudflare/cloudflare-pages-dashboard-min.png'; 
+import mailtrapApiDetails from '@images/galleries/astro-on-cloudflare/mailtrap-api-details.png'; 
 // import cloudflarePagesBuildPreferences from '@images/galleries/astro-on-cloudflare/cloudflare-static-build-preferences-min.png'; 
 // import cloudflarePagesBuildProcess from '@images/galleries/astro-on-cloudflare/cloudflare-static-build-view.png';
 
@@ -22,86 +22,262 @@ import LightBox from '@components/Media/LightBox.astro';
 
 This is a follow-on from my previous post about [how to deploy an Astro site onto Cloudflare Pages](/blog/astro-on-cloudflare-fully-automated). Last time I covered some basic principles relating to static, client-side and server-side rendered sites. I then gave a quick walkthrough of the process involved in setting up a static-only Astro site on Cloudflare Pages.
 
-Although most pages from most sites could quite easily exist as static, if you want to include a form that gets emailed upon submission or serve any sort of dynamic content then you need to include some capacity for your site to process these requests. Luckily, there is a Cloudflare adapter for Astro that opens up Cloudflare Workers functionality and Edge processing capabilities, allowing you to create API endpoints that can be processed by Cloudflare's Workers.
+Although most pages from most sites could quite easily exist as static, if you want to include a form that gets emailed upon submission or serve any sort of dynamic content then you need to include some capacity for your site to process these requests. Luckily, there is a Cloudflare adapter for Astro that opens up Cloudflare Workers functionality and Edge processing capabilities, allowing you to create API endpoints that can be processed by Cloudflare's Workers. This example walks through the processing of an Astro form via Cloudflare Workers for a site hosted on Cloudflare Pages.
 
-## Static, CSR and SSR
+Here's a quick breakdown of the steps involved:
+1. Add the Cloudflare adapter to Astro
+2. Install and configure Cloudflare Wrangler
+3. Create a form for processing
+4. Set up an MTA/transactional email provider
+5. Create an API endpoint to process your form
 
-### Static
+## Cloudflare adapter
 
-Static pages are built at build-time and as the name suggests, are static files that don't provide any iteractivity. Static content is lightning fast but not suited to content that changes. It's a good idea to generate as many static pages as possible to improve performance and reduce overhead & complexity.
+The Cloudflare adapter for Astro provides a set of bindings that allow for easy deployment to Cloudflare Pages using serverless functions. As we need our site to do more than just serve HTML, we need to make sure that Cloudflare is configured correctly.
 
-### Server-Side Rendering
+First off, add the Cloudflare adapter to your project:
 
-Each page is generated on the server on a per-request basis. This is most commonly used for sides that have dynamic content, such as ecommerce websites, sites where users log in, etc.
-
-### Client-Side Rendering
-
-Pages are generated in the browser using Javascript and can be updated in real time. This would typically be used where data is live-updated. A page that displays the current exchange rate would be a half-decent example of a use case for CSR.
-
-### Which To Use?
-
-Astro is geared towards content and in most cases the vast majority of pages can be generated ahead of time as static. However, most sites will often need to provide some degree of interactivity. One of the most common use cases is the processing of form data. If you want users to be able to fill in a contact form, as is the case for me on this site, you need to ensure that the form is able to send data and that data is processed accordingly.
-
-For now, let's leave that one, annoying page to the side and let's concentrate on first getting a workflow to automatically build a static-only website and publish it on Cloudflare Pages using their free tier.
-
-## Static-Only automation
-
-I'll not cover creating an Astro site or initialising its Git repo. I'm assuming that a site already exists locally and is linked to a Github repo. With that in mind, you just have these steps to complete to get your site up and running on Cloudflare Pages:
-
-1. Create a Pages project on Cloudflare
-2. Authenticate Cloudflare's access to Github
-3. Configure build preferences
-4. Push code to repo
-
-### Create a Pages Project on Cloudflare
-
-> **NOTE:** Pages are configured at account level, not at domain or 'website' level. You'll find the option in your account dashboard under the 'Workers & Pages' node.
-
-<div class="not-prose">
-<LightBox src={cloudflarePagesDashboard}
-  alt="Cloudflare Pages"
-  width={300}
-  class="my-4"
-  caption="Cloudflare Pages dashboard showing the Workers & Pages section"
-/>
-</div>
-
-### Authenticate GitHub
-
-Enter the repo details, click add and you'll be whisked away to GitHub to authenticate Cloudflare via OAuth. Once complete, you'll be automatically returned to the Cloudflare dashboard where you can select the repository you want to deploy from.
-
-### Configure Build Preferences
-
-Set the build command. I use bun, so it's a nice simple `bun run build`. Cloudflare includes a framework preset for Astro which just changes it to `npm run build`.
-
-<div class="not-prose">
-<LightBox src={cloudflarePagesBuildPreferences}
-  alt="Cloudflare build preferences"
-  width={300}
-  class="my-4"
-  caption="Build preferences"
-/>
-</div>
-
-### Push Code &amp; Watch Build
-
-When configured via the Cloudflare dashboard, the trigger is set up automatically. All that's left to do is push the site to Github and observe the build process.
-
-```bash caption="Push Astro code to repository"
-bun run astro sync --clear
-bun run astro build
-git add .
-git commit -m "Deploy Astro site to Cloudflare Pages"
-git push
+```bash
+bun add @astrojs/cloudflare
 ```
 
+Next, we'll configure Astro's config file to use the Cloudflare adapter:
+
+```javascript
+import { defineConfig, envField } from 'astro/config'
+import cloudflare from '@astrojs/cloudflare';
+import dotenv from 'dotenv';
+dotenv.config();
+
+export default defineConfig({
+  env: {
+    schema: {
+      SITE_URL: envField.string({ context: "client", access: "public", optional: true}),
+    }
+  },
+  vite: {
+    ssr: {
+      noExternal: ['dotenv', '@astrojs/cloudflare'],
+      target: 'webworker',
+      external: ['path','fs','url','module','crypto','os','child_process','util','net'],
+    },
+    resolve: {
+      alias: {
+        '@': '/src',
+      }
+    },
+  },
+  site: process.env.SITE_URL,
+  output: 'static',
+  adapter: cloudflare({  
+    mode: 'directory', 
+    platformProxy: {
+      enabled: true,
+      configPath: './wrangler.toml'
+    }
+  })
+})
+```
+
+There are several parts to make note of:
+1. Make sure you include an import statement for ``@astrojs/cloudflare``
+2. In your Vite config, create an 'ssr' section with the displayed values. This section tells Vite that we want to use an external provider for the listed Node commands.
+3. Leave your site with ``output: 'static'``. If you Cloudflare refuses to play ball, you need to upgrade the adapter to the most recent version. It's worth noting that Astro deprecated ``output: 'hybrid'`` with v5. Now, all pages will be rendered as static **unless stated otherwise on the page itself**.
+4. ``mode: 'directory'`` tells Cloudflare to use the simple configuration. By default it uses the 'advanced' setting.
+5. ``platformProxy`` is the section that confirms our intention to have Cloudflare execute processes at the edge. Nested under the ``platformProxy`` is the config file for Wrangler.
+
+### Wrangler
+
+Wrangler is a CLI tool from Cloudflare that helps development with and deployment of Cloudflare Workers. As we're going to be adding an API endpoint to handle form processing to our otherwise static site, we need to include some rudimentary configs for Wrangler. Wrangler will ensure that our serverless functions (ie. the API endpoint we'll be creating) are executed by an appropriate 'Worker'. 
+
+Let's start by installing Wrangler:
+```bash
+pamac install wrangler
+pacman -S wrangler
+apt install wrangler -y
+```
+
+I prefer to use my system's package manager but Cloudflare's documentation suggests installing the binaries on a per-project basis:
+```bash
+bun add -D wrangler
+```
+
+In the last step we added a config file path for Wrangler to the Cloudflare adapter's config. Let's create that and add the necessary configurations to it.
+
+```toml
+#:schema node_modules/wrangler/config-schema.json
+
+name = "my-project"
+compatibility_date = "2024-12-24"
+compatibility_flags = ["nodejs_compat"]
+main = "./dist/_worker.js/index.js"
+assets = { directory = "./dist", binding = "ASSETS" }
+
+[observability]
+enabled = true
+```
+
+And add types to ``tsconfig.json``:
+```json
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"],
+  "compilerOptions": {
+    "strictNullChecks": true,
+    "types": [
+        "@cloudflare/workers-types/2023-07-01"
+    ]
+  }
+}
+```
+You can authenticate via CLI with the following command. If running in a local development environment it will spin up a browser for oAuth authentication via Cloudflare's website.
+```bash
+bun run wrangler login
+```
+
+Generate your Wrangler types using the following command:
+```bash
+bun run cf-typegen
+```
+or
+```bash
+bun run wrangler types
+```
+
+To save time, you might want to add this as a build step in your ``package.json``.
+
+Wrangler will look in ``.dev.vars`` by for its environment variables and secrets when running a development environment locally. You will need to create your environment variables in Cloudflare Pages (either via dashboard or using the API. The former is probably easiest).
+
+### Create a Form
+
+This needn't be anything fancy:
+```html
+<form id="contact-form">
+  <input type="email" name="email" required placeholder="bob@bobsgiraffes.com" />
+  <label for="message">Your Message</label>
+  <textarea id="message" name="message" required rows="4" placeholder="Type your message here..." />
+  <button type="submit">Send Message</button>
+</form>
+```
+
+Append a simple script to pass the JSON data to our soon to be form processing API endpoint:
+
+```javascript
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(form);
+    const email = formData.get('email');
+    const message = formData.get('message');
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          name: email,
+          email, 
+          message
+        }),
+      });
+      if (response.ok) {
+        alert('Message sent successfully! You will receive a confirmation email shortly.');
+        form.reset();
+      } else {
+        alert('Failed to send message. Please try again.');
+      }
+    } catch (error) {
+      alert('An error occurred. Please try again later.');
+  }
+});
+</script>
+```
+
+### Set Up an MTA
+
+It's of course possible to use a standard SMTP-enabled mail server, but using a transactional email provider is inexpensive and removes all of the pain that comes with sending transactional emails. ([mailtrap.io](https://mailtrap.io) is my preferred option), but there are thousands out there.
+
 <div class="not-prose">
-<LightBox src={cloudflarePagesBuildProcess}
-  alt="Cloudflare build process"
+<LightBox src={mailtrapApiDetails}
+  alt="Mailtrap"
   width={300}
   class="my-4"
-  caption="Watch the build process"
+  caption="Mailtrap domain API details"
 />
 </div>
 
-**That's it! I'll be posting about deploying Astro v5 to Cloudflare as static with a server-side rendered API endpoint for mail processing in the next part of this series of posts. Stay tuned!**
+### Create API Endpoint
+
+In your Astro ``pages`` directory in Astro, create a new route for 'api' by making a new dir, and in that dir create a Typescript file with a suitable name and the following code:
+
+```typescript
+export const prerender = false;
+import type { APIRoute } from 'astro';
+
+export const POST: APIRoute = async ({ request, locals }) => {
+    // @ts-ignore
+    const runtime = locals.runtime;
+    
+    const formData = await request.json();
+    const { name, email, message } = formData as { name: string; email: string; message: string };
+  
+    const emailData = {
+      from: {
+        email: runtime.env.MAILTRAP_FROM_EMAIL,
+        name: "My Project's MailBot",
+      },
+      to: [
+        {
+          email: runtime.env.MAILTRAP_TO_EMAIL,
+          name: "Form Submission Recipient",
+        },
+      ],
+      subject: "New Contact Form Submission",
+      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+    };
+  
+    try {
+      const response = await fetch("https://send.api.mailtrap.io/api/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${await runtime.env.MAILTRAP_API_KEY}`,
+        },
+        body: JSON.stringify(emailData),
+      });
+  
+      if (!response.ok) {
+        const error = await response.json();
+        return new Response(JSON.stringify({ error }), { 
+          status: response.status,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+
+      return new Response(JSON.stringify({ message: "Email sent successfully" }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    } catch (error) {
+      console.error("Unexpected error:", error);
+      return new Response(JSON.stringify({ error: "Server error" }), { 
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+}
+```
+
+Note the ``prerender = false`` statement at the beginning of the file. This tells Astro not to build this page at build time as static, and instead run from the server as and when it's called.
+
+The code expects a name, email address and message in JSON which it parses and sends to Mailtrap where it's subsequently processed and sent to the recipient specified in the environment variables.
+
+### Test
+
+Once done you should have a Cloudflare Worker deployed using Wrangler that 

@@ -29,7 +29,9 @@
     ],
     "allowJs": true,
     "outDir": "./public/js",
-  },
+    "types": [
+      "@cloudflare/workers-types/2023-07-01"
+  ]},
   "include": [".astro/types.d.ts", "src/**/*.ts*", "src/**/*.mdx", "src/**/*.astro", "src/components/**/*", "@components/**/*", "@icons/**/*", "**/*"],
   "exclude": ["dist"]
 }
