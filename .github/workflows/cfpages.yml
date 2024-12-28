@@ -43,10 +43,21 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist --project-name=simongreer
   analyze:
+    needs: deploy
     runs-on: ubuntu-latest
     name: Run Pagespeed Analysis 
     environment: simongreercouk
     steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+          
+      - name: Install dependencies
+        run: bun install
+        
       - name: Run PageSpeed Analysis
         env:
           PAGESPEED_API_KEY: ${{ secrets.PAGESPEED_API_KEY }}
