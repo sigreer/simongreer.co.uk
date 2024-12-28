@@ -43,7 +43,6 @@ export default defineConfig({
   },
   vite: {
     optimizeDeps: {
-      include: ['react', 'react-dom'],
       exclude: ['@astrojs/react']
     },
     ssr: {
@@ -79,7 +78,11 @@ export default defineConfig({
         '@pages': '/src/pages',
         '@utils': '/src/utils',
         '@lib': '/src/lib',
-      }
+      },
+      alias: import.meta.env.PROD && {
+        "react-dom/server": "react-dom/server.edge",
+      },
+
     },
     build: {
       sourcemap: true,
@@ -94,10 +97,7 @@ export default defineConfig({
       jsx: true,
       jsxImportSource: 'react',
     }),
-    react({
-      include: ['**/react/*'],
-      experimentalReactChildren: true
-    }),
+    react(),
     sitemap()],
   markdown: {
     syntaxHighlight: false,
