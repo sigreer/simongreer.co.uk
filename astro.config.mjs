@@ -96,7 +96,7 @@ export default defineConfig({
     jsxImportSource: 'react',
   }), react(), sitemap(), criticalCss({
     penthouse: {
-      timeout: 60000,
+      timeout: 360000,
     },
 })],
   markdown: {
