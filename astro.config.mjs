@@ -12,7 +12,6 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import autoprefixer from 'autoprefixer';
 import remarkGfm from 'remark-gfm';
 import dotenv from 'dotenv';
-import criticalCss from 'astro-critical-css';
 dotenv.config();
 const prettyCodeOptions = {
   syntaxTheme,
@@ -94,11 +93,8 @@ export default defineConfig({
   integrations: [tailwind({ applyBaseStyles: false }), robotsTxt(), mdx({
     jsx: true,
     jsxImportSource: 'react',
-  }), react(), sitemap(), criticalCss({
-    penthouse: {
-      timeout: 360000,
-    },
-})],
+  }), react(), sitemap()
+],
   markdown: {
     syntaxHighlight: false,
     rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
