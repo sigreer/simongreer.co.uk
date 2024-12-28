@@ -1,5 +1,6 @@
 ---
-import { DarkLightToggle } from '@components/Header/DarkLightToggle.tsx';
+// import { DarkLightToggle } from '@components/Header/DarkLightToggle.tsx';
+import DarkLightToggle from '@components/Header/DarkLightToggle.astro';
 import GithubIcon from '@components/SocialIcons/GithubIcon.astro';
 import XIcon from '@components/SocialIcons/XIcon.astro';
 import MastadonIcon from '@components/SocialIcons/MastadonIcon.astro';
@@ -20,6 +21,7 @@ const attachedLayout = "my-0 rounded-b-none rounded-t-lg md:mb-0"
   <BlueSkyIcon class="w-8 h-7 hover:scale-125 text-white dark:text-gray-200" href="https://bsky.social/sigreer"/>
 </div>
 
-<DarkLightToggle client:only="react" />
+<!-- <DarkLightToggle client:only="react" /> -->
+<DarkLightToggle />
 
 </div>

@@ -18,6 +18,13 @@ const global = { title: 'SimonGreer.co.uk' };
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script is:inline>
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
     <title>{title ? `${global.title} - ${title}` : global.title}</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -57,6 +64,8 @@ const global = { title: 'SimonGreer.co.uk' };
         type="text/css"
       />
     </noscript>
+
+
 
     <ClientRouter />
   </head>
