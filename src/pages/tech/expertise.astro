@@ -1,11 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
+import { ChevronRight } from "lucide-react"
 import PageLayout from "@layouts/PageLayout.astro";
 import '@styles/custom.css';
-import ElevatorIcon from "@components/Icons/ElevatorIcon.astro";
 import TechCube from "@components/ContentBoxes/TechCube.astro";
 import type { CollectionEntry } from 'astro:content';
-
+import { Button } from '@components/ui/button';
 type TechWithStringTags = Omit<CollectionEntry<'tech'>, 'data'> & {
   data: Omit<CollectionEntry<'tech'>['data'], 'tags'> & {
     tags: string[] | undefined
@@ -14,11 +14,11 @@ type TechWithStringTags = Omit<CollectionEntry<'tech'>, 'data'> & {
 
 const techs = (await getCollection('tech'))
   .filter((tech: { data: { pubDate: Date } }) => tech.data.pubDate)
-  .map(tech => ({
+  .map((tech: CollectionEntry<'tech'>) => ({
     ...tech,
     data: {
       ...tech.data,
-      tags: tech.data.tags?.map(tag => tag.id)
+      tags: tech.data.tags?.map((tag: { id: string }) => tag.id)
     }
   })) as TechWithStringTags[];
 
@@ -33,28 +33,93 @@ const data = techs.filter((tech: TechWithStringTags) => tech.data.category === '
 
 <PageLayout title="Tech Stuff">
   
-  <section class="py-8 px-6 md:pr-2 pl-0">
-    <div class="w-full flex flex-col">
-      <h2 class="text-2xl font-bold mb-4">
-        Tech Stuff
-      </h2>
-      <p class="text-sm mb-4">
-        This page aims to highlight the technologies and vendors I've worked with both professionally and personally. My time is split pretty evenly between development and systems admin/integration work.
-      </p>
-    </div>
-    <div class="w-full border-gray-700 rounded-lg bg-gray-700 text-white p-4 my-8 flex flex-row">
-      <div class="w-1/12">
-        <ElevatorIcon class="w-20 h-20 mt-2 !fill-white" fill="#ffffff" />
+  <section class="py-2 px-6 md:pr-2 pl-0">
+    <div class="grid grid-cols-10 gap-12">
+      <div class="col-span-3 border-[#dcdde0] rounded-lg bg-white text-gray-800 border p-8 my-8 flex flex-col items-center">
+        <div class="w-full">
+          <h2 class="text-xl font-bold mb-4">
+            Professional Profile
+          </h2>
+        </div>
+        <div class="w-full">
+          <p class="text-sm mb-4">
+            I'm a full stack developer with a passion for building products that are both functional and beautiful. I'm also a systems administrator with a passion for building infrastructure that is both reliable and scalable.
+          </p>
+          <span class="text-sm font-bold mb-2 text-gray-900">Location:</span>
+          <p class="text-sm mb-4">
+            Cambridge, UK
+          </p>
+          <span class="text-sm font-bold mb-2 text-gray-900">Key Skills:</span>
+          <p class="text-sm mb-4">
+          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#6B7280] font-semibold text-white shadow-sm transition" data-tag="automation">
+                automation
+          </span>
+          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#cd3af1] font-semibold text-white shadow-sm transition" data-tag="automation">
+            web development
+          </span>
+          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#ffe815ee] font-semibold text-black shadow-sm transition" data-tag="automation">
+            linux
+          </span>
+          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#123885] font-semibold text-white shadow-sm transition" data-tag="automation">
+             api integration
+          </span>
+          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#0b9b2a] font-semibold text-white shadow-sm transition" data-tag="automation">
+            databases
+          </span>
+          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#64b4ff] font-semibold text-white shadow-sm transition" data-tag="automation">
+            server management
+          </span>
+          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#303030] font-semibold text-white shadow-sm transition" data-tag="automation">
+            networking
+          </span>
+          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#541c83] font-semibold text-white shadow-sm transition" data-tag="automation">
+            vector art
+          </span>
+          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#dddddd] font-semibold text-black shadow-sm transition" data-tag="automation">
+            network storage
+          </span>
+          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#7c61f5] font-semibold text-white shadow-sm transition" data-tag="automation">
+            voip
+          </span>
+         
+          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#ffb066] font-semibold text-gray-900 shadow-sm transition" data-tag="automation">
+            virtualisation
+          </span>
+          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#a81616] font-semibold text-white shadow-sm transition" data-tag="automation">
+            containerisation
+          </span>
+          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#d4ffb1] font-semibold text-gray-900 shadow-sm transition" data-tag="automation">
+            remote access
+          </span>
+        </p>
+        </div>
       </div>
-      <div class="w-11/12">
+      <div class="col-span-7 border border-[#dcdde0] rounded-lg bg-white text-gray-900 p-8 my-8">
         <h2 class="text-xl font-bold mb-4">
-        Elevator Pitch
+          A Bit About Me
         </h2>
         <p class="text-sm mb-4">
-          I'm a full stack developer with a passion for building products that are both functional and beautiful. I'm also a systems administrator with a passion for building infrastructure that is both reliable and scalable.
+          I've been working in the technology space since I left university in 2005. I started off in sales before moving into technical sales and hands-on technical roles. I spent the majority my time working with virtualisation and remote access technologies like VMware, Citrix and of course Microsoft. I started a specialist IT solutions company in 2010 which spawned an ecommerce sibling a couple of years later.
         </p>
+        <p class="text-sm mb-4">
+          I sold both businesses in 2014 and worked in the 'channel' for several years. I worked with a handful of specialist IT vendors, taking responsibility for the UK operations.
+        </p>
+        <p class="text-sm mb-4">
+          I started using Linux around this time, initially begrudgingly and not really knowing what I was doing. However, fast forward a couple of years and I was hacking my Surface Pro to get it running a Linux desktop.
+        </p>
+        <p class="text-sm mb-4">
+          I've spent the last seven or eight years as a consultant, systems engineer and software developer. The lines between the roles have progressively blurred over the last few years and I've taken on the mantle of CTO/Technical Director for several startups and fast-growing businesses in the UK, US and Europe.
+        </p>
+        <p class="text-sm">
+          Having spent much of my career concentrating on business growth and the nurturing of ideas, I'm acutely aware of how much of an overhead -- and enabler, technology can be. If you want slick, performant IT systems to drive your business without having to sell your soul (and anything else of value) to join one of the big tech companies' closed eco-systems, <a class="font-bold text-blue-700 hover:text-blue-900" href="/me/get-in-touch">get in touch!</a> I'd love to help!
+        </p>
+        <Button variant="outline" size="lg" className="mt-4 border-[#dcdde0]">
+          Drop Me a Line <ChevronRight />
+        </Button> 
       </div>
     </div>
+    
+
 
     <div class="flex flex-col gap-6">
       <div class="w-full flex flex-col">
