@@ -4,7 +4,7 @@ slug: astro-on-cloudflare-fully-automated-part-2
 description: "Automate your Astro site deployment to Cloudflare Pages using Git workflow automation"
 pubDate: 2024-12-23
 status: published
-coverimage: "astro-cloudflare-pages-workflow.png"
+coverimage: "astro-cloudflare-pages-workflow-part-2.png"
 vendor_name: "Cloudflare"
 horizontal_logo: "cloudflare-horizontal-logo.svg"
 vendoricon: "cloudflare-favicon.svg"
@@ -14,9 +14,9 @@ category: "DevOps"
 
 import '@styles/lightbox.css';
 import LightBox from '@components/Media/LightBox.astro';
-import mailtrapApiDetails from '@images/galleries/astro-on-cloudflare/mailtrap-api-details.png'; 
-// import cloudflarePagesBuildPreferences from '@images/galleries/astro-on-cloudflare/cloudflare-static-build-preferences-min.png'; 
-// import cloudflarePagesBuildProcess from '@images/galleries/astro-on-cloudflare/cloudflare-static-build-view.png';
+import emailSuccess from '@images/galleries/astro-on-cloudflare/successfully-sent-email.png';
+import mailtrapApiDetails from '@images/galleries/astro-on-cloudflare/mailtrap-api-details.png';
+
 
 ## Overview
 
@@ -43,7 +43,7 @@ bun add @astrojs/cloudflare
 
 Next, we'll configure Astro's config file to use the Cloudflare adapter:
 
-```javascript
+```js title="/astro.config.mjs" caption="Adding Cloudflare configs to Astro base config file"
 import { defineConfig, envField } from 'astro/config'
 import cloudflare from '@astrojs/cloudflare';
 import dotenv from 'dotenv';
@@ -86,7 +86,7 @@ There are several parts to make note of:
 4. ``mode: 'directory'`` tells Cloudflare to use the simple configuration. By default it uses the 'advanced' setting.
 5. ``platformProxy`` is the section that confirms our intention to have Cloudflare execute processes at the edge. Nested under the ``platformProxy`` is the config file for Wrangler.
 
-### Wrangler
+## Wrangler
 
 Wrangler is a CLI tool from Cloudflare that helps development with and deployment of Cloudflare Workers. As we're going to be adding an API endpoint to handle form processing to our otherwise static site, we need to include some rudimentary configs for Wrangler. Wrangler will ensure that our serverless functions (ie. the API endpoint we'll be creating) are executed by an appropriate 'Worker'. 
 
@@ -102,9 +102,9 @@ I prefer to use my system's package manager but Cloudflare's documentation sugge
 bun add -D wrangler
 ```
 
-In the last step we added a config file path for Wrangler to the Cloudflare adapter's config. Let's create that and add the necessary configurations to it.
+In the last step we set the location of Wrangler's config file in astro.config.mjs. Let's go ahead and create the associated config file and add the necessary configurations to it.
 
-```toml
+```toml caption="Wrangler config file" title="/wrangler.toml"
 #:schema node_modules/wrangler/config-schema.json
 
 name = "my-project"
@@ -118,7 +118,7 @@ enabled = true
 ```
 
 And add types to ``tsconfig.json``:
-```json
+```json caption="Add types to TS config file" title="/tsconfig.json"
 {
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],
@@ -149,10 +149,10 @@ To save time, you might want to add this as a build step in your ``package.json`
 
 Wrangler will look in ``.dev.vars`` by for its environment variables and secrets when running a development environment locally. You will need to create your environment variables in Cloudflare Pages (either via dashboard or using the API. The former is probably easiest).
 
-### Create a Form
+## Create a Form
 
 This needn't be anything fancy:
-```html
+```html caption="Simple HTML form" title="/src/pages/form.astro"
 <form id="contact-form">
   <input type="email" name="email" required placeholder="bob@bobsgiraffes.com" />
   <label for="message">Your Message</label>
@@ -163,8 +163,7 @@ This needn't be anything fancy:
 
 Append a simple script to pass the JSON data to our soon to be form processing API endpoint:
 
-```javascript
-<script>
+```typescript caption="In-Line form script" title="/src/pages/form.astro"
   const form = document.getElementById('contact-form') as HTMLFormElement;
   
   form.addEventListener('submit', async (e) => {
@@ -196,10 +195,9 @@ Append a simple script to pass the JSON data to our soon to be form processing A
       alert('An error occurred. Please try again later.');
   }
 });
-</script>
 ```
 
-### Set Up an MTA
+## Set Up an MTA
 
 It's of course possible to use a standard SMTP-enabled mail server, but using a transactional email provider is inexpensive and removes all of the pain that comes with sending transactional emails. ([mailtrap.io](https://mailtrap.io) is my preferred option), but there are thousands out there.
 
@@ -212,11 +210,11 @@ It's of course possible to use a standard SMTP-enabled mail server, but using a 
 />
 </div>
 
-### Create API Endpoint
+## Create API Endpoint
 
 In your Astro ``pages`` directory in Astro, create a new route for 'api' by making a new dir, and in that dir create a Typescript file with a suitable name and the following code:
 
-```typescript
+```typescript caption="API endpoint for form processing" title="/src/pages/api/send-email.ts"
 export const prerender = false;
 import type { APIRoute } from 'astro';
 
@@ -278,6 +276,15 @@ Note the ``prerender = false`` statement at the beginning of the file. This tell
 
 The code expects a name, email address and message in JSON which it parses and sends to Mailtrap where it's subsequently processed and sent to the recipient specified in the environment variables.
 
-### Test
+## Test
 
-Once done you should have a Cloudflare Worker deployed using Wrangler that 
+Once done you should have a Cloudflare Worker deployed using Wrangler that will process submitted forms and pass them to the MTA in order to send an email to the specified email address.
+
+<div class="not-prose">
+<LightBox src={emailSuccess}
+  alt="Mailtrap"
+  width={400}
+  class="my-4"
+  caption="Successfully sent email"
+/>
+</div>
