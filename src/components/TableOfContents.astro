@@ -21,7 +21,7 @@ const filteredToc = toc.filter((heading: Heading) => heading.depth >= 2 && headi
               block transition-colors duration-200 
               ${heading.depth === 3 
                 ? 'ml-4 text-sm' 
-                : '!uppercase text-sm font-semibold'
+                : 'text-sm font-semibold'
               } 
               text-gray-600 hover:text-purple-600 font-sans hover:underline leading-tight 
             `}
