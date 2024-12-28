@@ -6,7 +6,7 @@ import HomeLayout from "@layouts/HomeLayout.astro";
 import ShowAll from "@components/Inline/ShowAll.astro";
 import TechCube from "@components/ContentBoxes/TechCube.astro";
 import Card from '@components/ContentBoxes/Card.astro';
-import PostBanner from '@components/Inline/PostBanner.astro';
+import PostBanner from '@components/Media/PostBanner.astro';
 const techs = (await getCollection('tech'))
   .filter((tech: CollectionEntry<'tech'>) => Boolean(tech.data.pubDate))
   .sort((a: CollectionEntry<'tech'>, b: CollectionEntry<'tech'>) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());

@@ -31,7 +31,7 @@ const resolvedTags = tags?.map(tag => {
 
 ---
 
-<li class={`rounded-md bg-white shadow-md transition border border-gray-700 hover:shadow-xl hover:scale-105 ${className} relative overflow-hidden`}
+<li class={`rounded-md bg-white shadow-md transition border border-[#c8c9cc] hover:shadow-xl hover:scale-105 ${className} relative overflow-hidden`}
     data-tags={tags?.map(tag => tag.id).join(',')}>
 
   <a href={`${basePath}/${slug}`} class="group h-full flex flex-col">
@@ -45,7 +45,7 @@ const resolvedTags = tags?.map(tag => {
       </div>
     )}
     {coverImage && (
-      <div class="w-full h-48 rounded-t-md overflow-hidden relative">
+      <div class="w-full h-48 rounded-t-md overflow-hidden relative border-b border-[#eff0f3]">
         <div class="absolute inset-0 transition-opacity duration-300 opacity-100 group-hover:opacity-0"
           style="background: linear-gradient(to bottom left, #da2676, #e03f93, #f9a8d4)">
         </div>
