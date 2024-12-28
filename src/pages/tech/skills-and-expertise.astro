@@ -7,7 +7,7 @@ import TechCube from "@components/ContentBoxes/TechCube.astro";
 import type { CollectionEntry } from 'astro:content';
 import { Button } from '@components/ui/button';
 import { Badge } from '@components/ui/badge';
-import { Dialog } from '@components/ui/dialog';
+import { GetInTouchDialog } from '@components/GetInTouchDialog';
 type TechWithStringTags = Omit<CollectionEntry<'tech'>, 'data'> & {
   data: Omit<CollectionEntry<'tech'>['data'], 'tags'> & {
     tags: string[] | undefined
@@ -24,13 +24,6 @@ const techs = (await getCollection('tech'))
     }
   })) as TechWithStringTags[];
 
-const systems = techs.filter((tech: TechWithStringTags) => tech.data.category === 'systems');
-const development = techs.filter((tech: TechWithStringTags) => tech.data.category === 'development');
-const cloud = techs.filter((tech: TechWithStringTags) => tech.data.category === 'cloud');
-const business = techs.filter((tech: TechWithStringTags) => tech.data.category === 'business');
-const aiautomation = techs.filter((tech: TechWithStringTags) => tech.data.category === 'ai-automation');
-const media = techs.filter((tech: TechWithStringTags) => tech.data.category === 'media');
-const data = techs.filter((tech: TechWithStringTags) => tech.data.category === 'data');
 ---
 
 <PageLayout title="Tech Stuff">
@@ -44,11 +37,11 @@ const data = techs.filter((tech: TechWithStringTags) => tech.data.category === '
           </h2>
         </div>
         <div class="w-full p-8">
-          <p class="text-sm mb-4">
+          <p class="text-base mb-4">
             A systems engineer and software developer with a background in business management and growth.
           </p>
           <span class="text-sm font-bold mb-2 text-gray-900 dark:text-themepurple">Location:</span>
-          <p class="text-sm mb-4">
+          <p class="text-base mb-4">
             Cambridge, UK
           </p>
           <div class="w-full mb-2">
@@ -70,9 +63,7 @@ const data = techs.filter((tech: TechWithStringTags) => tech.data.category === '
             <Badge variant="secondary">Remote Access</Badge>
           </p>
         </div>
-        <Button variant="outline" size="lg" className="mt-4 border dark:hover:bg-background dark:hover:border-white w-full hover:bg-background hover:border-gray-300">
-          Get In Touch <ChevronRight />
-        </Button> 
+        <GetInTouchDialog client:load />
         </div>
       </div>
       <div class="col-span-7 border border-[#dcdde0] rounded-lg bg-white text-gray-900 my-3 dark:bg-background dark:border-neutral-800 dark:text-primary">
@@ -82,19 +73,19 @@ const data = techs.filter((tech: TechWithStringTags) => tech.data.category === '
           </h2>
         </div>
         <div class="w-full p-8">
-        <p class="text-sm mb-4">
+        <p class="text-base mb-4">
           I've been working in the technology space since I left university in 2005. I started off in sales before moving into technical sales and hands-on technical roles. I spent the majority my time working with virtualisation and remote access technologies like VMware, Citrix and of course Microsoft. I started a specialist IT solutions company in 2010 which spawned an ecommerce sibling a couple of years later.
         </p>
-        <p class="text-sm mb-4">
+        <p class="text-base mb-4">
           I sold both businesses in 2014 and worked in the 'channel' for several years. I worked with a handful of specialist IT vendors, taking responsibility for the UK operations.
         </p>
-        <p class="text-sm mb-4">
+        <p class="text-base mb-4">
           I started using Linux around this time, initially begrudgingly and not really knowing what I was doing. However, fast forward a couple of years and I was hacking my Surface Pro to get it running a Linux desktop.
         </p>
-        <p class="text-sm mb-4">
+        <p class="text-base mb-4">
           I've spent the last seven or eight years as a consultant, systems engineer and software developer. The lines between the roles have progressively blurred over the last few years and I've taken on the mantle of CTO/Technical Director for several startups and fast-growing businesses in the UK, US and Europe.
         </p>
-        <p class="text-sm">
+        <p class="text-base">
           Having spent much of my career concentrating on business growth and the nurturing of ideas, I'm acutely aware of how much of an overhead -- and enabler, technology can be. If you want slick, performant IT systems to drive your business without having to sell your soul (and anything else of value) to join one of the big tech companies' closed eco-systems, get in touch! I'd love to help!
         </p>
 

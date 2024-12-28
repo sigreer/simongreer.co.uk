@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import cloudflare from '@astrojs/cloudflare';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
-import syntaxTheme from 'src/lib/syntaxtheme.json';
+import syntaxTheme from './src/lib/syntaxtheme.json';
 import robotsTxt from 'astro-robots-txt';
 import postcssNesting from 'postcss-nesting';
 import { transformerCopyButton } from '@rehype-pretty/transformers';
