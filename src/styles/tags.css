@@ -1,0 +1,47 @@
+.tag-style {
+    @apply font-light rounded-sm text-xs px-2 py-1 text-center me-0 my-1;
+}
+
+/* Base tag styles */
+.tag-block .tag-style {
+    @apply text-white transition-all duration-200;
+}
+
+/* Solid color classes */
+.tag-block .gray1 { @apply bg-gray-500; }
+.tag-block .gray3 { @apply bg-gray-700; }
+.tag-block .slate1 { @apply bg-slate-800; }
+.tag-block .red1 { @apply bg-red-500; }
+.tag-block .red3 { @apply bg-red-700; }
+.tag-block .orange1 { @apply bg-orange-500; }
+.tag-block .orange3 { @apply bg-orange-700; }
+.tag-block .amber1 { @apply bg-amber-500; }
+.tag-block .amber3 { @apply bg-amber-700; }
+.tag-block .yellow1 { @apply bg-yellow-500; }
+.tag-block .yellow3 { @apply bg-yellow-700; }
+.tag-block .lime1 { @apply bg-lime-500; }
+.tag-block .lime3 { @apply bg-lime-700; }
+.tag-block .green1 { @apply bg-green-500; }
+.tag-block .green3 { @apply bg-green-700; }
+.tag-block .emerald1 { @apply bg-emerald-500; }
+.tag-block .emerald3 { @apply bg-emerald-700; }
+.tag-block .teal1 { @apply bg-teal-500; }
+.tag-block .teal3 { @apply bg-teal-700; }
+.tag-block .cyan1 { @apply bg-cyan-500; }
+.tag-block .cyan3 { @apply bg-cyan-700; }
+.tag-block .sky1 { @apply bg-sky-500; }
+.tag-block .sky3 { @apply bg-sky-700; }
+.tag-block .blue1 { @apply bg-blue-500; }
+.tag-block .blue3 { @apply bg-blue-700; }
+.tag-block .indigo1 { @apply bg-indigo-500; }
+.tag-block .indigo3 { @apply bg-indigo-700; }
+.tag-block .violet1 { @apply bg-violet-500; }
+.tag-block .violet3 { @apply bg-violet-700; }
+.tag-block .purple1 { @apply bg-purple-500; }
+.tag-block .purple3 { @apply bg-purple-700; }
+.tag-block .fuchsia1 { @apply bg-fuchsia-500; }
+.tag-block .fuchsia3 { @apply bg-fuchsia-700; }
+.tag-block .pink1 { @apply bg-pink-500; }
+.tag-block .pink3 { @apply bg-pink-700; }
+.tag-block .rose1 { @apply bg-rose-500; }
+.tag-block .rose3 { @apply bg-rose-700; }

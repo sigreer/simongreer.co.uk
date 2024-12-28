@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react'
 import type { EmblaOptionsType, EmblaCarouselType } from 'embla-carousel'
 import { DotButton, useDotButton } from '@components/Media/Carousel/EmblaCarouselDotButton.tsx'
+import '@styles/emblaslider.css'
 import {
   PrevButton,
   NextButton,
