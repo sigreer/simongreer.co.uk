@@ -1,6 +1,6 @@
 import { Root, Trigger, Portal, Overlay, Close, Content, Title, Description } from "@radix-ui/react-dialog"
 import { forwardRef } from "react"
-import type { ElementRef, ComponentPropsWithoutRef, HTMLAttributes } from "react"
+import type { ComponentRef, ComponentPropsWithoutRef, HTMLAttributes } from "react"
 import { X } from "lucide-react"
 import { cn } from "@lib/utils.ts"
 
@@ -13,7 +13,7 @@ const DialogPortal = Portal
 const DialogClose = Close
 
 const DialogOverlay = forwardRef<
-  ElementRef<typeof Overlay>,
+  ComponentRef<typeof Overlay>,
   ComponentPropsWithoutRef<typeof Overlay>
 >(({ className, ...props }, ref) => (
   <Overlay
@@ -28,7 +28,7 @@ const DialogOverlay = forwardRef<
 DialogOverlay.displayName = Overlay.displayName
 
 const DialogContent = forwardRef<
-  ElementRef<typeof Content>,
+  ComponentRef<typeof Content>,
   ComponentPropsWithoutRef<typeof Content>
 >(({ className, children, ...props }, ref) => (
   <DialogPortal>
@@ -80,7 +80,7 @@ const DialogFooter = ({
 DialogFooter.displayName = "DialogFooter"
 
 const DialogTitle = forwardRef<
-  ElementRef<typeof Title>,
+  ComponentRef<typeof Title>,
   ComponentPropsWithoutRef<typeof Title>
 >(({ className, ...props }, ref) => (
   <Title
@@ -95,7 +95,7 @@ const DialogTitle = forwardRef<
 DialogTitle.displayName = Title.displayName
 
 const DialogDescription = forwardRef<
-  ElementRef<typeof Description>,
+  ComponentRef<typeof Description>,
   ComponentPropsWithoutRef<typeof Description>
 >(({ className, ...props }, ref) => (
   <Description

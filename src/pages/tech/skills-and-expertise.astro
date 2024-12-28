@@ -1,11 +1,13 @@
 ---
 import { getCollection } from 'astro:content';
-import { ChevronRight } from "lucide-react"
+import { ChevronRight } from "lucide-react";
 import PageLayout from "@layouts/PageLayout.astro";
 import '@styles/custom.css';
 import TechCube from "@components/ContentBoxes/TechCube.astro";
 import type { CollectionEntry } from 'astro:content';
 import { Button } from '@components/ui/button';
+import { Badge } from '@components/ui/badge';
+import { Dialog } from '@components/ui/dialog';
 type TechWithStringTags = Omit<CollectionEntry<'tech'>, 'data'> & {
   data: Omit<CollectionEntry<'tech'>['data'], 'tags'> & {
     tags: string[] | undefined
@@ -33,69 +35,45 @@ const data = techs.filter((tech: TechWithStringTags) => tech.data.category === '
 
 <PageLayout title="Tech Stuff">
   
-  <section class="py-2 px-6 md:pr-2 pl-0">
-    <div class="grid grid-cols-10 gap-12">
-      <div class="col-span-3 border-[#dcdde0] rounded-lg bg-white text-gray-800 border p-8 my-8 flex flex-col items-center">
+  <section class="py-2 px-6 md:pr-0 pl-0 md:mb-6">
+    <div class="grid grid-cols-10 md:gap-5">
+      <div class="col-span-3 border-[#dcdde0] dark:bg-background dark:border-neutral-800 dark:text-gray-200 rounded-lg bg-white text-gray-800 border p-8 my-3 flex flex-col items-center">
         <div class="w-full">
-          <h2 class="text-xl font-bold mb-4">
+          <h2 class="text-xl font-bold mb-4 dark:text-themepurple">
             Professional Profile
           </h2>
         </div>
         <div class="w-full">
           <p class="text-sm mb-4">
-            I'm a full stack developer with a passion for building products that are both functional and beautiful. I'm also a systems administrator with a passion for building infrastructure that is both reliable and scalable.
+            A systems engineer and software developer with a background in business management and growth.
           </p>
-          <span class="text-sm font-bold mb-2 text-gray-900">Location:</span>
+          <span class="text-sm font-bold mb-2 text-gray-900 dark:text-themepurple">Location:</span>
           <p class="text-sm mb-4">
             Cambridge, UK
           </p>
-          <span class="text-sm font-bold mb-2 text-gray-900">Key Skills:</span>
-          <p class="text-sm mb-4">
-          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#6B7280] font-semibold text-white shadow-sm transition" data-tag="automation">
-                automation
-          </span>
-          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#cd3af1] font-semibold text-white shadow-sm transition" data-tag="automation">
-            web development
-          </span>
-          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#ffe815ee] font-semibold text-black shadow-sm transition" data-tag="automation">
-            linux
-          </span>
-          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#123885] font-semibold text-white shadow-sm transition" data-tag="automation">
-             api integration
-          </span>
-          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#0b9b2a] font-semibold text-white shadow-sm transition" data-tag="automation">
-            databases
-          </span>
-          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#64b4ff] font-semibold text-white shadow-sm transition" data-tag="automation">
-            server management
-          </span>
-          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#303030] font-semibold text-white shadow-sm transition" data-tag="automation">
-            networking
-          </span>
-          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#541c83] font-semibold text-white shadow-sm transition" data-tag="automation">
-            vector art
-          </span>
-          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#dddddd] font-semibold text-black shadow-sm transition" data-tag="automation">
-            network storage
-          </span>
-          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#7c61f5] font-semibold text-white shadow-sm transition" data-tag="automation">
-            voip
-          </span>
-         
-          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#ffb066] font-semibold text-gray-900 shadow-sm transition" data-tag="automation">
-            virtualisation
-          </span>
-          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#a81616] font-semibold text-white shadow-sm transition" data-tag="automation">
-            containerisation
-          </span>
-          <span class="tag-style inline-block rounded-md px-2 py-1 text-xs bg-[#d4ffb1] font-semibold text-gray-900 shadow-sm transition" data-tag="automation">
-            remote access
-          </span>
-        </p>
+          <div class="w-full mb-2">
+          <span class="text-sm font-bold mb-2 text-gray-900 dark:text-themepurple">Key Skills:</span>
+          <p class="text-xs">
+            <Badge variant="secondary">Automation</Badge>
+            <Badge variant="secondary">Web Development</Badge>
+            <Badge variant="secondary">Linux</Badge>
+            <Badge variant="secondary">APIs</Badge>
+            <Badge variant="secondary">Databases</Badge>
+            <Badge variant="secondary">Server Management</Badge>
+            <Badge variant="secondary">Networking</Badge>
+            <Badge variant="secondary">Vector Art</Badge>
+            <Badge variant="secondary">Broadcast Media</Badge>
+            <Badge variant="secondary">Network Storage</Badge>
+            <Badge variant="secondary">VoIP</Badge>
+            <Badge variant="secondary">Virtualisation</Badge>
+            <Badge variant="secondary">Containerisation</Badge>
+            <Badge variant="secondary">Remote Access</Badge>
+          </p>
+        </div>
         </div>
       </div>
-      <div class="col-span-7 border border-[#dcdde0] rounded-lg bg-white text-gray-900 p-8 my-8">
-        <h2 class="text-xl font-bold mb-4">
+      <div class="col-span-7 border border-[#dcdde0] rounded-lg bg-white text-gray-900 p-8 my-3 dark:bg-background dark:border-neutral-800 dark:text-primary">
+        <h2 class="text-xl font-bold mb-4 dark:text-themepurple">
           A Bit About Me
         </h2>
         <p class="text-sm mb-4">
@@ -111,7 +89,7 @@ const data = techs.filter((tech: TechWithStringTags) => tech.data.category === '
           I've spent the last seven or eight years as a consultant, systems engineer and software developer. The lines between the roles have progressively blurred over the last few years and I've taken on the mantle of CTO/Technical Director for several startups and fast-growing businesses in the UK, US and Europe.
         </p>
         <p class="text-sm">
-          Having spent much of my career concentrating on business growth and the nurturing of ideas, I'm acutely aware of how much of an overhead -- and enabler, technology can be. If you want slick, performant IT systems to drive your business without having to sell your soul (and anything else of value) to join one of the big tech companies' closed eco-systems, <a class="font-bold text-blue-700 hover:text-blue-900" href="/me/get-in-touch">get in touch!</a> I'd love to help!
+          Having spent much of my career concentrating on business growth and the nurturing of ideas, I'm acutely aware of how much of an overhead -- and enabler, technology can be. If you want slick, performant IT systems to drive your business without having to sell your soul (and anything else of value) to join one of the big tech companies' closed eco-systems, <a class="font-bold text-blue-700 hover:text-blue-900 dark:text-themepink" href="/me/get-in-touch">get in touch!</a> I'd love to help!
         </p>
         <Button variant="outline" size="lg" className="mt-4 border-[#dcdde0]">
           Drop Me a Line <ChevronRight />

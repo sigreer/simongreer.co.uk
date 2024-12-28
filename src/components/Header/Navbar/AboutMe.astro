@@ -10,16 +10,16 @@ const isActive = currentPath === '/me/professionally' || currentPath === '/me/pe
 <div class="relative group">
     <button class:list={[
         "block antialiased font-sans text-xl md:text-sm leading-normal font-normal w-full group/button",
-        isActive ? "md:rounded-lg" : "text-black"
+        isActive ? "md:rounded-lg" : "text-black dark:text-gray-200"
     ]}>
         <div class:list={[
-            "w-full md:rounded-lg text-start leading-tight transition-all outline-none flex items-center gap-2 pl-3 pr-4 py-2 hover:bg-purple-200 group-hover:bg-purple-200 hover:bg-opacity-80 hover:text-purple-900 group-hover:text-purple-900",
-            isActive && "bg-pink-700 text-white focus:bg-pink-500 focus:text-white hover:bg-purple-200 hover:text-purple-900"
+            "w-full md:rounded-lg text-start leading-tight transition-all outline-none flex items-center gap-2 pl-3 pr-4 py-2 hover:bg-purple-200 group-hover:bg-purple-200 dark:hover:bg-background dark:group-hover:bg-background hover:bg-opacity-80 hover:text-purple-900 group-hover:text-purple-900 dark:border-neutral-800 dark:border",
+            isActive && "bg-pink-700 text-white focus:bg-pink-500 focus:text-white hover:bg-purple-200 hover:text-purple-900 dark:bg-pink-700 dark:border-neutral-800 dark:border dark:hover:bg-background"
         ]}>
             <AccountCircleIcon
             class:list={[
-                "w-10 h-10 md:w-[18px] md:h-[18px] fill-black group-hover:fill-purple-900 group-hover/button:fill-purple-900",
-                isActive && "fill-white hover:fill-purple-900"
+                "w-10 h-10 md:w-[18px] md:h-[18px] fill-black dark:fill-gray-200 group-hover:fill-purple-900 group-hover/button:fill-purple-900",
+                isActive && "fill-white hover:fill-purple-900 dark:fill-gray-200 dark:hover:fill-purple-900"
             ]}
             />
             About Me
@@ -27,31 +27,31 @@ const isActive = currentPath === '/me/professionally' || currentPath === '/me/pe
     </button>
 
     <div class="absolute right-0 top-full pt-1 z-50">
-        <div class="hidden group-hover:block w-48 bg-white rounded-none shadow-lg">
-            <a href="/me/professionally" class="group/item px-4 py-2 text-sm text-gray-700 hover:bg-purple-200 hover:text-purple-900 text-left flex flex-row rounded-none antialiased font-sans">
+        <div class="hidden group-hover:block w-48 bg-white rounded-none shadow-lg dark:bg-background dark:border-neutral-800 dark:border">
+            <a href="/me/professionally" class="group/item px-4 py-2 text-sm text-gray-700 hover:bg-purple-200 hover:text-purple-900 text-left flex flex-row rounded-none antialiased font-sans dark:text-gray-200 dark:hover:text-purple-900 dark:hover:bg-background">
                 <IdentityIcon
                     class:list={[
-                        "mr-2 w-10 h-10 md:w-[18px] md:h-[18px] fill-black group-hover/item:fill-purple-900"
+                        "mr-2 w-10 h-10 md:w-[18px] md:h-[18px] fill-black group-hover/item:fill-purple-900 dark:fill-white"
                     ]}
                 />
                 Me Professionally
             </a>
         </div>
-        <div class="hidden group-hover:block w-48 bg-white rounded-b-md shadow-lg">
-            <a href="/me/personally" class="group/item px-4 py-2 text-sm text-gray-700 hover:bg-purple-200 hover:text-purple-900 text-left flex flex-row rounded-b-md antialiased font-sans">
+        <div class="hidden group-hover:block w-48 bg-white shadow-lg dark:bg-background dark:border-neutral-800 dark:border-t-0 dark:border">
+            <a href="/me/personally" class="group/item px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-purple-200 hover:text-purple-900 dark:hover:text-purple-900 dark:hover:bg-background text-left flex flex-row antialiased font-sans">
                 <FaceIcon
                     class:list={[
-                        "mr-2 w-10 h-10 md:w-[18px] md:h-[18px] fill-black group-hover/item:fill-purple-900"
+                        "mr-2 w-10 h-10 md:w-[18px] md:h-[18px] fill-black group-hover/item:fill-purple-900 dark:fill-white"
                     ]}
                 />
                 Me Personally
             </a>
         </div>
-        <div class="hidden group-hover:block w-48 bg-white rounded-b-md shadow-lg">
-            <a href="/get-in-touch" class="group/item px-4 py-2 text-sm text-gray-700 hover:bg-purple-200 hover:text-purple-900 text-left flex flex-row rounded-b-md antialiased font-sans">
+        <div class="hidden group-hover:block w-48 bg-white rounded-b-md shadow-lg dark:bg-background dark:border-neutral-800 dark:border-t-0 dark:border">
+            <a href="/get-in-touch" class="group/item px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-purple-200 hover:text-purple-900 dark:hover:text-purple-900 dark:hover:bg-background text-left flex flex-row rounded-b-md antialiased font-sans">
                 <ChatIcon
                     class:list={[
-                        "mr-2 w-10 h-10 md:w-[18px] md:h-[18px] fill-black group-hover/item:fill-purple-900"
+                        "mr-2 w-10 h-10 md:w-[18px] md:h-[18px] fill-black group-hover/item:fill-purple-900 dark:fill-white"
                     ]}
                 />
                 Get In Touch

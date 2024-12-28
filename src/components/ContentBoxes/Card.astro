@@ -31,7 +31,7 @@ const resolvedTags = tags?.map(tag => {
 
 ---
 
-<li class={`rounded-md bg-white shadow-md transition border border-[#c8c9cc] hover:shadow-xl hover:scale-105 ${className} relative overflow-hidden`}
+<li class={`rounded-md bg-white transition border border-[#9b9b9b] hover:shadow-xl hover:scale-105 ${className} relative overflow-hidden dark:bg-background dark:border-neutral-800 dark:border`}
     data-tags={tags?.map(tag => tag.id).join(',')}>
 
   <a href={`${basePath}/${slug}`} class="group h-full flex flex-col">
@@ -45,19 +45,25 @@ const resolvedTags = tags?.map(tag => {
       </div>
     )}
     {coverImage && (
-      <div class="w-full h-48 rounded-t-md overflow-hidden relative border-b border-[#eff0f3]">
-        <div class="absolute inset-0 transition-opacity duration-300 opacity-100 group-hover:opacity-0"
-          style="background: linear-gradient(to bottom left, #da2676, #e03f93, #f9a8d4)">
+      <div class="w-full h-48 overflow-hidden relative">
+        <div class="absolute inset-0 transition-opacity duration-300 opacity-100 group-hover:opacity-0 dark:opacity-0">
+          <div class="w-full h-full" style="background: linear-gradient(to bottom left, #da2676, #e03f93, #f9a8d4)"></div>
         </div>
-        <div class="absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100"
-          style="background: linear-gradient(to bottom left, #f9a8d4, #f472b6, #da2676)">
+        <div class="absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100 dark:opacity-0">
+          <div class="w-full h-full" style="background: linear-gradient(to bottom left, #f9a8d4, #f472b6, #da2676)"></div>
+        </div>
+        <div class="absolute inset-0 transition-opacity duration-300 opacity-0 dark:opacity-100 dark:group-hover:opacity-0">
+          <div class="w-full h-full bg-background"></div>
+        </div>
+        <div class="absolute inset-0 transition-opacity duration-300 opacity-0 dark:group-hover:opacity-100">
+          <div class="w-full h-full bg-background"></div>
         </div>
         <Image 
           src={coverImage} 
           alt={title}
           width={400}
           height={300}
-          class="relative w-full h-full object-cover object-center"
+          class="relative w-full h-full object-cover object-center border-b border-neutral-800"
         />
       </div>
     )}
@@ -66,7 +72,7 @@ const resolvedTags = tags?.map(tag => {
         {title}
       </h3>
       {description && (
-        <p class="text-gray-600 line-clamp-5 text-sm mb-2">
+        <p class="text-gray-600 line-clamp-5 text-sm mb-2 dark:text-gray-200">
           {description}
         </p>
       )}

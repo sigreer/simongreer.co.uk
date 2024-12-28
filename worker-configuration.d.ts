@@ -12,4 +12,5 @@ interface Env {
 	PAGESPEED_WEBHOOK_URL: string;
 	CLOUDFLARE_API_TOKEN: string;
 	CLOUDFLARE_ACCOUNT_ID: string;
+	ASSETS: Fetcher;
 }
