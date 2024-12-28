@@ -94,7 +94,11 @@ export default defineConfig({
   integrations: [tailwind({ applyBaseStyles: false }), robotsTxt(), mdx({
     jsx: true,
     jsxImportSource: 'react',
-  }), react(), sitemap(), criticalCss()],
+  }), react(), sitemap(), criticalCss({
+    penthouse: {
+      timeout: 60000,
+    },
+})],
   markdown: {
     syntaxHighlight: false,
     rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
