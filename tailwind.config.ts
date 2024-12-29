@@ -71,18 +71,18 @@ const config: Config = {
     					DEFAULT: 'hsl(var(--destructive))',
     					foreground: 'hsl(var(--destructive-foreground))'
     				},
-					themeblue: {
-    					DEFAULT: 'hsl(var(--theme-blue))',
-    					foreground: 'hsl(var(--theme-blue-foreground))'
-    				},
 					themepink: {
-    					DEFAULT: 'hsl(var(--theme-pink))',
-    					foreground: 'hsl(var(--theme-pink-foreground))'
-    				},
+						DEFAULT: 'hsl(var(--theme-pink))',
+						foreground: 'hsl(var(--theme-pink-foreground))'
+					},
 					themepurple: {
-    					DEFAULT: 'hsl(var(--theme-purple))',
-    					foreground: 'hsl(var(--theme-purple-foreground))'
-    				},
+						DEFAULT: 'hsl(var(--theme-purple))',
+						foreground: 'hsl(var(--theme-purple-foreground))'
+					},
+					themeblue: {
+						DEFAULT: 'hsl(var(--theme-blue))',
+						foreground: 'hsl(var(--theme-blue-foreground))'
+					},
     				border: 'hsl(var(--border))',
     				input: 'hsl(var(--input))',
     				ring: 'hsl(var(--ring))',

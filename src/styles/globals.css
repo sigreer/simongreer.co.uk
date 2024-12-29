@@ -74,5 +74,12 @@
   body {
     @apply bg-background text-foreground;
   }
-  
+  a {
+    @apply !text-blue-700 dark:!text-blue-500 !no-underline font-semibold;
+
+  }
+  a:hover {
+    @apply !underline;
+    color: theme('colors.pink.600')!important;
+  }
 }
