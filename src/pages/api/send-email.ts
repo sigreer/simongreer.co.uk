@@ -4,10 +4,8 @@ import type { APIRoute } from 'astro';
 export const POST: APIRoute = async ({ request, locals }) => {
     // @ts-ignore
     const runtime = locals.runtime;
-    
     const formData = await request.json();
     const { name, email, message } = formData as { name: string; email: string; message: string };
-  
     const emailData = {
       from: {
         email: runtime.env.MAILTRAP_FROM_EMAIL,

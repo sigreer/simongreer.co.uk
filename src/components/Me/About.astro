@@ -2,6 +2,8 @@
 import { Image } from 'astro:assets';
 import SimonBackwardsHead from '@images/simon-backwards-head.png';
 import ChatIcon from '@components/Icons/ChatIcon.astro';
+import { GetInTouchDialog } from '@/components/GetInTouchDialog';
+
 ---
 <div class="flex-col flex">
     <div class="flex flex-row">
@@ -13,11 +15,13 @@ import ChatIcon from '@components/Icons/ChatIcon.astro';
                     class="object-cover rounded-lg border-4 border-white drop-shadow-md"
                 />
             </div>
+            
             <a href="/blog" class="block md:inline-block antialiased font-sans text-xl md:text-sm leading-normal font-normal">
                 <div role="button" tabindex="0" class="flex w-full pl-3 pr-4 py-2 md:rounded-lg text-start leading-tight transition-all outline-none items-center gap-2 hover:bg-purple-200 hover:bg-opacity-80 hover:text-purple-900 bg-pink-700 text-white focus:bg-pink-500 focus:text-white">
                     <ChatIcon 
                         class="flex-shrink-0 w-10 h-10 md:w-[18px] md:h-[18px] group-hover:fill-purple-900 !focus:fill-white group-focus:!fill-white fill-white" />
                     <span class="flex-grow">Get In Touch</span>
+
                 </div>
             </a>
         </div>

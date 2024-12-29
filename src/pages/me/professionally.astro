@@ -3,12 +3,16 @@ import PageLayout from '@layouts/PageLayout.astro';
 import { Image } from 'astro:assets';
 import SimonBackwardsHead from '@images/covers/ai-fails.jpg';
 import ChatIcon from '@components/Icons/ChatIcon.astro';
+import { GetInTouchDialog } from '@/components/GetInTouchDialog';
+import { DialogDemo } from '@components/GetInTouch';
+import '@styles/custom.css';
 ---
 
 <PageLayout title="Me Professionally">
     <main class="flex flex-col gap-6 py-6">
         <h1 class="text-2xl font-bold text-gray-900">Me Professionally</h1>
-
+        <DialogDemo client:load />
+        <GetInTouchDialog client:load />
         <div class="flex-col flex">
     <div class="flex flex-row">
         <div class="flex flex-col p-0 mx-0 gap-y-3 spacing md:min-w-56">
