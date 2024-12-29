@@ -1,5 +1,4 @@
 ---
-// import { DarkLightToggle } from '@components/Header/DarkLightToggle.tsx';
 import DarkLightToggle from '@components/Header/DarkLightToggle.astro';
 import GithubIcon from '@components/SocialIcons/GithubIcon.astro';
 import XIcon from '@components/SocialIcons/XIcon.astro';
@@ -16,12 +15,12 @@ const attachedLayout = "my-0 rounded-b-none rounded-t-lg md:mb-0"
   2xl:max-w-2xl`}>
 <div class="hidden sm:flex items-center gap-x-2">
   <GithubIcon class="w-6 h-6 hover:scale-125 text-white dark:text-gray-200" href="https://github.com/sigreer"/>
-  <XIcon class="w-6 h-6 hover:scale-125 text-white dark:text-gray-200" href="https://x.com/sigreer"/>
-  <MastadonIcon class="w-6 h-6 hover:scale-125 text-white dark:text-gray-200" href="https://fosstodon.org/@simongreer"/>
-  <BlueSkyIcon class="w-8 h-7 hover:scale-125 text-white dark:text-gray-200" href="https://bsky.social/sigreer"/>
+  <!-- <XIcon class="w-6 h-6 hover:scale-125 text-white dark:text-gray-200" href="https://x.com/sigreer"/> -->
+  <!-- <MastadonIcon class="w-6 h-6 hover:scale-125 text-white dark:text-gray-200" href="https://fosstodon.org/@simongreer"/> -->
+  <BlueSkyIcon class="w-8 h-7 hover:scale-125 text-white dark:text-gray-200" href="https://bsky.app/profile/sigreer.bsky.social"/>
 </div>
 
-<!-- <DarkLightToggle client:only="react" /> -->
+
 <DarkLightToggle />
 
 </div>
