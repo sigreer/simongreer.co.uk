@@ -3,7 +3,6 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 // import { getCollection } from 'astro:content';
 // import { Image } from 'astro:assets';
 import '@styles/custom.css';
-import '@fontsource/poppins';
 
 // const techs = (await getCollection('tech')).filter(({ data }: { data: { pubDate: Date } }) => {
 //   return data.pubDate;
@@ -18,7 +17,7 @@ import '@fontsource/poppins';
 // // const allVendorIcons = import.meta.glob<{ default: ImageMetadata }>('../../images/vendor-icons/*', { eager: true });
 ---
 <BaseLayout>
-  <main class="flex-grow w-full sm:text-lg font-poppins mx-auto">
+  <main class="flex-grow w-full sm:text-lg mx-auto">
     <slot />
   </main>
 </BaseLayout>

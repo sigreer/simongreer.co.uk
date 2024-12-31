@@ -4,7 +4,6 @@ import PreHeader from "@components/Header/PreHeader.astro";
 import { ClientRouter } from 'astro:transitions';
 import '@styles/custom.css';
 import '@styles/globals.css';
-import '@fontsource/poppins';
 import NavBar from "@components/Header/Navbar/NavBar.astro";
 interface Props {
   title?: string;
@@ -42,7 +41,7 @@ const global = { title: 'SimonGreer.co.uk' };
 
     <ClientRouter />
   </head>
-  <body class="bg-gray-100 dark:bg-background font-poppins min-h-screen flex flex-col max-w-lg mx-auto md:py-6 space-y-0">
+  <body class="bg-gray-100 dark:bg-background min-h-screen flex flex-col max-w-lg mx-auto md:py-6 space-y-0">
     <div class="hidden md:visible md:block md:w-full"><PreHeader /></div>
     <NavBar />
     <slot />

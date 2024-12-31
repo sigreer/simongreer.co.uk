@@ -43,22 +43,13 @@ export default defineConfig({
   },
   vite: {
     optimizeDeps: {
+      include: [ 'react', 'react-dom' ],
       exclude: ['@astrojs/react']
     },
     ssr: {
       noExternal: ['dotenv', '@astrojs/cloudflare', '@astrojs/react'],
       target: 'webworker',
-      external: [
-        'path',
-        'fs',
-        'url',
-        'module',
-        'crypto',
-        'os',
-        'child_process',
-        'util',
-        'net',
-      ]
+      external: ['path', 'fs', 'url', 'module', 'crypto', 'os', 'child_process', 'util', 'net']
     },
     css: {
       postcss: {
@@ -78,11 +69,9 @@ export default defineConfig({
         '@pages': '/src/pages',
         '@utils': '/src/utils',
         '@lib': '/src/lib',
-      },
-      alias: import.meta.env.PROD && {
+      ...(import.meta.env.PROD && {
         "react-dom/server": "react-dom/server.edge",
-      },
-
+      })}
     },
     build: {
       sourcemap: true,

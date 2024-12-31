@@ -4,7 +4,7 @@ import PreHeader from "@components/Header/PreHeader.astro";
 import { ClientRouter } from 'astro:transitions';
 import '@styles/custom.css';
 import '@styles/globals.css';
-import '@fontsource/poppins';
+import '@fontsource/geist-sans';
 import NavBar from "@components/Header/Navbar/NavBar.astro";
 interface Props {
   title?: string;
@@ -38,38 +38,9 @@ const global = { title: 'SimonGreer.co.uk' };
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
 
-    <!-- Preload fonts -->
-    <link
-      rel="preload"
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <link
-      rel="preload" 
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <!-- Fallback -->
-    <noscript>
-      <link 
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-        type="text/css"
-      />
-      <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
-        rel="stylesheet"
-        type="text/css"
-      />
-    </noscript>
-
-
-
     <ClientRouter />
   </head>
-  <body class="bg-gray-100 dark:bg-background font-poppins min-h-screen">
+  <body class="bg-gray-100 dark:bg-background min-h-screen">
     <div class="flex flex-col max-w-lg mx-auto md:py-6 space-y-0">
       <div class="hidden md:visible md:block md:w-full"><PreHeader /></div>
       <NavBar />

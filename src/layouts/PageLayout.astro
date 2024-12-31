@@ -1,14 +1,14 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import '@styles/custom.css';
-import '@fontsource/poppins';
+import '@fontsource/geist-mono';
 interface Props {
   title: string;
 }
 const { title } = Astro.props;
 ---
 <BaseLayout title={title}>
-  <main class="flex-grow w-full sm:text-lg font-poppins mx-auto">
+  <main class="flex-grow w-full sm:text-lg mx-auto">
     <slot />
   </main>
 </BaseLayout>
