@@ -263,10 +263,16 @@
       "category": "ai-automation",
       "color": "#007bb5"
     },
-    "devops": {
-      "name": "DevOps",
-      "description": "DevOps tools and practices",
-      "category": "development",
-      "color": "#007bb5"
-    }
+      "devops": {
+        "name": "DevOps",
+        "description": "DevOps tools and practices",
+        "category": "development",
+        "color": "#007bb5"
+      },
+      "connectivity": {
+        "name": "Connectivity",
+        "description": "Connectivity solutions",
+        "category": "development",
+        "color": "#333333"
+      }
   }
