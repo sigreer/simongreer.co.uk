@@ -31,7 +31,7 @@ const resolvedTags = tags?.map(tag => {
 
 ---
 
-<li class={`rounded-md bg-white transition border border-[#9b9b9b] hover:shadow-xl hover:scale-105 ${className} relative overflow-hidden dark:bg-background dark:border-neutral-800 dark:border`}
+<li class={`rounded-md bg-white transition-all duration-300 border border-[#9b9b9b] hover:shadow-xl hover:scale-105 ${className} relative overflow-hidden dark:bg-background dark:border-neutral-800 dark:border`}
     data-tags={tags?.map(tag => tag.id).join(',')}>
 
   <a href={`${basePath}/${slug}`} class="group h-full flex flex-col">

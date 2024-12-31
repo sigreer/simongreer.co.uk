@@ -1,4 +1,6 @@
-
+[data-tags] {
+  transition: opacity 300ms ease-in-out;
+}
 
 
  

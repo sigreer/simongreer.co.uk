@@ -16,24 +16,23 @@ const resolvedTags = tags.map((tag: string) => {
   return { id: tag, data: tagData };
 });
 ---
-
+<div class="flex flex-col gap-2">
 <div class="flex items-center gap-2">
   <span class="font-semibold">FILTER:</span>
-  <span id="active-tag" class="hidden cursor-pointer hover:opacity-75 !bg-transparent !text-black !border !px-2 rounded-md !border-gray-700 !shadow-none !drop-shadow-none tag-style !py-1 text-sm font-semibold" data-tag="all">
+  <span id="active-tag" class="hidden cursor-pointer hover:opacity-75 !bg-transparent !text-black dark:!text-white !border !px-2 rounded-md !border-gray-700 dark:!border-gray-800 !shadow-none !drop-shadow-none dark:shadow-none dark:drop-shadow-sm tag-style py-0.5 text-sm font-semibold" data-tag="all">
     <span>× </span><span id="tag-name"></span>
   </span>
 </div>
-<div class="flex flex-wrap gap-2 tag-block">
-  <button
-    class="tag-style rounded-md px-2 py-1 text-xs md:text-sm font-bold text-white bg-black transition-all uppercase hover:scale-105"
+  <div class="flex flex-row gap-2">
+    <button
+    class="tag-style rounded-md px-2 py-0.5 text-xs md:text-sm font-bold text-white bg-black outline outline-white outline-1 transition-all lowercase hover:brightness-125"
     data-tag="all"
   >
-    All
+    x
   </button>
-  
   {resolvedTags.map((tag) => (
     <button
-      class="tag-style rounded-md px-2 py-1 text-xs md:text-sm font-semibold text-white transition-all hover:scale-105"
+      class="tag-style rounded-md !px-2 py-0.5 text-xs md:text-sm font-semibold text-white transition-all hover:brightness-125"
       data-tag={tag.id}
       style={`background-color: ${tag.data?.color || '#6B7280'}`}
     >
@@ -41,7 +40,7 @@ const resolvedTags = tags.map((tag: string) => {
     </button>
   ))}
 </div>
-
+</div>
 <script>
   function handleFilter() {
     const posts = document.querySelectorAll('[data-tags]');
@@ -51,7 +50,13 @@ const resolvedTags = tags.map((tag: string) => {
 
     function filterPosts(selectedTag: string) {
       if (selectedTag === 'all') {
-        posts.forEach(post => post.classList.remove('hidden'));
+        posts.forEach((post) => {
+          (post as HTMLElement).style.opacity = '0';
+          setTimeout(() => {
+            post.classList.remove('hidden');
+            (post as HTMLElement).style.opacity = '1';
+          }, 300);
+        });
         activeTagDisplay?.classList.add('hidden');
         return;
       }
@@ -60,11 +65,15 @@ const resolvedTags = tags.map((tag: string) => {
         const tagsAttr = post.getAttribute('data-tags');
         const tags = tagsAttr ? tagsAttr.split(',') : [];
         
-        if (tags.includes(selectedTag)) {
-          post.classList.remove('hidden');
-        } else {
-          post.classList.add('hidden');
-        }
+        (post as HTMLElement).style.opacity = '0';
+        setTimeout(() => {
+          if (tags.includes(selectedTag)) {
+            post.classList.remove('hidden');
+            (post as HTMLElement).style.opacity = '1';
+          } else {
+            post.classList.add('hidden');
+          }
+        }, 300);
       });
 
       const selectedTagData = document.querySelector(`[data-tag="${selectedTag}"]`);
@@ -99,7 +108,7 @@ const resolvedTags = tags.map((tag: string) => {
 
 <style>
   .tag-style.active {
-    transform: scale(1.1);
+    filter: brightness(125%);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
 </style> 

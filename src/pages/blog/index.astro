@@ -34,8 +34,7 @@ const tagsWithData = await Promise.all(posts.map(async (post: CollectionEntry<'b
     <Filter type="tag">
       <TagFilter posts={posts} />
     </Filter>
-    <div class="w-full">
-
+    <div class="w-full min-h-[var(--initial-height)]" id="posts-container">
       <ul class="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {tagsWithData.map((post) => (
           <Card 
@@ -52,4 +51,15 @@ const tagsWithData = await Promise.all(posts.map(async (post: CollectionEntry<'b
     </div>
   </section>
 </PageLayout>
+
+<script>
+  // Add this script to set the initial height
+  window.addEventListener('load', () => {
+    const container = document.getElementById('posts-container');
+    if (container) {
+      const height = container.offsetHeight;
+      container.style.setProperty('--initial-height', `${height}px`);
+    }
+  });
+</script>
 
