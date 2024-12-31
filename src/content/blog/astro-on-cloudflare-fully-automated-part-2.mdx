@@ -12,7 +12,7 @@ tags: ["astro", "cloudflare", "git", "automation"]
 category: "DevOps"
 ---
 
-import '@styles/lightbox.css';
+
 import LightBox from '@components/Media/LightBox.astro';
 import emailSuccess from '@images/galleries/astro-on-cloudflare/successfully-sent-email.png';
 import mailtrapApiDetails from '@images/galleries/astro-on-cloudflare/mailtrap-api-details.png';
@@ -205,7 +205,7 @@ It's of course possible to use a standard SMTP-enabled mail server, but using a 
 <LightBox src={mailtrapApiDetails}
   alt="Mailtrap"
   width={300}
-  class="my-4"
+  class="my-4 shadow-lg"
   caption="Mailtrap domain API details"
 />
 </div>
@@ -284,7 +284,7 @@ Once done you should have a Cloudflare Worker deployed using Wrangler that will 
 <LightBox src={emailSuccess}
   alt="Mailtrap"
   width={400}
-  class="my-4"
+  class="my-4 shadow-lg"
   caption="Successfully sent email"
 />
 </div>

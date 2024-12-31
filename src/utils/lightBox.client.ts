@@ -5,6 +5,9 @@ function initLightbox() {
     const thumbnail = wrapper.querySelector('.lightbox-thumbnail');
     const overlay = wrapper.querySelector('.lightbox-overlay');
     
+    // Skip if already initialized
+    if ((wrapper as HTMLElement).dataset.initialized) return;
+    
     // Create and append close button
     const closeButton = document.createElement('span');
     closeButton.className = 'lightbox-close';
@@ -24,7 +27,14 @@ function initLightbox() {
         document.body.style.overflow = '';
       });
     });
+
+    // Mark as initialized
+    ((wrapper as HTMLElement).dataset.initialized)  = 'true';
   });
 }
 
-document.addEventListener('DOMContentLoaded', initLightbox); 
+// Run on initial load
+document.addEventListener('DOMContentLoaded', initLightbox);
+
+// Run on view transitions
+document.addEventListener('astro:page-load', initLightbox); 
