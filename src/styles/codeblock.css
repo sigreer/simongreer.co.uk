@@ -87,7 +87,7 @@ pre {
 }
 
 code {
-  @apply text-xs md:text-sm !leading-normal tracking-tighter;
+  @apply text-base md:text-lg !leading-normal tracking-tighter;
 }
 
 pre > code {
@@ -270,6 +270,6 @@ pre:has(+ [data-caption]) {
   @apply !rounded-t-none;
 }
 
-code:not(pre code) {
-  @apply bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-sm font-['ui-monospace','SFMono-Regular','Menlo','Monaco','Consolas','Liberation_Mono','Courier_New',monospace];
+.prose code:not(pre code) {
+  @apply bg-gray-700 text-white dark:text-white dark:bg-gray-800 px-1 my-0 rounded text-[13px] font-normal;
 }
