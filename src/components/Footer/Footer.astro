@@ -1,5 +1,5 @@
 ---
-import PoweredBy from './PoweredBy.astro';
+import PoweredBy from '@components/Footer/PoweredBy.astro';
 import { getCollection } from 'astro:content';
 const posts = await getCollection('blog');
 ---
@@ -53,7 +53,7 @@ const posts = await getCollection('blog');
           <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">SimonGreer.co.uk</span>
       </a>
   </div>
-    <span class="text-sm text-white sm:text-center"><a href="https://simongreer.co.uk" class="hover:underline">SimonGreer.co.uk</a>. Opinions are my own. If you're offended, go elsewhere.
+    <span class="text-sm text-white sm:text-center">Opinions are my own. If you're offended, go elsewhere.
     </span>
   </div>  
 </footer>

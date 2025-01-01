@@ -1,5 +1,5 @@
 ---
-import tagsData from '../../content/tags.json';
+const tagsData = await import('@content/tags.json');
 
 interface Props {
   posts: any[];
@@ -8,7 +8,7 @@ interface Props {
 const { posts } = Astro.props;
 
 const tags = [...new Set(posts
-  .filter(post => !post.data.draft)
+  .filter(post => post.data.status === 'published')
   .flatMap(post => post.data.tags?.map((tag: {id: string}) => tag.id) || []))];
 
 const resolvedTags = tags.map((tag: string) => {
@@ -34,7 +34,7 @@ const resolvedTags = tags.map((tag: string) => {
     <button
       class="tag-style rounded-md !px-2 py-0.5 text-xs md:text-sm font-semibold text-white transition-all hover:brightness-125"
       data-tag={tag.id}
-      style={`background-color: ${tag.data?.color || '#6B7280'}`}
+      style={`background-color: ${typeof tag.data === 'object' ? (tag.data as {color: string})?.color : '#6B7280'}`}
     >
       {tag.id}
     </button>

@@ -4,7 +4,7 @@ import type { CollectionEntry } from 'astro:content';
 import HomeLayout from "@layouts/HomeLayout.astro";
 import ShowAll from "@components/Inline/ShowAll.astro";
 import Card from '@components/ContentBoxes/Card.astro';
-import PostBanner from '@components/Media/PostBanner.astro';
+import HomeBanner from '@components/Media/HomeBanner.astro';
 const posts = (await getCollection('blog'))
   .filter(({ data }: { data: { status: string } }) => data.status === 'published')
   .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime())
@@ -35,7 +35,7 @@ const posts = (await getCollection('blog'))
 <HomeLayout title="Tech" leftcol="blog" rightcol="tech">
   <section class="md:py-8 px-6 md:px-0">
     <div class="flex flex-col gap-6">
-      <PostBanner post={posts[0]} />
+      <HomeBanner post={posts[0]} />
       <div class="w-full">
         <div class="flex justify-between items-center">
           <h2 class="text-lg text-gray-900 font-semibold uppercase mb-2 dark:text-themepurple">
@@ -56,10 +56,6 @@ const posts = (await getCollection('blog'))
           ))}
         </ul>
       </div>
-
-        
-      <!-- <h3 class="text-black text-base md:text-2xl font-semibold md:font-bold"><span class="hidden md:inline">Why Are You Here?</span><span class="md:hidden">Let me know what you're looking for and I'll find something suitable.</span></h3> -->
-      <!-- <SuggestoBot /> -->
     </div>
   </section>
 </HomeLayout>

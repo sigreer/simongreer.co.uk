@@ -12,7 +12,7 @@
     "dump": "wrangler types && astro sync --clear && astro build && wrangler deploy --dry-run",
     "sync": "astro sync --clear",
     "lint": "prettier --write  \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\" && eslint --fix \"src/**/*.{js,ts,jsx,tsx,astro}\"",
-    "purge": "rm -rf ./node_modules && rm bun.lockb && rm -rf ./.astro && rm -rf ./.wrangler && bun pm cache rm && rm -rf ./dist",
+    "purge": "rm -rf ./{node_modules,.astro,.wrangler,dist} && rm bun.lockb && bun pm cache rm && bun install && bun update && astro sync && wrangler types && astro build",
     "update": "bun install && bun update && bun upgrade",
     "pagespeed": "node scripts/pagespeed-report.cjs"
   },

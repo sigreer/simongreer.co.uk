@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import { getEntry } from 'astro:content';
-import tagsData from '../../content/tags.json';
+const tagsData = await import('@content/tags.json');
 
 interface Props {
   
@@ -82,7 +82,7 @@ const resolvedTags = tags?.map(tag => {
             return (
               <span
                 class="tag-style rounded-md px-2 py-1 text-xs font-semibold text-white shadow-sm transition" 
-                style={`background-color: ${tag.data?.color || '#6B7280'}`}
+                style={`background-color: ${typeof tag.data === 'object' ? (tag.data as {color: string})?.color : '#6B7280'}`}
                 data-tag={tag.id}
               >
                 {tag.id}
