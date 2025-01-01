@@ -21,7 +21,7 @@ const filteredToc = toc.filter((heading: Heading) => heading.depth >= 2 && headi
               block transition-colors duration-200 
               ${heading.depth === 3 
                 ? 'ml-4 text-base' 
-                : 'text-base font-semibold'
+                : 'text-base font-medium'
               } 
               text-gray-600 hover:text-purple-600 active:text-purple-600 dark:text-gray-200 hover:underline leading-tight 
             `}
@@ -68,14 +68,14 @@ const filteredToc = toc.filter((heading: Heading) => heading.depth >= 2 && headi
           if (entry.isIntersecting) {
             // Remove active class from previous
             if (activeLink) {
-              activeLink.classList.remove('text-purple-600', 'font-bold');
+              activeLink.classList.remove('text-purple-600', 'font-');
             }
             
             // Add active class to current link
             const href = `#${entry.target.id}`;
             const currentLink = document.querySelector(`[data-toc-link][href="${href}"]`) as HTMLElement;
             if (currentLink) {
-              currentLink.classList.add('text-purple-600', 'font-bold');
+              currentLink.classList.add('text-purple-600', 'font-600');
               activeLink = currentLink;
             }
           }

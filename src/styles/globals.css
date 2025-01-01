@@ -35,7 +35,7 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
     --detail-medium-contrast: rgba(0, 0, 0, 0.3);
-    --text-body: rgba(0, 0, 0, 0.8);
+    --text-body: rgb(24, 24, 24);
     
   }
   .dark {
@@ -64,10 +64,13 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
     --detail-medium-contrast: rgba(255, 255, 255, 0.3);
-    --text-body: rgba(255, 255, 255, 0.8);
+    --text-body: rgb(230, 230, 230);
   }
 }
 @layer base {
+  html {
+    font-size: 14px;
+  }
   * {
     @apply border-border;
   }
@@ -76,7 +79,9 @@
   }
   .prose a {
     @apply !text-blue-700 dark:!text-blue-500 !no-underline font-semibold;
-
+  }
+  .prose {
+    @apply !text-inherit;
   }
   .prose a:hover {
     @apply !underline;
