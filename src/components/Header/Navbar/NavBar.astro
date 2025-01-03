@@ -1,16 +1,11 @@
 ---
-import TechStuff from '@components/Header/Navbar/TechStuff.astro';
-import RootItem from '@components/Header/Navbar/SiMenu/RootItem.astro';
-import SubMenu from '@components/Header/Navbar/SiMenu/SubMenu.astro';
-import SubMenuItem from '@components/Header/Navbar/SiMenu/SubMenuItem.astro';
-import BlogPosts from '@components/Header/Navbar/BlogPosts.astro';
-import AboutMe from '@components/Header/Navbar/AboutMe.astro';
+import RootItem from '@components/Header/Navbar/RootItem.astro';
+import SubMenuItem from '@components/Header/Navbar/SubMenuItem.astro';
 import LogoIcon from '@components/Header/Navbar/LogoIcon.astro';
 import AccountCircleIcon from '@components/Icons/AccountCircleIcon.astro';
 import IdentityIcon from '@components/Icons/IdentityIcon.astro';
 import FaceIcon from '@components/Icons/FaceIcon.astro';
 import NewspaperIcon from '@components/Icons/NewspaperIcon.astro';
-import ChatIcon from '@components/Icons/ChatIcon.astro'
 import ServerIcon from '@components/Icons/ServerIcon.astro';
 import EditorChoiceIcon from '@components/Icons/EditorChoiceIcon.astro';
 import KanbanIcon from '@icons/KanbanIcon.astro';
@@ -30,12 +25,12 @@ const menuStructure = {
 };
 
 const currentPath = Astro.url.pathname; 
-const isActiveRoute = (rootPath: string, pathMatch: string) => {
-  return currentPath === rootPath || currentPath.startsWith(pathMatch);
+const isActiveRoute = (menuItem: keyof typeof menuStructure) => {
+  return currentPath === menuStructure[menuItem].root || currentPath.startsWith(menuStructure[menuItem].pathMatch);
 };
 
 const getIsActive = (menuItem: keyof typeof menuStructure) => {
-  return isActiveRoute(menuStructure[menuItem].root, menuStructure[menuItem].pathMatch);
+  return isActiveRoute(menuItem);
 };
 
 const iconClasses = (menuItem: keyof typeof menuStructure) => [
@@ -69,13 +64,13 @@ const rootIconClasses = (menuItem: keyof typeof menuStructure) => [
 
       <div id="navbar-default" 
           class="items-center flex-grow gap-x-1 justify-end hidden md:flex w-full p-0 m-0 mt-16 md:mt-0 dark:bg-background bg-white absolute top-0 h-[100vh] min-h-[100vh] md:min-h-full md:top-0 md:relative md:visible md:w-auto md:h-full">
-          <RootItem isActive={isActiveRoute(menuStructure.blog.root, menuStructure.blog.pathMatch)} link="/blog" label="Blog Posts">
+          <RootItem isActive={isActiveRoute('blog')} link="/blog" label="Blog Posts">
             <NewspaperIcon 
               class:list={rootIconClasses('blog')}
             />
             Blog Posts
           </RootItem>
-            <RootItem isActive={isActiveRoute(menuStructure.tech.root, menuStructure.tech.pathMatch)} link="/tech" label="Tech Stuff">
+            <RootItem isActive={isActiveRoute('tech')} link="/tech" label="Tech Stuff">
               <ServerIcon class:list={rootIconClasses('tech')}/>
               Tech Stuff
               <Fragment slot="submenu">
@@ -87,7 +82,7 @@ const rootIconClasses = (menuItem: keyof typeof menuStructure) => [
                 </SubMenuItem>
               </Fragment>
             </RootItem>
-            <RootItem isActive={isActiveRoute(menuStructure.about.root, menuStructure.about.pathMatch)} link="/me" label="About Me">
+            <RootItem isActive={isActiveRoute('about')} link="/me" label="About Me">
               <AccountCircleIcon 
                 class:list={rootIconClasses('about')}
               />
