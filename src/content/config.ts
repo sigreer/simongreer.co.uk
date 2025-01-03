@@ -35,12 +35,28 @@ const projects = defineCollection({
     description: z.string().nullable(),
     pubDate: z.date(),
     status: z.enum(['draft', 'published', 'archived', 'hidden']),
+    contentType: z.enum(['article', 'snippet']),
     coverimage: z.string().optional(),
     tags: z.array(reference('tags')).optional(),
-    client: z.string().optional(),
+    client: reference('clients').optional(),
     vendor: z.string().optional(),
   }),
 });
+
+const clients = defineCollection({
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "./src/content/clients/"
+  }),
+  schema: z.object({
+    name: z.string(),
+    description: z.string().nullable(),
+    industry: z.string().nullable(),
+    tags: z.array(reference('tags')).optional(),
+    horizontal_logo: z.string().optional().describe('Path to the horizontal logo image'),
+  }),
+});
+
 
 const blog = defineCollection({
   loader: glob({
@@ -67,8 +83,9 @@ const tags = defineCollection({
   schema: z.object({
     name: z.string(),
     description: z.string().optional(),
-    color: z.string().optional()
+    color: z.string().optional(),
+    synonyms: z.array(z.string()).optional()
   })
 });
 
-export const collections = { blog, projects, tech, tags };
+export const collections = { blog, projects, tech, tags, clients };

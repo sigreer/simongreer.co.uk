@@ -32,7 +32,7 @@ const tagsWithData = await Promise.all(posts.map(async (post: CollectionEntry<'b
 <PageLayout title="Blog">
   <section class="py-8 px-6 md:px-0">
     <Filter type="tag">
-      <TagFilter posts={posts} />
+      <TagFilter items={posts} />
     </Filter>
     <div class="w-full min-h-[var(--initial-height)]" id="posts-container">
       <ul class="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

@@ -51,6 +51,7 @@ const posts = (await getCollection('blog'))
               description={post.data.description}
               coverimage={post.data.coverimage}
               pubDate={post.data.pubDate}
+              tags={post.data.tags}
               type="blog"
             />
           ))}

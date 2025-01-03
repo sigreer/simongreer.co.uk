@@ -3,276 +3,649 @@
     "name": "Virtualization",
     "description": "Virtual machine technology",
     "category": "systems",
-    "color": "#8B7B0D"
+    "color": "#8B7B0D",
+    "synonyms": [
+      "virtualisation"
+    ]
   },
   "vdi": {
     "name": "VDI",
     "description": "Virtual Desktop Infrastructure",
     "category": "systems",
-    "color": "#8B7B0D"
+    "color": "#8B7B0D",
+    "synonyms": [
+      "virtual-desktop-infrastructure"
+    ]
   },
-    "javascript": {
-      "name": "JavaScript",
-      "description": "A programming language that powers the web",
-      "category": "development",
-      "color": "#8B7B0D"
-    },
-    "aws": {
-      "name": "AWS",
-      "description": "Amazon Web Services cloud platform",
-      "category": "cloud",
-      "color": "#A65E00"
-    },
-    "cloud": {
-      "name": "Cloud",
-      "description": "Cloud computing and infrastructure",
-      "category": "cloud",
-      "color": "#2563A7"
-    },
-    "hetzner": {
-      "name": "Hetzner",
-      "description": "Hetzner hosting services",
-      "category": "cloud",
-      "color": "#d32f2f"
-    },
-    "hosting": {
-      "name": "Hosting",
-      "description": "Web and application hosting",
-      "category": "cloud",
-      "color": "#2196f3"
-    },
-    "vps": {
-      "name": "VPS",
-      "description": "Virtual Private Servers",
-      "category": "cloud",
-      "color": "#64b5f6"
-    },
-    "storage": {
-      "name": "Storage",
-      "description": "Data storage solutions",
-      "category": "systems",
-      "color": "#991800"
-    },
-    "nas": {
-      "name": "NAS",
-      "description": "Network Attached Storage",
-      "category": "systems",
-      "color": "#2e7d32"
-    },
-    "truenas": {
-      "name": "TrueNAS",
-      "description": "Open source storage platform",
-      "category": "systems",
-      "color": "#1a237e"
-    },
-    "firewall": {
-      "name": "Firewall",
-      "description": "Network security",
-      "category": "systems",
-      "color": "#f44336"
-    },
-    "opnsense": {
-      "name": "OPNsense",
-      "description": "Open source firewall platform",
-      "category": "systems",
-      "color": "#ff5722"
-    },
-    "pfsense": {
-      "name": "pfSense",
-      "description": "Open source firewall platform",
-      "category": "systems",
-      "color": "#0d47a1"
-    },
-    "virtualisation": {
-      "name": "Virtualisation",
-      "description": "Virtual machine technology",
-      "category": "systems",
-      "color": "#673ab7"
-    },
-    "open source": {
-      "name": "Open Source",
-      "description": "Open source software",
-      "category": "development",
-      "color": "#4caf50"
-    },
-    "linux": {
-      "name": "Linux",
-      "description": "Linux operating system",
-      "category": "systems",
-      "color": "#675400"
-    },
-    "embedded": {
-      "name": "Embedded",
-      "description": "Embedded systems",
-      "category": "systems",
-      "color": "#ff9800"
-    },
-    "development": {
-      "name": "Development",
-      "description": "Software development",
-      "category": "development",
-      "color": "#2196f3"
-    },
-    "shell": {
-      "name": "Shell",
-      "description": "Command line shell",
-      "category": "development",
-      "color": "#757575"
-    },
-    "flutter": {
-      "name": "Flutter",
-      "description": "Cross-platform development framework",
-      "category": "development",
-      "color": "#0277BD"
-    },
-    "webrtc": {
-      "name": "WebRTC",
-      "description": "Real-time communication",
-      "category": "development",
-      "color": "#008494"
-    },
-    "obs": {
-      "name": "OBS",
-      "description": "Open Broadcaster Software",
-      "category": "media",
-      "color": "#9c27b0"
-    },
-    "automation": {
-      "name": "Automation",
-      "description": "Process automation",
-      "category": "ai-automation",
-      "color": "#831c00"
-    },
-    "bash": {
-      "name": "Bash",
-      "description": "Command line scripting",
-      "category": "development",
-      "color": "#1a791d"
-    },
-    "astro": {
-      "name": "Astro",
-      "description": "Web framework",
-      "category": "development",
-      "color": "#7c3aed"
-    },
-    "cloudflare": {
-      "name": "Cloudflare",
-      "description": "Web infrastructure and security",
-      "category": "cloud",
-      "color": "#B35A0F"
-    },
-    "git": {
-      "name": "Git",
-      "description": "Version control system",
-      "category": "development",
-      "color": "#991800"
-    },
-    "ai": {
-      "name": "AI",
-      "description": "Artificial Intelligence",
-      "category": "ai-automation",
-      "color": "#9333ea"
-    },
-    "funny": {
-      "name": "Funny",
-      "description": "Humorous content",
-      "category": "content",
-      "color": "#ec4899"
-    },
-    "fails": {
-      "name": "Fails",
-      "description": "Failure cases and lessons",
-      "category": "content",
-      "color": "#ef4444"
-    },
-    "workflow": {
-      "name": "Workflow",
-      "description": "Process and workflow management",
-      "category": "business",
-      "color": "#0A6B98"
-    },
-    "productivity": {
-      "name": "Productivity",
-      "description": "Productivity tools and methods",
-      "category": "business",
-      "color": "#087F54"
-    },
-    "wordpress": {
-      "name": "WordPress",
-      "description": "WordPress CMS",
-      "category": "content",
-      "color": "#0073aa"
-    },
-    "web": {
-      "name": "Web",
-      "description": "Web development",
-      "category": "development",
-      "color": "#78003f"
-    },
-    "docker": {
-      "name": "Docker",
-      "description": "Docker containerization",
-      "category": "cloud",
-      "color": "#303030"
-    },
-    "audio": {
-      "name": "Audio",
-      "description": "Audio processing and production",
-      "category": "media",
-      "color": "#ac0077"
-    },
-    "business apps": {
-      "name": "Business Apps",
-      "description": "Business applications",
-      "category": "business",
-      "color": "#0073aa"
-    },
-    "vector art": {
-      "name": "Vector Art",
-      "description": "Vector art and icon design",
-      "category": "design",
-      "color": "#007bb5"
-    },
-    "inkscape": {
-      "name": "Inkscape",
-      "description": "Inkscape vector graphics editor",
-      "category": "design",
-      "color": "#007bb5"
-    },
-    "llm": {
-      "name": "LLM",
-      "description": "Large Language Models",
-      "category": "ai-automation",
-      "color": "#007bb5"
-    },
-    "anthropic": {
-      "name": "Anthropic",
-      "description": "Anthropic AI",
-      "category": "ai-automation",
-      "color": "#007bb5"
-    },
-    "enterprise": {
-      "name": "Enterprise",
-      "description": "Enterprise solutions",
-      "category": "business",
-      "color": "#007bb5"
-    },
-    "ansible": {
-      "name": "Ansible",
-      "description": "Ansible automation tool",
-      "category": "ai-automation",
-      "color": "#007bb5"
-    },
-      "devops": {
-        "name": "DevOps",
-        "description": "DevOps tools and practices",
-        "category": "development",
-        "color": "#007bb5"
-      },
-      "connectivity": {
-        "name": "Connectivity",
-        "description": "Connectivity solutions",
-        "category": "development",
-        "color": "#333333"
-      }
+  "javascript": {
+    "name": "JavaScript",
+    "description": "A programming language that powers the web",
+    "category": "development",
+    "color": "#8B7B0D",
+    "synonyms": [
+      "js"
+    ]
+  },
+  "aws": {
+    "name": "AWS",
+    "description": "Amazon Web Services cloud platform",
+    "category": "cloud",
+    "color": "#A65E00",
+    "synonyms": [
+      "amazon-web-services",
+      "amazon-aws"
+    ]
+  },
+  "cloud": {
+    "name": "Cloud",
+    "description": "Cloud computing and infrastructure",
+    "category": "cloud",
+    "color": "#2563A7"
+  },
+  "hetzner": {
+    "name": "Hetzner",
+    "description": "Hetzner hosting services",
+    "category": "cloud",
+    "color": "#d32f2f"
+  },
+  "hosting": {
+    "name": "Hosting",
+    "description": "Web and application hosting",
+    "category": "cloud",
+    "color": "#2196f3"
+  },
+  "vps": {
+    "name": "VPS",
+    "description": "Virtual Private Servers",
+    "category": "cloud",
+    "color": "#64b5f6",
+    "synonyms": [
+      "virtual-private-server"
+    ]
+  },
+  "storage": {
+    "name": "Storage",
+    "description": "Data storage solutions",
+    "category": "systems",
+    "color": "#991800",
+    "synonyms": [
+      "data-storage"
+    ]
+  },
+  "nas": {
+    "name": "NAS",
+    "description": "Network Attached Storage",
+    "category": "systems",
+    "color": "#2e7d32",
+    "synonyms": [
+      "network-attached-storage",
+      "network-storage"
+    ]
+  },
+  "truenas": {
+    "name": "TrueNAS",
+    "description": "Open source storage platform",
+    "category": "systems",
+    "color": "#1a237e",
+    "synonyms": [
+      "freenas"
+    ]
+  },
+  "firewall": {
+    "name": "Firewall",
+    "description": "Network security",
+    "category": "systems",
+    "color": "#f44336",
+    "synonyms": [
+      "fw"
+    ]
+  },
+  "opnsense": {
+    "name": "OPNsense",
+    "description": "Open source firewall platform",
+    "category": "systems",
+    "color": "#ff5722"
+  },
+  "pfsense": {
+    "name": "pfSense",
+    "description": "Open source firewall platform",
+    "category": "systems",
+    "color": "#0d47a1"
+  },
+  "open source": {
+    "name": "Open Source",
+    "description": "Open source software",
+    "category": "development",
+    "color": "#4caf50"
+  },
+  "linux": {
+    "name": "Linux",
+    "description": "Linux operating system",
+    "category": "systems",
+    "color": "#675400"
+  },
+  "embedded": {
+    "name": "Embedded",
+    "description": "Embedded systems",
+    "category": "systems",
+    "color": "#ff9800",
+    "synonyms": [
+      "embedded-systems"
+    ]
+  },
+  "development": {
+    "name": "Development",
+    "description": "Software development",
+    "category": "development",
+    "color": "#2196f3",
+    "synonyms": [
+      "software-development",
+      "dev",
+      "programming"
+    ]
+  },
+  "flutter": {
+    "name": "Flutter",
+    "description": "Cross-platform development framework",
+    "category": "development",
+    "color": "#0277BD"
+  },
+  "webrtc": {
+    "name": "WebRTC",
+    "description": "Real-time communication",
+    "category": "development",
+    "color": "#008494"
+  },
+  "obs": {
+    "name": "OBS",
+    "description": "Open Broadcaster Software",
+    "category": "media",
+    "color": "#9c27b0",
+    "synonyms": [
+      "obs-studio"
+    ]
+  },
+  "automation": {
+    "name": "Automation",
+    "description": "Process automation",
+    "category": "ai-automation",
+    "color": "#831c00"
+  },
+  "bash": {
+    "name": "Bash",
+    "description": "Command line scripting",
+    "category": "development",
+    "color": "#1a791d",
+    "synonyms": [
+      "shell"
+    ]
+  },
+  "astro": {
+    "name": "Astro",
+    "description": "Web framework",
+    "category": "development",
+    "color": "#7c3aed",
+    "synonyms": [
+      "astrojs"
+    ]
+  },
+  "cloudflare": {
+    "name": "Cloudflare",
+    "description": "Web infrastructure and security",
+    "category": "cloud",
+    "color": "#B35A0F",
+    "synonyms": [
+      "cf"
+    ]
+  },
+  "git": {
+    "name": "Git",
+    "description": "Version control system",
+    "category": "development",
+    "color": "#991800",
+    "synonyms": [
+      "git",
+      "github",
+      "gitlab",
+      "bitbucket"
+    ]
+  },
+  "ai": {
+    "name": "AI",
+    "description": "Artificial Intelligence",
+    "category": "ai-automation",
+    "color": "#9333ea",
+    "synonyms": [
+      "artificial intelligence",
+      "llm",
+      "llms",
+      "large-language-model",
+      "large-language-models"
+    ]
+  },
+  "funny": {
+    "name": "Funny",
+    "description": "Humorous content",
+    "category": "content",
+    "color": "#ec4899",
+    "synonyms": [
+      "humor",
+      "fun",
+      "joke",
+      "silly",
+      "jokes",
+      "humour",
+      "fails"
+    ]
+  },
+  "workflow": {
+    "name": "Workflow",
+    "description": "Process and workflow management",
+    "category": "business",
+    "color": "#0A6B98"
+  },
+  "productivity": {
+    "name": "Productivity",
+    "description": "Productivity tools and methods",
+    "category": "business",
+    "color": "#087F54"
+  },
+  "wordpress": {
+    "name": "WordPress",
+    "description": "WordPress CMS",
+    "category": "content",
+    "color": "#0073aa",
+    "synonyms": [
+      "word-press",
+      "wp"
+    ]
+  },
+  "web": {
+    "name": "Web",
+    "description": "Web",
+    "category": "development",
+    "color": "#78003f",
+    "synonyms": [
+      "www"
+    ]
+  },
+  "docker": {
+    "name": "Docker",
+    "description": "Docker containerization",
+    "category": "cloud",
+    "color": "#303030"
+  },
+  "audio": {
+    "name": "Audio",
+    "description": "Audio processing and production",
+    "category": "media",
+    "color": "#ac0077",
+    "synonyms": [
+      "audio-production",
+      "audio-processing",
+      "audio-tools",
+      "audio-software",
+      "audio-production-tools",
+      "audio-production-software",
+      "professional-audio",
+      "recording"
+    ]
+  },
+  "business-apps": {
+    "name": "Business Apps",
+    "description": "Business applications",
+    "category": "business",
+    "color": "#0073aa",
+    "synonyms": [
+      "business-applications",
+      "business-apps",
+      "business-software",
+      "line-of-business"
+    ]
+  },
+  "vector-art": {
+    "name": "Vector Art",
+    "description": "Vector art and icon design",
+    "category": "design",
+    "color": "#007bb5",
+    "synonyms": [
+      "vector-graphics",
+      "vector-art",
+      "icon-design",
+      "iconography",
+      "icons",
+      "vectors",
+      "vector",
+      "inkscape"
+    ]
+  },
+  "anthropic": {
+    "name": "Anthropic",
+    "description": "Anthropic AI",
+    "category": "ai-automation",
+    "color": "#007bb5"
+  },
+  "enterprise": {
+    "name": "Enterprise",
+    "description": "Enterprise solutions",
+    "category": "business",
+    "color": "#007bb5"
+  },
+  "ansible": {
+    "name": "Ansible",
+    "description": "Ansible automation tool",
+    "category": "ai-automation",
+    "color": "#007bb5"
+  },
+  "devops": {
+    "name": "DevOps",
+    "description": "DevOps tools and practices",
+    "category": "development",
+    "color": "#007bb5"
+  },
+  "connectivity": {
+    "name": "Connectivity",
+    "description": "Connectivity solutions",
+    "category": "development",
+    "color": "#333333"
+  },
+  "api": {
+    "name": "api",
+    "description": "api",
+    "category": "business",
+    "color": "#f98599"
+  },
+  "asterisk": {
+    "name": "asterisk",
+    "description": "asterisk",
+    "category": "business",
+    "color": "#d1bed0"
+  },
+  "bitfocus": {
+    "name": "bitfocus",
+    "description": "bitfocus",
+    "category": "business",
+    "color": "#e5ecfe"
+  },
+  "broadcast": {
+    "name": "broadcast",
+    "description": "broadcast",
+    "category": "business",
+    "color": "#b3d5cf",
+    "synonyms": [
+      "broadcast-tools",
+      "streaming"
+    ]
+  },
+  "chat": {
+    "name": "chat",
+    "description": "chat",
+    "category": "business",
+    "color": "#c6ebdf"
+  },
+  "cms": {
+    "name": "cms",
+    "description": "cms",
+    "category": "business",
+    "color": "#91fcd7"
+  },
+  "collaboration": {
+    "name": "collaboration",
+    "description": "collaboration",
+    "category": "business",
+    "color": "#c29e8e",
+    "synonyms": [
+      "file-sharing",
+      "collaboration-tools",
+      "meeting",
+      "meetings"
+    ]
+  },
+  "communications": {
+    "name": "communications",
+    "description": "communications",
+    "category": "business",
+    "color": "#9ff7f2"
+  },
+  "companion": {
+    "name": "companion",
+    "description": "companion",
+    "category": "business",
+    "color": "#aea497"
+  },
+  "crm": {
+    "name": "crm",
+    "description": "crm",
+    "category": "business",
+    "color": "#f8ffd2"
+  },
+  "database": {
+    "name": "database",
+    "description": "database",
+    "category": "business",
+    "color": "#95a2ec"
+  },
+  "data-pipeline": {
+    "name": "data-pipeline",
+    "description": "data-pipeline",
+    "category": "business",
+    "color": "#ecd0ee"
+  },
+  "desktop": {
+    "name": "desktop",
+    "description": "desktop",
+    "category": "business",
+    "color": "#a0b5f1"
+  },
+  "dev": {
+    "name": "dev",
+    "description": "dev",
+    "category": "business",
+    "color": "#ffeea5",
+    "synonyms": [
+      "development",
+      "programming",
+      "scripting"
+    ]
+  },
+  "documentdb": {
+    "name": "document-database",
+    "description": "document-database",
+    "category": "business",
+    "color": "#be9ab0",
+    "synonyms": [
+      "document-database",
+      "document-db"
+    ]
+  },
+  "ecommerce": {
+    "name": "ecommerce",
+    "description": "ecommerce",
+    "category": "business",
+    "color": "#9a9be0"
+  },
+  "finance": {
+    "name": "finance",
+    "description": "finance",
+    "category": "business",
+    "color": "#e7e397"
+  },
+  "freepbx": {
+    "name": "freepbx",
+    "description": "freepbx",
+    "category": "business",
+    "color": "#a9f390"
+  },
+  "frontend": {
+    "name": "frontend",
+    "description": "frontend",
+    "category": "business",
+    "color": "#c082b1"
+  },
+  "headless": {
+    "name": "headless",
+    "description": "headless",
+    "category": "business",
+    "color": "#ea81d2"
+  },
+  "marketing": {
+    "name": "marketing",
+    "description": "marketing",
+    "category": "business",
+    "color": "#a9b7b7",
+    "synonyms": [
+      "conversion",
+      "marketing-software",
+      "marketing-automation"
+    ]
+  },
+  "media": {
+    "name": "media",
+    "description": "media",
+    "category": "business",
+    "color": "#9f96e0"
+  },
+  "microsoft": {
+    "name": "microsoft",
+    "description": "microsoft",
+    "category": "business",
+    "color": "#a4859f"
+  },
+  "mobile": {
+    "name": "mobile",
+    "description": "mobile",
+    "category": "business",
+    "color": "#d7fbb5"
+  },
+  "movies": {
+    "name": "movies",
+    "description": "movies",
+    "category": "business",
+    "color": "#a2faa1"
+  },
+  "networking": {
+    "name": "networking",
+    "description": "networking",
+    "category": "business",
+    "color": "#dff2ed",
+    "synonyms": [
+      "proxy",
+      "vpn",
+      "vpns"
+    ]
+  },
+  "nextjs": {
+    "name": "nextjs",
+    "description": "nextjs",
+    "category": "business",
+    "color": "#c7adc9"
+  },
+  "no-code": {
+    "name": "no-code",
+    "description": "no-code",
+    "category": "business",
+    "color": "#ada6a9"
+  },
+  "nosql": {
+    "name": "nosql",
+    "description": "nosql",
+    "category": "business",
+    "color": "#abfd9c"
+  },
+  "openai": {
+    "name": "openai",
+    "description": "openai",
+    "category": "business",
+    "color": "#b7a9f8"
+  },
+  "open-source": {
+    "name": "open-source",
+    "description": "open-source",
+    "category": "business",
+    "color": "#abeb9b"
+  },
+  "project-management": {
+    "name": "project-management",
+    "description": "project-management",
+    "category": "business",
+    "color": "#d395ab"
+  },
+  "relationaldb": {
+    "name": "relational-database",
+    "description": "relational-database",
+    "category": "business",
+    "color": "#e78fd7",
+    "synonyms": [
+      "relational-db",
+      "relational-database"
+    ]
+  },
+  "rust": {
+    "name": "rust",
+    "description": "rust",
+    "category": "business",
+    "color": "#bca2ba"
+  },
+  "scheduling": {
+    "name": "scheduling",
+    "description": "scheduling",
+    "category": "business",
+    "color": "#b1fbde",
+    "synonyms": [
+      "calendar",
+      "booking"
+    ]
+  },
+  "security": {
+    "name": "security",
+    "description": "security",
+    "category": "business",
+    "color": "#a4a9da",
+    "synonyms": [
+      "cybersecurity",
+      "encryption",
+      "password-manager"
+    ]
+  },
+  "server": {
+    "name": "server",
+    "description": "server",
+    "category": "business",
+    "color": "#99918c"
+  },
+  "sql": {
+    "name": "sql",
+    "description": "sql",
+    "category": "business",
+    "color": "#da90d2"
+  },
+  "tv-series": {
+    "name": "tv-series",
+    "description": "tv-series",
+    "category": "business",
+    "color": "#e1c5ca"
+  },
+  "video": {
+    "name": "video",
+    "description": "video",
+    "category": "business",
+    "color": "#99f2b3"
+  },
+  "voip": {
+    "name": "voip",
+    "description": "voip",
+    "category": "business",
+    "color": "#dfa887",
+    "synonyms": [
+      "sip",
+      "telephony",
+      "pbx"
+    ]
+  },
+  "windows": {
+    "name": "windows",
+    "description": "windows",
+    "category": "business",
+    "color": "#bc9184"
   }
+}

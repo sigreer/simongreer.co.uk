@@ -2,14 +2,19 @@
 const tagsData = await import('@content/tags.json');
 
 interface Props {
-  posts: any[];
+  items: {
+    data: {
+      status: string;
+      tags?: { id: string }[];
+    };
+  }[];
 }
 
-const { posts } = Astro.props;
+const { items } = Astro.props;
 
-const tags = [...new Set(posts
-  .filter(post => post.data.status === 'published')
-  .flatMap(post => post.data.tags?.map((tag: {id: string}) => tag.id) || []))];
+const tags = [...new Set(items
+  .filter(item => item.data.status === 'published')
+  .flatMap(item => item.data.tags?.map((tag: {id: string}) => tag.id) || []))];
 
 const resolvedTags = tags.map((tag: string) => {
   const tagData = tagsData[tag as keyof typeof tagsData];

@@ -9,9 +9,9 @@ const { toc } = Astro.props;
 const filteredToc = toc.filter((heading: Heading) => heading.depth >= 2 && heading.depth <= 3);
 ---
 
-<nav class="toc sticky top-4 p-6 bg-white dark:bg-neutral-950 rounded-lg border border-[#c8c9cc] dark:border-neutral-800">
-  <h2 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200 border-b pb-2">Table of Contents</h2>
-  <ul class="space-y-2">
+<nav class="toc sticky top-4 py-2 bg-background dark:bg-background rounded-lg border border-[#c8c9cc] dark:border-neutral-800">
+  <h2 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200 border-b py-1 px-4 text-center">Table of Contents</h2>
+  <ul class="space-y-2 px-4 pb-2">
     {
       filteredToc.map((heading: Heading) => (
         <li>
