@@ -1,0 +1,9 @@
+---
+const { link,class: className } = Astro.props;
+---
+
+<div class="absolute right-0 top-full pt-1 z-50">
+    <div class="hidden group-hover:block w-52 bg-white shadow-lg dark:bg-background dark:border-neutral-800 dark:border">
+      <slot />
+    </div>
+  </div>

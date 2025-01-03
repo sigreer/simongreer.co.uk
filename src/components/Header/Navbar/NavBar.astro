@@ -1,9 +1,55 @@
 ---
 import TechStuff from '@components/Header/Navbar/TechStuff.astro';
+import RootItem from '@components/Header/Navbar/SiMenu/RootItem.astro';
+import SubMenu from '@components/Header/Navbar/SiMenu/SubMenu.astro';
+import SubMenuItem from '@components/Header/Navbar/SiMenu/SubMenuItem.astro';
 import BlogPosts from '@components/Header/Navbar/BlogPosts.astro';
 import AboutMe from '@components/Header/Navbar/AboutMe.astro';
 import LogoIcon from '@components/Header/Navbar/LogoIcon.astro';
+import AccountCircleIcon from '@components/Icons/AccountCircleIcon.astro';
+import IdentityIcon from '@components/Icons/IdentityIcon.astro';
+import FaceIcon from '@components/Icons/FaceIcon.astro';
+import NewspaperIcon from '@components/Icons/NewspaperIcon.astro';
+import ChatIcon from '@components/Icons/ChatIcon.astro'
+import ServerIcon from '@components/Icons/ServerIcon.astro';
+import EditorChoiceIcon from '@components/Icons/EditorChoiceIcon.astro';
+import KanbanIcon from '@icons/KanbanIcon.astro';
+const menuStructure = {
+  tech: {
+    root: '/tech',
+    pathMatch: '/tech/'
+  },
+  about: {
+    root: '/me',
+    pathMatch: '/me/'
+  },
+  blog: {
+    root: '/blog',
+    pathMatch: '/blog/'
+  },
+};
+
+const currentPath = Astro.url.pathname; 
+const isActiveRoute = (rootPath: string, pathMatch: string) => {
+  return currentPath === rootPath || currentPath.startsWith(pathMatch);
+};
+
+const getIsActive = (menuItem: keyof typeof menuStructure) => {
+  return isActiveRoute(menuStructure[menuItem].root, menuStructure[menuItem].pathMatch);
+};
+
+const iconClasses = (menuItem: keyof typeof menuStructure) => [
+  "w-10 h-10 md:w-[18px] md:h-[18px] fill-black dark:fill-gray-200 hover:fill-purple-900 group-hover/item:fill-purple-900 mr-2",
+  getIsActive(menuItem) && "fill-white hover:fill-purple-900 dark:fill-gray-200 dark:hover:fill-purple-900"
+];
+
+const rootIconClasses = (menuItem: keyof typeof menuStructure) => [
+  "w-10 h-10 md:w-[18px] md:h-[18px] fill-black dark:fill-gray-200 group-hover:fill-purple-900 group-hover/button:fill-purple-900",
+  getIsActive(menuItem) && "fill-white hover:fill-purple-900 dark:fill-gray-200 dark:hover:fill-purple-900"
+];
 ---
+
+
 
 <nav>
     <div class={`md:flex-row gap-0 space-y-0 flex flex-grow flex-col items-center justify-between w-full max-w-lg border-[#c8c9cc] dark:border-neutral-800 border my-0 md:rounded-t-none md:rounded-b-lg md:mb-0 bg-white dark:bg-background
@@ -23,9 +69,40 @@ import LogoIcon from '@components/Header/Navbar/LogoIcon.astro';
 
       <div id="navbar-default" 
           class="items-center flex-grow gap-x-1 justify-end hidden md:flex w-full p-0 m-0 mt-16 md:mt-0 dark:bg-background bg-white absolute top-0 h-[100vh] min-h-[100vh] md:min-h-full md:top-0 md:relative md:visible md:w-auto md:h-full">
-        <BlogPosts/>
-        <TechStuff/>
-        <AboutMe/>
+          <RootItem isActive={isActiveRoute(menuStructure.blog.root, menuStructure.blog.pathMatch)} link="/blog" label="Blog Posts">
+            <NewspaperIcon 
+              class:list={rootIconClasses('blog')}
+            />
+            Blog Posts
+          </RootItem>
+            <RootItem isActive={isActiveRoute(menuStructure.tech.root, menuStructure.tech.pathMatch)} link="/tech" label="Tech Stuff">
+              <ServerIcon class:list={rootIconClasses('tech')}/>
+              Tech Stuff
+              <Fragment slot="submenu">
+                <SubMenuItem link="/tech/skills-and-expertise" isFirst={true}>
+                  <KanbanIcon class:list={iconClasses('tech')}/>Skills and Experience
+                </SubMenuItem>
+                <SubMenuItem link="/tech/projects" isLast={true}>
+                  <EditorChoiceIcon class:list={iconClasses('tech')}/>Projects
+                </SubMenuItem>
+              </Fragment>
+            </RootItem>
+            <RootItem isActive={isActiveRoute(menuStructure.about.root, menuStructure.about.pathMatch)} link="/me" label="About Me">
+              <AccountCircleIcon 
+                class:list={rootIconClasses('about')}
+              />
+              About Me
+              <Fragment slot="submenu">
+              <SubMenuItem link="/me/professionally" isFirst={true}>
+                <IdentityIcon class:list={iconClasses('about')}/>
+                Me Professionally
+              </SubMenuItem>
+              <SubMenuItem link="/me/personally" isLast={true}>
+                <FaceIcon class:list={iconClasses('about')}/>
+                Me Personally
+                </SubMenuItem>
+              </Fragment>
+            </RootItem>
       </div>
       
 

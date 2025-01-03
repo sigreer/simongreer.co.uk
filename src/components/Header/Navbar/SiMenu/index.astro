@@ -1,0 +1,11 @@
+---
+const { class: className } = Astro.props;
+
+export interface Props {
+  class?: string;
+}
+---
+
+<div class="relative group">
+  <slot />
+</div> 
