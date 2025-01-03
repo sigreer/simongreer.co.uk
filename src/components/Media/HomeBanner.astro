@@ -6,14 +6,14 @@ const entry = await getEntry('blog', post.id);
 import type { ImageMetadata } from 'astro';
 const allImages = import.meta.glob<{ default: ImageMetadata }>('../../images/covers/*', { eager: true });
 const ImageSrc = entry?.data.coverimage ? allImages[`../../images/covers/${entry.data.coverimage}`]?.default : null;
-const formattedDate = new Date(post.data.pubDate).toLocaleDateString('en-GB', {
+const formattedDate = new Date(post.data.pubDate).toLocaleDateString(undefined, {
   day: '2-digit',
   month: '2-digit',
   year: '2-digit'
 });
 ---
   {ImageSrc && (
-    <a href={`/blog/${post.id}`} class="block relative mt-4 md:mt-0 lg:min-w-[1024px] max-h-[400px] items-center overflow-hidden rounded-b-lg border-gray-800 border drop-shadow-lg rounded-lg bg-gradient-to-b from-blue-900 from-75% via-blue-900 via-75% to-85% to-blue-950 dark:from-neutral-950 dark:from-75% dark:to-neutral-900 before:absolute before:inset-0 before:bg-gradient-to-b before:from-blue-900 before:via-blue-950 before:to-blue-900 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 group dark:border-neutral-800 dark:border dark:before:bg-neutral-900 dark:before:bg-none">
+    <a href={`/blog/${post.id}`} class="block relative mt-4 md:mt-0 lg:min-w-[1024px] max-h-[400px] items-center overflow-hidden rounded-b-lg border-gray-400 border drop-shadow-lg rounded-lg bg-gradient-to-b from-blue-900 from-75% via-blue-900 via-75% to-85% to-blue-950 dark:from-neutral-950 dark:from-75% dark:to-neutral-900 before:absolute before:inset-0 before:bg-gradient-to-b before:from-blue-900 before:via-blue-950 before:to-blue-900 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 group dark:border-neutral-800 dark:border dark:before:bg-neutral-900 dark:before:bg-none">
       <Image 
         src={ImageSrc} 
         alt={post.data.title ?? 'Nice cover image'} 
@@ -30,7 +30,7 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString('en-GB', {
         <h1>{post.data.title}</h1>
       </div>
       <div class="absolute top-4 left-4 px-4 z-10">
-        <span class="text-pink-400 !text-2xl font-bold no-underline">{formattedDate}</span>
+        <span class="text-pink-600 !text-2xl font-extrabold no-underline">{formattedDate}</span>
       </div>
       <div class="absolute right-4 bottom-1  opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
         <span class="inline-block ml-1 group-hover:animate-arrow-fade text-white text-[4rem]">&gt;</span>
