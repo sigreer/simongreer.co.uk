@@ -1,8 +1,9 @@
 ---
 import ServerIcon from '@components/Icons/ServerIcon.astro';
 import EditorChoiceIcon from '@components/Icons/EditorChoiceIcon.astro';
+import KanbanIcon from '@icons/KanbanIcon.astro';
 const currentPath = Astro.url.pathname;
-const isActive = currentPath === '/tech';
+const isActive = currentPath.startsWith('/tech');
 ---
 <div class="relative group">
     <button class:list={[
@@ -24,8 +25,8 @@ const isActive = currentPath === '/tech';
     </button>
 
     <div class="absolute right-0 top-full pt-1 z-50">
-        <div class="hidden group-hover:block w-48 bg-white rounded-b-md shadow-lg dark:bg-background dark:border-neutral-800 dark:border">
-            <a href="/tech/skills-and-expertise" class="group/item px-4 py-2 text-sm text-gray-700 hover:bg-purple-200 hover:text-purple-900 text-left flex flex-row rounded-none antialiased font-sans dark:text-gray-200 dark:hover:text-purple-900 dark:hover:bg-background rounded-b-md">
+        <div class="hidden group-hover:block w-52 bg-white rounded-b-md shadow-lg dark:bg-background dark:border-neutral-800 dark:border">
+            <a href="/tech/skills-and-expertise" class="group/item px-4 py-2 text-sm text-gray-700 hover:bg-purple-200 hover:text-purple-900 text-left flex flex-row rounded-none antialiased font-sans dark:text-gray-200 dark:hover:text-purple-900 dark:hover:bg-background">
                 <EditorChoiceIcon
                 class:list={[
                     "mr-2 w-10 h-10 md:w-[18px] md:h-[18px] fill-black group-hover/item:fill-purple-900 dark:fill-white"
@@ -33,16 +34,14 @@ const isActive = currentPath === '/tech';
                 />
                Skills and Expertise
             </a>
-        </div>
-        <!-- <div class="hidden group-hover:block w-48 bg-white rounded-b-md shadow-lg">
-            <a href="/tech/projects" class="group/item px-4 py-2 text-sm text-gray-700 hover:bg-purple-200 hover:text-purple-900 text-left flex flex-row rounded-b-md antialiased font-sans">
+            <a href="/tech/projects" class="group/item px-4 py-2 text-sm text-gray-700 hover:bg-purple-200 hover:text-purple-900 text-left flex flex-row rounded-none antialiased font-sans dark:text-gray-200 dark:hover:text-purple-900 dark:hover:bg-background rounded-b-md border-t border-gray-100 dark:border-neutral-800">
                 <KanbanIcon
-                    class:list={[
-                        "mr-2 w-10 h-10 md:w-[18px] md:h-[18px] fill-black group-hover/item:fill-purple-900"
-                    ]}
+                class:list={[
+                    "mr-2 w-10 h-10 md:w-[18px] md:h-[18px] fill-black group-hover/item:fill-purple-900 dark:fill-white"
+                ]}
                 />
-                Projects
+               Projects
             </a>
-        </div> -->
+        </div>
     </div>
 </div>
