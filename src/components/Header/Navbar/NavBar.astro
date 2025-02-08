@@ -9,6 +9,15 @@ import NewspaperIcon from '@components/Icons/NewspaperIcon.astro';
 import ServerIcon from '@components/Icons/ServerIcon.astro';
 import EditorChoiceIcon from '@components/Icons/EditorChoiceIcon.astro';
 import KanbanIcon from '@icons/KanbanIcon.astro';
+import SystemsIcon from '@icons/ServerIcon.astro';
+import WebDevelopmentIcon from '@icons/WebDevelopmentIcon.astro';
+import SoftwareDevelopmentIcon from '@icons/SoftwareDevelopmentIcon.astro';
+import NetworkingIcon from '@icons/NetworkingIcon.astro';
+import HireMeIcon from '@icons/HireMeIcon.astro';
+import StorageIcon from '@icons/StorageIcon.astro';
+import SysAdminIcon from '@icons/SysAdminIcon.astro';
+import AIIcon from '@icons/Robot2Icon.astro';
+
 const menuStructure = {
   tech: {
     root: '/tech',
@@ -22,6 +31,10 @@ const menuStructure = {
     root: '/blog',
     pathMatch: '/blog/'
   },
+  hireme: {
+    root: '/hire-me',
+    pathMatch: '/hire-me/'
+  }
 };
 
 const currentPath = Astro.url.pathname; 
@@ -80,6 +93,36 @@ const rootIconClasses = (menuItem: keyof typeof menuStructure) => [
                 <SubMenuItem link="/tech/projects" isLast={true}>
                   <EditorChoiceIcon class:list={iconClasses('tech')}/>Projects
                 </SubMenuItem>
+              </Fragment>
+            </RootItem>
+            <RootItem isActive={isActiveRoute('hireme')} link="/hire-me" label="Hire Me">
+              <HireMeIcon class:list={rootIconClasses('hireme')}/>
+              Hire Me
+              <Fragment slot="submenu">
+              <SubMenuItem link="/hire-me/web-development" isFirst={true}>
+                <WebDevelopmentIcon class:list={iconClasses('hireme')}/>
+                Web Development
+              </SubMenuItem>
+              <SubMenuItem link="/hire-me/software-development" isLast={false}>
+                <SoftwareDevelopmentIcon class:list={iconClasses('hireme')}/>
+                Software Development
+              </SubMenuItem>
+              <SubMenuItem link="/hire-me/networking">
+                <NetworkingIcon class:list={iconClasses('hireme')}/>
+                Networking, Security, VPNs
+              </SubMenuItem>
+              <SubMenuItem link="/hire-me/system-administration">
+                <SysAdminIcon class:list={iconClasses('hireme')}/>
+                SysAdmin
+              </SubMenuItem>
+              <SubMenuItem link="/hire-me/system-deployment">
+                <SystemsIcon class:list={iconClasses('hireme')}/>
+                System Deployment
+              </SubMenuItem>
+              <SubMenuItem link="/hire-me/storage-nas" isLast={true}>
+                <StorageIcon class:list={iconClasses('hireme')}/>
+                Storage, NAS
+              </SubMenuItem>
               </Fragment>
             </RootItem>
             <RootItem isActive={isActiveRoute('about')} link="/me" label="About Me">

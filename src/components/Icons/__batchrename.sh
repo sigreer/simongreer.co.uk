@@ -73,6 +73,41 @@ removeExtraIconSuffix() {
     echo "Renaming completed!"
 }
 
+createIcon() {
+    if [ -z "$1" ]; then
+        echo "Error: Please provide a filename as an argument"
+        return 1
+    fi
+
+    # Ensure filename ends with Icon.astro
+    filename="$1"
+    if [[ ! "$filename" =~ Icon\.astro$ ]]; then
+        if [[ "$filename" =~ \.astro$ ]]; then
+            filename="${filename%.astro}Icon.astro"
+        else
+            filename="${filename}Icon.astro"
+        fi
+    fi
+
+    # Create the file with frontmatter
+    cat > "$filename" << 'EOL'
+---
+interface Props {
+  fill?: string;
+  class?: string;
+}
+
+const { fill = "#000000", class: className } = Astro.props;
+---
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill={fill} class={className}>
+</svg>
+EOL
+
+    echo "Created $filename with frontmatter template"
+}
+
 # addIconSuffix
 # removeExtraIconSuffix
-addFrontmatter
+createIcon "$1"
+#addFrontmatter
