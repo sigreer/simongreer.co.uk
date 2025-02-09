@@ -3,7 +3,7 @@
 name = "simongreer"
 compatibility_date = "2024-12-24"
 compatibility_flags = ["nodejs_compat"]
-main = "./dist/_worker.js/index.js"
+main = "./dist/_worker.js/index.ts"
 assets = { directory = "./dist", binding = "ASSETS" }
 
 [observability]
