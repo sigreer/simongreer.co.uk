@@ -15,7 +15,8 @@
     "purge": "rm -rf ./{node_modules,.astro,.wrangler,dist} && rm bun.lockb && bun pm cache rm && bun install && bun update && astro sync && wrangler types && astro build",
     "update": "bun install && bun update && bun upgrade",
     "pagespeed": "node scripts/pagespeed-report.cjs",
-    "tags": "scripts/update-tags.sh"
+    "tags": "scripts/update-tags.sh",
+    "icons": "scripts/icon-helper.sh"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.2.1",

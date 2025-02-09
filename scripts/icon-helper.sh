@@ -1,5 +1,21 @@
 #!/bin/bash
 
+# Get the directory where the script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# Calculate Icons directory path relative to script location
+ICONS_DIR="$SCRIPT_DIR/../src/components/Icons"
+
+show_usage() {
+    echo "Usage: batchrename.sh <command> [filename]"
+    echo ""
+    echo "Commands:"
+    echo "  add-suffixes        Add 'Icon' suffix to all .astro files"
+    echo "  repair-suffixes     Fix incorrect 'Icon' suffixes in filenames"
+    echo "  inject-frontmatter  Add frontmatter to existing SVG files"
+    echo "  new-icon <name>     Create a new icon component"
+    exit 1
+}
+
 addFrontmatter() {
     ICON_DIR="."
     for svg_file in "$ICON_DIR"/*.svg; do

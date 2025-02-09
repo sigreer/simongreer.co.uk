@@ -1,2 +1,0 @@
-<!DOCTYPE KRename>
-<KRename version="1.0"><FindReplaceList rows="1"><Row num="0"><RegularExpression>2</RegularExpression><Find>^([a-z]+)_(([a-z]+)?(_([a-z]+)?)?)?.*$</Find><ReplaceWith>\1\3\5</ReplaceWith><ProcessTokens>2</ProcessTokens></Row></FindReplaceList></KRename>

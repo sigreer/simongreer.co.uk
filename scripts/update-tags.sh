@@ -52,18 +52,37 @@ get_display_name() {
     echo "$1" | sed -e 's/-/ /g' -e 's/\b\(.\)/\u\1/g'
 }
 
+# Determine the directory of the script
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
+# Adjust the path to tags.json
+TAGS_JSON="$SCRIPT_DIR/../src/content/tags.json"
+
 # Function to map synonyms to their respective tag IDs
 map_synonyms_to_ids() {
     local tag="$1"
-    log_verbose "Checking tag: $tag"
-    local tag_id=$(jq -r --arg tag "$tag" '
-        to_entries | .[] | 
-        select(
-            .key == $tag or 
-            (.value.synonyms | type == "array" and contains([$tag]))
-        ) | .key' src/content/tags.json)
-    log_verbose "Found ID: $tag_id"
-    echo "$tag_id"
+    echo "Processing tag: $tag" >&2
+    
+    # First try direct match
+    local primary_tag=$(jq -r --arg tag "$tag" '
+        to_entries[] | 
+        select(.key == $tag) |
+        .key' "$TAGS_JSON")
+
+    # If no direct match, look for synonym
+    if [ -z "$primary_tag" ]; then
+        primary_tag=$(jq -r --arg tag "$tag" '
+            to_entries[] |
+            select(.value.synonyms != null and (.value.synonyms | index($tag))) |
+            .key' "$TAGS_JSON")
+    fi
+
+    # Return the primary tag if found, otherwise return original tag
+    if [ ! -z "$primary_tag" ]; then
+        echo "$primary_tag"
+    else
+        echo "$tag"
+    fi
 }
 
 # Function to process tags in frontmatter
@@ -134,6 +153,87 @@ fix_tag_formatting() {
     ' "$file" > "$temp_file"
 
     mv "$temp_file" "$file"
+}
+
+clean_frontmatter_tags() {
+    local file="$1"
+    temp_file=$(mktemp)
+
+    echo "Processing file: $file" >&2
+
+    awk -v filename="$file" '
+    BEGIN { any_changes = 0 }
+    /^tags:/ {
+        line = $0
+        split(line, parts, /tags: *\[/)
+        split(parts[2], tags_part, /\]/)
+        original_line = $0
+        processed = ""
+        delete seen_tags
+        
+        # Debug: Print original line
+        printf "Original line: %s\n", original_line > "/dev/stderr"
+        
+        # Extract tags and remove brackets
+        tags = tags_part[1]
+        gsub(/^[ "'\'']*|[ "'\'']*$/, "", tags)
+        
+        # Split and process each tag
+        n = split(tags, tag_array, /[ ]*,[ ]*/)
+        for (i = 1; i <= n; i++) {
+            tag = tag_array[i]
+            gsub(/^[ "'\'']*|[ "'\'']*$/, "", tag)
+            
+            # Get mapped tag
+            cmd = "map_synonyms_to_ids \"" tag "\""
+            cmd | getline mapped_tag
+            close(cmd)
+            
+            # Debug: Print tag mapping
+            printf "Tag: %s, Mapped Tag: %s\n", tag, mapped_tag > "/dev/stderr"
+            
+            if (!(mapped_tag in seen_tags)) {
+                if (processed != "") processed = processed ", "
+                processed = processed "\"" mapped_tag "\""
+                seen_tags[mapped_tag] = 1
+                
+                if (tag != mapped_tag) {
+                    printf "In %s: Replacing tag \"%s\" with \"%s\"\n", filename, tag, mapped_tag > "/dev/stderr"
+                    any_changes = 1
+                }
+            }
+        }
+        
+        # Construct new line
+        new_line = parts[1] "tags: [" processed "]"
+        
+        # Debug: Print new line
+        printf "New line: %s\n", new_line > "/dev/stderr"
+        
+        if (original_line != new_line) {
+            any_changes = 1
+            printf "\nUpdated tags in %s\n", filename > "/dev/stderr"
+            printf "  From: %s\n  To:   %s\n\n", original_line, new_line > "/dev/stderr"
+        }
+        print new_line
+        next
+    }
+    { print }
+    END {
+        if (!any_changes) {
+            printf "No changes needed in %s\n", filename > "/dev/stderr"
+        }
+    }
+    ' "$file" > "$temp_file"
+
+    # Only replace if changes were made and temp file is not empty
+    if [ -s "$temp_file" ]; then
+        mv "$temp_file" "$file"
+    else
+        rm "$temp_file"
+        echo "Error: Empty output file for $file" >&2
+        return 1
+    fi
 }
 
 # Main script
@@ -222,3 +322,13 @@ while IFS= read -r tag; do
 done <<< "$new_tags"
 
 echo -e "${GREEN}Tags have been added to tags.json${NC}"
+
+if [[ " $* " =~ " --clean-frontmatter " ]]; then
+    echo -e "${GREEN}Cleaning frontmatter tags...${NC}"
+    for dir in src/content/{tech,blog,projects,clients}; do
+        if [ -d "$dir" ]; then
+            find "$dir" -name "*.mdx" -exec bash -c 'clean_frontmatter_tags "$0"' {} \;
+        fi
+    done
+    echo -e "${GREEN}Frontmatter tags cleaned${NC}"
+fi
