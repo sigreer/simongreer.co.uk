@@ -20,7 +20,8 @@ const tech = defineCollection({
     vendor_primary_color: z.string().optional(),
     vendor_secondary_color: z.string().optional(),
     tags: z.array(reference('tags')).optional(),
-    category: z.enum(['development', 'cloud', 'systems', 'business', 'ai-automation', 'data', 'media'])
+    category: z.enum(['development', 'cloud', 'systems', 'business', 'ai-automation', 'data', 'media']),
+    hireme_filter: z.enum(['broadcast-networking', 'web-development', 'software-development', 'cloud-and-hosted', 'ai-automation', 'networking', 'storage', 'system-administration', 'design-and-deployment', 'business', 'data-and-databases'])
   })
 });
 
