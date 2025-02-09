@@ -156,7 +156,8 @@ const config: Config = {
     },
 	plugins: [
 		typography,
-        require("tailwindcss-animate")
+        require("tailwindcss-animate"),
+        require("tailwindcss-motion")
     ],
 };
 
