@@ -21,6 +21,7 @@ const tagsWithData = await Promise.all(projects.map(async (project) => {
     data: {
       ...project.data,
       client: resolvedClient?.data,
+      horizontal_logo: resolvedClient?.data.horizontal_logo,
       tags: project.data.tags 
         ? (await getCollection('tags', ({ id }) => project.data.tags?.map(t => t.id).includes(id)))
           .map(tag => ({
@@ -44,7 +45,7 @@ const tagsWithData = await Promise.all(projects.map(async (project) => {
       </div>
 
       <div class="w-full flex flex-col">
-        <p class="text-base font-regular text-gray-600 mb-0 dark:text-gray-400 px-4 py-2">
+        <p class="text-base font-regular text-gray-800 mb-0 dark:text-gray-200 px-4 py-2">
           This is a quick glance at some of the projects I've been working on but haven't had a chance to complete a full write-up for.
         </p>
         <div class="w-full px-4 pt-4 pb-0 m-0">
@@ -52,7 +53,7 @@ const tagsWithData = await Promise.all(projects.map(async (project) => {
             <TagFilter items={projects} />
           </Filter>
         </div>
-        <ul class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-full min-w-full md:px-8 md:pb-8 items-center justify-center" id="posts-container">
+        <ul class="grid grid-cols-1 md:grid-cols-2 gap-12 w-full max-w-full min-w-full md:px-12 md:pb-8 items-center justify-center" id="`posts-container">
           {tagsWithData.map((project) => (
             <DetailedCard
               title={project.data.title}
@@ -65,6 +66,7 @@ const tagsWithData = await Promise.all(projects.map(async (project) => {
               client={project.data.client}
               vendor={project.data.vendor}
               contentType={project.data.contentType}
+              horizontal_logo={project.data.horizontal_logo}
             />
           ))}
         </ul>
