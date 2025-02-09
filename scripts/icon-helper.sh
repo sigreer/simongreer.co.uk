@@ -1,9 +1,6 @@
 #!/bin/bash
 
-# Get the directory where the script is located
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-# Calculate Icons directory path relative to script location
-ICONS_DIR="$SCRIPT_DIR/../src/components/Icons"
+ICONS_DIR="/src/components/Icons"
 
 show_usage() {
     echo "Usage: batchrename.sh <command> [filename]"
@@ -17,8 +14,7 @@ show_usage() {
 }
 
 addFrontmatter() {
-    ICON_DIR="."
-    for svg_file in "$ICON_DIR"/*.svg; do
+    for svg_file in "$ICONS_DIR"/*.svg; do
     
         # Check if the file already contains a frontmatter fence
         if grep -q "^---" "$svg_file"; then
@@ -52,16 +48,15 @@ addFrontmatter() {
 }
 
 addIconSuffix() {
-    DIR="./"
-    for file in "$DIR"/*.astro; do
-    base_name=$(basename "$file" .astro)
+    for file in "$ICONS_DIR"/*.astro; do
+        base_name=$(basename "$file" .astro)
         
-    # Capitalize the first letter and add 'Icon' to the end
-    new_name="${base_name}Icon.astro"
+        # Capitalize the first letter and add 'Icon' to the end
+        new_name="${base_name}Icon.astro"
 
-    if [[ "$file" != "$DIR/$new_name" ]]; then
-        mv "$file" "$DIR/$new_name"
-        echo "Renamed $file to $new_name"
+        if [[ "$file" != "$ICONS_DIR/$new_name" ]]; then
+            mv "$file" "$ICONS_DIR/$new_name"
+            echo "Renamed $file to $new_name"
         fi
     done
 
@@ -69,19 +64,19 @@ addIconSuffix() {
 }
 
 removeExtraIconSuffix() {
-    DIR="./"
-    for file in "$DIR"/*.astro; do
+    for file in "$ICONS_DIR"/*.astro; do
         base_name=$(basename "$file" .astro)
         
-        # Remove only the last 'Icon' from the end if present
-        if [[ "$base_name" =~ IconIcon$ ]]; then
-            new_name="${base_name%IconIcon}Icon.astro"
-        else
-            new_name="${base_name}.astro"
-        fi
+        # More robust suffix handling
+        # Remove all 'Icon' occurrences except for the last one
+        while [[ "$base_name" =~ (.*)Icon(.+)Icon$ ]]; do
+            base_name="${BASH_REMATCH[1]}${BASH_REMATCH[2]}Icon"
+        done
+        
+        new_name="$ICONS_DIR/${base_name}.astro"
 
-        if [[ "$file" != "$DIR/$new_name" ]]; then
-            mv "$file" "$DIR/$new_name"
+        if [[ "$file" != "$new_name" ]]; then
+            mv "$file" "$new_name"
             echo "Renamed $file to $new_name"
         fi
     done
@@ -105,8 +100,10 @@ createIcon() {
         fi
     fi
 
-    # Create the file with frontmatter
-    cat > "$filename" << 'EOL'
+    # Create the file with frontmatter in the Icons directory
+    filepath="$ICONS_DIR/$filename"
+    
+    cat > "$filepath" << 'EOL'
 ---
 interface Props {
   fill?: string;
@@ -123,7 +120,30 @@ EOL
     echo "Created $filename with frontmatter template"
 }
 
-# addIconSuffix
-# removeExtraIconSuffix
-createIcon "$1"
-#addFrontmatter
+# Main command handling
+if [ $# -eq 0 ]; then
+    show_usage
+fi
+
+case "$1" in
+    "add-suffixes")
+        addIconSuffix
+        ;;
+    "repair-suffixes")
+        removeExtraIconSuffix
+        ;;
+    "inject-frontmatter")
+        addFrontmatter
+        ;;
+    "new-icon")
+        if [ -z "$2" ]; then
+            echo "Error: Please provide a name for the new icon"
+            show_usage
+        fi
+        createIcon "$2"
+        ;;
+    *)
+        echo "Error: Unknown command '$1'"
+        show_usage
+        ;;
+esac
