@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content';
+import { ChevronRight } from "lucide-react";
+import PageLayout from "@layouts/PageLayout.astro";
+import '@styles/custom.css';
+import TechCube from "@components/ContentBoxes/TechCube.astro";
+import type { CollectionEntry } from 'astro:content';
+import { Button } from '@components/ui/button';
+import { Badge } from '@components/ui/badge';
+import { GetInTouchDialog } from '@components/GetInTouchDialog';
+import PricingAndInfoSection from '@components/Content/PricingAndInfoSection.astro';
+import TechGrid from "@components/ContentBoxes/TechGrid.astro";
+
+type TechWithStringTags = Omit<CollectionEntry<'tech'>, 'data'> & {
+  data: Omit<CollectionEntry<'tech'>['data'], 'tags'> & {
+    tags: string[] | undefined
+  }
+};
+
+const techs = (await getCollection('tech'))
+  .filter((tech) => 
+    tech.data.pubDate && tech.data.hireme_filter === 'storage'
+  )
+  .map((tech) => ({
+    ...tech,
+    data: {
+      ...tech.data,
+      tags: tech.data.tags?.map(tag => tag.id)
+    }
+  })) as TechWithStringTags[];
+
+---
+
+<PageLayout title="Tech Stuff">
+  
+  <section class="py-2 px-6 md:pr-0 pl-0">
+    <div class="grid grid-cols-10 md:gap-5">
+      <div class="col-span-3 border-[#dcdde0] dark:bg-background dark:border-neutral-800 dark:text-gray-200 rounded-lg bg-white text-gray-800 border my-3 flex flex-col items-center">
+        <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
+          <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
+            Vendors &amp; Products
+          </h2>
+        </div>
+        <TechGrid techs={techs} />
+        <div class="w-full p-6">
+          <GetInTouchDialog client:only="react"  />
+        </div>
+      </div>
+    
+      <div class="col-span-7 border border-[#dcdde0] rounded-lg bg-white text-gray-900 my-3 dark:bg-background dark:border-neutral-800 dark:text-primary">
+        <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
+          <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
+           Storage, NAS, etc.
+          </h2>
+        </div>
+        <div class="w-full p-8">
+        <p class="text-base mb-4">
+          Networking text.
+        </p>
+      </div>
+    </div>
+  </div>
+  </section>
+  <PricingAndInfoSection/>
+  
+</PageLayout>

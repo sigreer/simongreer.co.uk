@@ -1,0 +1,34 @@
+---
+import TechCube from "@components/ContentBoxes/TechCube.astro";
+import type { CollectionEntry } from 'astro:content';
+
+type TechWithStringTags = Omit<CollectionEntry<'tech'>, 'data'> & {
+  data: Omit<CollectionEntry<'tech'>['data'], 'tags'> & {
+    tags: string[] | undefined
+  }
+};
+
+interface Props {
+  techs: TechWithStringTags[];
+  class?: string;
+}
+
+const { techs, class: className = "gap-5 p-1 p-6 grid-cols-6 sm:grid-cols-8 md:grid-cols-3" } = Astro.props;
+---
+
+<div class={`w-full grid ${className}`}>
+  {techs.map((tech) => (
+    <div>
+      <TechCube
+        title={tech.data.vendor_name || tech.data.title}
+        vendoricon={tech.data.vendoricon}
+        description={tech.data.description}
+        tags={tech.data.tags}
+        slug={tech.data.slug}
+        vendor_primary_color={tech.data.vendor_primary_color}
+        vendor_secondary_color={tech.data.vendor_secondary_color}
+        category={tech.data.category}
+      />
+    </div>
+  ))}
+</div>
