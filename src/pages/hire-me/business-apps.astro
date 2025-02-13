@@ -10,6 +10,7 @@ import { Badge } from '@components/ui/badge';
 import { GetInTouchDialog } from '@components/GetInTouchDialog';
 import PricingAndInfoSection from '@components/Content/PricingAndInfoSection.astro';
 import TechGrid from "@components/ContentBoxes/TechGrid.astro";
+
 type TechWithStringTags = Omit<CollectionEntry<'tech'>, 'data'> & {
   data: Omit<CollectionEntry<'tech'>['data'], 'tags'> & {
     tags: string[] | undefined
@@ -18,7 +19,7 @@ type TechWithStringTags = Omit<CollectionEntry<'tech'>, 'data'> & {
 
 const techs = (await getCollection('tech'))
   .filter((tech) => 
-    tech.data.pubDate && tech.data.hireme_filter === 'software-development'
+    tech.data.pubDate && tech.data.hireme_filter === 'business'
   )
   .map((tech) => ({
     ...tech,
@@ -49,11 +50,13 @@ const techs = (await getCollection('tech'))
       <div class="col-span-7 border border-[#dcdde0] rounded-lg bg-white text-gray-900 my-3 dark:bg-background dark:border-neutral-800 dark:text-primary">
         <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
           <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
-            Software Development
+            Cloud &amp; Hosted Infrastructure
           </h2>
         </div>
         <div class="w-full p-8">
-          <p class="text-base mb-4"> I’ve built software solutions across a range of platforms, from embedded Linux devices to cross-platform mobile applications. I work with Flutter for mobile development, Tauri for lightweight desktop apps, and Go for high-performance backend services. </p> <p class="text-base mb-4"> Scripting is a core part of my workflow, whether it's automating system processes with Bash, handling infrastructure tasks in PowerShell, or writing custom utilities to bridge different technologies. </p> <p class="text-base mb-4"> My development process includes everything from wireframing and prototyping to writing production-ready code, ensuring robust and maintainable software solutions tailored to specific needs. </p>
+        <p class="text-base mb-4">
+          Cloud &amp; Hosted Infrastructure text.
+        </p>
       </div>
     </div>
   </div>

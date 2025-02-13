@@ -1,12 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
-import { ChevronRight } from "lucide-react";
 import PageLayout from "@layouts/PageLayout.astro";
 import '@styles/custom.css';
-import TechCube from "@components/ContentBoxes/TechCube.astro";
 import type { CollectionEntry } from 'astro:content';
-import { Button } from '@components/ui/button';
-import { Badge } from '@components/ui/badge';
 import { GetInTouchDialog } from '@components/GetInTouchDialog';
 import PricingAndInfoSection from '@components/Content/PricingAndInfoSection.astro';
 import TechGrid from "@components/ContentBoxes/TechGrid.astro";
@@ -28,11 +24,9 @@ const techs = (await getCollection('tech'))
       tags: tech.data.tags?.map(tag => tag.id)
     }
   })) as TechWithStringTags[];
-
 ---
 
 <PageLayout title="Tech Stuff">
-  
   <section class="py-2 px-6 md:pr-0 pl-0">
     <div class="grid grid-cols-10 md:gap-5">
       <div class="col-span-3 border-[#dcdde0] dark:bg-background dark:border-neutral-800 dark:text-gray-200 rounded-lg bg-white text-gray-800 border my-3 flex flex-col items-center">
@@ -41,22 +35,7 @@ const techs = (await getCollection('tech'))
             Vendors &amp; Products
           </h2>
         </div>
-        <div class="w-full grid grid-cols-6 sm:grid-cols-8 md:grid-cols-3 gap-5 p-1 p-6">
-          {techs.map((tech: TechWithStringTags) => (
-          <div>
-                  <TechCube
-                    title={tech.data.vendor_name || tech.data.title}
-                    vendoricon={tech.data.vendoricon}
-                    description={tech.data.description}
-                    tags={tech.data.tags}
-                    slug={tech.data.slug}
-                    vendor_primary_color={tech.data.vendor_primary_color}
-                    vendor_secondary_color={tech.data.vendor_secondary_color}
-                    category={tech.data.category}
-                  />
-          </div>
-          ))}
-        </div>
+        <TechGrid techs={techs} />
         <div class="w-full p-6">
           <GetInTouchDialog client:only="react"  />
         </div>
@@ -65,13 +44,11 @@ const techs = (await getCollection('tech'))
       <div class="col-span-7 border border-[#dcdde0] rounded-lg bg-white text-gray-900 my-3 dark:bg-background dark:border-neutral-800 dark:text-primary">
         <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
           <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
-            Web Development
+            System Administration
           </h2>
         </div>
         <div class="w-full p-8">
-        <p class="text-base mb-4">
-          Web development text.
-        </p>
+          <p class="text-base mb-4"> I provide both proactive and reactive system administration, ensuring that critical infrastructure remains stable and secure. This includes everything from troubleshooting complex issues to planning long-term system improvements. </p> <p class="text-base mb-4"> With extensive hands-on experience, I work across open source and proprietary ecosystems, from managing Linux servers and containerized workloads to administering Microsoft and VMware environments. </p> <p class="text-base mb-4"> Whether it’s optimizing performance, ensuring backups are reliable, or setting up monitoring and alerting, my focus is on keeping systems running efficiently with minimal downtime. </p>
       </div>
     </div>
   </div>

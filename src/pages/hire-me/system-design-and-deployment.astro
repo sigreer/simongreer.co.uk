@@ -18,7 +18,7 @@ type TechWithStringTags = Omit<CollectionEntry<'tech'>, 'data'> & {
 
 const techs = (await getCollection('tech'))
   .filter((tech) => 
-    tech.data.pubDate && tech.data.hireme_filter === 'system-deployment'
+    tech.data.pubDate && tech.data.hireme_filter === 'design-and-deployment'
   )
   .map((tech) => ({
     ...tech,
@@ -53,9 +53,7 @@ const techs = (await getCollection('tech'))
           </h2>
         </div>
         <div class="w-full p-8">
-        <p class="text-base mb-4">
-          System Design &amp; Deployment text.
-        </p>
+          <p class="text-base mb-4"> I design and deploy IT infrastructure solutions ranging from on-premises server environments to cloud-based systems. My focus is on high availability, scalability, and security, leveraging open source and proprietary technologies where they fit best. </p> <p class="text-base mb-4"> Proxmox and TrueNAS form the backbone of many of my virtualization and storage solutions, while Nginx, WireGuard, and containerization allow me to optimize performance and security across various workloads. </p> <p class="text-base mb-4"> I have experience designing and managing systems in AWS, Azure, and Hetzner, balancing cost and performance while ensuring seamless integration with existing infrastructure. Whether it's Citrix-based remote environments, RDS deployments, or Kubernetes clusters, I take a strategic approach to building reliable systems. </p>
       </div>
     </div>
   </div>

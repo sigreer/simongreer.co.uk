@@ -1,0 +1,215 @@
+---
+import { getCollection } from 'astro:content';
+import { ChevronRight } from "lucide-react";
+import PageLayout from "@layouts/PageLayout.astro";
+import '@styles/custom.css';
+import '@styles/lightbox.css';
+import type { CollectionEntry } from 'astro:content';
+import { GetInTouchDialog } from '@components/GetInTouchDialog';
+import PricingAndInfoSection from '@components/Content/PricingAndInfoSection.astro';
+import TechGrid from "@components/ContentBoxes/TechGrid.astro";
+import LightBox from '@components/Media/LightBox.astro';
+import pageSpeedScoreMobile from '@images/galleries/simongreer-co-uk-pagespeed-scores/simongreer-co-uk-pagespeed-mobile-score.png'; 
+import pageSpeedScoreDesktop from '@images/galleries/simongreer-co-uk-pagespeed-scores/simongreer-co-uk-pagespeed-desktop-score.png'; 
+
+type TechWithStringTags = Omit<CollectionEntry<'tech'>, 'data'> & {
+  data: Omit<CollectionEntry<'tech'>['data'], 'tags'> & {
+    tags: string[] | undefined
+  }
+};
+
+const techs = (await getCollection('tech'))
+  .filter((tech) => 
+    tech.data.pubDate && tech.data.hireme_filter === 'web-development'
+  )
+  .map((tech) => ({
+    ...tech,
+    data: {
+      ...tech.data,
+      tags: tech.data.tags?.map(tag => tag.id)
+    }
+  })) as TechWithStringTags[];
+
+  
+
+---
+
+<PageLayout title="Tech Stuff">
+  
+  <section class="my-2 px-6 md:pr-0 pl-0">
+    <div class="grid grid-cols-10 md:gap-5">
+      <div class="col-span-3 border-[#dcdde0] dark:bg-background dark:border-neutral-800 dark:text-gray-200 rounded-lg bg-white text-gray-800 border my-3 flex flex-col items-center">
+        <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
+          <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
+            Vendors &amp; Products
+          </h2>
+        </div>
+        <TechGrid techs={techs} />
+        <div class="w-full p-6">
+          <GetInTouchDialog client:only="react"  />
+        </div>
+      </div>
+    
+      <div class="col-span-7 border border-[#dcdde0] rounded-lg bg-white text-gray-900 my-3 dark:bg-background dark:border-neutral-800 dark:text-primary">
+        <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
+          <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
+            Web Development
+          </h2>
+        </div>
+        <div class="w-full p-8">
+          <p class="text-sm mb-3">Web development is pretty broad category that could include any number of different technologies. Based on my own experiences and the projects that I've been involved in, it's often possible to categorise sites as being:</p>
+          <ul class="list-disc ml-8 space-y-1 mb-4 text-sm">
+            <li class="pl-0 pb-3">
+              <a class="text-blue-500" href="#content-centric-websites">Content-Centric Websites</a><br/>
+              Corporate presence, marketing sites, landing pages, blogs, portfolios,  documentation, knowledgebases and news outlets. Most websites would fall into this category.
+            </li>
+            <li class="pl-0 pb-3">
+              <a class="text-blue-500" href="#ecommerce-sites">Ecommerce Platforms</a><br/>
+              Any website whose primary function is to facilitate sales that include some sort of transactional element.
+            </li>
+            <li class="pl-0 pb-1">
+              <a class="text-blue-500" href="#web-applications">Web Applications</a><br/>
+              Anything that doesn't fall into the above categories would fall into the web app category as its function will be something other than serving content and facilitating sales.
+            </li>
+          </ul> 
+          </p>
+          <p class="text-sm mb-4">
+            This is an overt simplification but a rule of thumb befitting of the majority of conversations I have with clients. It's also representative of how I approach web development projects and the mindset I use when trying to interpret customer needs and requirements. 
+          </p>
+
+      </div>
+    </div>
+  </div>
+  </section>
+  <section class="mt-2 mb-4 px-6 md:pr-0 pl-0">
+    <div class="col-span-10 border border-[#dcdde0] rounded-lg bg-white text-gray-900 my-3 dark:bg-background dark:border-neutral-800 dark:text-primary">
+      <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
+        <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
+          Content-Centric Websites
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-10 md:gap-0">
+        <div class="w-full p-8 col-span-5 border-r">
+          <p class="text-sm mb-4">The vast majority of websites fall into this category. This is the portion of the web that Wordpress was intended for and largely still caters to. It's also the category that this website falls into.</p>
+          <p class="text-sm mb-4">
+            <span class="font-bold">Key Considerations:</span>
+            <ul class="list-disc ml-8 space-y-1 mb-4 text-sm">
+              <li class="pl-0 pb-1">
+                Modern design with brand-aligned aesthetics
+              </li>
+              <li class="pl-0 pb-1">
+                Fast initial load speed with minimal wait times when navigating between pages
+              </li>
+              <li class="pl-0 pb-1">
+                Intuitive presentation of content and a focus on user experience
+              </li>
+              <li>
+                Web and mobile-friendly with accessibility options
+              </li>
+              <li>
+                Inately search engine friendly and highly-ranking for key search terms
+              </li>
+              <li>
+                Manageable and maintanable content by non-technical staff (aka, a Content Management System that's easy to use)
+              </li>
+              </ul>
+          </p>
+      </div>
+      <div class="w-full p-8 col-span-5">
+        <p class="text-sm mb-4">
+          <span class="font-bold">How I Can Help:</span>
+        </p>
+        <p class="text-sm mb-4">
+          By using cutting edge frontend Javascript frameworks such as Astro together with modern UI libraries such as React, SvelteKit and Tailwind I' build a website that's lightning fast, offers an excellent user experience and outscores the competition on all of the leading benchmarks and tests.
+        </p>
+       
+        <p class="text-sm mb-4">
+          This website was built from the ground up using the same collection of technologies and you're encouraged to see how well it does in comparison to your own and/or competitor websites. Here's a couple of screenshots showing the most recent Google PageSpeed scores for mobile and desktop:
+        </p>
+        <div class="p-4 flex flex-row gap-12 justify-center">
+          <LightBox src={pageSpeedScoreMobile}
+          alt="Mobile PageSpeed Score"
+          width={275}
+          class="my-4 border dark:border-0"
+          caption="Mobile PageSpeed Score"
+          />
+          <LightBox src={pageSpeedScoreDesktop}
+            alt="Desktop PageSpeed Score"
+            width={275}
+            class="my-4 border dark:border-0"
+            caption="Desktop PageSpeed Score"
+          />
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+  <section class="mt-6 mb-2 px-6 md:pr-0 pl-0">
+    <div class="col-span-10 border border-[#dcdde0] rounded-lg bg-white text-gray-900 my-0 dark:bg-background dark:border-neutral-800 dark:text-primary">
+      <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
+        <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
+          Content-Centric Websites
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-10 md:gap-0">
+        <div class="w-full p-8 col-span-5 border-r">
+          <p class="text-sm mb-4">The vast majority of websites fall into this category. This is the portion of the web that Wordpress was intended for and largely still caters to. It's also the category that this website falls into.</p>
+          <p class="text-sm mb-4">
+            <span class="font-bold">Key Considerations:</span>
+            <ul class="list-disc ml-8 space-y-1 mb-4 text-sm">
+              <li class="pl-0 pb-1">
+                Modern design with brand-aligned aesthetics
+              </li>
+              <li class="pl-0 pb-1">
+                Fast initial load speed with minimal wait times when navigating between pages
+              </li>
+              <li class="pl-0 pb-1">
+                Intuitive presentation of content and a focus on user experience
+              </li>
+              <li>
+                Web and mobile-friendly with accessibility options
+              </li>
+              <li>
+                Inately search engine friendly and highly-ranking for key search terms
+              </li>
+              <li>
+                Manageable and maintanable content by non-technical staff (aka, a Content Management System that's easy to use)
+              </li>
+              </ul>
+          </p>
+      </div>
+      <div class="w-full p-8 col-span-5">
+        <p class="text-sm mb-4">
+          <span class="font-bold">How I Can Help:</span>
+        </p>
+        <p class="text-sm mb-4">
+          By using cutting edge frontend Javascript frameworks such as Astro together with modern UI libraries such as React, SvelteKit and Tailwind I' build a website that's lightning fast, offers an excellent user experience and outscores the competition on all of the leading benchmarks and tests.
+        </p>
+       
+        <p class="text-sm mb-4">
+          This website was built from the ground up using the same collection of technologies and you're encouraged to see how well it does in comparison to your own and/or competitor websites. Here's a couple of screenshots showing the most recent Google PageSpeed scores for mobile and desktop:
+        </p>
+        <div class="p-4 flex flex-row gap-12 justify-center">
+          <LightBox src={pageSpeedScoreMobile}
+          alt="Mobile PageSpeed Score"
+          width={275}
+          class="my-4 border dark:border-0"
+          caption="Mobile PageSpeed Score"
+          />
+          <LightBox src={pageSpeedScoreDesktop}
+            alt="Desktop PageSpeed Score"
+            width={275}
+            class="my-4 border dark:border-0"
+            caption="Desktop PageSpeed Score"
+          />
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <PricingAndInfoSection/>
+  
+</PageLayout>

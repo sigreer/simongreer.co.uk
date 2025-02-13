@@ -36,6 +36,15 @@
       "amazon-aws"
     ]
   },
+  "s3": {
+    "name": "S3",
+    "description": "object storage",
+    "category": "storage",
+    "color": "#A65E00",
+    "synonyms": [
+      "object-storage"
+    ]
+  },
   "cloud": {
     "name": "Cloud",
     "description": "Cloud computing and infrastructure",
@@ -66,7 +75,7 @@
   "storage": {
     "name": "Storage",
     "description": "Data storage solutions",
-    "category": "systems",
+    "category": "storage",
     "color": "#991800",
     "synonyms": [
       "data-storage"
@@ -75,7 +84,7 @@
   "nas": {
     "name": "NAS",
     "description": "Network Attached Storage",
-    "category": "systems",
+    "category": "storage",
     "color": "#2e7d32",
     "synonyms": [
       "network-attached-storage",
@@ -85,7 +94,7 @@
   "truenas": {
     "name": "TrueNAS",
     "description": "Open source storage platform",
-    "category": "systems",
+    "category": "storage",
     "color": "#1a237e",
     "synonyms": [
       "freenas"
@@ -94,7 +103,7 @@
   "firewall": {
     "name": "Firewall",
     "description": "Network security",
-    "category": "systems",
+    "category": "networking",
     "color": "#f44336",
     "synonyms": [
       "fw"
@@ -103,20 +112,14 @@
   "opnsense": {
     "name": "OPNsense",
     "description": "Open source firewall platform",
-    "category": "systems",
+    "category": "networking",
     "color": "#ff5722"
   },
   "pfsense": {
     "name": "pfSense",
     "description": "Open source firewall platform",
-    "category": "systems",
+    "category": "networking",
     "color": "#0d47a1"
-  },
-  "open source": {
-    "name": "Open Source",
-    "description": "Open source software",
-    "category": "development",
-    "color": "#4caf50"
   },
   "linux": {
     "name": "Linux",
@@ -153,13 +156,13 @@
   "webrtc": {
     "name": "WebRTC",
     "description": "Real-time communication",
-    "category": "development",
+    "category": "broadcast",
     "color": "#008494"
   },
   "obs": {
     "name": "OBS",
     "description": "Open Broadcaster Software",
-    "category": "media",
+    "category": "broadcast",
     "color": "#9c27b0",
     "synonyms": [
       "obs-studio"
@@ -225,8 +228,8 @@
   },
   "funny": {
     "name": "Funny",
-    "description": "Humorous content",
-    "category": "content",
+    "description": "Funny stuff",
+    "category": "off-topic",
     "color": "#ec4899",
     "synonyms": [
       "humor",
@@ -241,7 +244,7 @@
   "workflow": {
     "name": "Workflow",
     "description": "Process and workflow management",
-    "category": "business",
+    "category": "ai-automation",
     "color": "#0A6B98"
   },
   "productivity": {
@@ -253,7 +256,7 @@
   "wordpress": {
     "name": "WordPress",
     "description": "WordPress CMS",
-    "category": "content",
+    "category": "development",
     "color": "#0073aa",
     "synonyms": [
       "word-press",
@@ -272,7 +275,7 @@
   "docker": {
     "name": "Docker",
     "description": "Docker containerization",
-    "category": "cloud",
+    "category": "systems",
     "color": "#303030"
   },
   "audio": {
@@ -328,7 +331,7 @@
   "enterprise": {
     "name": "Enterprise",
     "description": "Enterprise solutions",
-    "category": "business",
+    "category": "systems",
     "color": "#007bb5"
   },
   "ansible": {
@@ -346,31 +349,31 @@
   "connectivity": {
     "name": "Connectivity",
     "description": "Connectivity solutions",
-    "category": "development",
+    "category": "networking",
     "color": "#333333"
   },
   "api": {
     "name": "api",
     "description": "api",
-    "category": "business",
+    "category": "development",
     "color": "#f98599"
   },
   "asterisk": {
     "name": "asterisk",
     "description": "asterisk",
-    "category": "business",
+    "category": "communications",
     "color": "#d1bed0"
   },
   "bitfocus": {
     "name": "bitfocus",
     "description": "bitfocus",
-    "category": "business",
+    "category": "broadcast",
     "color": "#e5ecfe"
   },
   "broadcast": {
     "name": "broadcast",
     "description": "broadcast",
-    "category": "business",
+    "category": "broadcast",
     "color": "#b3d5cf",
     "synonyms": [
       "broadcast-tools",
@@ -380,13 +383,13 @@
   "chat": {
     "name": "chat",
     "description": "chat",
-    "category": "business",
+    "category": "communications",
     "color": "#c6ebdf"
   },
   "cms": {
     "name": "cms",
     "description": "cms",
-    "category": "business",
+    "category": "development",
     "color": "#91fcd7"
   },
   "collaboration": {
@@ -404,13 +407,13 @@
   "communications": {
     "name": "communications",
     "description": "communications",
-    "category": "business",
+    "category": "communications",
     "color": "#9ff7f2"
   },
   "companion": {
     "name": "companion",
     "description": "companion",
-    "category": "business",
+    "category": "broadcast",
     "color": "#aea497"
   },
   "crm": {
@@ -422,25 +425,25 @@
   "database": {
     "name": "database",
     "description": "database",
-    "category": "business",
+    "category": "databases",
     "color": "#95a2ec"
   },
   "data-pipeline": {
     "name": "data-pipeline",
     "description": "data-pipeline",
-    "category": "business",
+    "category": "databases",
     "color": "#ecd0ee"
   },
   "desktop": {
     "name": "desktop",
     "description": "desktop",
-    "category": "business",
+    "category": "systems",
     "color": "#a0b5f1"
   },
   "dev": {
     "name": "dev",
     "description": "dev",
-    "category": "business",
+    "category": "development",
     "color": "#ffeea5",
     "synonyms": [
       "development",
@@ -451,7 +454,7 @@
   "documentdb": {
     "name": "document-database",
     "description": "document-database",
-    "category": "business",
+    "category": "databases",
     "color": "#be9ab0",
     "synonyms": [
       "document-database",
@@ -461,7 +464,7 @@
   "ecommerce": {
     "name": "ecommerce",
     "description": "ecommerce",
-    "category": "business",
+    "category": "development",
     "color": "#9a9be0"
   },
   "finance": {
@@ -473,19 +476,19 @@
   "freepbx": {
     "name": "freepbx",
     "description": "freepbx",
-    "category": "business",
+    "category": "communications",
     "color": "#a9f390"
   },
   "frontend": {
     "name": "frontend",
     "description": "frontend",
-    "category": "business",
+    "category": "development",
     "color": "#c082b1"
   },
   "headless": {
     "name": "headless",
     "description": "headless",
-    "category": "business",
+    "category": "development",
     "color": "#ea81d2"
   },
   "marketing": {
@@ -502,31 +505,25 @@
   "media": {
     "name": "media",
     "description": "media",
-    "category": "business",
+    "category": "media",
     "color": "#9f96e0"
   },
   "microsoft": {
     "name": "microsoft",
     "description": "microsoft",
-    "category": "business",
+    "category": "systems",
     "color": "#a4859f"
   },
   "mobile": {
     "name": "mobile",
     "description": "mobile",
-    "category": "business",
+    "category": "development",
     "color": "#d7fbb5"
-  },
-  "movies": {
-    "name": "movies",
-    "description": "movies",
-    "category": "business",
-    "color": "#a2faa1"
   },
   "networking": {
     "name": "networking",
     "description": "networking",
-    "category": "business",
+    "category": "networking",
     "color": "#dff2ed",
     "synonyms": [
       "proxy",
@@ -537,31 +534,31 @@
   "nextjs": {
     "name": "nextjs",
     "description": "nextjs",
-    "category": "business",
+    "category": "development",
     "color": "#c7adc9"
   },
   "no-code": {
     "name": "no-code",
     "description": "no-code",
-    "category": "business",
+    "category": "ai-automation",
     "color": "#ada6a9"
   },
   "nosql": {
     "name": "nosql",
     "description": "nosql",
-    "category": "business",
+    "category": "databases",
     "color": "#abfd9c"
   },
   "openai": {
     "name": "openai",
     "description": "openai",
-    "category": "business",
+    "category": "ai-automation",
     "color": "#b7a9f8"
   },
   "open-source": {
     "name": "open-source",
     "description": "open-source",
-    "category": "business",
+    "category": "development",
     "color": "#abeb9b"
   },
   "project-management": {
@@ -573,7 +570,7 @@
   "relationaldb": {
     "name": "relational-database",
     "description": "relational-database",
-    "category": "business",
+    "category": "databases",
     "color": "#e78fd7",
     "synonyms": [
       "relational-db",
@@ -583,7 +580,7 @@
   "rust": {
     "name": "rust",
     "description": "rust",
-    "category": "business",
+    "category": "development",
     "color": "#bca2ba"
   },
   "scheduling": {
@@ -599,7 +596,7 @@
   "security": {
     "name": "security",
     "description": "security",
-    "category": "business",
+    "category": "security",
     "color": "#a4a9da",
     "synonyms": [
       "cybersecurity",
@@ -610,31 +607,25 @@
   "server": {
     "name": "server",
     "description": "server",
-    "category": "business",
+    "category": "systems",
     "color": "#99918c"
   },
   "sql": {
     "name": "sql",
     "description": "sql",
-    "category": "business",
+    "category": "databases",
     "color": "#da90d2"
-  },
-  "tv-series": {
-    "name": "tv-series",
-    "description": "tv-series",
-    "category": "business",
-    "color": "#e1c5ca"
   },
   "video": {
     "name": "video",
     "description": "video",
-    "category": "business",
+    "category": "media",
     "color": "#99f2b3"
   },
   "voip": {
     "name": "voip",
     "description": "voip",
-    "category": "business",
+    "category": "media",
     "color": "#dfa887",
     "synonyms": [
       "sip",
@@ -645,7 +636,17 @@
   "windows": {
     "name": "windows",
     "description": "windows",
-    "category": "business",
+    "category": "systems",
     "color": "#bc9184"
+  },
+  "remote-desktop": {
+    "name": "remote-desktop",
+    "description": "remote-desktop",
+    "category": "systems",
+    "color": "#bc9184",
+    "synonyms": [
+      "remote-desktop-services",
+      "rds", "rdp", "work-from-home"
+    ]
   }
 }

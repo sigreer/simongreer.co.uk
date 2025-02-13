@@ -1,13 +1,12 @@
 ---
 import { getCollection } from 'astro:content';
-import { ChevronRight } from "lucide-react";
 import PageLayout from "@layouts/PageLayout.astro";
 import '@styles/custom.css';
-import TechCube from "@components/ContentBoxes/TechCube.astro";
 import type { CollectionEntry } from 'astro:content';
-import { Button } from '@components/ui/button';
 import { Badge } from '@components/ui/badge';
 import { GetInTouchDialog } from '@components/GetInTouchDialog';
+import PricingAndInfoSection from '@components/Content/PricingAndInfoSection.astro';
+
 type TechWithStringTags = Omit<CollectionEntry<'tech'>, 'data'> & {
   data: Omit<CollectionEntry<'tech'>['data'], 'tags'> & {
     tags: string[] | undefined
@@ -28,9 +27,9 @@ const techs = (await getCollection('tech'))
 
 <PageLayout title="Tech Stuff">
   
-  <section class="py-2 px-6 md:pr-0 pl-0 md:mb-6">
+  <section class="py-2 px-6 md:pr-0 pl-0 md:mb-0 md:mt-2">
     <div class="grid grid-cols-10 md:gap-5">
-      <div class="col-span-3 border-[#dcdde0] dark:bg-background dark:border-neutral-800 dark:text-gray-200 rounded-lg bg-white text-gray-800 border my-3 flex flex-col items-center">
+      <div class="col-span-3 border-[#dcdde0] dark:bg-background dark:border-neutral-800 dark:text-gray-200 rounded-lg bg-white text-gray-800 border mt-2 mb-0 flex flex-col items-center">
         <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
           <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
             Professional Profile
@@ -68,7 +67,7 @@ const techs = (await getCollection('tech'))
       </div>
         </div>
       </div>
-      <div class="col-span-7 border border-[#dcdde0] rounded-lg bg-white text-gray-900 my-3 dark:bg-background dark:border-neutral-800 dark:text-primary">
+      <div class="col-span-7 border border-[#dcdde0] rounded-lg bg-white text-gray-900 mt-3 mb-0 dark:bg-background dark:border-neutral-800 dark:text-primary">
         <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
           <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
             A Bit About Me
@@ -95,20 +94,5 @@ const techs = (await getCollection('tech'))
     </div>
   </div>
 </section>
-
-<section class="py-2 px-6 md:pr-0 pl-0 md:mb-6">
-  <div class="flex flex-col gap-6 border border-[#dcdde0] dark:border-neutral-800 rounded-lg bg-white text-gray-900 my-3 dark:bg-background dark:text-primary">
-    <div class="w-full flex flex-col">
-      <div class="flex border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 flex-col">
-        <h2 class="text-xl font-bold dark:text-themepurple">
-          Section 2
-        </h2>
-        <div class="col-span-12 text-sm">
-          More text.
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-  
+<PricingAndInfoSection/>
 </PageLayout>

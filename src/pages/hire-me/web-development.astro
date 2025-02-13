@@ -3,13 +3,22 @@ import { getCollection } from 'astro:content';
 import { ChevronRight } from "lucide-react";
 import PageLayout from "@layouts/PageLayout.astro";
 import '@styles/custom.css';
-import TechCube from "@components/ContentBoxes/TechCube.astro";
+import '@styles/lightbox.css';
 import type { CollectionEntry } from 'astro:content';
-import { Button } from '@components/ui/button';
-import { Badge } from '@components/ui/badge';
 import { GetInTouchDialog } from '@components/GetInTouchDialog';
 import PricingAndInfoSection from '@components/Content/PricingAndInfoSection.astro';
 import TechGrid from "@components/ContentBoxes/TechGrid.astro";
+import LightBox from '@components/Media/LightBox.astro';
+import pageSpeedScoreMobile from '@images/galleries/simongreer-co-uk-pagespeed-scores/simongreer-co-uk-pagespeed-mobile-score.png'; 
+import pageSpeedScoreDesktop from '@images/galleries/simongreer-co-uk-pagespeed-scores/simongreer-co-uk-pagespeed-desktop-score.png'; 
+import { 
+  Layers, Newspaper, SquareLibrary, Store, Cog, Bot,
+  ShoppingCart, Database, Workflow, Cpu, Network, Server,
+  Paintbrush, Code, Rocket, Box, FileJson, FileType2,
+  ArrowRightLeft, Wordpress, Globe, Terminal, PackageOpen,
+  AppWindow, ServerCog, MonitorSmartphone, DatabaseBackup
+} from 'lucide-react';
+import { Badge } from '@components/ui/badge';
 type TechWithStringTags = Omit<CollectionEntry<'tech'>, 'data'> & {
   data: Omit<CollectionEntry<'tech'>['data'], 'tags'> & {
     tags: string[] | undefined
@@ -28,38 +37,173 @@ const techs = (await getCollection('tech'))
     }
   })) as TechWithStringTags[];
 
+  
+
 ---
 
 <PageLayout title="Tech Stuff">
   
-  <section class="py-2 px-6 md:pr-0 pl-0">
-    <div class="grid grid-cols-10 md:gap-5">
-      <div class="col-span-3 border-[#dcdde0] dark:bg-background dark:border-neutral-800 dark:text-gray-200 rounded-lg bg-white text-gray-800 border my-3 flex flex-col items-center">
-        <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
-          <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
-            Vendors &amp; Products
-          </h2>
-        </div>
-        <TechGrid techs={techs} />
-        <div class="w-full p-6">
-          <GetInTouchDialog client:only="react"  />
+<section class="my-2 px-6 md:pr-0 pl-0">
+
+  <div class="grid grid-cols-10 md:gap-5">
+
+    <div class="col-span-3 border-[#dcdde0] dark:bg-background dark:border-neutral-800 dark:text-gray-200 rounded-lg bg-white text-gray-800 border my-3 flex flex-col items-center">
+      <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
+        <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
+          Vendors &amp; Products
+        </h2>
+      </div>
+      <TechGrid techs={techs} />
+      <div class="w-full px-8">
+        <div class="w-full mb-2">
+          <span class="text-sm font-bold mb-2 text-gray-900 dark:text-themepurple">Hire Me For:</span>
+          <p class="text-xs">
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><ShoppingCart className="w-4 h-4" />Ecommerce</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Database className="w-4 h-4" />Headless CMS</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Workflow className="w-4 h-4" />Workflow Automation</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Bot className="w-4 h-4" />AI Integration</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Network className="w-4 h-4" />API Integration</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Server className="w-4 h-4" />Server Management</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Paintbrush className="w-4 h-4" />TailwindCSS</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Code className="w-4 h-4" />React</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Rocket className="w-4 h-4" />AstroJS</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Box className="w-4 h-4" />Directus</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><FileJson className="w-4 h-4" />JavaScript</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><FileType2 className="w-4 h-4" />TypeScript</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Store className="w-4 h-4" />MedusaJS</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><ArrowRightLeft className="w-4 h-4" />Wordpress Migration</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><svg viewBox="0 0 122.88 122.88" class="fill-white w-4 h-4"><g><path class="st0" d="M61.44,0C27.51,0,0,27.51,0,61.44c0,33.93,27.51,61.44,61.44,61.44c33.93,0,61.44-27.51,61.44-61.44 C122.88,27.51,95.37,0,61.44,0L61.44,0z M106.37,36.88c0.22,1.63,0.34,3.38,0.34,5.26c0,5.19-0.97,11.03-3.89,18.34l-15.64,45.21 c15.22-8.87,25.46-25.37,25.46-44.25C112.64,52.54,110.37,44.17,106.37,36.88L106.37,36.88z M62.34,65.92l-15.36,44.64 c4.59,1.35,9.44,2.09,14.46,2.09c5.96,0,11.68-1.03,17-2.9c-0.14-0.22-0.26-0.45-0.37-0.71L62.34,65.92L62.34,65.92z M96,58.86 c0-6.33-2.27-10.71-4.22-14.12c-2.6-4.22-5.03-7.79-5.03-12.01c0-4.71,3.57-9.09,8.6-9.09c0.23,0,0.44,0.03,0.66,0.04 c-9.11-8.35-21.25-13.44-34.57-13.44c-17.89,0-33.62,9.18-42.78,23.08c1.2,0.04,2.33,0.06,3.3,0.06c5.35,0,13.65-0.65,13.65-0.65 c2.76-0.16,3.08,3.89,0.33,4.22c0,0-2.77,0.32-5.86,0.49l18.64,55.46l11.21-33.6l-7.98-21.86c-2.76-0.16-5.37-0.49-5.37-0.49 c-2.76-0.16-2.44-4.38,0.32-4.22c0,0,8.45,0.65,13.48,0.65c5.35,0,13.65-0.65,13.65-0.65c2.76-0.16,3.08,3.89,0.33,4.22 c0,0-2.78,0.32-5.86,0.49L87,92.47l5.28-16.74C94.63,68.42,96,63.24,96,58.86L96,58.86z M10.24,61.44 c0,20.27,11.78,37.78,28.86,46.08L14.67,40.6C11.83,46.97,10.24,54.01,10.24,61.44L10.24,61.44z M61.44,3.69 c7.8,0,15.36,1.53,22.48,4.54c3.42,1.45,6.72,3.24,9.81,5.32c3.06,2.07,5.94,4.44,8.55,7.05c2.61,2.61,4.99,5.49,7.05,8.55 c2.09,3.09,3.88,6.39,5.32,9.81c3.01,7.12,4.54,14.68,4.54,22.48c0,7.8-1.53,15.36-4.54,22.48c-1.45,3.42-3.24,6.72-5.32,9.81 c-2.07,3.06-4.44,5.94-7.05,8.55c-2.61,2.61-5.49,4.99-8.55,7.05c-3.09,2.09-6.39,3.88-9.81,5.32c-7.12,3.01-14.68,4.54-22.48,4.54 c-7.8,0-15.36-1.53-22.48-4.54c-3.42-1.45-6.72-3.24-9.81-5.32c-3.06-2.07-5.94-4.44-8.55-7.05c-2.61-2.61-4.99-5.49-7.05-8.55 c-2.09-3.09-3.88-6.39-5.32-9.81C5.21,76.8,3.69,69.24,3.69,61.44c0-7.8,1.53-15.36,4.54-22.48c1.45-3.42,3.24-6.72,5.32-9.81 c2.07-3.06,4.44-5.94,7.05-8.55c2.61-2.61,5.49-4.99,8.55-7.05c3.09-2.09,6.39-3.88,9.81-5.32C46.08,5.21,53.64,3.69,61.44,3.69 L61.44,3.69z"/></g></svg>
+              Wordpress As CMS</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Layers className="w-4 h-4" />Full Stack</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Terminal className="w-4 h-4" />Deno</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><PackageOpen className="w-4 h-4" />Bun</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><AppWindow className="w-4 h-4" />Web Apps</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><ServerCog className="w-4 h-4" />Backend</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><MonitorSmartphone className="w-4 h-4" />Frontend</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><DatabaseBackup className="w-4 h-4" />SQL DBs</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><DatabaseBackup className="w-4 h-4" />NoSQL DBs</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Globe className="w-4 h-4" />Nginx</Badge>
+          </p>
         </div>
       </div>
-    
-      <div class="col-span-7 border border-[#dcdde0] rounded-lg bg-white text-gray-900 my-3 dark:bg-background dark:border-neutral-800 dark:text-primary">
-        <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
-          <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
-            Web Development
-          </h2>
+      <div class="w-full p-6">
+        <GetInTouchDialog client:only="react"/>
+      </div>
+      <div class="flex flex-row gap-3 p-2">
+      <div class="w-full p-0">
+        <LightBox src={pageSpeedScoreMobile}
+        alt="Mobile PageSpeed Score"
+        width={120}
+        class="my-4 border drop-shadow-md dark:border-0"
+        caption="Mobile  PageSpeed Score"
+        fontSize="9px"
+      />
+      </div>
+      <div class="w-full p-0">
+        <LightBox src={pageSpeedScoreDesktop}
+        alt="Desktop PageSpeed Score"
+        width={120}
+        class="my-4 border drop-shadow-md dark:border-0"
+        caption="Desktop PageSpeed Score"
+        fontSize="9px"
+      />
+      </div>
+      </div>
+    </div>
+
+    <div class="col-span-7 border border-[#dcdde0] rounded-lg bg-white text-gray-900 my-3 dark:bg-background dark:border-neutral-800 dark:text-primary">
+
+      <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
+        <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
+          Web Development
+        </h2>
+      </div>
+
+      <div class="w-full p-8">
+        <div class="py-1 flex flex-col gap-2">
+          <p class="text-sm mb-3">
+            I'm a web developer, designer and systems engineer with a strong focus on cutting edge open source technologies, frameworks and libraries predominantly in the Javascript eco-system. I have built full stack, database-driven web applications, ecommerce solutions and lightning fast statically generated content-centric websites.
+          </p>
         </div>
-        <div class="w-full p-8">
-        <p class="text-base mb-4">
-          Web development text.
-        </p>
+
+        <div class="py-1 flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2 mb-1">
+            <Newspaper className="text-themepink w-6" />
+            <h5 class="text-base text-themepink font-bold m-0">
+              Content-Driven Websites
+            </h5>
+          </div>
+          <p class="text-sm mb-3">
+            Over the last couple of years I've been using AstroJS for content-driven websites. Astro is a next generation Javascript framework that allows developers to build blazingly fast, standards-based websites that provide an exceptional end user experience. Astro orchestrates components and tooling from other well-known frameworks and technologies and bundles them into a tiny, performance-optimised package.
+          </p>
+        </div>
+
+        <div class="py-1 flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2">
+            <SquareLibrary className="text-themepink w-6" />
+            <h5 class="text-base text-themepink font-bold m-0">
+              Content Management
+            </h5>
+          </div>
+          <p class="text-sm mb-3">
+            Unlike other, ancient PHP-based web frameworks that try to be all things to all men, Astro is a frontend framework. It does not have an admin panel for adding content; instead it takes the more modern approach of being easily integrated into headless applications such as CMS. There are lots of great CMS options but I've found Directus to offer a superb developer experience whilst being ridiculously easy to adapt for non-technical users. Astro and Directus can be integrated simply and easily giving you the freedom to structure your content in whichever way you see fit.
+          </p>
+        </div>
+
+        <div class="py-1 flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2">
+            <Store className="text-themepink w-6" />
+            <h5 class="text-base text-themepink font-bold m-0">
+              Ecommerce Websites
+            </h5>
+          </div>
+          <p class="text-sm mb-3">
+            Shopify has ruled the roost for a number of years now, and although a powerful platform it's incredibly expensive if you require any level of flexibility or integration with external systems. Thankfully open source solutions such as MedusaJS have emerged that provide a headless, modular, API-based ecommerce platform that can be easily adapted for use with all modern frontend frameworks.
+          </p>
+        </div>
+
+        <div class="py-1 flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2">
+            <Layers className="text-themepink w-6" />
+            <h5 class="text-base text-themepink font-bold m-0">
+              Full Stack Web Applications
+            </h5>
+          </div>
+          <p class="text-sm mb-3">
+            Headless, modular, API-based web technologies make it easy to evolve ideas into fully-fledged applications that can be adapted and integrated into existing systems. I've implemented solutions that span the full depth of the 'stack' - frontend, identity, authorisation, session and state management, databases, APIs and more. I look to work with modern JS-based backend frameworks such as NodeJS, Deno and Bun over archaic PHP-based frameworks and server components.
+          </p>
+        </div>
+
+        <div class="py-1 flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2">
+            <Cog className="text-themepink w-6" />
+            <h5 class="text-base text-themepink font-bold m-0">
+              Workflows &amp; Automation
+            </h5>
+          </div>
+          <p class="text-sm mb-3">
+            I try to automate anything that's repetitive and shouldn't need human intervention. Creating workflow automations and CI/CD pipelines makes the task of deploying, maintaining and updating applications completely time-neutral. I like to add simple webhook-based integrations to provide notifications, reports and information via chat, email, WhatsApp etc.
+          </p>
+        </div>
+
+        <div class="py-1 flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2">
+            <Bot className="text-themepink w-6" />
+            <h5 class="text-base text-themepink font-bold m-0">
+              Artificial Intelligence
+            </h5>
+          </div>
+          <p class="text-sm mb-3">
+AI as an integral part of the development, debugging, refinement and refactoring process; and also as a core component of web applications themselves. Not because it's a buzzword, but because harnessing the power of LLMs, RAGs and other AI tools effectively is critical to remaining ahead of the competition and staying relevant to your audience, like or not!
+          </p>
+        </div>
+
       </div>
     </div>
   </div>
   </section>
+ 
+
   <PricingAndInfoSection/>
   
 </PageLayout>

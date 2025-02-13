@@ -8,9 +8,11 @@ interface Props {
   width?: number;
   class?: string;
   caption?: string;
+  fontSize?: string;
+  fontStyle?: string;
 }
 
-const { src, alt, width = 300, class: className, caption } = Astro.props;
+const { src, alt, width = 300, class: className, caption, fontSize = '12px', fontStyle = 'normal' } = Astro.props;
 ---
 
 <div class="lightbox-wrapper">
@@ -30,7 +32,7 @@ const { src, alt, width = 300, class: className, caption } = Astro.props;
     >
       <path d="M200-200v-240h60v180h180v60H200Zm500-320v-180H520v-60h240v240h-60Z"/>
     </svg>
-    {caption && <figcaption class="lightbox-caption leading-tight" style={`max-width: ${width}px`}>{caption}</figcaption>}
+    {caption && <figcaption class="lightbox-caption leading-tight" style={`max-width: ${width}px; font-size: ${fontSize}; font-style: ${fontStyle}`}>{caption}</figcaption>}
   </figure>
   <div class="lightbox-overlay">
     <figure class="lightbox-figure">

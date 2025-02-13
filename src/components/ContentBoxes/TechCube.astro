@@ -27,6 +27,8 @@ const secondaryColor = tailwindColors[vendor_secondary_color as keyof typeof tai
 
 const isPrimaryColorDark = vendor_primary_color.includes('700') || vendor_primary_color.includes('800') || vendor_primary_color.includes('900') || vendor_primary_color.includes('950') || vendor_primary_color.includes('black');
 
+const isVeryLight = vendor_primary_color.includes('50') || vendor_primary_color.includes('100') || vendor_primary_color.includes('white');
+
 const panels = [
   {
     id: 'image',
@@ -54,9 +56,7 @@ const panels = [
     id: 'description',
     content: (
       `<div class="w-full h-full p-2">
-        <p class="text-sm line-clamp-4 overflow-hidden ${isPrimaryColorDark ? 'text-white' : ''}">
-          ${description}
-        </p>
+        <p class="text-sm line-clamp-4 overflow-hidden ${isPrimaryColorDark ? 'text-white' : isVeryLight ? 'text-gray-900' : ''}">${description}</p>
       </div>`
     )
   }
