@@ -18,7 +18,7 @@ import StorageIcon from '@icons/StorageIcon.astro';
 import SysAdminIcon from '@icons/SysAdminIcon.astro';
 import AIIcon from '@icons/Robot2Icon.astro';
 import DatabaseIcon from '@icons/DatabaseIcon.astro';
-
+import BriefcaseIcon from '@icons/BriefcaseIcon.astro';
 const menuStructure = {
   tech: {
     root: '/tech',
@@ -84,7 +84,7 @@ const rootIconClasses = (menuItem: keyof typeof menuStructure) => [
             />
             Blog Posts
           </RootItem>
-            <RootItem isActive={isActiveRoute('tech')} link="/tech" label="Tech Stuff">
+            <!-- <RootItem isActive={isActiveRoute('tech')} link="/tech" label="Tech Stuff">
               <ServerIcon class:list={rootIconClasses('tech')}/>
               Tech Stuff
               <Fragment slot="submenu">
@@ -95,7 +95,7 @@ const rootIconClasses = (menuItem: keyof typeof menuStructure) => [
                   <EditorChoiceIcon class:list={iconClasses('tech')}/>Projects
                 </SubMenuItem>
               </Fragment>
-            </RootItem>
+            </RootItem> -->
             <RootItem isActive={isActiveRoute('hireme')} link="/hire-me" label="Hire Me">
               <HireMeIcon class:list={rootIconClasses('hireme')}/>
               Hire Me
@@ -107,6 +107,10 @@ const rootIconClasses = (menuItem: keyof typeof menuStructure) => [
               <SubMenuItem link="/hire-me/software-development">
                 <SoftwareDevelopmentIcon class:list={iconClasses('hireme')}/>
                 Software Development
+              </SubMenuItem>
+              <SubMenuItem link="/hire-me/business-apps">
+                <BriefcaseIcon class:list={iconClasses('hireme')} class="fill-white" fill="#ffffff" />
+                Business Apps
               </SubMenuItem>
               <SubMenuItem link="/hire-me/networking-and-security">
                 <NetworkingIcon class:list={iconClasses('hireme')}/>
@@ -135,16 +139,6 @@ const rootIconClasses = (menuItem: keyof typeof menuStructure) => [
                 class:list={rootIconClasses('about')}
               />
               About Me
-              <Fragment slot="submenu">
-              <SubMenuItem link="/me/professionally" isFirst={true}>
-                <IdentityIcon class:list={iconClasses('about')}/>
-                Me Professionally
-              </SubMenuItem>
-              <SubMenuItem link="/me/personally" isLast={true}>
-                <FaceIcon class:list={iconClasses('about')}/>
-                Me Personally
-                </SubMenuItem>
-              </Fragment>
             </RootItem>
       </div>
       

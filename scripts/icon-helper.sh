@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ICONS_DIR="/src/components/Icons"
+ICONS_DIR="./src/components/Icons"
 
 show_usage() {
     echo "Usage: batchrename.sh <command> [filename]"

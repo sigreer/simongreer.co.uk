@@ -1,17 +1,22 @@
 ---
 import { getCollection } from 'astro:content';
+import { ChevronRight } from "lucide-react";
 import PageLayout from "@layouts/PageLayout.astro";
 import '@styles/custom.css';
+import TechCube from "@components/ContentBoxes/TechCube.astro";
 import type { CollectionEntry } from 'astro:content';
+import { Button } from '@components/ui/button';
+import { Badge } from '@components/ui/badge';
 import { GetInTouchDialog } from '@components/GetInTouchDialog';
 import PricingAndInfoSection from '@components/Content/PricingAndInfoSection.astro';
 import TechGrid from "@components/ContentBoxes/TechGrid.astro";
-import TestimonialsSection from "@components/Content/TestimonialsSection.astro";
+
 type TechWithStringTags = Omit<CollectionEntry<'tech'>, 'data'> & {
   data: Omit<CollectionEntry<'tech'>['data'], 'tags'> & {
     tags: string[] | undefined
   }
 };
+
 const techs = (await getCollection('tech'))
   .filter((tech) => 
     tech.data.pubDate && tech.data.hireme_filter === 'storage'
@@ -27,6 +32,7 @@ const techs = (await getCollection('tech'))
 ---
 
 <PageLayout title="Tech Stuff">
+  
   <section class="py-2 px-6 md:pr-0 pl-0">
     <div class="grid grid-cols-10 md:gap-5">
       <div class="col-span-3 border-[#dcdde0] dark:bg-background dark:border-neutral-800 dark:text-gray-200 rounded-lg bg-white text-gray-800 border my-3 flex flex-col items-center">
@@ -49,23 +55,12 @@ const techs = (await getCollection('tech'))
         </div>
         <div class="w-full p-8">
         <p class="text-base mb-4">
-          I've designed, deployed and supported network storage solutions for clients of various sizes and with varying needs. I have built hardware solutions from scratch and I've integrated complex, multi-part proprietary systems into existing environments.
+          Networking text.
         </p>
-        <p class="text-base mb-4">
-          Having a career focus on open source technologies, TrueNAS (formerly FreeNAS) is a go-to solution and something I recommend to customers that need flexibility and control over their storage infrastructure.
-        </p>
-        <p class="text-base mb-4">
-          I'm a big proponent of ZFS as a filesystem (which is at the core of TrueNAS) and have developed a comprehensive understanding of its features sets, capabilities and quirks (of which there are many)
-        </p>
-        <p class="text-base mb-4">
-          Like most techies that have muddied their hands in the real world, I've worked extensively with Microsoft products in order to integrate storage systems into Windows-based desktop and server environments. This has included but is certainly not limited to Windows Server, Windows 7/8/10/11, Active Directory and cloud-based systems such as Azure.
-        </p>
-        <p class="text-base mb-4">
-          Object storage has become a mainstay with the prevalence of cloud-based infrastructure and as an open source advocate I've enjoyed working with and learning Minio, which is a next-gen, fully open source S3-compatible object storage solution. It's not always practical, cost effective or even possible to implement every solution using open source, self-hosted technologies. To that end I've worked with Amazon S3, Azure Blob Storage, Google Cloud Storage and more recently Cloudlare's R2 (currently my preference for new, cloud-based projects).
-        </p>
+      </div>
     </div>
   </div>
   </section>
-  <TestimonialsSection filter="storage" />
   <PricingAndInfoSection/>
+  
 </PageLayout>
