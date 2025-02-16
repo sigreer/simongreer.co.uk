@@ -13,10 +13,10 @@ import TechGrid from "@components/ContentBoxes/TechGrid.astro";
 import { 
   Layers, Newspaper, SquareLibrary, Store, Cog, Bot, ShoppingCart, Database, Workflow, Network, Server, Paintbrush, Code, Rocket, Box, FileJson, FileType2, ArrowRightLeft, KeyRound, Calendar1, Terminal, Wallet, CircleDollarSign, BookUser, ScrollText, TicketsPlane, HardDriveDownload, FileText, Signature, PhoneCall, Headset, ChartColumnStacked, Asterisk, BookText, Mails,MessageSquareText, Plus, Minus, ThumbsUp, ThumbsDown
 } from 'lucide-react';
-import twentyScreenshot from '@images/galleries/screenshots/twentycrm1.png';
-import documensoScreenshot from '@images/galleries/screenshots/documenso1.png';
-import planeScreenshot from '@images/galleries/screenshots/plane1.png';
-import nextcloudScreenshot from '@images/galleries/screenshots/nextcloud1.png';
+import twentyScreenshot from '@images/screenshots/twentycrm1.png';
+import documensoScreenshot from '@images/screenshots/documenso1.png';
+import planeScreenshot from '@images/screenshots/plane1.png';
+import nextcloudScreenshot from '@images/screenshots/nextcloud1.png';
 import DocumensoIcon from '@components/Icons/DocumensoIcon.astro';
 import NextcloudIcon from '@components/Icons/NextcloudIcon.astro';
 import { Badge } from '@components/ui/badge';
@@ -253,41 +253,49 @@ const techs = (await getCollection('tech')) .filter((tech) =>
           <div class="flex flex-row gap-3 p-2">
             <div class="w-full p-0">
               <LightBox src={twentyScreenshot}
-              alt="TwentyCRM"
-              width={120}
-              class="my-4 border drop-shadow-md dark:border-0"
-              caption="Modern, open CRM system that can be easily integrated with your existing systems."
-              fontSize="9px"
-            />
+                alt="TwentyCRM"
+                width={120}
+                class="my-4 border drop-shadow-md dark:border-0"
+                captionText="Modern, open CRM system that can be easily integrated with your existing systems."
+                captionClass="text-[9px] font-normal"
+                thumbText="TwentyCRM"
+                thumbClass="text-[9px] font-normal"
+              />
             </div>
             <div class="w-full p-0">
               <LightBox src={documensoScreenshot}
-              alt="Documenso"
-              width={120}
-              class="my-4 border drop-shadow-md dark:border-0"
-              caption="Document-signing app that can be fully embedded into your business apps."
-              fontSize="9px"
-            />
+                alt="Documenso"
+                width={120}
+                class="my-4 border drop-shadow-md dark:border-0"
+                captionText="Document-signing app that can be fully embedded into your business apps."
+                captionClass="text-[9px] font-normal"
+                thumbText="Documenso"
+                thumbClass="text-[9px] font-normal"
+              />
             </div>
             <div class="w-full p-0">
               <LightBox src={planeScreenshot}
-              alt="Plane"
-              width={120}
-              class="my-4 border drop-shadow-md dark:border-0"
-              caption="Modern, slick and responsive project management app for teams."
-              fontSize="9px"
-            />
+                alt="Plane"
+                width={120}
+                class="my-4 border drop-shadow-md dark:border-0"
+                captionText="Modern, slick and responsive project management app for teams."
+                captionClass="text-[9px] font-normal"
+                thumbText="Plane"
+                thumbClass="text-xs"
+              />
             </div>
             <div class="w-full p-0">
               <LightBox src={nextcloudScreenshot}
-              alt="Nextcloud"
-              width={120}
-              class="my-4 border drop-shadow-md dark:border-0"
-              caption="File-sharing, Collaboration and a whole lot more."
-              fontSize="9px"
-            />
+                alt="Nextcloud"
+                width={120}
+                class="my-4 border drop-shadow-md dark:border-0"
+                captionText="File-sharing, Collaboration and a whole lot more."
+                captionClass="text-xs"
+                thumbText="Nextcloud"
+                thumbClass="text-xs"
+              />
             </div>
-            </div>
+          </div>
         </div>
       </div>
   </section>
