@@ -1,25 +1,33 @@
 ---
 import { getCollection } from 'astro:content';
-import { ChevronRight } from "lucide-react";
 import PageLayout from "@layouts/PageLayout.astro";
 import '@styles/custom.css';
-import TechCube from "@components/ContentBoxes/TechCube.astro";
+import '@styles/lightbox.css';
+import LightBox from '@components/Media/LightBox.astro';
 import type { CollectionEntry } from 'astro:content';
-import { Button } from '@components/ui/button';
-import { Badge } from '@components/ui/badge';
 import { GetInTouchDialog } from '@components/GetInTouchDialog';
+import GoogleIcon from '@icons/GoogleIcon.astro';
+import MicrosoftWindowsIcon from '@icons/MicrosoftWindowsIcon.astro';
 import PricingAndInfoSection from '@components/Content/PricingAndInfoSection.astro';
 import TechGrid from "@components/ContentBoxes/TechGrid.astro";
-
+import { 
+  Layers, Newspaper, SquareLibrary, Store, Cog, Bot, ShoppingCart, Database, Workflow, Network, Server, Paintbrush, Code, Rocket, Box, FileJson, FileType2, ArrowRightLeft, KeyRound, Calendar1, Terminal, Wallet, CircleDollarSign, BookUser, ScrollText, TicketsPlane, HardDriveDownload, FileText, Signature, PhoneCall, Headset, ChartColumnStacked, Asterisk, BookText, Mails,MessageSquareText, Plus, Minus, ThumbsUp, ThumbsDown
+} from 'lucide-react';
+import twentyScreenshot from '@images/screenshots/twentycrm1.png';
+import documensoScreenshot from '@images/screenshots/documenso1.png';
+import planeScreenshot from '@images/screenshots/plane1.png';
+import nextcloudScreenshot from '@images/screenshots/nextcloud1.png';
+import DocumensoIcon from '@components/Icons/DocumensoIcon.astro';
+import NextcloudIcon from '@components/Icons/NextcloudIcon.astro';
+import { Badge } from '@components/ui/badge';
 type TechWithStringTags = Omit<CollectionEntry<'tech'>, 'data'> & {
   data: Omit<CollectionEntry<'tech'>['data'], 'tags'> & {
     tags: string[] | undefined
   }
 };
 
-const techs = (await getCollection('tech'))
-  .filter((tech) => 
-    tech.data.pubDate && tech.data.hireme_filter === 'cloud-and-hosted'
+const techs = (await getCollection('tech')) .filter((tech) => 
+    tech.data.pubDate && tech.data.hireme_filter === 'business'
   )
   .map((tech) => ({
     ...tech,
@@ -28,39 +36,271 @@ const techs = (await getCollection('tech'))
       tags: tech.data.tags?.map(tag => tag.id)
     }
   })) as TechWithStringTags[];
-
 ---
 
 <PageLayout title="Tech Stuff">
   
-  <section class="py-2 px-6 md:pr-0 pl-0">
-    <div class="grid grid-cols-10 md:gap-5">
-      <div class="col-span-3 border-[#dcdde0] dark:bg-background dark:border-neutral-800 dark:text-gray-200 rounded-lg bg-white text-gray-800 border my-3 flex flex-col items-center">
-        <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
-          <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
-            Vendors &amp; Products
-          </h2>
-        </div>
-        <TechGrid techs={techs} />
-        <div class="w-full p-6">
-          <GetInTouchDialog client:only="react"  />
+<section class="my-2 px-6 md:pr-0 pl-0">
+
+  <div class="grid grid-cols-10 md:gap-5">
+
+    <div class="col-span-3 border-[#dcdde0] dark:bg-background dark:border-neutral-800 dark:text-gray-200 rounded-lg bg-white text-gray-800 border my-3 flex flex-col items-center">
+      <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
+        <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
+          Vendors &amp; Products
+        </h2>
+      </div>
+      <TechGrid techs={techs} />
+      <div class="w-full px-8">
+        <div class="w-full mb-2">
+          <span class="text-sm font-bold mb-2 text-gray-900 dark:text-themepurple">Hire Me For:</span>
+          <p class="text-xs">
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <NextcloudIcon class="w-4 h-4" fill="#ffffff" />Nextcloud
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Calendar1 className="w-4 h-4"/>Cal.com
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Mails className="w-4 h-4"/>Mautic</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <BookUser className="w-4 h-4"/>TwentyCRM</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <ScrollText className="w-4 h-4"/>InvoiceNinja</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <TicketsPlane className="w-4 h-4"/>Plane</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <KeyRound className="w-4 h-4"/>Bitwarden</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <FileText className="w-4 h-4"/>OnlyOffice</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <HardDriveDownload className="w-4 h-4"/>System Integration</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <MicrosoftWindowsIcon class="w-4 h-4" fill="#ffffff" />MS365</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <GoogleIcon class="w-4 h-4" fill="#ffffff" />Google Workspace</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <PhoneCall className="w-4 h-4"/>FreePBX
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Asterisk className="w-4 h-4" />Asterisk
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <MessageSquareText className="w-4 h-4" />Mattermost
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Network className="w-4 h-4" />Workflow Automation
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <PhoneCall className="w-4 h-4" />VoIP
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Code className="w-4 h-4" />Open Source
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Headset className="w-4 h-4" />Zammad
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <ChartColumnStacked className="w-4 h-4" />Grafana
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Signature className="w-4 h-4" />Document Signing
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <DocumensoIcon class="w-4 h-4" fill="#ffffff" />Documenso
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <FileType2 className="w-4 h-4" />Knowledgebases
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <BookText className="w-4 h-4" />WikiJS
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <ArrowRightLeft className="w-4 h-4" />Marketing Automation
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Headset className="w-4 h-4" />Customer Support
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <ScrollText className="w-4 h-4" />Invoicing
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal ">
+              <Wallet className="w-4 h-4" />Payments
+            </Badge>
+          </p>
         </div>
       </div>
-    
-      <div class="col-span-7 border border-[#dcdde0] rounded-lg bg-white text-gray-900 my-3 dark:bg-background dark:border-neutral-800 dark:text-primary">
-        <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
-          <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
-            Cloud &amp; Hosted Infrastructure
-          </h2>
-        </div>
-        <div class="w-full p-8">
-        <p class="text-base mb-4">
-          Cloud &amp; Hosted Infrastructure text.
-        </p>
+      <div class="w-full p-6">
+        <GetInTouchDialog client:only="react"/>
       </div>
     </div>
-  </div>
+
+    <div class="col-span-7 border border-[#dcdde0] rounded-lg bg-white text-gray-900 my-3 dark:bg-background dark:border-neutral-800 dark:text-primary">
+
+      <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
+        <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
+          Cloud &amp; Hosted Solutions
+        </h2>
+      </div>
+
+      <div class="w-full p-8">
+        <div class="py-1 flex flex-col gap-2">
+          <p class="text-sm mb-3">
+            I can work at any layer of the stack, from physical hardware to Software-as-a-Service. I have experience with GCP, AWS and Azure but currently use Hetzner and Cloudflare wherever possible.
+          </p>
+
+        </div>
+
+        <div class="py-1 flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2 mb-1">
+            <Code className="text-themepink w-6" />
+            <h5 class="text-base text-themepink font-bold m-0">
+              Open Source Solutions First
+            </h5>
+          </div>
+          <p class="text-sm mb-3">
+            As a user and developer of open source software, I strongly advocate for its use in business operations. There has historically been some stigma attached to open source solutions, but over the last five years or so the eco-system has changed and many software startups are basing their businesses on the open source model.
+          </p>
+          <p class="text-sm mb-3">
+            I've helped clients of all sizes to identify where open source solutions might be a best fit and how to go about successfully implementing them. The FOSS (Free and Open Source Software) landscape it's often not easy to discern solutions that will provide value for money vs those that will cause more problems than they solve.
+          </p>
+          </div>
+
+        <div class="py-1 flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2 mb-1 mt-2">
+            <ThumbsUp className="text-themepink w-6" />
+            <h5 class="text-base text-themepink font-bold m-0">
+              The Pros &amp; Cons of Open Source Business Apps
+            </h5>
+          </div>
+          <div class="grid grid-cols-2 gap-4 mt-2">
+            <div>
+              <ul class="list-none p-0 m-0 space-y-2">
+                <li class="flex items-center gap-2">
+                  <Plus className="text-green-500 w-5 h-5 flex-shrink-0" />
+                  <span class="text-sm">Full control over data and infrastructure</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <Plus className="text-green-500 w-5 h-5 flex-shrink-0" />
+                  <span class="text-sm">No vendor lock-in or proprietary formats</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <Plus className="text-green-500 w-5 h-5 flex-shrink-0" />
+                  <span class="text-sm">Lower total cost of ownership</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <Plus className="text-green-500 w-5 h-5 flex-shrink-0" />
+                  <span class="text-sm">Active community support and development</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <Plus className="text-green-500 w-5 h-5 flex-shrink-0" />
+                  <span class="text-sm">Customizable to specific business needs</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <ul class="list-none p-0 m-0 space-y-2">
+                <li class="flex items-center gap-2">
+                  <Minus className="text-red-500 w-5 h-5 flex-shrink-0" />
+                  <span class="text-sm">May require technical expertise to maintain</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <Minus className="text-red-500 w-5 h-5 flex-shrink-0" />
+                  <span class="text-sm">Documentation can be inconsistent</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <Minus className="text-red-500 w-5 h-5 flex-shrink-0" />
+                  <span class="text-sm">Support may be community-dependent</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <Minus className="text-red-500 w-5 h-5 flex-shrink-0" />
+                  <span class="text-sm">Updates can be less predictable</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <Minus className="text-red-500 w-5 h-5 flex-shrink-0" />
+                  <span class="text-sm">Initial setup may take longer</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="py-1 flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2 mb-1 mt-2">
+            <Code className="text-themepink w-6" />
+            <h5 class="text-base text-themepink font-bold m-0">
+            How I Can Help
+          </h5>
+          </div>
+          <p class="text-sm mb-3">
+            By developing an understanding of your business, the systems used and your goals, I can help you identify whether open source solutions would be a good fit and more practically how to go about implementing, integrating and maintaining them. Open source solutions often require more time, effort and resources to set up than their proprietary, SaaS-based counterparts but when implemented properly they probably a more open, flexible and scalable platform from which to grow a business. 
+          </p>
+          <p class="text-sm mb-3">
+            Many of my clients started with open source by needing to solve a particular problem that wasn't easily solvable through SaaS-based systems. After putting the building blocks in place by way of basic infrastructure (typically cloud-hosted), we've added systems and built out a responsive, business-oriented environment that delivers value for money.
+          </p>
+        </div>
+
+        <div class="py-1 flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2 mb-1 mt-2">
+            <Code className="text-themepink w-6" />
+            <h5 class="text-base text-themepink font-bold m-0">
+            Software Highlights
+          </h5>
+          </div>
+          <p class="text-sm mb-3">
+            Some examples of open source business software that I've worked with and in many cases use myself. 
+          </p>
+          <div class="flex flex-row gap-3 p-2">
+            <div class="w-full p-0">
+              <LightBox src={twentyScreenshot}
+                alt="TwentyCRM"
+                width={120}
+                class="my-4 border drop-shadow-md dark:border-0"
+                captionText="Modern, open CRM system that can be easily integrated with your existing systems."
+                captionClass="text-[9px] font-normal"
+                thumbText="TwentyCRM"
+                thumbClass="text-[9px] font-normal"
+              />
+            </div>
+            <div class="w-full p-0">
+              <LightBox src={documensoScreenshot}
+                alt="Documenso"
+                width={120}
+                class="my-4 border drop-shadow-md dark:border-0"
+                captionText="Document-signing app that can be fully embedded into your business apps."
+                captionClass="text-[9px] font-normal"
+                thumbText="Documenso"
+                thumbClass="text-[9px] font-normal"
+              />
+            </div>
+            <div class="w-full p-0">
+              <LightBox src={planeScreenshot}
+                alt="Plane"
+                width={120}
+                class="my-4 border drop-shadow-md dark:border-0"
+                captionText="Modern, slick and responsive project management app for teams."
+                captionClass="text-[9px] font-normal"
+                thumbText="Plane"
+                thumbClass="text-xs"
+              />
+            </div>
+            <div class="w-full p-0">
+              <LightBox src={nextcloudScreenshot}
+                alt="Nextcloud"
+                width={120}
+                class="my-4 border drop-shadow-md dark:border-0"
+                captionText="File-sharing, Collaboration and a whole lot more."
+                captionClass="text-xs"
+                thumbText="Nextcloud"
+                thumbClass="text-xs"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
   </section>
+ 
+
   <PricingAndInfoSection/>
   
 </PageLayout>

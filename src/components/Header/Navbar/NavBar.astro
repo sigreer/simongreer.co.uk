@@ -19,6 +19,7 @@ import SysAdminIcon from '@icons/SysAdminIcon.astro';
 import AIIcon from '@icons/Robot2Icon.astro';
 import DatabaseIcon from '@icons/DatabaseIcon.astro';
 import BriefcaseIcon from '@icons/BriefcaseIcon.astro';
+import CloudIcon from '@icons/CloudIcon.astro';
 const menuStructure = {
   tech: {
     root: '/tech',
@@ -104,10 +105,14 @@ const rootIconClasses = (menuItem: keyof typeof menuStructure) => [
                 <WebDevelopmentIcon class:list={iconClasses('hireme')}/>
                 Web Development
               </SubMenuItem>
-              <SubMenuItem link="/hire-me/software-development">
+              <!-- SubMenuItem link="/hire-me/cloud-and-hosted">
+                <CloudIcon class:list={iconClasses('hireme')}/>
+                Cloud &amp; Hosted
+              </SubMenuItem> -->
+              <!-- <SubMenuItem link="/hire-me/software-development">
                 <SoftwareDevelopmentIcon class:list={iconClasses('hireme')}/>
                 Software Development
-              </SubMenuItem>
+              </SubMenuItem> -->
               <SubMenuItem link="/hire-me/business-apps">
                 <BriefcaseIcon class:list={iconClasses('hireme')} class="fill-white" fill="#ffffff" />
                 Business Apps
@@ -116,9 +121,9 @@ const rootIconClasses = (menuItem: keyof typeof menuStructure) => [
                 <NetworkingIcon class:list={iconClasses('hireme')}/>
                 Networking, Security, VPNs
               </SubMenuItem>
-              <SubMenuItem link="/hire-me/system-administration">
+              <!-- <SubMenuItem link="/hire-me/system-administration">
                 <SysAdminIcon class:list={iconClasses('hireme')}/>
-                SysAdmin
+                System Administration
               </SubMenuItem>
               <SubMenuItem link="/hire-me/system-design-and-deployment">
                 <SystemsIcon class:list={iconClasses('hireme')}/>
@@ -127,7 +132,7 @@ const rootIconClasses = (menuItem: keyof typeof menuStructure) => [
               <SubMenuItem link="/hire-me/data-and-databases">
                 <DatabaseIcon class:list={iconClasses('hireme')}/>
                 Data &amp; Databases
-              </SubMenuItem>
+              </SubMenuItem> -->
               <SubMenuItem link="/hire-me/storage-and-nas" isLast={true}>
                 <StorageIcon class:list={iconClasses('hireme')}/>
                 Storage, NAS

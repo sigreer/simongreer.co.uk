@@ -1,24 +1,32 @@
 ---
 import { getCollection } from 'astro:content';
-import { ChevronRight } from "lucide-react";
 import PageLayout from "@layouts/PageLayout.astro";
 import '@styles/custom.css';
-import TechCube from "@components/ContentBoxes/TechCube.astro";
+import '@styles/lightbox.css';
+import LightBox from '@components/Media/LightBox.astro';
 import type { CollectionEntry } from 'astro:content';
-import { Button } from '@components/ui/button';
-import { Badge } from '@components/ui/badge';
 import { GetInTouchDialog } from '@components/GetInTouchDialog';
+import GoogleIcon from '@icons/GoogleIcon.astro';
+import MicrosoftWindowsIcon from '@icons/MicrosoftWindowsIcon.astro';
 import PricingAndInfoSection from '@components/Content/PricingAndInfoSection.astro';
 import TechGrid from "@components/ContentBoxes/TechGrid.astro";
-
+import { 
+  Layers, Newspaper, SquareLibrary, Store, Cog, Bot, ShoppingCart, Database, Workflow, Network, Server, Paintbrush, Code, Rocket, Box, FileJson, FileType2, ArrowRightLeft, KeyRound, Calendar1, Terminal, Wallet, CircleDollarSign, BookUser, ScrollText, TicketsPlane, HardDriveDownload, FileText, Signature, PhoneCall, Headset, ChartColumnStacked, Asterisk, BookText, Mails,MessageSquareText, Plus, Minus, ThumbsUp, ThumbsDown
+} from 'lucide-react';
+import twentyScreenshot from '@images/screenshots/twentycrm1.png';
+import documensoScreenshot from '@images/screenshots/documenso1.png';
+import planeScreenshot from '@images/screenshots/plane1.png';
+import nextcloudScreenshot from '@images/screenshots/nextcloud1.png';
+import DocumensoIcon from '@components/Icons/DocumensoIcon.astro';
+import NextcloudIcon from '@components/Icons/NextcloudIcon.astro';
+import { Badge } from '@components/ui/badge';
 type TechWithStringTags = Omit<CollectionEntry<'tech'>, 'data'> & {
   data: Omit<CollectionEntry<'tech'>['data'], 'tags'> & {
     tags: string[] | undefined
   }
 };
 
-const techs = (await getCollection('tech'))
-  .filter((tech) => 
+const techs = (await getCollection('tech')) .filter((tech) => 
     tech.data.pubDate && tech.data.hireme_filter === 'storage'
   )
   .map((tech) => ({
@@ -28,39 +36,232 @@ const techs = (await getCollection('tech'))
       tags: tech.data.tags?.map(tag => tag.id)
     }
   })) as TechWithStringTags[];
-
 ---
 
 <PageLayout title="Tech Stuff">
   
-  <section class="py-2 px-6 md:pr-0 pl-0">
-    <div class="grid grid-cols-10 md:gap-5">
-      <div class="col-span-3 border-[#dcdde0] dark:bg-background dark:border-neutral-800 dark:text-gray-200 rounded-lg bg-white text-gray-800 border my-3 flex flex-col items-center">
-        <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
-          <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
-            Vendors &amp; Products
-          </h2>
-        </div>
-        <TechGrid techs={techs} />
-        <div class="w-full p-6">
-          <GetInTouchDialog client:only="react"  />
+<section class="my-2 px-6 md:pr-0 pl-0">
+
+  <div class="grid grid-cols-10 md:gap-5">
+
+    <div class="col-span-3 border-[#dcdde0] dark:bg-background dark:border-neutral-800 dark:text-gray-200 rounded-lg bg-white text-gray-800 border my-3 flex flex-col items-center">
+      <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
+        <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
+          Vendors &amp; Products
+        </h2>
+      </div>
+      <TechGrid techs={techs} />
+      <div class="w-full px-8">
+        <div class="w-full mb-2">
+          <span class="text-sm font-bold mb-2 text-gray-900 dark:text-themepurple">Hire Me For:</span>
+          <p class="text-xs">
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Server className="w-4 h-4" />TrueNAS SCALE
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Server className="w-4 h-4" />TrueNAS Core
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Server className="w-4 h-4" />TrueNAS CE
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Database className="w-4 h-4" />ZFS
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Network className="w-4 h-4" />NFS
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Network className="w-4 h-4" />CIFS/SMB
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Box className="w-4 h-4" />S3
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Box className="w-4 h-4" />Minio
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Server className="w-4 h-4" />UnRAID
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Server className="w-4 h-4" />HexOS
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Network className="w-4 h-4" />iSCSI
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <HardDriveDownload className="w-4 h-4" />On-Site Backup
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <HardDriveDownload className="w-4 h-4" />Remote Backup
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Database className="w-4 h-4" />RAID
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <KeyRound className="w-4 h-4" />Data Protection
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Server className="w-4 h-4" />NAS
+            </Badge>
+          </p>
         </div>
       </div>
-    
-      <div class="col-span-7 border border-[#dcdde0] rounded-lg bg-white text-gray-900 my-3 dark:bg-background dark:border-neutral-800 dark:text-primary">
-        <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
-          <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
-           Storage, NAS, etc.
-          </h2>
-        </div>
-        <div class="w-full p-8">
-        <p class="text-base mb-4">
-          Networking text.
-        </p>
+      <div class="w-full p-6">
+        <GetInTouchDialog client:only="react"/>
       </div>
     </div>
-  </div>
+
+    <div class="col-span-7 border border-[#dcdde0] rounded-lg bg-white text-gray-900 my-3 dark:bg-background dark:border-neutral-800 dark:text-primary">
+
+      <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
+        <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
+          Business Apps
+        </h2>
+      </div>
+
+      <div class="w-full p-8">
+        <div class="py-1 flex flex-col gap-2">
+          <p class="text-sm mb-3">
+            I specialise in designing and implementing robust storage solutions using enterprise-grade open source technologies. Whether you need a new NAS deployment, storage expansion, or performance optimization of existing systems, I can help create reliable storage infrastructure that meets your data management needs while ensuring data integrity and accessibility.
+          </p>
+        </div>
+
+        <div class="py-1 flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2">
+            <Database className="text-themepink w-6" />
+            <h5 class="text-base text-themepink font-bold m-0">
+              TrueNAS &amp; ZFS
+            </h5>
+          </div>
+          <p class="text-sm mb-3">
+            As a TrueNAS specialist, I work extensively with both SCALE and CORE editions to deliver enterprise-grade storage solutions. ZFS provides unmatched data integrity, snapshot capabilities, and efficient replication. I can help you leverage advanced features like dataset management, compression, and deduplication to optimize your storage infrastructure while ensuring maximum data protection.
+          </p>
+        </div>
+
+        <div class="py-1 flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2">
+            <Network className="text-themepink w-6" />
+            <h5 class="text-base text-themepink font-bold m-0">
+              Network Storage Protocols
+            </h5>
+          </div>
+          <p class="text-sm mb-3">
+            Modern storage solutions need to support various access protocols. I implement and configure NFS, SMB/CIFS, and iSCSI to ensure your storage is accessible across different platforms and operating systems. This includes setting up proper permissions, optimizing performance, and ensuring secure access to shared resources.
+          </p>
+        </div>
+
+        <div class="py-1 flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2">
+            <HardDriveDownload className="text-themepink w-6" />
+            <h5 class="text-base text-themepink font-bold m-0">
+              Backup &amp; Disaster Recovery
+            </h5>
+          </div>
+          <p class="text-sm mb-3">
+            Data protection is critical in today's digital environment. I design comprehensive backup strategies utilizing ZFS snapshots, replication, and both on-site and off-site backup solutions. This includes implementing automated backup schedules, testing recovery procedures, and ensuring your data is protected against hardware failure, user errors, and other potential disasters.
+          </p>
+        </div>
+
+        <div class="py-1 flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2">
+            <Box className="text-themepink w-6" />
+            <h5 class="text-base text-themepink font-bold m-0">
+              Object Storage &amp; S3
+            </h5>
+          </div>
+          <p class="text-sm mb-3">
+            Modern applications often require object storage capabilities. I implement solutions like MinIO and TrueNAS's built-in S3-compatible storage to provide scalable, reliable object storage. This enables cloud-native applications while maintaining data sovereignty and reducing costs compared to cloud storage providers.
+          </p>
+        </div>
+
+        <div class="py-1 flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2">
+            <KeyRound className="text-themepink w-6" />
+            <h5 class="text-base text-themepink font-bold m-0">
+              Data Protection &amp; Security
+            </h5>
+          </div>
+          <p class="text-sm mb-3">
+            Security is paramount when it comes to data storage. I implement robust access controls, encryption at rest and in transit, and audit logging to ensure your data remains secure. This includes configuring RAID arrays for redundancy, implementing ZFS encryption, and setting up secure remote access to storage resources.
+          </p>
+        </div>
+
+        <div class="py-1 flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2 mb-1 mt-2">
+            <Code className="text-themepink w-6" />
+            <h5 class="text-base text-themepink font-bold m-0">
+              How I Can Help
+            </h5>
+          </div>
+          <p class="text-sm mb-3">
+            By understanding your storage requirements, data protection needs, and performance expectations, I can help design and implement a storage solution that provides the right balance of performance, reliability, and cost-effectiveness. Whether you're looking to deploy a new NAS system, optimize existing storage, or implement a comprehensive backup strategy, I can help you navigate the technical complexities and deliver a solution that meets your needs.
+          </p>
+          <p class="text-sm mb-3">
+            Many of my clients start with basic NAS requirements but quickly realize the benefits of enterprise features like snapshots, replication, and automated backups. I can help you build a scalable storage infrastructure that grows with your needs while maintaining data integrity and accessibility.
+          </p>
+        </div>
+
+        <!-- <div class="py-1 flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2 mb-1 mt-2">
+            <Code className="text-themepink w-6" />
+            <h5 class="text-base text-themepink font-bold m-0">
+              Software Highlights
+            </h5>
+          </div>
+          <p class="text-sm mb-3">
+            Some examples of open source business software that I've worked with and in many cases use myself. 
+          </p>
+          <div class="flex flex-row gap-3 p-2">
+            <div class="w-full p-0">
+              <LightBox src={twentyScreenshot}
+                alt="TwentyCRM"
+                width={120}
+                class="my-4 border drop-shadow-md dark:border-0"
+                captionText="Modern, open CRM system that can be easily integrated with your existing systems."
+                captionClass="text-[9px] font-normal"
+                thumbText="TwentyCRM"
+                thumbClass="text-[9px] font-normal"
+              />
+            </div>
+            <div class="w-full p-0">
+              <LightBox src={documensoScreenshot}
+                alt="Documenso"
+                width={120}
+                class="my-4 border drop-shadow-md dark:border-0"
+                captionText="Document-signing app that can be fully embedded into your business apps."
+                captionClass="text-[9px] font-normal"
+                thumbText="Documenso"
+                thumbClass="text-[9px] font-normal"
+              />
+            </div>
+            <div class="w-full p-0">
+              <LightBox src={planeScreenshot}
+                alt="Plane"
+                width={120}
+                class="my-4 border drop-shadow-md dark:border-0"
+                captionText="Modern, slick and responsive project management app for teams."
+                captionClass="text-[9px] font-normal"
+                thumbText="Plane"
+                thumbClass="text-xs"
+              />
+            </div>
+            <div class="w-full p-0">
+              <LightBox src={nextcloudScreenshot}
+                alt="Nextcloud"
+                width={120}
+                class="my-4 border drop-shadow-md dark:border-0"
+                captionText="File-sharing, Collaboration and a whole lot more."
+                captionClass="text-xs"
+                thumbText="Nextcloud"
+                thumbClass="text-xs"
+              />
+            </div>
+          </div> -->
+        </div>
+      </div>
   </section>
+ 
+
   <PricingAndInfoSection/>
   
 </PageLayout>

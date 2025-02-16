@@ -1,24 +1,34 @@
 ---
 import { getCollection } from 'astro:content';
-import { ChevronRight } from "lucide-react";
 import PageLayout from "@layouts/PageLayout.astro";
 import '@styles/custom.css';
-import TechCube from "@components/ContentBoxes/TechCube.astro";
+import '@styles/lightbox.css';
+import LightBox from '@components/Media/LightBox.astro';
 import type { CollectionEntry } from 'astro:content';
-import { Button } from '@components/ui/button';
-import { Badge } from '@components/ui/badge';
 import { GetInTouchDialog } from '@components/GetInTouchDialog';
+import GoogleIcon from '@icons/GoogleIcon.astro';
+import MicrosoftWindowsIcon from '@icons/MicrosoftWindowsIcon.astro';
 import PricingAndInfoSection from '@components/Content/PricingAndInfoSection.astro';
 import TechGrid from "@components/ContentBoxes/TechGrid.astro";
-
+import { 
+  Network, Code, KeyRound, BookUser, ScrollText, PhoneCall, BookText, Plus, Minus, ThumbsUp, ThumbsDown, FileWarning, MonitorUp, Globe, IdCard, Fingerprint, ChevronsLeftRightEllipsis, Flame, EarthLock, Waypoints } from 'lucide-react';
+import KeycloakIcon from '@icons/KeycloakIcon.astro';
+import TailscaleIcon from '@icons/TailscaleIcon.astro';
+import OPNsenseIcon from '@icons/OPNsenseIcon.astro';
+import PfsenseIcon from '@icons/PfsenseIcon.astro';
+import CrowdsecIcon from '@icons/CrowdsecIcon.astro';
+import twentyScreenshot from '@images/screenshots/twentycrm1.png';
+import documensoScreenshot from '@images/screenshots/documenso1.png';
+import planeScreenshot from '@images/screenshots/plane1.png';
+import nextcloudScreenshot from '@images/screenshots/nextcloud1.png';
+import { Badge } from '@components/ui/badge';
 type TechWithStringTags = Omit<CollectionEntry<'tech'>, 'data'> & {
   data: Omit<CollectionEntry<'tech'>['data'], 'tags'> & {
     tags: string[] | undefined
   }
 };
 
-const techs = (await getCollection('tech'))
-  .filter((tech) => 
+const techs = (await getCollection('tech')) .filter((tech) => 
     tech.data.pubDate && tech.data.hireme_filter === 'networking'
   )
   .map((tech) => ({
@@ -28,39 +38,193 @@ const techs = (await getCollection('tech'))
       tags: tech.data.tags?.map(tag => tag.id)
     }
   })) as TechWithStringTags[];
-
 ---
 
 <PageLayout title="Tech Stuff">
   
-  <section class="py-2 px-6 md:pr-0 pl-0">
-    <div class="grid grid-cols-10 md:gap-5">
-      <div class="col-span-3 border-[#dcdde0] dark:bg-background dark:border-neutral-800 dark:text-gray-200 rounded-lg bg-white text-gray-800 border my-3 flex flex-col items-center">
-        <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
-          <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
-            Vendors &amp; Products
-          </h2>
-        </div>
-        <TechGrid techs={techs} />
-        <div class="w-full p-6">
-          <GetInTouchDialog client:only="react"  />
+<section class="my-2 px-6 md:pr-0 pl-0">
+
+  <div class="grid grid-cols-10 md:gap-5">
+
+    <div class="col-span-3 border-[#dcdde0] dark:bg-background dark:border-neutral-800 dark:text-gray-200 rounded-lg bg-white text-gray-800 border my-3 flex flex-col items-center">
+      <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
+        <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
+          Vendors &amp; Products
+        </h2>
+      </div>
+      <TechGrid techs={techs} />
+      <div class="w-full px-8">
+        <div class="w-full mb-2">
+          <span class="text-sm font-bold mb-2 text-gray-900 dark:text-themepurple">Hire Me For:</span>
+          <p class="text-xs">
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Network className="w-4 h-4" />Network Design
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <ChevronsLeftRightEllipsis className="w-4 h-4" />VPNs
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <EarthLock className="w-4 h-4" />Wireguard
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <TailscaleIcon class="w-4 h-4" fill="#ffffff"/>Tailscale
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Flame className="w-4 h-4" />Firewalls
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <PfsenseIcon class="w-4 h-4" fill="#ffffff" />pfSense
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <OPNsenseIcon class="w-4 h-4"  fill="#ffffff"/>OPNsense
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Waypoints className="w-4 h-4" />NAT &amp; Routing
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <PhoneCall className="w-4 h-4" />VoIP
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <CrowdsecIcon class="w-4 h-4" fill="#ffffff"/>Crowdsec
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <MonitorUp className="w-4 h-4" />Remote Access
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Globe className="w-4 h-4" />DNS
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <IdCard className="w-4 h-4" />Identity Management
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Fingerprint className="w-4 h-4" />Single Sign-On
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <BookUser className="w-4 h-4" />Active Directory
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <KeycloakIcon class="w-4 h-4" fill="#ffffff"/>Keycloak
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <ChevronsLeftRightEllipsis className="w-4 h-4" />Site-to-Site
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <BookText className="w-4 h-4" />Security Audits
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <Code className="w-4 h-4" />Open Source
+            </Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
+              <FileWarning className="w-4 h-4" />Logging &amp; Monitoring
+            </Badge>
+          </p>
         </div>
       </div>
-    
-      <div class="col-span-7 border border-[#dcdde0] rounded-lg bg-white text-gray-900 my-3 dark:bg-background dark:border-neutral-800 dark:text-primary">
-        <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
-          <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
-           Networking
-          </h2>
-        </div>
-        <div class="w-full p-8">
-        <p class="text-base mb-4">
-          Networking text.
-        </p>
+      <div class="w-full p-6">
+        <GetInTouchDialog client:only="react"/>
       </div>
     </div>
-  </div>
+
+    <div class="col-span-7 border border-[#dcdde0] rounded-lg bg-white text-gray-900 my-3 dark:bg-background dark:border-neutral-800 dark:text-primary">
+
+      <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
+        <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
+          Networking, Security &amp; VPNs
+        </h2>
+      </div>
+
+      <div class="w-full p-8">
+        <div class="py-1 flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2 mb-1">
+            <Network className="text-themepink w-6" />
+            <h5 class="text-base text-themepink font-bold m-0">
+              Network Design & Infrastructure
+            </h5>
+          </div>
+          <p class="text-sm mb-3">
+            I specialise in designing and implementing secure, scalable network infrastructure using modern open-source solutions. Whether you need a complete network overhaul or specific improvements to your existing setup, I can help create robust networking solutions that meet your business needs while maintaining high security standards.
+          </p>
+        </div>
+
+        <div class="py-1 flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2">
+            <Globe className="text-themepink w-6" />
+            <h5 class="text-base text-themepink font-bold m-0">
+              Remote Access & VPNs
+            </h5>
+          </div>
+          <p class="text-sm mb-3">
+            Modern businesses need secure remote access solutions. I implement and configure VPN services using tools like Wireguard and Tailscale, providing secure access to company resources while maintaining strict security protocols. Whether you need site-to-site VPNs or remote worker access, I can design a solution that balances security with usability.
+          </p>
+        </div>
+
+        <div class="py-1 flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2">
+            <Flame className="text-themepink w-6" />
+            <h5 class="text-base text-themepink font-bold m-0">
+              Firewall & Security
+            </h5>
+          </div>
+          <p class="text-sm mb-3">
+            Security is paramount in today's digital landscape. I work with enterprise-grade open source firewalls like OPNsense and pfSense to create robust security perimeters. This includes implementing intrusion detection systems, setting up network segregation, and configuring advanced threat detection using tools like Crowdsec.
+          </p>
+        </div>
+
+        <div class="py-1 flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2">
+            <IdCard className="text-themepink w-6" />
+            <h5 class="text-base text-themepink font-bold m-0">
+              Identity Management & SSO
+            </h5>
+          </div>
+          <p class="text-sm mb-3">
+            Managing user access across multiple systems requires a robust identity management solution. I implement and configure systems like Keycloak and Active Directory to provide secure, centralized authentication and authorization. This includes setting up Single Sign-On (SSO) to streamline user access while maintaining security.
+          </p>
+        </div>
+
+        <div class="py-1 flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2">
+            <FileWarning className="text-themepink w-6" />
+            <h5 class="text-base text-themepink font-bold m-0">
+              Monitoring & Logging
+            </h5>
+          </div>
+          <p class="text-sm mb-3">
+            Effective network management requires comprehensive monitoring and logging. I set up monitoring systems to track network performance, detect anomalies, and maintain detailed logs for security analysis and compliance requirements. This proactive approach helps identify and resolve issues before they impact your business.
+          </p>
+        </div>
+
+        <div class="py-1 flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2">
+            <BookText className="text-themepink w-6" />
+            <h5 class="text-base text-themepink font-bold m-0">
+              Security Audits & Documentation
+            </h5>
+          </div>
+          <p class="text-sm mb-3">
+            Regular security audits are crucial for maintaining a strong security posture. I conduct thorough network security assessments, identify vulnerabilities, and provide detailed documentation of your network infrastructure. This includes creating disaster recovery plans and maintaining up-to-date network documentation.
+          </p>
+        </div>
+
+        <div class="py-1 flex flex-col gap-2">
+          <div class="flex flex-row items-center gap-2 mb-1 mt-2">
+            <Code className="text-themepink w-6" />
+            <h5 class="text-base text-themepink font-bold m-0">
+            How I Can Help
+          </h5>
+          </div>
+          <p class="text-sm mb-3">
+            By developing an understanding of your business, the systems used and your goals, I can help you identify whether open source solutions would be a good fit and more practically how to go about implementing, integrating and maintaining them. Open source solutions often require more time, effort and resources to set up than their proprietary, SaaS-based counterparts but when implemented properly they probably a more open, flexible and scalable platform from which to grow a business. 
+          </p>
+          <p class="text-sm mb-3">
+            Many of my clients started with open source by needing to solve a particular problem that wasn't easily solvable through SaaS-based systems. After putting the building blocks in place by way of basic infrastructure (typically cloud-hosted), we've added systems and built out a responsive, business-oriented environment that delivers value for money.
+          </p>
+        </div>
+        </div>
+      </div>
   </section>
+ 
+
   <PricingAndInfoSection/>
   
 </PageLayout>
