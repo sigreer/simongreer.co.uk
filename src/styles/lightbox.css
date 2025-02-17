@@ -77,11 +77,11 @@
   left: 50%;
   transform: translateX(-50%);
   color: rgba(255, 255, 255, 0.2);
-  font-size: 2rem;
+  font-size: 1.5rem;
   cursor: pointer;
   transition: color 0.3s ease;
   z-index: 1001;
-  width: 40px;
+  width: 400px;
   height: 40px;
   text-align: center;
   display: flex;
@@ -91,11 +91,19 @@
 }
 
 .lightbox-close span {
-  line-height: 1;
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+@media (hover: none) {
+  .lightbox-close {
+    color: rgb(255, 221, 0);
+  }
 }
 
 .lightbox-close:hover,
 .lightbox-figure:hover ~ .lightbox-close,
 .lightbox-full:hover ~ .lightbox-close {
-  color: rgba(255, 255, 255, 1);
+  color: rgb(255, 221, 0);
 }

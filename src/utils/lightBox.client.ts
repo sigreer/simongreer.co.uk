@@ -11,7 +11,7 @@ function initLightbox() {
     // Create and append close button
     const closeButton = document.createElement('span');
     closeButton.className = 'lightbox-close';
-    closeButton.innerHTML = 'CLOSE<span style="font-size: 4rem">×</span>';
+    closeButton.innerHTML = '<div class="flex flex-row items-center gap-2"><div class="text-[1.5rem] text-white animate-pulse">CLICK/TAP ANYWHERE TO CLOSE</div><div class="text-[3rem] pb-1 text-red-500 animate-pulse">×</div></div>';
     overlay?.appendChild(closeButton);
     
     thumbnail?.addEventListener('click', () => {
