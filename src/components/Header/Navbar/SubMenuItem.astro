@@ -3,7 +3,7 @@ const { link, class: className, isFirst, isLast } = Astro.props;
 ---
 
 <a href={link} class:list={[
-    "group/item px-2 py-2 text-sm text-gray-700 hover:bg-purple-200 hover:text-purple-900 text-left flex flex-row antialiased font-sans dark:text-gray-200 dark:hover:text-purple-900 dark:hover:bg-background border-b border-gray-100 dark:border-neutral-800",
+    "group/item px-2 py-2 text-sm text-gray-700 hover:bg-purple-200 hover:text-themepurple text-left flex flex-row antialiased font-sans dark:text-gray-200 dark:hover:text-themepurple dark:hover:bg-background border-b border-gray-100 dark:border-neutral-800",
     isLast && "rounded-b-lg border-none"
 ]}>
     <slot />

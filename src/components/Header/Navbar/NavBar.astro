@@ -49,13 +49,13 @@ const getIsActive = (menuItem: keyof typeof menuStructure) => {
 };
 
 const iconClasses = (menuItem: keyof typeof menuStructure) => [
-  "w-10 h-10 md:w-[18px] md:h-[18px] fill-black dark:fill-gray-200 hover:fill-purple-900 group-hover/item:fill-purple-900 mr-2",
-  getIsActive(menuItem) && "fill-black hover:fill-purple-900 dark:fill-gray-200 dark:hover:fill-purple-900"
+  "w-10 h-10 md:w-[18px] md:h-[18px] fill-black dark:fill-gray-200 hover:fill-themepurple group-hover/item:fill-themepurple mr-2",
+  getIsActive(menuItem) && "fill-black hover:fill-themepurple dark:fill-gray-200 dark:hover:fill-themepurple"
 ];
 
 const rootIconClasses = (menuItem: keyof typeof menuStructure) => [
-  "w-10 h-10 md:w-[18px] md:h-[18px] fill-black dark:fill-gray-200 group-hover:fill-purple-900 group-hover/button:fill-purple-900",
-  getIsActive(menuItem) && "fill-white hover:fill-purple-900 dark:fill-gray-200 dark:hover:fill-purple-900"
+  "w-10 h-10 md:w-[18px] md:h-[18px] fill-black dark:fill-gray-200 group-hover:fill-themepurple group-hover/button:fill-themepurple",
+  getIsActive(menuItem) && "fill-white hover:fill-themepurple dark:fill-gray-200 dark:hover:fill-themepurple"
 ];
 ---
 
