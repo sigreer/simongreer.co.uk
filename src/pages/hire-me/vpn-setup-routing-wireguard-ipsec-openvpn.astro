@@ -1,0 +1,241 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from "@layouts/PageLayout.astro";
+import '@styles/custom.css';
+import '@styles/lightbox.css';
+import type { CollectionEntry } from 'astro:content';
+import { GetInTouchDialog } from '@components/GetInTouchDialog';
+import PricingAndInfoSection from '@components/Content/PricingAndInfoSection.astro';
+import TechGrid from "@components/ContentBoxes/TechGrid.astro";
+import LightBox from '@components/Media/LightBox.astro';
+// import pageSpeedScoreMobile from '@images/galleries/simongreer-co-uk-pagespeed-scores/simongreer-co-uk-pagespeed-mobile-score.png'; 
+// import pageSpeedScoreDesktop from '@images/galleries/simongreer-co-uk-pagespeed-scores/simongreer-co-uk-pagespeed-desktop-score.png'; 
+import { 
+  Network, Shield, Lock, Server, Globe, Router,
+  Settings, Key, ShieldCheck, Wifi, Cloud, Terminal,
+  Database, Cpu, HardDrive, ShieldAlert, ShieldQuestion,
+  ShieldX, ShieldPlus, ShieldMinus, ShieldOff, User, ChevronRight
+} from 'lucide-react';
+import KeycloakIcon from '@icons/KeycloakIcon.astro';
+import TailscaleIcon from '@icons/TailscaleIcon.astro';
+import OPNsenseIcon from '@icons/OPNsenseIcon.astro';
+import PfsenseIcon from '@icons/PfsenseIcon.astro';
+import WireguardIcon from '@icons/WireguardIcon.astro';
+import OpenVPNIcon from '@icons/OpenVPNIcon.astro';
+import { Badge } from '@components/ui/badge';
+type TechWithStringTags = Omit<CollectionEntry<'tech'>, 'data'> & {
+  data: Omit<CollectionEntry<'tech'>['data'], 'tags'> & {
+    tags: string[] | undefined
+  }
+};
+
+const techs = (await getCollection('tech'))
+  .filter((tech) => 
+    tech.data.pubDate && tech.data.tags?.some(tag => 
+      ['wireguard', 'vpn', 'openvpn', 'ipsec', 'tailscale', 'mesh-vpn', 'remote-access'].includes(tag.id)
+    )
+  )
+  .map((tech) => ({
+    ...tech,
+    data: {
+      ...tech.data,
+      tags: tech.data.tags?.map(tag => tag.id)
+    }
+  })) as TechWithStringTags[];
+
+  
+
+---
+
+<PageLayout title="Tech Stuff">
+  
+<section class="my-2 px-6 md:pr-0 pl-0">
+
+  <div class="grid grid-cols-10 md:gap-5">
+
+    <div class="col-span-3 border-[#dcdde0] dark:bg-background dark:border-neutral-800 dark:text-gray-200 rounded-lg bg-white text-gray-800 border my-3 flex flex-col items-center">
+      <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
+        <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
+          Skills &amp; Experience
+        </h2>
+      </div>
+      <TechGrid techs={techs} />
+      <div class="w-full px-8">
+        <div class="w-full mb-2">
+          <span class="text-sm font-bold mb-2 text-gray-900 dark:text-themepurple">Hire Me For:</span>
+          <p class="text-xs">
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Shield className="w-4 h-4" />WireGuard</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Lock className="w-4 h-4" />IPSec</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Network className="w-4 h-4" />OpenVPN</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Router className="w-4 h-4" />Routing</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Globe className="w-4 h-4" />DNS</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Server className="w-4 h-4" />Server Setup</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Settings className="w-4 h-4" />Configuration</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Key className="w-4 h-4" />Site-to-Site</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><ShieldCheck className="w-4 h-4" />Mesh</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Wifi className="w-4 h-4" />Client-to-Server</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Cloud className="w-4 h-4" />Performance Optimisation</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Terminal className="w-4 h-4" />Tailscale</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Database className="w-4 h-4" />Packet Analysis</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Cpu className="w-4 h-4" />Remote Monitoring</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><ShieldX className="w-4 h-4" />Roaming Access</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><ShieldAlert className="w-4 h-4" />Encryption</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><ShieldQuestion className="w-4 h-4" />Certificates</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><Key className="w-4 h-4" />Single Sign-On</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><User className="w-4 h-4" />Auth Backend</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><KeycloakIcon class="w-4 h-4 fill-white" fill="white" />Keycloak</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><TailscaleIcon class="w-4 h-4 fill-white" fill="white" />Tailscale</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><OPNsenseIcon class="w-4 h-4 fill-white" fill="white" />OPNsense</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><PfsenseIcon class="w-4 h-4 fill-white" fill="white" />Pfsense</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><WireguardIcon class="w-4 h-4 fill-white" fill="white" />WireGuard</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><ShieldMinus className="w-4 h-4" />AD Integration</Badge>
+            <Badge variant="secondary" className="inline-flex items-center gap-1"><ShieldOff className="w-4 h-4" />Firewall Rules</Badge>
+          </p>
+        </div>
+      </div>
+      <div class="w-full p-6">
+        <GetInTouchDialog client:only="react"/>
+      </div>
+      <div class="flex flex-row gap-3 p-2">
+      <div class="w-full p-0">
+     <!-- <LightBox src={pageSpeedScoreMobile}
+        alt="Mobile PageSpeed Score"
+        width={120}
+        class="my-4 border drop-shadow-md dark:border-0"
+        caption="Mobile  PageSpeed Score"
+        fontSize="9px"
+      /> -->
+      </div>
+      <!-- <div class="w-full p-0">
+         <LightBox src={pageSpeedScoreDesktop}
+        alt="Desktop PageSpeed Score"
+        width={120}
+        class="my-4 border drop-shadow-md dark:border-0"
+        caption="Desktop PageSpeed Score"
+        fontSize="9px"
+      />
+      </div> -->
+      </div>
+    </div>
+
+    <div class="col-span-7 gap-4 mt-3">
+      <div class="md:col-span-2 border border-[#dcdde0] rounded-lg bg-white text-gray-900 dark:bg-background dark:border-neutral-800 dark:text-primary"> 
+        <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
+          <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
+            VPN Setup &amp; Configuration
+          </h2>
+        </div>
+        <div class="w-full py-4 px-8">
+          <div class="py-1 flex flex-col gap-2">
+            <p class="text-sm mb-3">
+              I'm a web developer, designer and systems engineer with a strong focus on cutting edge open source technologies, frameworks and libraries predominantly in the Javascript eco-system. I have built full stack, database-driven web applications, ecommerce solutions and lightning fast statically generated content-centric websites.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="md:grid-cols-2 lg:grid-cols-3 md:grid md:grid-cols-2 gap-3 lg:grid lg:flex-col">
+      <div class="md:col-span-1 border border-[#dcdde0] rounded-lg bg-slate-700 text-white dark:bg-background dark:text-primary"> 
+        <div class="w-full p-5">
+          <div class="flex flex-row md:flex-col gap-3">
+            <div class="py-1 md:flex md:justify-center">
+              <TailscaleIcon class="w-auto h-20 lg:h-32 fill-white" fill="white" />
+            </div>
+            <div class="py-3 lg:px-2 md:p-0 flex flex-col md:text-center">
+              <p class="text-base leading-tight md:text-justify ">
+                Tailscale uses Wireguard at its core, but introduces some unique features that make it a perfect choice for remote teams. Although it's easy to set up, it's also very powerful and flexible. I can help unlock its full potential.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:col-span-1 border border-[#dcdde0] rounded-lg bg-red-800 text-white dark:bg-background dark:text-primary"> 
+        <div class="w-full p-3">
+          <div class="flex flex-row gap-3">
+            <div class="py-1 flex">
+              <WireguardIcon class="w-auto h-20 fill-white" fill="white" />
+            </div>
+            <div class="py-3 flex flex-col gap-2">
+              <!-- <div class="w-full dark:border-neutral-800 pt-4">
+                <h2 class="text-xl font-bold mb-0 dark:text-themepurple text-themepink">
+                  Tailscale
+                </h2>
+              </div> -->
+              <p class="text-md leading-tight">
+                Having embraced Wireguard when it was first included in the Linux kernel, I'm become very familiar with its capabilities, quirks and best practices. I use Wireguard in almost all of my projects in one form or another.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:col-span-1 border border-[#dcdde0] rounded-lg bg-orange-600 text-white dark:bg-background dark:text-primary"> 
+
+        <div class="w-full p-3">
+          <div class="flex flex-row gap-3">
+            <div class="py-1 flex">
+              <OpenVPNIcon class="w-auto h-20 fill-white" fill="white" />
+            </div>
+            <div class="py-3 flex flex-col gap-2">
+              <!-- <div class="w-full dark:border-neutral-800 pt-4">
+                <h2 class="text-xl font-bold mb-0 dark:text-themepurple text-themepink">
+                  Tailscale
+                </h2>
+              </div> -->
+              <p class="text-md leading-tight">
+                I'm well-versed in the intricacies of <span class="font-bold">OpenVPN</span>, including the newer introductions such as kernel-level data channel offloading for vastly improved performance over wide area networks.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:col-span-1 border border-[#dcdde0] rounded-lg bg-blue-900 text-white dark:bg-background dark:text-primary"> 
+        <div class="w-full p-3">
+          <div class="flex flex-row gap-3">
+            <div class="py-1 flex">
+              <PfsenseIcon class="w-auto h-20 fill-white" fill="white" />
+            </div>
+            <div class="py-3 flex flex-col gap-2">
+              <!-- <div class="w-full dark:border-neutral-800 pt-4">
+                <h2 class="text-xl font-bold mb-0 dark:text-themepurple text-themepink">
+                  Tailscale
+                </h2>
+              </div> -->
+              <p class="text-md leading-tight">
+                A mainstay in the open source firewall router market, I've managed pfSense environments that are still running securely and efficiently ten year after deployment.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:col-span-1 border border-[#dcdde0] rounded-lg bg-gray-500 text-white dark:bg-background dark:text-primary"> 
+        <div class="w-full p-3">
+          <div class="flex flex-row gap-3">
+            <div class="py-1 flex">
+              <OPNsenseIcon class="w-auto h-20 fill-white" fill="white" />
+            </div>
+            <div class="py-3 flex flex-col gap-2">
+              <!-- <div class="w-full dark:border-neutral-800 pt-4">
+                <h2 class="text-xl font-bold mb-0 dark:text-themepurple text-themepink">
+                  Tailscale
+                </h2>
+              </div> -->
+              <p class="text-md leading-tight">
+                Spawned from the same codebase as pfSense, OPNsense is a powerful and flexible firewall and routing platform with a stronger focus on open source and community involvement with more regular updates and packages.
+              </p>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </section>
+ 
+
+  <PricingAndInfoSection/>
+  
+</PageLayout>
