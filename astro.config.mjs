@@ -97,9 +97,6 @@ export default defineConfig({
       autoprefixer()
     ]
   },
-  experimental: {
-    svg: false,
-  },
   prefetch: {
     defaultStrategy: 'viewport'
   },
