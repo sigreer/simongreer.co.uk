@@ -1,0 +1,38 @@
+---
+title: "Fedora Kernel Upgrades with ZFS"
+slug: fedora-kernel-upgrades-with-zfs
+description: "Automate your Astro site deployment to Cloudflare Pages using Git workflow automation"
+pubDate: 2025-04-06
+status: published
+coverimage: "fedora-zfs-kernel-upgrades.svg"
+vendor_name: "Cloudflare"
+horizontal_logo: "cloudflare-horizontal-logo.svg"
+vendoricon: "cloudflare-favicon.svg"
+tags: ["astro", "cloudflare", "git", "automation"]
+category: "DevOps"
+---
+import GithubIcon from '@components/SocialIcons/GithubIcon.astro';
+
+## Intro
+
+I started using Fedora on my office workstation a little while ago. My last forray into the world of Fedora was a long time ago and pretty short-lived so I didn't really have any preconceived ideas about how it might work out. I'm not really one for distro-hopping and have been running the same instance of Manjaro on the workstation in question for three years. Manjaro (with KDE) ran absolutely flawlessly on this machine over those three years but at some point something happened and it stopped booting properly.
+
+I worked through the usual fixes and did some log skimming. Like anything on Linux, I'm sure it was fixable but I decided that it might be a sensible time to check out another distro. I'd just watched Manjaro being pelted by Nick from the Linux Experiment and his audience during his top-rated distro vote video and seeing how Fedora was lauded to a similar degree and also meets some of my criteria for a distro, I thought I'd give it a try.
+
+Honestly, it's been a battle getting it to a place where it works and performs its major functions seamlessly. As a devout ZFS user I rely heavily on any distro I use maintaining cointinued support for ZFS and this has been by far the biggest challenge for me with Fedora. I get the impression there's no love lost between the ZFS and Fedora teams with the former berating Fedora's Fuse implementation on their website, telling users to avoid it at all costs.
+
+Fedora is a bleeding edge distro and it cares little about maintaining compatibility with software and drivers that alread exist on your system. Given the relentless pace of updates and new kernel releases, being able to maintain support for ZFS has been difficult. So much so that I very nearly threw in the towel. However, I decided to try and cobble together a workable solution and it works like this:
+- Keep the kernel version locked to the most recent version that supports ZFS compiled via DKMS.
+- Perform full kernel upgrades when ZFS catches up with kernel versions.
+- Keep a working kernel version on the system at all times just in case.
+
+Sounds pretty easy, right? Logically, it is except compiling ZFS for a non-running kernel in Fedora is not an easy task. So, I present to you my kernel upgrade script for Fedora! This script started off as scribbles on a notepad so I could remember the commands needed to rebuild ZFS each time a new ZFS version was released. I slowly added in a few bells and whistles to check for newer ZFS versions, verify compatibility with current and new kernel versions and to lock and unlock the upgrading of the kernel to avoid things breaking.
+
+It downloads all relevant packages, kernel headers and compiles ZFS when required. It also generates initramfs using dracut and ensures that grub is always set to boot from the most recently installed version of the kernel that has ZFS compiled to avoid the panic penguin showing up on reboot.
+
+I can't promise it will work on every system, but it's been working really well for me. I currently run it manually once or twice a week to see if there's a new kernel version I can upgrade to. Once I'm happy that it works properly I'll slide it into a cron job and leave it to do its thing whilst I sit back and enjoy the comforts of ZFS on a bleeding edge distro!
+
+<div class="inline-flex items-center gap-2 hover:scale-105 transition-transform origin-center text-gray-800 dark:text-gray-200">
+  <GithubIcon class="w-6 h-6" />
+  <a class="inline-block" href="https://github.com/sigreer/bishbash/blob/main/ztools/fedora-zfs-kernel-upgrade.sh">View fedora-zfs-kernel-upgrade.sh on Github</a>
+</div>
