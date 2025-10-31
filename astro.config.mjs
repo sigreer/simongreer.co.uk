@@ -11,8 +11,6 @@ import { transformerCopyButton } from '@rehype-pretty/transformers';
 import rehypePrettyCode from 'rehype-pretty-code';
 import autoprefixer from 'autoprefixer';
 import remarkGfm from 'remark-gfm';
-import dotenv from 'dotenv';
-dotenv.config();
 const prettyCodeOptions = {
   syntaxTheme,
   onVisitHighlightedLine(node) {
@@ -33,12 +31,23 @@ const prettyCodeOptions = {
 
 // https://astro.build/config
 export default defineConfig({
+  server: {
+    host: '0.0.0.0'
+  },
   env: {
     schema: {
-      SITE_URL: envField.string({ context: "client", access: "public", optional: true}),
-      MAILTRAP_API_KEY: envField.string({ context: "server", access: "secret", optional: false }),
-      MAILTRAP_FROM_EMAIL: envField.string({ context: "server", access: "secret", optional: false }),
-      MAILTRAP_TO_EMAIL: envField.string({ context: "server", access: "secret", optional: false })
+      // Public client variables
+      SITE_URL: envField.string({ context: "client", access: "public", optional: true, default: "https://simongreer.co.uk" }),
+
+      // Server-only secrets (runtime - used in API routes)
+      MAILTRAP_API_KEY: envField.string({ context: "server", access: "secret" }),
+      MAILTRAP_FROM_EMAIL: envField.string({ context: "server", access: "secret" }),
+      MAILTRAP_TO_EMAIL: envField.string({ context: "server", access: "secret" }),
+
+      // Server-only public variables (runtime)
+      MAILTRAP_HOST: envField.string({ context: "server", access: "public", optional: true, default: "live.smtp.mailtrap.io" }),
+      MAILTRAP_PORT: envField.number({ context: "server", access: "public", optional: true, default: 587 }),
+      MAILTRAP_API_USER: envField.string({ context: "server", access: "public", optional: true, default: "api" }),
     }
   },
   vite: {
@@ -47,7 +56,7 @@ export default defineConfig({
       exclude: ['@astrojs/react']
     },
     ssr: {
-      noExternal: ['dotenv', '@astrojs/cloudflare', '@astrojs/react'],
+      noExternal: ['@astrojs/cloudflare', '@astrojs/react'],
       target: 'webworker',
       external: ['path', 'fs', 'url', 'module', 'crypto', 'os', 'child_process', 'util', 'net']
     },
