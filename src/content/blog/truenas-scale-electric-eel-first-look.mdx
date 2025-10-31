@@ -10,4 +10,14 @@ vendor_name: "TrueNAS"
 tags: ["storage"]
 ---
 
-## Test
+## TrueNAS SCALE Electric Eel RC
+
+TrueNAS SCALE “Electric Eel” RC has finally seen the light of day and is probably the most anticipated release since SCALE itself a few years ago. The headline change is the move away from Kubernetes to Docker. Although it could be seen as a shift away from the enterprise, the reality is that organisations that rely on microservices architecure aren't going to be doing it through a TrueNAS web GUI. I personally think this is long overdue and will ultimately lead to a much richer app catalogue with many more contributors.
+
+Kubernetes always felt like overkill for a system that is more often scaled up as a single node rather than out as a cluster of nodes. The Docker implementation, which includes the ability to create custom container stacks using Docker Compose YAML syntax seems like a logical step forwards. 
+
+Having spent some time getting my head around the redesign I'm generally pretty happy with what iX are trying to do here. I did find the Compose side of things to be really frustrating though as you essentially get a text box to paste your YAML into and regardless of whether your syntax is valid or not, if there something the middleware doesn't like in there, it refuses to play ball. I wouldn't mind that so much if there was even so much as a clue as to which config value(s) it doesn't like, but at the moment the only way to figure it out is to take an educated guess and tweak a setting at a time. I've already racked up fair amount of time waiting waiting for seemingly innocuous config syntax to instead be met with non-sensical Python exceptions. With even a modest compose file, this can be a nuisance. BUT, for an initial stab at a complete overhaul of the container architecture I think it's a massive step in the right direction.
+
+Beyond the container shake-up, Electric Eel introduces long-awaited RAID-Z expansion. Slowly growing a vdev by replacing drives one at a time has been on most sysadmins wishlists for years. It gives you a little bit more wiggle room with your storage layout after deployment which is well received. Additionally, fast de-duplication is being introduced which I suspect may make some users consider the one-way ticket that is de-dup more seriously.
+
+The last new addition that I think's worth mentioning is the introduction of dashboard customisation via widgets. As with the Docker feature additions, conceptually this is absolutely the right way to go but I think it's a little early to pass judgement on currently as the scope for 'customisation' doesn't extend far beyond custom text and widget reordering. It would be great if the framework was extended to allow for plugin-style customisations for this kind of thing though. Still, this feature along with the rest of the overhaul carves a trajectory for TrueNAS that makes me excited to see what's coming next!
