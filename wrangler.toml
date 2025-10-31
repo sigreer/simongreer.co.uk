@@ -12,10 +12,7 @@ MAILTRAP_HOST = "live.smtp.mailtrap.io"
 MAILTRAP_PORT = "587"
 MAILTRAP_API_USER = "api"
 
-# Secrets (sensitive data) must be set via CLI:
-# wrangler pages secret put MAILTRAP_API_KEY --project-name=simongreer
-# wrangler pages secret put MAILTRAP_FROM_EMAIL --project-name=simongreer
-# wrangler pages secret put MAILTRAP_TO_EMAIL --project-name=simongreer
+# Secrets (sensitive data) must be set via CLI - see CLAUDE.md for instructions
 
 [observability]
 enabled = true
