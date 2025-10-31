@@ -84,25 +84,13 @@ The site uses Astro 5's `astro:env` API for type-safe environment variables defi
 
 **Setting Secrets for Production:**
 
-Since this project uses `wrangler.toml`, secrets cannot be managed via the Cloudflare dashboard. Use the Wrangler CLI:
+Since this project uses `wrangler.toml`, secrets cannot be managed via the Cloudflare dashboard. Use the Wrangler CLI to set secrets individually (you'll be prompted to enter values):
 
 ```bash
-# Easy way: Use the provided script (reads from .dev.vars)
-./scripts/set-secrets.sh
-
-# Manual way: Set each secret individually
-wrangler pages secret put MAILTRAP_API_KEY --project-name=simongreer
-wrangler pages secret put MAILTRAP_FROM_EMAIL --project-name=simongreer
-wrangler pages secret put MAILTRAP_TO_EMAIL --project-name=simongreer
-
-# Or bulk upload from a file
-wrangler pages secret bulk .env.production --project-name=simongreer
+wrangler pages secret put <SECRET_NAME> --project-name=<PROJECT_NAME>
 ```
 
-**Note:** After setting secrets, trigger a new deployment:
-```bash
-git commit --allow-empty -m 'Trigger deployment' && git push
-```
+After setting secrets, trigger a new deployment for changes to take effect.
 
 ### Build Tools
 
