@@ -76,9 +76,27 @@ The site uses Astro 5's `astro:env` API for type-safe environment variables defi
 
 **Important Notes:**
 - Environment variables are accessed via `import { VAR_NAME } from 'astro:env/server'` for server secrets
-- All server variables are runtime-only and must be set in `.dev.vars` for local development
-- Production secrets are managed through Cloudflare dashboard or GitHub Actions secrets
+- Local development: All server variables must be set in `.dev.vars`
+- Production deployment:
+  - **Non-sensitive vars** are defined in `wrangler.toml` under `[vars]`
+  - **Secrets** must be set via Wrangler CLI (see below)
 - Run `wrangler types` to regenerate TypeScript types in `worker-configuration.d.ts`
+
+**Setting Secrets for Production:**
+
+Since this project uses `wrangler.toml`, secrets cannot be managed via the Cloudflare dashboard. Use the Wrangler CLI:
+
+```bash
+# Set each secret individually (you'll be prompted to enter the value)
+wrangler pages secret put MAILTRAP_API_KEY --project-name=simongreer
+wrangler pages secret put MAILTRAP_FROM_EMAIL --project-name=simongreer
+wrangler pages secret put MAILTRAP_TO_EMAIL --project-name=simongreer
+
+# Or bulk upload from a file
+wrangler pages secret bulk .env.production --project-name=simongreer
+```
+
+**Note:** After setting secrets, you may need to trigger a new deployment for changes to take effect.
 
 ### Build Tools
 

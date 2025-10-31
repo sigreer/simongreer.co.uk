@@ -5,5 +5,17 @@ compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = "./dist"
 
+# Non-sensitive environment variables
+[vars]
+SITE_URL = "https://simongreer.co.uk"
+MAILTRAP_HOST = "live.smtp.mailtrap.io"
+MAILTRAP_PORT = "587"
+MAILTRAP_API_USER = "api"
+
+# Secrets (sensitive data) must be set via CLI:
+# wrangler pages secret put MAILTRAP_API_KEY --project-name=simongreer
+# wrangler pages secret put MAILTRAP_FROM_EMAIL --project-name=simongreer
+# wrangler pages secret put MAILTRAP_TO_EMAIL --project-name=simongreer
+
 [observability]
 enabled = true
