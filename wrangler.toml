@@ -1,10 +1,9 @@
 #:schema node_modules/wrangler/config-schema.json
 
 name = "simongreer"
-compatibility_date = "2024-12-24"
+compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
-main = "./dist/_worker.js/index.ts"
-assets = { directory = "./dist", binding = "ASSETS" }
+pages_build_output_dir = "./dist"
 
 [observability]
 enabled = true
