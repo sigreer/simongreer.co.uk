@@ -1,27 +1,27 @@
-name: Deploy to Dev (Preview)
+name: Deploy to Production
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-    
+    branches: [ production ]
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       deployments: write
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
+
       - name: Install dependencies
         run: bun install
+
       - name: Build site
         env:
           MAILTRAP_API_KEY: ${{ secrets.MAILTRAP_API_KEY }}
@@ -32,8 +32,8 @@ jobs:
           MAILTRAP_TO_EMAIL: ${{ secrets.MAILTRAP_TO_EMAIL }}
           SITE_URL: ${{ vars.SITE_URL }}
         run: bun run astro build
-        
-      - name: Publish to Cloudflare Pages (Preview)
+
+      - name: Publish to Cloudflare Pages (Production)
         uses: cloudflare/wrangler-action@v3
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -41,26 +41,30 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=simongreer --branch=main
+          command: pages deploy dist --project-name=simongreer --branch=production
+
   analyze:
     needs: deploy
     runs-on: ubuntu-latest
-    name: Run PageSpeed Analysis (Dev)
+    name: Run PageSpeed Analysis (Production)
     environment: simongreercouk
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
-          
+
       - name: Install dependencies
         run: bun install
-        
+
+      - name: Wait for Cloudflare deployment
+        run: sleep 60
+
       - name: Run PageSpeed Analysis
         env:
           PAGESPEED_API_KEY: ${{ secrets.PAGESPEED_API_KEY }}
           PAGESPEED_WEBHOOK_URL: ${{ secrets.PAGESPEED_WEBHOOK_URL }}
-          SITE_URL: ${{ vars.DEV_SITE_URL }}
+          SITE_URL: ${{ vars.SITE_URL }}
         run: bun run pagespeed
