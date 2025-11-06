@@ -13,7 +13,7 @@ interface Props {
   class?: string;
 }
 
-const { techs, class: className = "gap-5 md:gap-6 lg:gap-7 xl:gap-8 p-1 p-6 md:p-7 lg:p-8 xl:p-10 grid-cols-6 sm:grid-cols-8 md:grid-cols-3" } = Astro.props;
+const { techs, class: className = "gap-5 p-1 p-6 grid-cols-6 sm:grid-cols-8 md:grid-cols-3" } = Astro.props;
 ---
 
 <div class={`w-full grid ${className}`}>
