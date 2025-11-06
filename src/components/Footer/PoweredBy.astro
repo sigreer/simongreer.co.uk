@@ -13,9 +13,9 @@ interface Props {
 const { iconFill = 'white', socialIconSize = 'h-14 w-14 max-w-14 max-h-14' } = Astro.props as Props;
 ---
 
-<div class="hidden md:p-4 col-span-2 md:flex md:flex-col md:items-center">
+<div class="hidden col-span-2 md:flex md:flex-col md:items-center">
     <div class="w-full h-6 bg-transparent rounded-sm text-center text-xs p-1 mb-1 text-white font-bold">POWERED BY</div>
-    <div class="flex flex-wrap justify-center gap-3">
+    <div class="flex flex-wrap justify-center gap-2">
         <Image src={astroIcon} alt="Astro" class={`${iconFill} ${socialIconSize}`}/>
         <Image src={bunIcon} alt="Bun" class={`${iconFill} ${socialIconSize}`} />
         <Image src={tailWindIcon} alt="TailWind" class={`${iconFill} ${socialIconSize}`} />

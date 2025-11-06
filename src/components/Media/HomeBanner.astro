@@ -13,27 +13,27 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString(undefined, 
 });
 ---
   {ImageSrc && (
-    <a href={`/blog/${post.id}`} class="block relative mt-4 md:mt-0 lg:min-w-[1024px] max-h-[400px] items-center overflow-hidden rounded-b-lg border-gray-400 border drop-shadow-lg rounded-lg bg-gradient-to-b from-blue-900 from-75% via-blue-900 via-75% to-85% to-blue-950 dark:from-neutral-950 dark:from-75% dark:to-neutral-900 before:absolute before:inset-0 before:bg-gradient-to-b before:from-blue-900 before:via-blue-950 before:to-blue-900 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 group dark:border-neutral-800 dark:border dark:before:bg-neutral-900 dark:before:bg-none">
-      <Image 
-        src={ImageSrc} 
-        alt={post.data.title ?? 'Nice cover image'} 
+    <a href={`/blog/${post.id}`} class="block relative mt-4 md:mt-0 lg:min-w-[1024px] h-[320px] md:h-[360px] lg:h-[400px] xl:h-[480px] 2xl:h-[540px] items-center overflow-hidden rounded-b-lg border-gray-400 border drop-shadow-lg rounded-lg bg-gradient-to-b from-blue-900 from-75% via-blue-900 via-75% to-85% to-blue-950 dark:from-neutral-950 dark:from-75% dark:to-neutral-900 before:absolute before:inset-0 before:bg-gradient-to-b before:from-blue-900 before:via-blue-950 before:to-blue-900 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 group dark:border-neutral-800 dark:border dark:before:bg-neutral-900 dark:before:bg-none">
+      <Image
+        src={ImageSrc}
+        alt={post.data.title ?? 'Nice cover image'}
         width={1024}
-        height={400}
+        height={540}
         quality={80}
         format="avif"
-        class="w-full h-full max-h-[400px] p-0 mt-0 rounded-none relative z-10 object-cover"
+        class="w-full h-full p-0 mt-0 rounded-none relative z-10 object-cover"
         loading="eager"
         fetchpriority="high"
         decoding="sync"
       />
-      <div class="absolute bottom-4 left-4 prose-h1:text-white prose-h1:text-xl prose-h1:sm:text-2xl md:prose-h1:!text-3xl prose-h1:font-bold [text-shadow:0px_1px_8px_rgb(0_0_0/_0.7)] prose-h1:no-underline px-4 drop-shadow-[0px_1px_3px_rgb(0_0_0/_0.8)] z-10">
+      <div class="absolute bottom-4 left-4 md:bottom-5 lg:bottom-6 xl:bottom-8 md:left-5 lg:left-6 xl:left-8 prose-h1:text-white prose-h1:text-xl prose-h1:sm:text-2xl md:prose-h1:!text-3xl prose-h1:font-bold [text-shadow:0px_1px_8px_rgb(0_0_0/_0.7)] prose-h1:no-underline px-4 md:px-5 lg:px-6 xl:px-8 drop-shadow-[0px_1px_3px_rgb(0_0_0/_0.8)] z-10">
         <h1>{post.data.title}</h1>
       </div>
-      <div class="absolute top-4 left-4 px-4 z-10">
-        <span class="text-pink-600 !text-2xl font-extrabold no-underline">{formattedDate}</span>
+      <div class="absolute top-4 left-4 md:top-5 lg:top-6 xl:top-8 md:left-5 lg:left-6 xl:left-8 px-4 md:px-5 lg:px-6 xl:px-8 z-10">
+        <span class="text-pink-600 !text-2xl md:!text-3xl font-extrabold no-underline">{formattedDate}</span>
       </div>
-      <div class="absolute right-4 bottom-1  opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-        <span class="inline-block ml-1 group-hover:animate-arrow-fade text-white text-[4rem]">&gt;</span>
+      <div class="absolute right-4 bottom-1 md:right-5 lg:right-6 xl:right-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+        <span class="inline-block ml-1 group-hover:animate-arrow-fade text-white text-[4rem] md:text-[5rem] lg:text-[5.5rem]">&gt;</span>
       </div>
     </a>
   )}
