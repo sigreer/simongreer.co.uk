@@ -28,16 +28,16 @@ const resolvedTags = tags.map((tag: string) => {
     <span>× </span><span id="tag-name"></span>
   </span>
 </div>
-  <div class="flex flex-row gap-2">
+  <div class="flex flex-row flex-wrap gap-2">
     <button
-    class="tag-style rounded-md px-2 py-0.5 text-xs md:text-sm font-bold text-white bg-black outline outline-white outline-1 transition-all lowercase hover:brightness-125"
+    class="tag-style rounded-md px-2 py-0.5 text-xs md:text-sm font-bold text-white bg-black outline outline-white outline-1 transition-all lowercase hover:brightness-125 whitespace-nowrap"
     data-tag="all"
   >
     x
   </button>
   {resolvedTags.map((tag) => (
     <button
-      class="tag-style rounded-md !px-2 py-0.5 text-xs md:text-sm font-semibold text-white transition-all hover:brightness-125"
+      class="tag-style rounded-md !px-2 py-0.5 text-xs md:text-sm font-semibold text-white transition-all hover:brightness-125 whitespace-nowrap"
       data-tag={tag.id}
       style={`background-color: ${typeof tag.data === 'object' ? (tag.data as {color: string})?.color : '#6B7280'}`}
     >
