@@ -25,7 +25,7 @@ const vendorImage = vendoricon ? allVendorIcons[`../../images/vendor-icons/${ven
 const primaryColor = tailwindColors[vendor_primary_color as keyof typeof tailwindColors] || tailwindColors['gray-100'];
 const secondaryColor = tailwindColors[vendor_secondary_color as keyof typeof tailwindColors] || tailwindColors['gray-900'];
 
-const isPrimaryColorDark = vendor_primary_color.includes('700') || vendor_primary_color.includes('800') || vendor_primary_color.includes('900') || vendor_primary_color.includes('950') || vendor_primary_color.includes('black');
+const isPrimaryColorDark = vendor_primary_color.includes('600') || vendor_primary_color.includes('700') || vendor_primary_color.includes('800') || vendor_primary_color.includes('900') || vendor_primary_color.includes('950') || vendor_primary_color.includes('black');
 
 const panels = [
   {
@@ -54,7 +54,7 @@ const panels = [
     id: 'description',
     content: (
       `<div class="w-full h-full p-2">
-        <p class="text-sm line-clamp-4 overflow-hidden ${isPrimaryColorDark ? 'text-white' : ''}">
+        <p class="text-sm line-clamp-4 overflow-hidden ${isPrimaryColorDark ? 'text-white' : 'text-gray-700'}">
           ${description}
         </p>
       </div>`
