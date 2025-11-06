@@ -64,14 +64,17 @@ const panels = [
 
 ---
 
-<div 
-  class={`group relative w-20 h-20 p-0 m-0${className}`}
+<div
+  class={`group relative w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 p-0 m-0${className}`}
 >
-  <div class="absolute w-20 h-20 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50"></div>
-  
-  <div 
-    class="grid grid-cols-2 grid-rows-2 w-20 h-20 border-8 m-0 border-solid rounded-lg border-gray-200 overflow-hidden absolute 
-    transition-all duration-300 ease-in-out group-hover:w-[200px] group-hover:h-[200px] group-hover:z-10
+  <div class="absolute w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50"></div>
+
+  <div
+    class="grid grid-cols-2 grid-rows-2 w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 border-8 m-0 border-solid rounded-lg border-gray-200 overflow-hidden absolute
+    transition-all duration-300 ease-in-out
+    group-hover:w-[200px] group-hover:md:w-[220px] group-hover:lg:w-[240px] group-hover:xl:w-[270px]
+    group-hover:h-[200px] group-hover:md:h-[220px] group-hover:lg:h-[240px] group-hover:xl:h-[270px]
+    group-hover:z-10
     left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
     style={`--vendor-primary: ${primaryColor}; --vendor-secondary: ${secondaryColor};
     border-color: var(--vendor-primary); background-color: var(--vendor-primary);`}
