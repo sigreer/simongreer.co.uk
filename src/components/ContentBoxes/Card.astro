@@ -45,7 +45,7 @@ const resolvedTags = tags?.map(tag => {
       </div>
     )}
     {coverImage && (
-      <div class="w-full h-48 overflow-hidden relative">
+      <div class="w-full h-32 md:h-36 lg:h-40 xl:h-44 overflow-hidden relative">
         <div class="absolute inset-0 transition-opacity duration-300 opacity-100 group-hover:opacity-0 dark:opacity-0">
           <div class="w-full h-full" style="background: linear-gradient(to bottom left, #da2676, #e03f93, #f9a8d4)"></div>
         </div>
@@ -58,16 +58,16 @@ const resolvedTags = tags?.map(tag => {
         <div class="absolute inset-0 transition-opacity duration-300 opacity-0 dark:group-hover:opacity-100">
           <div class="w-full h-full bg-background"></div>
         </div>
-        <Image 
-          src={coverImage} 
+        <Image
+          src={coverImage}
           alt={title}
           width={400}
-          height={300}
-          class="relative w-full h-full object-cover object-center border-b dark:border-neutral-800 border-gray-300 max-h-[300px]"
+          height={225}
+          class="relative w-full h-full object-cover object-center border-b dark:border-neutral-800 border-gray-300"
         />
       </div>
     )}
-    <div class="p-4 flex-1 flex flex-col">
+    <div class="p-3 md:p-4 flex-1 flex flex-col">
       <h3 class="text-base font-semibold line-clamp-2 mb-2">
         {title}
       </h3>
@@ -77,11 +77,11 @@ const resolvedTags = tags?.map(tag => {
         </p>
       )}
       {resolvedTags && resolvedTags.length > 0 && (
-        <div class="flex flex-wrap-reverse gap-2 tag-container mt-auto">
+        <div class="flex flex-wrap-reverse gap-1.5 md:gap-2 tag-container mt-auto">
           {resolvedTags.map((tag) => {
             return (
               <span
-                class="tag-style rounded-md px-2 py-1 text-xs font-semibold text-white shadow-sm transition" 
+                class="tag-style rounded-md px-2 py-1 text-xs font-semibold text-white shadow-sm transition"
                 style={`background-color: ${typeof tag.data === 'object' ? (tag.data as {color: string})?.color : '#6B7280'}`}
                 data-tag={tag.id}
               >

@@ -33,17 +33,17 @@ const posts = (await getCollection('blog'))
   updateVisibleItems();
 </script>
 <HomeLayout title="Tech" leftcol="blog" rightcol="tech">
-  <section class="md:py-8 px-6 md:px-0">
-    <div class="flex flex-col gap-6">
+  <section class="md:py-8 lg:py-10 xl:py-12 px-6 md:px-0">
+    <div class="flex flex-col gap-6 md:gap-7 lg:gap-8 xl:gap-10">
       <HomeBanner post={posts[0]} />
       <div class="w-full">
         <div class="flex justify-between items-center">
-          <h2 class="text-lg text-gray-900 font-semibold uppercase mb-2 dark:text-themepurple">
+          <h2 class="text-lg text-gray-900 font-semibold uppercase mb-2 md:mb-3 lg:mb-4 dark:text-themepurple">
             Recent Blog Posts
           </h2>
           <ShowAll link="/blog/" />
         </div>
-        <ul class="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 overflow-visible">
+        <ul class="grid gap-6 md:gap-7 lg:gap-8 xl:gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 overflow-visible">
           {posts.slice(1).map((post: CollectionEntry<'blog'>) => (
             <Card 
               title={post.data.title}
