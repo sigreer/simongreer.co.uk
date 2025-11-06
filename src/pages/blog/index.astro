@@ -9,24 +9,9 @@ import TagFilter from '@components/Filter/Tag.astro';
 const posts = (await getCollection('blog', ({ data }: { data: { status: string, pubDate: Date } }) => {
   return data.status === 'published';
 }))
-.sort((a: { data: { pubDate: Date } }, b: { data: { pubDate: Date } }) => 
+.sort((a: { data: { pubDate: Date } }, b: { data: { pubDate: Date } }) =>
   new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
 );
-
-const tagsWithData = await Promise.all(posts.map(async (post: CollectionEntry<'blog'>) => ({
-  ...post,
-  data: {
-    ...post.data,
-    tags: post.data.tags 
-      ? (await getCollection('tags', ({ id }: { id: string }) => post.data.tags?.map((t: { id: string }) => t.id).includes(id)))
-        .map((tag: CollectionEntry<'tags'>) => ({
-          id: tag.id,
-          collection: tag.collection,
-          data: { color: tag.data.color || '#000000' }
-        }))
-      : undefined
-  }
-})));
 ---
 
 <PageLayout title="Blog">
@@ -36,8 +21,8 @@ const tagsWithData = await Promise.all(posts.map(async (post: CollectionEntry<'b
     </Filter>
     <div class="w-full min-h-[var(--initial-height)]" id="posts-container">
       <ul class="grid gap-6 md:gap-7 lg:gap-8 xl:gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {tagsWithData.map((post) => (
-          <Card 
+        {posts.map((post) => (
+          <Card
             title={post.data.title}
             slug={post.data.slug}
             description={post.data.description}
