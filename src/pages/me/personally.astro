@@ -1,67 +1,75 @@
 ---
 import PageLayout from '@layouts/PageLayout.astro';
-import RecentListening from "@components/Me/RecentListening.astro";
-import RecentViewing from "@components/Me/RecentViewing.astro";
 import { Image } from 'astro:assets';
 import SimonBackwardsHead from '@images/covers/ai-fails.jpg';
 import ChatIcon from '@components/Icons/ChatIcon.astro';
+import { MapPin, Music, Headphones, Footprints, PersonStanding, Volleyball, Baby, Paintbrush, Cat } from 'lucide-react';
 ---
 <PageLayout title="Me">
     <main class="flex flex-col gap-6 py-6">
         <div class="flex-col flex">
-    <div class="flex flex-row">
-        <div class="flex flex-col p-0 mx-0 gap-y-3 spacing md:min-w-56">
-            <div class="flex max-h-56 max-w-56">
-               
-                <Image 
-                    src={SimonBackwardsHead} 
+    <div class="flex flex-row gap-4">
+        <div class="flex flex-col w-1/2">
+            <div class="flex w-full">
+
+                <Image
+                    src={SimonBackwardsHead}
                     alt="My Backwards Head"
-                    class="object-cover rounded-lg border-4 border-white drop-shadow-md"
+                    class="w-full h-auto object-cover rounded-lg border-4 border-white drop-shadow-md"
                 />
             </div>
-            <a href="/blog" class="block md:inline-block antialiased font-sans text-xl md:text-sm leading-normal font-normal">
+            <!-- <a href="/blog" class="block md:inline-block antialiased font-sans text-xl md:text-sm leading-normal font-normal">
                 <div role="button" tabindex="0" class="flex w-full pl-3 pr-4 py-2 md:rounded-lg text-start leading-tight transition-all outline-none items-center gap-2 hover:bg-purple-200 hover:bg-opacity-80 hover:text-purple-900 bg-pink-700 text-white focus:bg-pink-500 focus:text-white">
-                    <ChatIcon 
+                    <ChatIcon
                         class="flex-shrink-0 w-10 h-10 md:w-[18px] md:h-[18px] group-hover:fill-purple-900 !focus:fill-white group-focus:!fill-white fill-white" />
                     <span class="flex-grow">Get In Touch</span>
                 </div>
-            </a>
+            </a> -->
         </div>
 
-        <div class="flex-col flex px-4">
-            <h3 class="text-xl font-semibold text-gray-800 mb-2 dark:text-themepurple">Me Personally</h3>
-            <p class="text-gray-700 mb-4 text-base dark:text-gray-300">
-                I live near Cambridge in the UK.
-            </p>
-            
-            <p class="text-gray-700 mb-4 text-base dark:text-gray-300">
-                I have a seven year-old son who is autistic.He is the most hilarious and accidentally brilliant person I know.
-            </p>
-            <p class="text-gray-700 mb-4 text-base dark:text-gray-300">
-                I listen to a lot of music and go to as many gigs as I can. Mostly with friends, but sometimes on my own. You can see what I've been listening to recently below.
-            </p>
-            <p class="text-gray-700 mb-4 text-base dark:text-gray-300">
-                I've also added the most recent movies and TV shows I've watched on my Jellyfin media server.
-            </p>
-            <p class="text-gray-700 mb-4 text-base dark:text-gray-300">
-                I don't use social media all that much but am currently having a muted go with Bluesky. I never really got the hang of Twitter, but felt I should contribute in some way to the 'Xodus' as I'm not a fan of Elon Musk and what he's done to 'X'.
-            </p>
-
+        <div class="flex-col flex w-1/2">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4 dark:text-themepurple">Me Personally</h3>
+            <ul class="space-y-3">
+                <li class="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                    <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0 text-themepink" />
+                    <span class="text-base">Northamptonshire, UK</span>
+                </li>
+                <li class="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                    <Music className="w-5 h-5 mt-0.5 flex-shrink-0 text-themepink" />
+                    <span class="text-base">Bass guitar and drums</span>
+                </li>
+                <li class="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                    <Headphones className="w-5 h-5 mt-0.5 flex-shrink-0 text-themepink" />
+                    <span class="text-base">Vinyl</span>
+                </li>
+                <li class="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                    <Footprints className="w-5 h-5 mt-0.5 flex-shrink-0 text-themepink" />
+                    <span class="text-base">Running, kayaking</span>
+                </li>
+                <li class="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                    <PersonStanding className="w-5 h-5 mt-0.5 flex-shrink-0 text-themepink" />
+                    <span class="text-base">Man Utd, Lakers, Saints</span>
+                </li>
+                <li class="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                    <Volleyball className="w-5 h-5 mt-0.5 flex-shrink-0 text-themepink" />
+                    <span class="text-base">Basketball</span>
+                </li>
+                <li class="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                    <Baby className="w-5 h-5 mt-0.5 flex-shrink-0 text-themepink" />
+                    <span class="text-base">Family</span>
+                </li>
+                <li class="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                    <Paintbrush className="w-5 h-5 mt-0.5 flex-shrink-0 text-themepink" />
+                    <span class="text-base">Weird art</span>
+                </li>
+                <li class="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                    <Cat className="w-5 h-5 mt-0.5 flex-shrink-0 text-themepink" />
+                    <span class="text-base">Cats (+ dogs + all other animals)</span>
+                </li>
+            </ul>
         </div>
-            </div>  
+            </div>
         </div>
-     <div class="flex flex-col gap-6 mt-10">
-    <section class="mb-16">
-        <h2 class="text-2xl font-semibold mb-6 text-gray-800 dark:text-themepurple">Recent Listening</h2>
-        <RecentListening />
-    </section>
-
-    <section class="mb-16">
-        <h2 class="text-2xl font-semibold mb-6 text-gray-800 dark:text-themepurple">Recent Viewing</h2>
-        <RecentViewing />
-    </section>
-
-
 
 </main>
 </PageLayout>
