@@ -307,7 +307,7 @@
     "name": "Vector Art",
     "description": "Vector art and icon design",
     "category": "design",
-    "color": "#007bb5",
+    "color": "#6b46c1",
     "synonyms": [
       "vector-graphics",
       "vector-art",
@@ -647,5 +647,26 @@
     "description": "windows",
     "category": "business",
     "color": "#bc9184"
+  },
+  "fedora": {
+    "name": "Fedora",
+    "description": "Fedora Linux distribution",
+    "category": "systems",
+    "color": "#294172"
+  },
+  "zfs": {
+    "name": "ZFS",
+    "description": "ZFS file system",
+    "category": "systems",
+    "color": "#1a8b9e",
+    "synonyms": [
+      "openzfs"
+    ]
+  },
+  "kernel": {
+    "name": "Kernel",
+    "description": "Operating system kernel",
+    "category": "systems",
+    "color": "#8b4513"
   }
 }
