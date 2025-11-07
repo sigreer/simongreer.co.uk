@@ -84,18 +84,6 @@ const rootIconClasses = (menuItem: keyof typeof menuStructure) => [
             />
             Blog Posts
           </RootItem>
-            <!-- <RootItem isActive={isActiveRoute('tech')} link="/tech" label="Tech Stuff">
-              <ServerIcon class:list={rootIconClasses('tech')}/>
-              Tech Stuff
-              <Fragment slot="submenu">
-                <SubMenuItem link="/tech/skills-and-expertise" isFirst={true}>
-                  <KanbanIcon class:list={iconClasses('tech')}/>Skills and Experience
-                </SubMenuItem>
-                <SubMenuItem link="/tech/projects" isLast={true}>
-                  <EditorChoiceIcon class:list={iconClasses('tech')}/>Projects
-                </SubMenuItem>
-              </Fragment>
-            </RootItem> -->
             <RootItem isActive={isActiveRoute('hireme')} link="/hire-me" label="Hire Me">
               <HireMeIcon class:list={rootIconClasses('hireme')}/>
               Hire Me
@@ -104,14 +92,6 @@ const rootIconClasses = (menuItem: keyof typeof menuStructure) => [
                 <WebDevelopmentIcon class:list={iconClasses('hireme')}/>
                 Web Development
               </SubMenuItem>
-              <!-- SubMenuItem link="/hire-me/cloud-and-hosted">
-                <CloudIcon class:list={iconClasses('hireme')}/>
-                Cloud &amp; Hosted
-              </SubMenuItem> -->
-              <!-- <SubMenuItem link="/hire-me/software-development">
-                <SoftwareDevelopmentIcon class:list={iconClasses('hireme')}/>
-                Software Development
-              </SubMenuItem> -->
               <SubMenuItem link="/hire-me/business-apps">
                 <BriefcaseIcon class:list={iconClasses('hireme')}/>
                 Business Apps
@@ -120,18 +100,6 @@ const rootIconClasses = (menuItem: keyof typeof menuStructure) => [
                 <NetworkingIcon class:list={iconClasses('hireme')}/>
                 Networking, Security, VPNs
               </SubMenuItem>
-              <!-- <SubMenuItem link="/hire-me/system-administration">
-                <SysAdminIcon class:list={iconClasses('hireme')}/>
-                System Administration
-              </SubMenuItem>
-              <SubMenuItem link="/hire-me/system-design-and-deployment">
-                <SystemsIcon class:list={iconClasses('hireme')}/>
-                System Deployment
-              </SubMenuItem>
-              <SubMenuItem link="/hire-me/data-and-databases">
-                <DatabaseIcon class:list={iconClasses('hireme')}/>
-                Data &amp; Databases
-              </SubMenuItem> -->
               <SubMenuItem link="/hire-me/storage-and-nas" isLast={true}>
                 <StorageIcon class:list={iconClasses('hireme')}/>
                 Storage, NAS
