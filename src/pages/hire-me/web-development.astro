@@ -5,8 +5,7 @@ import '@styles/custom.css';
 import '@styles/lightbox.css';
 import LightBox from '@components/Media/LightBox.astro';
 import type { CollectionEntry } from 'astro:content';
-import { GetInTouchDialog } from '@components/GetInTouchDialog';
-import PricingAndInfoSection from '@components/Content/PricingAndInfoSection.astro';
+import { EmbeddedContactForm } from '@components/EmbeddedContactForm';
 import TechGrid from "@components/ContentBoxes/TechGrid.astro";
 import pageSpeedScoreMobile from '@images/galleries/simongreer-co-uk-pagespeed-scores/simongreer-co-uk-pagespeed-mobile-score.png'; 
 import pageSpeedScoreDesktop from '@images/galleries/simongreer-co-uk-pagespeed-scores/simongreer-co-uk-pagespeed-desktop-score.png'; 
@@ -127,8 +126,17 @@ const techs = (await getCollection('tech'))
           </p>
         </div>
       </div>
+      <div class="w-full border-y border-[#dcdde0] dark:border-neutral-800 px-8 py-2 pattern-cross dark:pattern-gray-800 pattern-gray-200 pattern-bg-background dark:pattern-bg-background
+  pattern-size-4 pattern-opacity-100">
+        <h2 class="text-xl font-bold mb-0 dark:text-themepurple text-gray-800">
+          How To Hire Me
+        </h2>
+      </div>
       <div class="w-full p-6">
-        <GetInTouchDialog client:only="react"/>
+        <p class="text-sm mb-4">
+          Just drop me a line below with a few details about your project and I'll come straight back to you to discuss further.
+        </p>
+        <EmbeddedContactForm usePlaceholders={true} client:only="react"/>
       </div>
       <div class="flex flex-row gap-3 p-2">
       <div class="w-full p-0">
@@ -246,8 +254,5 @@ const techs = (await getCollection('tech'))
     </div>
   </div>
   </section>
- 
 
-  <PricingAndInfoSection/>
-  
 </PageLayout>

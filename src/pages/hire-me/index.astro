@@ -7,7 +7,7 @@ import TechCube from "@components/ContentBoxes/TechCube.astro";
 import type { CollectionEntry } from 'astro:content';
 import { Button } from '@components/ui/button';
 import { Badge } from '@components/ui/badge';
-import { GetInTouchDialog } from '@components/GetInTouchDialog';
+import { EmbeddedContactForm } from '@components/EmbeddedContactForm';
 type TechWithStringTags = Omit<CollectionEntry<'tech'>, 'data'> & {
   data: Omit<CollectionEntry<'tech'>['data'], 'tags'> & {
     tags: string[] | undefined
@@ -28,7 +28,7 @@ const techs = (await getCollection('tech'))
 
 <PageLayout title="Tech Stuff">
   
-  <section class="py-2 px-6 md:pr-0 pl-0 md:mb-6">
+  <section class="my-2 px-6 md:pr-0 pl-0">
     <div class="grid grid-cols-10 md:gap-5">
       <div class="col-span-3 border-[#dcdde0] dark:bg-background dark:border-neutral-800 dark:text-gray-200 rounded-lg bg-white text-gray-800 border my-3 flex flex-col items-center">
         <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
@@ -63,12 +63,22 @@ const techs = (await getCollection('tech'))
             <Badge variant="secondary">Remote Access</Badge>
           </p>
         </div>
-        <div class="w-full mt-6">
-        <GetInTouchDialog client:only="react"  />
       </div>
-        </div>
+      <div class="w-full border-y border-[#dcdde0] dark:border-neutral-800 px-8 py-2 pattern-cross dark:pattern-gray-800 pattern-gray-200 pattern-bg-background dark:pattern-bg-background
+  pattern-size-4 pattern-opacity-100">
+        <h2 class="text-xl font-bold mb-0 dark:text-themepurple text-gray-800">
+          Get In Touch
+        </h2>
       </div>
-      <div class="col-span-7 border border-[#dcdde0] rounded-lg bg-white text-gray-900 my-3 dark:bg-background dark:border-neutral-800 dark:text-primary">
+      <div class="w-full p-6">
+        <p class="text-sm mb-4">
+          Drop me a line with details about your project and I'll come straight back to you.
+        </p>
+        <EmbeddedContactForm usePlaceholders={true} client:only="react"/>
+      </div>
+    </div>
+
+    <div class="col-span-7 border border-[#dcdde0] rounded-lg bg-white text-gray-900 my-3 dark:bg-background dark:border-neutral-800 dark:text-primary">
         <div class="w-full border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 ">
           <h2 class="text-xl font-bold mb-0 dark:text-themepurple">
             A Bit About Me
@@ -76,39 +86,27 @@ const techs = (await getCollection('tech'))
         </div>
         <div class="w-full p-8">
         <p class="text-base mb-4">
-          I've been working in the technology space since I left university in 2005. I started off in sales before moving into technical sales and hands-on technical roles. I spent the majority my time working with virtualisation and remote access technologies like VMware, Citrix and of course Microsoft. I started a specialist IT solutions company in 2010 which spawned an ecommerce sibling a couple of years later.
+          I've spent the last seven or eight years as a consultant, systems engineer and software developer in the Linux &amp; open source space. The lines between these roles has progressively blurred over the last few years and as I've worked on some interesting and diverse projects with wide-ranging responsibilities.
         </p>
         <p class="text-base mb-4">
-          I sold both businesses in 2014 and worked in the 'channel' for several years. I worked with a handful of specialist IT vendors, taking responsibility for the UK operations.
+          Having spent much of my career concentrating on business growth and the nurturing of ideas, I'm acutely aware of how much of an overhead -- and an enabler, technology can be.
         </p>
+        <p class="text-base mb-4">Most of my technical experience has been accrued in the startup, SMB and mid-market space where roles and responsibilities are varied and occassionally vague. I've worked extensively with enterprise systems but generally prefer the dynamics of smaller teams with less rigidity.
+        </p>
+        <p class="text-base mb-4">I'm up front and honest and value long-standing relationships over quick wins.
+        </p>
+      <p class="text-base mb-4">
+        As a developer I have experience working with front and backend web apps using modern Javascript frameworks. I've also built apps for broadcast media using Flutter, CRM/ERP systems backed by PostgreSQL and Prisma; and cross-platform desktop apps using Tauri and Electron.
+      </p>
         <p class="text-base mb-4">
-          I started using Linux around this time, initially begrudgingly and not really knowing what I was doing. However, fast forward a couple of years and I was hacking my Surface Pro to get it running a Linux desktop.
-        </p>
-        <p class="text-base mb-4">
-          I've spent the last seven or eight years as a consultant, systems engineer and software developer. The lines between the roles have progressively blurred over the last few years and I've taken on the mantle of CTO/Technical Director for several startups and fast-growing businesses in the UK, US and Europe.
-        </p>
-        <p class="text-base">
-          Having spent much of my career concentrating on business growth and the nurturing of ideas, I'm acutely aware of how much of an overhead -- and enabler, technology can be. If you want slick, performant IT systems to drive your business without having to sell your soul (and anything else of value) to join one of the big tech companies' closed eco-systems, get in touch! I'd love to help!
-        </p>
-
+       A larger part of my career has been spent as a systems engineer. Originally with remote access technologies (Citrix, RDP, etc.) and then into virtualisation with VMware. As I moved into the open source realm I spent much more time building networking, server and storage solutions with particular emphasis on TrueNAS, OPNsense, Nginx and Docker.
+      </p>
+              <p class="text-base mb-4">
+                If you think you've got a project that might be suitable - let me know. I'm not interested in wasting anyone's time and will only take on projects that I have 100% confidence in completing. That being said, I'll always extend the courtesy of responding even if that means directing you somewhere else.
+              </p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="py-2 px-6 md:pr-0 pl-0 md:mb-6">
-  <div class="flex flex-col gap-6 border border-[#dcdde0] dark:border-neutral-800 rounded-lg bg-white text-gray-900 my-3 dark:bg-background dark:text-primary">
-    <div class="w-full flex flex-col">
-      <div class="flex border-b border-[#dcdde0] dark:border-neutral-800 px-8 py-2 flex-col">
-        <h2 class="text-xl font-bold dark:text-themepurple">
-          Section 2
-        </h2>
-        <div class="col-span-12 text-sm">
-          More text.
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-  
 </PageLayout>

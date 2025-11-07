@@ -5,13 +5,13 @@ import '@styles/custom.css';
 import '@styles/lightbox.css';
 import LightBox from '@components/Media/LightBox.astro';
 import type { CollectionEntry } from 'astro:content';
-import { GetInTouchDialog } from '@components/GetInTouchDialog';
+import { EmbeddedContactForm } from '@components/EmbeddedContactForm';
 import GoogleIcon from '@icons/GoogleIcon.astro';
 import MicrosoftWindowsIcon from '@icons/MicrosoftWindowsIcon.astro';
 import PricingAndInfoSection from '@components/Content/PricingAndInfoSection.astro';
 import TechGrid from "@components/ContentBoxes/TechGrid.astro";
-import { 
-  Layers, Newspaper, SquareLibrary, Store, Cog, Bot, ShoppingCart, Database, Workflow, Network, Server, Paintbrush, Code, Rocket, Box, FileJson, FileType2, ArrowRightLeft, KeyRound, Calendar1, Terminal, Wallet, CircleDollarSign, BookUser, ScrollText, TicketsPlane, HardDriveDownload, FileText, Signature, PhoneCall, Headset, ChartColumnStacked, Asterisk, BookText, Mails,MessageSquareText, Plus, Minus, ThumbsUp, ThumbsDown
+import {
+  Layers, Newspaper, SquareLibrary, Store, Cog, Bot, ShoppingCart, Database, Workflow, Network, Server, Paintbrush, Code, Rocket, Box, FileJson, FileType2, ArrowRightLeft, KeyRound, Calendar1, Terminal, Wallet, CircleDollarSign, BookUser, ScrollText, TicketsPlane, HardDriveDownload, FileText, Signature, PhoneCall, Headset, ChartColumnStacked, Asterisk, BookText, Mails, MessageSquareText, Plus, Minus, ThumbsUp, ThumbsDown, HardDrive, Boxes, FolderSync, ServerCog, Cloud, ShieldCheck, Archive, CloudDownload, Disc3, Package
 } from 'lucide-react';
 import twentyScreenshot from '@images/screenshots/twentycrm1.png';
 import documensoScreenshot from '@images/screenshots/documenso1.png';
@@ -52,62 +52,71 @@ const techs = (await getCollection('tech')) .filter((tech) =>
       </div>
       <TechGrid techs={techs} />
       <div class="w-full px-8">
-        <div class="w-full mb-2">
+        <div class="w-full mb-8">
           <span class="text-sm font-bold mb-2 text-gray-900 dark:text-themepurple">Hire Me For:</span>
           <p class="text-xs">
             <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
-              <Server className="w-4 h-4" />TrueNAS SCALE
+              <ServerCog className="w-4 h-4" />TrueNAS SCALE
             </Badge>
             <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
               <Server className="w-4 h-4" />TrueNAS Core
             </Badge>
             <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
-              <Server className="w-4 h-4" />TrueNAS CE
+              <HardDrive className="w-4 h-4" />TrueNAS CE
             </Badge>
             <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
-              <Database className="w-4 h-4" />ZFS
+              <Disc3 className="w-4 h-4" />ZFS
             </Badge>
             <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
-              <Network className="w-4 h-4" />NFS
+              <FolderSync className="w-4 h-4" />NFS
             </Badge>
             <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
               <Network className="w-4 h-4" />CIFS/SMB
             </Badge>
             <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
-              <Box className="w-4 h-4" />S3
+              <Cloud className="w-4 h-4" />S3
             </Badge>
             <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
-              <Box className="w-4 h-4" />Minio
+              <Package className="w-4 h-4" />Minio
             </Badge>
             <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
-              <Server className="w-4 h-4" />UnRAID
+              <Boxes className="w-4 h-4" />UnRAID
             </Badge>
             <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
-              <Server className="w-4 h-4" />HexOS
+              <Box className="w-4 h-4" />HexOS
             </Badge>
             <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
-              <Network className="w-4 h-4" />iSCSI
+              <Database className="w-4 h-4" />iSCSI
             </Badge>
             <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
-              <HardDriveDownload className="w-4 h-4" />On-Site Backup
+              <Archive className="w-4 h-4" />On-Site Backup
             </Badge>
             <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
-              <HardDriveDownload className="w-4 h-4" />Remote Backup
+              <CloudDownload className="w-4 h-4" />Remote Backup
             </Badge>
             <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
-              <Database className="w-4 h-4" />RAID
+              <HardDriveDownload className="w-4 h-4" />RAID
             </Badge>
             <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
-              <KeyRound className="w-4 h-4" />Data Protection
+              <ShieldCheck className="w-4 h-4" />Data Protection
             </Badge>
             <Badge variant="secondary" className="inline-flex items-center gap-0.5 text-xs font-normal">
-              <Server className="w-4 h-4" />NAS
+              <HardDrive className="w-4 h-4" />NAS
             </Badge>
           </p>
         </div>
       </div>
-      <div class="w-full p-6">
-        <GetInTouchDialog client:only="react"/>
+      <div class="w-full border-y border-[#dcdde0] dark:border-neutral-800 px-8 py-2 pattern-cross dark:pattern-gray-800 pattern-gray-200 pattern-bg-background dark:pattern-bg-background
+  pattern-size-4 pattern-opacity-100">
+        <h2 class="text-xl font-bold mb-0 dark:text-themepurple text-gray-800">
+          How To Hire Me
+        </h2>
+      </div>
+        <div class="w-full p-6">
+          <p class="text-sm mb-4">
+            Just drop me a line below with a few details about your project and I'll come straight back to you to discuss further.
+          </p>
+          <EmbeddedContactForm usePlaceholders={true} client:only="react"/>
       </div>
     </div>
 
@@ -201,67 +210,8 @@ const techs = (await getCollection('tech')) .filter((tech) =>
           </p>
         </div>
 
-        <!-- <div class="py-1 flex flex-col gap-2">
-          <div class="flex flex-row items-center gap-2 mb-1 mt-2">
-            <Code className="text-themepink w-6" />
-            <h5 class="text-base dark:text-gray-200 text-gray-800 font-bold m-0">
-              Software Highlights
-            </h5>
-          </div>
-          <p class="text-sm mb-3">
-            Some examples of open source business software that I've worked with and in many cases use myself. 
-          </p>
-          <div class="flex flex-row gap-3 p-2">
-            <div class="w-full p-0">
-              <LightBox src={twentyScreenshot}
-                alt="TwentyCRM"
-                width={120}
-                class="my-4 border drop-shadow-md dark:border-0"
-                captionText="Modern, open CRM system that can be easily integrated with your existing systems."
-                captionClass="text-[9px] font-normal"
-                thumbText="TwentyCRM"
-                thumbClass="text-[9px] font-normal"
-              />
-            </div>
-            <div class="w-full p-0">
-              <LightBox src={documensoScreenshot}
-                alt="Documenso"
-                width={120}
-                class="my-4 border drop-shadow-md dark:border-0"
-                captionText="Document-signing app that can be fully embedded into your business apps."
-                captionClass="text-[9px] font-normal"
-                thumbText="Documenso"
-                thumbClass="text-[9px] font-normal"
-              />
-            </div>
-            <div class="w-full p-0">
-              <LightBox src={planeScreenshot}
-                alt="Plane"
-                width={120}
-                class="my-4 border drop-shadow-md dark:border-0"
-                captionText="Modern, slick and responsive project management app for teams."
-                captionClass="text-[9px] font-normal"
-                thumbText="Plane"
-                thumbClass="text-xs"
-              />
-            </div>
-            <div class="w-full p-0">
-              <LightBox src={nextcloudScreenshot}
-                alt="Nextcloud"
-                width={120}
-                class="my-4 border drop-shadow-md dark:border-0"
-                captionText="File-sharing, Collaboration and a whole lot more."
-                captionClass="text-xs"
-                thumbText="Nextcloud"
-                thumbClass="text-xs"
-              />
-            </div>
-          </div> -->
         </div>
       </div>
   </section>
- 
-
-  <PricingAndInfoSection/>
   
 </PageLayout>
