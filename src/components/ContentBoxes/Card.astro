@@ -52,17 +52,9 @@ const formatDate = (date: Date) => {
     )}
     {coverImage && (
       <div class="w-full h-32 md:h-36 lg:h-40 xl:h-44 overflow-hidden relative">
-        <div class="absolute inset-0 transition-opacity duration-300 opacity-100 group-hover:opacity-0 dark:opacity-0">
-          <div class="w-full h-full" style="background: linear-gradient(to bottom left, #da2676, #e03f93, #f9a8d4)"></div>
+        <div class="absolute inset-0 w-full h-full transition-all duration-300 dark:bg-background" style="background: linear-gradient(to bottom left, #da2676, #e03f93, #f9a8d4);">
         </div>
-        <div class="absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100 dark:opacity-0">
-          <div class="w-full h-full" style="background: linear-gradient(to bottom left, #f9a8d4, #f472b6, #da2676)"></div>
-        </div>
-        <div class="absolute inset-0 transition-opacity duration-300 opacity-0 dark:opacity-100 dark:group-hover:opacity-0">
-          <div class="w-full h-full bg-background"></div>
-        </div>
-        <div class="absolute inset-0 transition-opacity duration-300 opacity-0 dark:group-hover:opacity-100">
-          <div class="w-full h-full bg-background"></div>
+        <div class="absolute inset-0 w-full h-full transition-opacity duration-300 opacity-0 group-hover:opacity-100 dark:bg-background" style="background: linear-gradient(to bottom left, #f9a8d4, #f472b6, #da2676);">
         </div>
         <Image
           src={coverImage}
