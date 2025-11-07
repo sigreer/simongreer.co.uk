@@ -29,6 +29,16 @@ const resolvedTags = tags?.map(tag => {
   return { ...tag, data: tagData };
 }) ?? [];
 
+// Format date manually to ensure consistent DD MMM YYYY format
+const formatDate = (date: Date) => {
+  const d = new Date(date);
+  const day = d.getUTCDate();
+  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const month = monthNames[d.getUTCMonth()];
+  const year = d.getUTCFullYear();
+  return `${day} ${month} ${year}`;
+};
+
 ---
 
 <li class={`rounded-md bg-white transition-all duration-300 border border-[#9b9b9b] hover:shadow-xl hover:scale-105 ${className} relative overflow-hidden dark:bg-background dark:border-neutral-800 dark:border`}
@@ -37,12 +47,7 @@ const resolvedTags = tags?.map(tag => {
   <a href={`${basePath}/${slug}`} class="group h-full flex flex-col">
     {pubDate && (
       <div class="absolute top-0 right-0 bg-gray-800 text-white px-3 py-0 rounded-bl-lg text-xs z-10">
-        {new Date(pubDate).toLocaleDateString('en-GB', {
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric',
-          timeZone: 'UTC'
-        })}
+        {formatDate(pubDate)}
       </div>
     )}
     {coverImage && (
