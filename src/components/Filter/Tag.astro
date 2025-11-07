@@ -1,5 +1,5 @@
 ---
-const tagsData = await import('@content/tags.json');
+const { default: tagsData } = await import('@content/tags.json');
 
 interface Props {
   items: {

@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import { getEntry } from 'astro:content';
-const tagsData = await import('@content/tags.json');
+const { default: tagsData } = await import('@content/tags.json');
 
 interface Props {
   
