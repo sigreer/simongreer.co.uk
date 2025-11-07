@@ -37,10 +37,11 @@ const resolvedTags = tags?.map(tag => {
   <a href={`${basePath}/${slug}`} class="group h-full flex flex-col">
     {pubDate && (
       <div class="absolute top-0 right-0 bg-gray-800 text-white px-3 py-0 rounded-bl-lg text-xs z-10">
-        {pubDate.toLocaleDateString('en-GB', { 
+        {new Date(pubDate).toLocaleDateString('en-GB', {
           year: 'numeric',
           month: 'short',
-          day: 'numeric'
+          day: 'numeric',
+          timeZone: 'UTC'
         })}
       </div>
     )}
