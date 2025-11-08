@@ -100,6 +100,21 @@ After setting secrets, trigger a new deployment for changes to take effect.
 - **Formatting**: Prettier with Astro and Tailwind plugins
 - **Code Highlighting**: Rehype Pretty Code with custom transformers
 
+### CSS Optimization
+
+The site uses optimized CSS bundling for performance:
+
+- **Code Splitting**: CSS is split per page/layout (homepage: ~79KB, blog: ~6.9KB, carousel: ~2.8KB)
+- **Tailwind Plugins**: Uses `@tailwindcss/typography`, `tailwindcss-animate`, and `tailwindcss-bg-patterns`
+- **Critical CSS**: Automatically inlines small CSS files (<4KB) via `inlineStylesheets: 'auto'`
+- **Purging**: Tailwind configured to purge unused styles, with safelist for dynamic pattern classes
+- **Resource Hints**: DNS prefetch and preconnect for external fonts
+
+**Performance Results:**
+- Mobile PageSpeed: 98%
+- Desktop PageSpeed: 100%
+- Gzipped CSS transfer: ~13.8 KB for homepage
+
 ### Cloudflare Pages Deployment
 
 The site is deployed to **Cloudflare Pages** (not Workers) with the following configuration:
@@ -115,8 +130,30 @@ The site is deployed to **Cloudflare Pages** (not Workers) with the following co
 **Key Points:**
 - Most pages are pre-rendered as static HTML at build time
 - API routes (e.g., `/api/send-email`) use on-demand rendering with `export const prerender = false`
-- Deployment happens via GitHub Actions workflow (`.github/workflows/cfpages.yml`)
+- Deployment happens via GitHub Actions workflows:
+  - `.github/workflows/cfpages.yml` - Dev/preview deployments (main branch)
+  - `.github/workflows/deploy-production.yml` - Production deployments (production branch)
 - Local preview uses `wrangler pages dev` after building
+
+### GitHub Actions Workflows
+
+**Dev Deployments** (`.github/workflows/cfpages.yml`):
+- Triggers on push to `main` branch and pull requests
+- Deploys to preview URL (typically `https://main.simongreer.pages.dev`)
+- Captures deployment URL from Cloudflare wrangler-action output
+- Runs PageSpeed analysis on the actual deployed preview URL
+- PageSpeed reports sent to Mattermost webhook
+
+**Production Deployments** (`.github/workflows/deploy-production.yml`):
+- Triggers on push to `production` branch
+- Deploys to production URL (`https://simongreer.co.uk`)
+- Runs PageSpeed analysis on production site
+- No arbitrary delays - job dependencies ensure proper sequencing
+
+**GitHub Secrets & Variables:**
+- Environment: `simongreercouk`
+- Secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `MAILTRAP_*`, `PAGESPEED_API_KEY`, `PAGESPEED_WEBHOOK_URL`
+- Variables: `SITE_URL`, `MAILTRAP_HOST`, `MAILTRAP_PORT`
 
 ### Development Notes
 
