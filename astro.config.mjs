@@ -85,9 +85,8 @@ export default defineConfig({
     build: {
       sourcemap: true,
       profile: true,
-      cssCodeSplit: true,
+      cssCodeSplit: false,
       minify: 'esbuild',
-      assetsInlineLimit: 4096,
       rollupOptions: {
         output: {
           manualChunks: undefined,
@@ -119,7 +118,7 @@ export default defineConfig({
   },
   output: 'static',
   build: {
-    inlineStylesheets: 'auto',
+    inlineStylesheets: 'never',
     assets: '_astro',
   },
   image: {
