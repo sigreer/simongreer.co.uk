@@ -16,7 +16,9 @@
     "update": "bun install && bun update && bun upgrade",
     "pagespeed": "node scripts/pagespeed-report.cjs",
     "tags": "scripts/update-tags.sh",
-    "icons": "scripts/icon-helper.sh"
+    "icons": "scripts/icon-helper.sh",
+    "push-preview": "scripts/push-preview.sh",
+    "publish": "scripts/publish.sh"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.10",
