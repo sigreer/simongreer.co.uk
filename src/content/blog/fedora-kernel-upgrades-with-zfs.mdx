@@ -22,7 +22,7 @@ I worked through the usual fixes and did some log skimming. Like anything on Lin
 Honestly, it's been a battle getting it to a place where it works and performs its major functions seamlessly. As a devout ZFS user I rely heavily on any distro I use maintaining cointinued support for ZFS and this has been by far the biggest challenge for me with Fedora. I get the impression there's no love lost between the ZFS and Fedora teams with the former berating Fedora's Fuse implementation on their website, telling users to avoid it at all costs.
 
 ## The Problem
-Fedora is a bleeding edge distro and it cares little about maintaining compatibility with software and drivers that alread exist on your system. Given the relentless pace of updates and new kernel releases, being able to maintain support for ZFS has been difficult. So much so that I very nearly threw in the towel. However, I decided to try and cobble together a workable solution and it works like this:
+Fedora is a bleeding edge distro and it cares little about maintaining compatibility with software and drivers that already exist on your system. Given the relentless pace of updates and new kernel releases, being able to maintain support for ZFS has been difficult. So much so that I very nearly threw in the towel. However, I decided to try and cobble together a workable solution and it works like this:
 - Keep the kernel version locked to the most recent version that supports ZFS compiled via DKMS.
 - Perform full kernel upgrades when ZFS catches up with kernel versions.
 - Keep a working kernel version on the system at all times just in case.

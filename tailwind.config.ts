@@ -4,7 +4,14 @@ import typography from '@tailwindcss/typography';
 const config: Config = {
     darkMode: ['class'],
     content: [
-		'./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue,scss}',
+		'./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
+	],
+	safelist: [
+		// Dynamic pattern classes used in hire-me pages
+		'pattern-cross',
+		'pattern-gray-200',
+		'pattern-gray-800',
+		'pattern-bg-background',
 	],
 	theme: {
 
@@ -181,7 +188,6 @@ const config: Config = {
 	plugins: [
 		typography,
         require("tailwindcss-animate"),
-        require("tailwindcss-motion"),
 		require('tailwindcss-bg-patterns'),
     ],
 };

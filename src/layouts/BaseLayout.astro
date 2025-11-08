@@ -3,7 +3,6 @@ import Footer from "@components/Footer/Footer.astro";
 import PreHeader from "@components/Header/PreHeader.astro";
 import { ClientRouter } from 'astro:transitions';
 import '@styles/fonts.css';
-import '@styles/custom.css';
 import '@styles/globals.css';
 import NavBar from "@components/Header/Navbar/NavBar.astro";
 interface Props {
@@ -25,9 +24,11 @@ const global = { title: 'SimonGreer.co.uk' };
         document.documentElement.classList.remove('dark');
       }
     </script>
-    <title>{title ? `${global.title} - ${title}` : global.title}</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <title>{title ? `${global.title} - ${title}` : global.title}</title>
     <link rel="icon" type="image/png" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />

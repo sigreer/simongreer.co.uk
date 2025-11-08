@@ -100,4 +100,7 @@
     @apply !underline;
     color: theme('colors.pink.600')!important;
   }
+  [data-tags] {
+    transition: opacity 300ms ease-in-out;
+  }
 }

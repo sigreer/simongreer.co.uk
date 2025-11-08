@@ -85,6 +85,14 @@ export default defineConfig({
     build: {
       sourcemap: true,
       profile: true,
+      cssCodeSplit: true,
+      minify: 'esbuild',
+      assetsInlineLimit: 4096,
+      rollupOptions: {
+        output: {
+          manualChunks: undefined,
+        }
+      }
     },
   },
   site: 'https://simongreer.co.uk',
@@ -110,6 +118,10 @@ export default defineConfig({
     defaultStrategy: 'viewport'
   },
   output: 'static',
+  build: {
+    inlineStylesheets: 'auto',
+    assets: '_astro',
+  },
   image: {
     
     formats: ['avif', 'webp', 'png', 'jpeg']
