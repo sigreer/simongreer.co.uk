@@ -12,7 +12,9 @@ jobs:
     permissions:
       contents: read
       deployments: write
-    
+    outputs:
+      deployment-url: ${{ steps.cloudflare-deploy.outputs.deployment-url }}
+
     steps:
       - uses: actions/checkout@v4
       
@@ -34,6 +36,7 @@ jobs:
         run: bun run astro build
         
       - name: Publish to Cloudflare Pages (Preview)
+        id: cloudflare-deploy
         uses: cloudflare/wrangler-action@v3
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -62,5 +65,7 @@ jobs:
         env:
           PAGESPEED_API_KEY: ${{ secrets.PAGESPEED_API_KEY }}
           PAGESPEED_WEBHOOK_URL: ${{ secrets.PAGESPEED_WEBHOOK_URL }}
-          SITE_URL: ${{ vars.DEV_SITE_URL }}
-        run: bun run pagespeed
+          SITE_URL: ${{ needs.deploy.outputs.deployment-url }}
+        run: |
+          echo "Testing deployment at: $SITE_URL"
+          bun run pagespeed

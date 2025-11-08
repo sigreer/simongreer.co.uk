@@ -34,6 +34,7 @@ jobs:
         run: bun run astro build
 
       - name: Publish to Cloudflare Pages (Production)
+        id: cloudflare-deploy
         uses: cloudflare/wrangler-action@v3
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -58,9 +59,6 @@ jobs:
 
       - name: Install dependencies
         run: bun install
-
-      - name: Wait for Cloudflare deployment
-        run: sleep 60
 
       - name: Run PageSpeed Analysis
         env:
