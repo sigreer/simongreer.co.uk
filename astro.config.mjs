@@ -106,13 +106,6 @@ export default defineConfig({
     shikiConfig: { syntaxTheme },
     remarkPlugins: [remarkGfm],
   },
-  postcss: {
-    plugins: [
-      postcssNesting(),
-      tailwind(),
-      autoprefixer()
-    ]
-  },
   prefetch: {
     defaultStrategy: 'viewport'
   },

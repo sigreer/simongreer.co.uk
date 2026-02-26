@@ -1,4 +1,5 @@
 ---
+import type { MarkdownHeading } from 'astro';
 import BaseLayout from "@layouts/BaseLayout.astro";
 import TableOfContents from "@components/TableOfContents.astro";
 import Lines from "@components/ContentBoxes/Lines.astro";
@@ -7,7 +8,7 @@ import '@styles/codeblock.css';
 interface Props {
   title: string;
   slug: string;
-  toc?: any;
+  toc?: MarkdownHeading[];
   horizontal_logo?: ImageMetadata | null;
   vendor_name?: string | null;
   cover_image?: ImageMetadata | null;

@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 const posts = await getCollection('blog');
 const techs = await getCollection('tech');
-import HomeLayout from "../layouts/HomeLayout.astro";
+import HomeLayout from "@layouts/HomeLayout.astro";
 import '@styles/custom.css';
 ---
 <HomeLayout description="A website about beeps, bleeps and other feats" posts={posts} techs={techs}>

@@ -2,7 +2,8 @@
 dist/
 .output/
 .astro/
-
+.playwright/
+.playwright-cli/
 # dependencies
 node_modules/
 
