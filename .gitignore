@@ -36,3 +36,6 @@ wrangler-output/
 .astro/content-modules.mjs
 .astro/data-store.json
 .dev.vars
+
+# Benchmark results
+bench-results/

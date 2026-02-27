@@ -1,0 +1,92 @@
+name: Run Lighthouse Benchmarks
+
+on:
+  workflow_call:
+    inputs:
+      site-url:
+        description: The base URL to run Lighthouse against
+        required: true
+        type: string
+      label:
+        description: Label for this benchmark run (e.g. "v5-baseline")
+        required: true
+        type: string
+      runs:
+        description: Number of Lighthouse runs per page
+        required: false
+        type: number
+        default: 5
+      pages:
+        description: Comma-separated paths to test (e.g. "/, /blog, /tech")
+        required: false
+        type: string
+        default: '/, /blog, /tech'
+
+jobs:
+  lighthouse:
+    name: Lighthouse (${{ inputs.label }})
+    runs-on: ubuntu-latest
+    environment: simongreercouk
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Run Lighthouse for each page
+        env:
+          PAGESPEED_API_KEY: ${{ secrets.PAGESPEED_API_KEY }}
+          BENCH_SITE_URL: ${{ inputs.site-url }}
+          BENCH_LABEL: ${{ inputs.label }}
+          BENCH_RUNS: ${{ inputs.runs }}
+        run: |
+          IFS=',' read -ra PAGES <<< "${{ inputs.pages }}"
+          for page in "${PAGES[@]}"; do
+            page=$(echo "$page" | xargs)
+            echo "--- Running Lighthouse for path: $page ---"
+            node scripts/bench/run-lighthouse.mjs \
+              --url "${BENCH_SITE_URL}${page}" \
+              --label "$BENCH_LABEL" \
+              --runs "$BENCH_RUNS"
+          done
+
+      - name: Collect and aggregate metrics
+        env:
+          BENCH_LABEL: ${{ inputs.label }}
+        run: |
+          node scripts/bench/collect-metrics.mjs --label "$BENCH_LABEL"
+
+      - name: Upload benchmark results
+        uses: actions/upload-artifact@v4
+        with:
+          name: bench-results-${{ inputs.label }}
+          path: bench-results/
+          retention-days: 90
+
+      - name: Post summary to Mattermost
+        if: ${{ secrets.PAGESPEED_WEBHOOK_URL != '' }}
+        env:
+          PAGESPEED_WEBHOOK_URL: ${{ secrets.PAGESPEED_WEBHOOK_URL }}
+          BENCH_LABEL: ${{ inputs.label }}
+          BENCH_SITE_URL: ${{ inputs.site-url }}
+        run: |
+          SUMMARY_FILE="bench-results/${BENCH_LABEL}/summary.json"
+          if [ -f "$SUMMARY_FILE" ]; then
+            PAYLOAD=$(cat <<EOF
+          {
+            "text": "### Lighthouse Benchmark: ${BENCH_LABEL}\n\nSite: ${BENCH_SITE_URL}\nRuns: ${{ inputs.runs }} per page\nPages: ${{ inputs.pages }}\n\nResults uploaded as workflow artifact."
+          }
+          EOF
+          )
+            curl -s -X POST -H "Content-Type: application/json" \
+              -d "$PAYLOAD" \
+              "$PAGESPEED_WEBHOOK_URL"
+          else
+            echo "No summary file found, skipping Mattermost notification"
+          fi

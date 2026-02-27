@@ -1,0 +1,129 @@
+name: Full Benchmark Suite
+
+on:
+  workflow_dispatch:
+    inputs:
+      config:
+        description: Which configuration to test
+        required: true
+        type: choice
+        options:
+          - v5-baseline
+          - v5-speed-brain
+          - v5-astro-prefetch
+          - all
+      compare-with:
+        description: Label to compare against (e.g. "v5-baseline"). Leave empty to skip comparison.
+        required: false
+        type: string
+        default: ''
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # Deploy the bench branch
+  # ---------------------------------------------------------------------------
+  deploy:
+    name: Deploy Bench Branch
+    runs-on: ubuntu-latest
+    environment: simongreercouk
+    permissions:
+      contents: read
+      deployments: write
+    outputs:
+      deployment-url: ${{ steps.cloudflare-deploy.outputs.deployment-url }}
+    strategy:
+      matrix:
+        config: ${{ fromJson(
+          inputs.config == 'all'
+            && '["v5-baseline","v5-speed-brain","v5-astro-prefetch"]'
+            || format('["{0}"]', inputs.config)
+          ) }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: bench/${{ matrix.config }}
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build site
+        env:
+          MAILTRAP_API_KEY: ${{ secrets.MAILTRAP_API_KEY }}
+          MAILTRAP_API_USER: ${{ secrets.MAILTRAP_API_USER }}
+          MAILTRAP_FROM_EMAIL: ${{ secrets.MAILTRAP_FROM_EMAIL }}
+          MAILTRAP_HOST: ${{ vars.MAILTRAP_HOST }}
+          MAILTRAP_PORT: ${{ vars.MAILTRAP_PORT }}
+          MAILTRAP_TO_EMAIL: ${{ secrets.MAILTRAP_TO_EMAIL }}
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: bun run astro build
+
+      - name: Deploy to Cloudflare Pages (Bench)
+        id: cloudflare-deploy
+        uses: cloudflare/wrangler-action@v3
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=simongreer-bench --branch=bench/${{ matrix.config }}
+
+      - name: Smoke test deployment
+        run: |
+          DEPLOY_URL="${{ steps.cloudflare-deploy.outputs.deployment-url }}"
+          echo "Smoke testing: $DEPLOY_URL"
+          sleep 15
+          STATUS=$(curl -o /dev/null -s -w "%{http_code}" --retry 3 --retry-delay 5 "$DEPLOY_URL")
+          echo "HTTP status: $STATUS"
+          if [ "$STATUS" -ne 200 ]; then
+            echo "Smoke test failed — expected 200, got $STATUS"
+            exit 1
+          fi
+          echo "Smoke test passed"
+
+  # ---------------------------------------------------------------------------
+  # Run Lighthouse benchmarks
+  # ---------------------------------------------------------------------------
+  benchmark:
+    name: Benchmark
+    needs: deploy
+    strategy:
+      matrix:
+        config: ${{ fromJson(
+          inputs.config == 'all'
+            && '["v5-baseline","v5-speed-brain","v5-astro-prefetch"]'
+            || format('["{0}"]', inputs.config)
+          ) }}
+    uses: ./.github/workflows/bench-lighthouse.yml
+    with:
+      site-url: ${{ needs.deploy.outputs.deployment-url }}
+      label: ${{ matrix.config }}
+      runs: 5
+      pages: '/, /blog, /tech'
+    secrets: inherit
+
+  # ---------------------------------------------------------------------------
+  # Compare results (conditional — only if compare-with is set)
+  # ---------------------------------------------------------------------------
+  compare:
+    name: Compare Results
+    if: inputs.compare-with != ''
+    needs: benchmark
+    strategy:
+      matrix:
+        config: ${{ fromJson(
+          inputs.config == 'all'
+            && '["v5-baseline","v5-speed-brain","v5-astro-prefetch"]'
+            || format('["{0}"]', inputs.config)
+          ) }}
+    uses: ./.github/workflows/bench-compare.yml
+    with:
+      label-a: ${{ inputs.compare-with }}
+      label-b: ${{ matrix.config }}
+    secrets: inherit

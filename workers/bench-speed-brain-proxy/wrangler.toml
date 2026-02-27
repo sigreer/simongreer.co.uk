@@ -1,0 +1,10 @@
+name = "bench-speed-brain-proxy"
+main = "src/index.ts"
+compatibility_date = "2025-10-31"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+BENCH_ORIGIN = "https://simongreer-bench.pages.dev"
+
+# Route configuration - to be set up when deploying
+# route = { pattern = "bench.simongreer.co.uk/*", zone_name = "simongreer.co.uk" }

@@ -1,0 +1,103 @@
+name: Compare Benchmark Results
+
+on:
+  workflow_call:
+    inputs:
+      label-a:
+        description: First configuration label (e.g. "v5-baseline")
+        required: true
+        type: string
+      label-b:
+        description: Second configuration label (e.g. "v5-speed-brain")
+        required: true
+        type: string
+      date:
+        description: Date prefix for results (YYYY-MM-DD, defaults to today)
+        required: false
+        type: string
+        default: ''
+  workflow_dispatch:
+    inputs:
+      label-a:
+        description: First configuration label (e.g. "v5-baseline")
+        required: true
+        type: string
+      label-b:
+        description: Second configuration label (e.g. "v5-speed-brain")
+        required: true
+        type: string
+      date:
+        description: Date prefix for results (YYYY-MM-DD, defaults to today)
+        required: false
+        type: string
+        default: ''
+
+jobs:
+  compare:
+    name: Compare ${{ inputs.label-a }} vs ${{ inputs.label-b }}
+    runs-on: ubuntu-latest
+    environment: simongreercouk
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Download artifact for ${{ inputs.label-a }}
+        uses: actions/download-artifact@v4
+        with:
+          name: bench-results-${{ inputs.label-a }}
+          path: bench-results/
+
+      - name: Download artifact for ${{ inputs.label-b }}
+        uses: actions/download-artifact@v4
+        with:
+          name: bench-results-${{ inputs.label-b }}
+          path: bench-results/
+
+      - name: Run comparison report
+        env:
+          BENCH_LABEL_A: ${{ inputs.label-a }}
+          BENCH_LABEL_B: ${{ inputs.label-b }}
+          BENCH_DATE: ${{ inputs.date }}
+        run: |
+          ARGS="--label-a $BENCH_LABEL_A --label-b $BENCH_LABEL_B"
+          if [ -n "$BENCH_DATE" ]; then
+            ARGS="$ARGS --date $BENCH_DATE"
+          fi
+          node scripts/bench/compare-reports.mjs $ARGS
+
+      - name: Upload comparison report
+        uses: actions/upload-artifact@v4
+        with:
+          name: bench-comparison-${{ inputs.label-a }}-vs-${{ inputs.label-b }}
+          path: bench-results/
+          retention-days: 90
+
+      - name: Post comparison to Mattermost
+        if: ${{ secrets.PAGESPEED_WEBHOOK_URL != '' }}
+        env:
+          PAGESPEED_WEBHOOK_URL: ${{ secrets.PAGESPEED_WEBHOOK_URL }}
+          BENCH_LABEL_A: ${{ inputs.label-a }}
+          BENCH_LABEL_B: ${{ inputs.label-b }}
+        run: |
+          COMPARISON_FILE="bench-results/comparison-${BENCH_LABEL_A}-vs-${BENCH_LABEL_B}.json"
+          if [ -f "$COMPARISON_FILE" ]; then
+            PAYLOAD=$(cat <<EOF
+          {
+            "text": "### Benchmark Comparison: ${BENCH_LABEL_A} vs ${BENCH_LABEL_B}\n\nComparison report uploaded as workflow artifact.\n\nDownload the artifact for full details."
+          }
+          EOF
+          )
+            curl -s -X POST -H "Content-Type: application/json" \
+              -d "$PAYLOAD" \
+              "$PAGESPEED_WEBHOOK_URL"
+          else
+            echo "No comparison file found, skipping Mattermost notification"
+          fi
