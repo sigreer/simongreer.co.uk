@@ -12,6 +12,13 @@
     },
     "types": ["./worker-configuration.d.ts"]
   },
-  "include": [".astro/types.d.ts", "src/**/*", "tests/**/*", "astro.config.ts", "vitest.config.ts", "playwright.config.ts"],
+  "include": [
+    ".astro/types.d.ts",
+    "src/**/*",
+    "tests/**/*",
+    "astro.config.ts",
+    "vitest.config.ts",
+    "playwright.config.ts"
+  ],
   "exclude": ["dist", "node_modules"]
 }

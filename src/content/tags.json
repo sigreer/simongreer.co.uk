@@ -4,37 +4,28 @@
     "description": "Virtual machine technology",
     "category": "systems",
     "color": "#8B7B0D",
-    "synonyms": [
-      "virtualisation"
-    ]
+    "synonyms": ["virtualisation"]
   },
   "vdi": {
     "name": "VDI",
     "description": "Virtual Desktop Infrastructure",
     "category": "systems",
     "color": "#8B7B0D",
-    "synonyms": [
-      "virtual-desktop-infrastructure"
-    ]
+    "synonyms": ["virtual-desktop-infrastructure"]
   },
   "javascript": {
     "name": "JavaScript",
     "description": "A programming language that powers the web",
     "category": "development",
     "color": "#8B7B0D",
-    "synonyms": [
-      "js"
-    ]
+    "synonyms": ["js"]
   },
   "aws": {
     "name": "AWS",
     "description": "Amazon Web Services cloud platform",
     "category": "cloud",
     "color": "#A65E00",
-    "synonyms": [
-      "amazon-web-services",
-      "amazon-aws"
-    ]
+    "synonyms": ["amazon-web-services", "amazon-aws"]
   },
   "cloud": {
     "name": "Cloud",
@@ -59,46 +50,35 @@
     "description": "Virtual Private Servers",
     "category": "cloud",
     "color": "#64b5f6",
-    "synonyms": [
-      "virtual-private-server"
-    ]
+    "synonyms": ["virtual-private-server"]
   },
   "storage": {
     "name": "Storage",
     "description": "Data storage solutions",
     "category": "systems",
     "color": "#991800",
-    "synonyms": [
-      "data-storage"
-    ]
+    "synonyms": ["data-storage"]
   },
   "nas": {
     "name": "NAS",
     "description": "Network Attached Storage",
     "category": "systems",
     "color": "#2e7d32",
-    "synonyms": [
-      "network-attached-storage",
-      "network-storage"
-    ]
+    "synonyms": ["network-attached-storage", "network-storage"]
   },
   "truenas": {
     "name": "TrueNAS",
     "description": "Open source storage platform",
     "category": "systems",
     "color": "#1a237e",
-    "synonyms": [
-      "freenas"
-    ]
+    "synonyms": ["freenas"]
   },
   "firewall": {
     "name": "Firewall",
     "description": "Network security",
     "category": "systems",
     "color": "#f44336",
-    "synonyms": [
-      "fw"
-    ]
+    "synonyms": ["fw"]
   },
   "opnsense": {
     "name": "OPNsense",
@@ -129,20 +109,14 @@
     "description": "Embedded systems",
     "category": "systems",
     "color": "#ff9800",
-    "synonyms": [
-      "embedded-systems"
-    ]
+    "synonyms": ["embedded-systems"]
   },
   "development": {
     "name": "Development",
     "description": "Software development",
     "category": "development",
     "color": "#2196f3",
-    "synonyms": [
-      "software-development",
-      "dev",
-      "programming"
-    ]
+    "synonyms": ["software-development", "dev", "programming"]
   },
   "flutter": {
     "name": "Flutter",
@@ -161,9 +135,7 @@
     "description": "Open Broadcaster Software",
     "category": "media",
     "color": "#9c27b0",
-    "synonyms": [
-      "obs-studio"
-    ]
+    "synonyms": ["obs-studio"]
   },
   "automation": {
     "name": "Automation",
@@ -176,67 +148,42 @@
     "description": "Command line scripting",
     "category": "development",
     "color": "#1a791d",
-    "synonyms": [
-      "shell"
-    ]
+    "synonyms": ["shell"]
   },
   "astro": {
     "name": "Astro",
     "description": "Web framework",
     "category": "development",
     "color": "#7c3aed",
-    "synonyms": [
-      "astrojs"
-    ]
+    "synonyms": ["astrojs"]
   },
   "cloudflare": {
     "name": "Cloudflare",
     "description": "Web infrastructure and security",
     "category": "cloud",
     "color": "#B35A0F",
-    "synonyms": [
-      "cf"
-    ]
+    "synonyms": ["cf"]
   },
   "git": {
     "name": "Git",
     "description": "Version control system",
     "category": "development",
     "color": "#991800",
-    "synonyms": [
-      "git",
-      "github",
-      "gitlab",
-      "bitbucket"
-    ]
+    "synonyms": ["git", "github", "gitlab", "bitbucket"]
   },
   "ai": {
     "name": "AI",
     "description": "Artificial Intelligence",
     "category": "ai-automation",
     "color": "#9333ea",
-    "synonyms": [
-      "artificial intelligence",
-      "llm",
-      "llms",
-      "large-language-model",
-      "large-language-models"
-    ]
+    "synonyms": ["artificial intelligence", "llm", "llms", "large-language-model", "large-language-models"]
   },
   "funny": {
     "name": "Funny",
     "description": "Humorous content",
     "category": "content",
     "color": "#ec4899",
-    "synonyms": [
-      "humor",
-      "fun",
-      "joke",
-      "silly",
-      "jokes",
-      "humour",
-      "fails"
-    ]
+    "synonyms": ["humor", "fun", "joke", "silly", "jokes", "humour", "fails"]
   },
   "workflow": {
     "name": "Workflow",
@@ -255,19 +202,14 @@
     "description": "WordPress CMS",
     "category": "content",
     "color": "#0073aa",
-    "synonyms": [
-      "word-press",
-      "wp"
-    ]
+    "synonyms": ["word-press", "wp"]
   },
   "web": {
     "name": "Web",
     "description": "Web",
     "category": "development",
     "color": "#78003f",
-    "synonyms": [
-      "www"
-    ]
+    "synonyms": ["www"]
   },
   "docker": {
     "name": "Docker",
@@ -296,12 +238,7 @@
     "description": "Business applications",
     "category": "business",
     "color": "#0073aa",
-    "synonyms": [
-      "business-applications",
-      "business-apps",
-      "business-software",
-      "line-of-business"
-    ]
+    "synonyms": ["business-applications", "business-apps", "business-software", "line-of-business"]
   },
   "vector-art": {
     "name": "Vector Art",
@@ -372,10 +309,7 @@
     "description": "broadcast",
     "category": "business",
     "color": "#b3d5cf",
-    "synonyms": [
-      "broadcast-tools",
-      "streaming"
-    ]
+    "synonyms": ["broadcast-tools", "streaming"]
   },
   "chat": {
     "name": "chat",
@@ -394,12 +328,7 @@
     "description": "collaboration",
     "category": "business",
     "color": "#c29e8e",
-    "synonyms": [
-      "file-sharing",
-      "collaboration-tools",
-      "meeting",
-      "meetings"
-    ]
+    "synonyms": ["file-sharing", "collaboration-tools", "meeting", "meetings"]
   },
   "communications": {
     "name": "communications",
@@ -442,21 +371,14 @@
     "description": "dev",
     "category": "business",
     "color": "#ffeea5",
-    "synonyms": [
-      "development",
-      "programming",
-      "scripting"
-    ]
+    "synonyms": ["development", "programming", "scripting"]
   },
   "documentdb": {
     "name": "document-database",
     "description": "document-database",
     "category": "business",
     "color": "#be9ab0",
-    "synonyms": [
-      "document-database",
-      "document-db"
-    ]
+    "synonyms": ["document-database", "document-db"]
   },
   "ecommerce": {
     "name": "ecommerce",
@@ -493,11 +415,7 @@
     "description": "marketing",
     "category": "business",
     "color": "#a9b7b7",
-    "synonyms": [
-      "conversion",
-      "marketing-software",
-      "marketing-automation"
-    ]
+    "synonyms": ["conversion", "marketing-software", "marketing-automation"]
   },
   "media": {
     "name": "media",
@@ -528,11 +446,7 @@
     "description": "networking",
     "category": "business",
     "color": "#dff2ed",
-    "synonyms": [
-      "proxy",
-      "vpn",
-      "vpns"
-    ]
+    "synonyms": ["proxy", "vpn", "vpns"]
   },
   "nextjs": {
     "name": "nextjs",
@@ -575,10 +489,7 @@
     "description": "relational-database",
     "category": "business",
     "color": "#e78fd7",
-    "synonyms": [
-      "relational-db",
-      "relational-database"
-    ]
+    "synonyms": ["relational-db", "relational-database"]
   },
   "rust": {
     "name": "rust",
@@ -591,21 +502,14 @@
     "description": "scheduling",
     "category": "business",
     "color": "#b1fbde",
-    "synonyms": [
-      "calendar",
-      "booking"
-    ]
+    "synonyms": ["calendar", "booking"]
   },
   "security": {
     "name": "security",
     "description": "security",
     "category": "business",
     "color": "#a4a9da",
-    "synonyms": [
-      "cybersecurity",
-      "encryption",
-      "password-manager"
-    ]
+    "synonyms": ["cybersecurity", "encryption", "password-manager"]
   },
   "server": {
     "name": "server",
@@ -636,11 +540,7 @@
     "description": "voip",
     "category": "business",
     "color": "#dfa887",
-    "synonyms": [
-      "sip",
-      "telephony",
-      "pbx"
-    ]
+    "synonyms": ["sip", "telephony", "pbx"]
   },
   "windows": {
     "name": "windows",
@@ -659,9 +559,7 @@
     "description": "ZFS file system",
     "category": "systems",
     "color": "#1a8b9e",
-    "synonyms": [
-      "openzfs"
-    ]
+    "synonyms": ["openzfs"]
   },
   "kernel": {
     "name": "Kernel",

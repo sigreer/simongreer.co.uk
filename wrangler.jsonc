@@ -22,6 +22,8 @@
   // The contact Action that uses them is Phase 5. The `send_email` binding is
   // added in Phase 5 too, after the destination address is verified in the
   // dashboard, so that no deploy depends on an unverified address.
-  "ratelimits": [{ "name": "CONTACT_RATE_LIMIT", "namespace_id": "1001", "simple": { "limit": 3, "period": 60 } }],
+  "ratelimits": [
+    { "name": "CONTACT_RATE_LIMIT", "namespace_id": "1001", "simple": { "limit": 3, "period": 60 } }
+  ],
   "images": { "binding": "IMAGES" }
 }

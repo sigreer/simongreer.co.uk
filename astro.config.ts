@@ -1,7 +1,7 @@
-import { defineConfig, envField, fontProviders } from 'astro/config';
 import cloudflare from '@astrojs/cloudflare';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import { defineConfig, envField, fontProviders } from 'astro/config';
 import astroExpressiveCode from 'astro-expressive-code';
 import icon from 'astro-icon';
 
@@ -19,7 +19,16 @@ export default defineConfig({
     sitemap(),
     icon({
       include: {
-        'material-symbols': ['newspaper-outline', 'work-outline', 'account-circle-outline', 'menu-rounded', 'close-rounded', 'light-mode-outline', 'dark-mode-outline', 'chevron-right-rounded'],
+        'material-symbols': [
+          'newspaper-outline',
+          'work-outline',
+          'account-circle-outline',
+          'menu-rounded',
+          'close-rounded',
+          'light-mode-outline',
+          'dark-mode-outline',
+          'chevron-right-rounded',
+        ],
         'simple-icons': ['github', 'bluesky', 'astro', 'cloudflare', 'bun', 'typescript'],
       },
     }),
@@ -29,13 +38,17 @@ export default defineConfig({
       provider: fontProviders.local(),
       name: 'Geist Sans',
       cssVariable: '--font-sans',
-      options: { variants: [{ weight: '100 900', style: 'normal', src: ['./src/assets/fonts/Geist[wght].woff2'] }] },
+      options: {
+        variants: [{ weight: '100 900', style: 'normal', src: ['./src/assets/fonts/Geist[wght].woff2'] }],
+      },
     },
     {
       provider: fontProviders.local(),
       name: 'Geist Mono',
       cssVariable: '--font-mono',
-      options: { variants: [{ weight: '100 900', style: 'normal', src: ['./src/assets/fonts/GeistMono[wght].woff2'] }] },
+      options: {
+        variants: [{ weight: '100 900', style: 'normal', src: ['./src/assets/fonts/GeistMono[wght].woff2'] }],
+      },
     },
   ],
   env: {

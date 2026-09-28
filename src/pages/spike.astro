@@ -9,10 +9,14 @@ const title = 'Spike';
     <output id="out"></output>
     <script>
       import { actions } from 'astro:actions';
-      document.getElementById('ping')!.addEventListener('click', async () => {
-        const { data, error } = await actions.ping({ who: 'spike' });
-        document.getElementById('out')!.textContent = error ? `error: ${error.message}` : data.reply;
-      });
+      const btn = document.getElementById('ping');
+      const out = document.getElementById('out');
+      if (btn && out) {
+        btn.addEventListener('click', async () => {
+          const { data, error } = await actions.ping({ who: 'spike' });
+          out.textContent = error ? `error: ${error.message}` : data.reply;
+        });
+      }
     </script>
   </body>
 </html>

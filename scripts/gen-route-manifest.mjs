@@ -35,14 +35,28 @@ for (const c of collections) {
     const fm = frontmatter(join(root, file));
     const filename = f.replace(/\.mdx?$/, '');
     const slug = fm.slug || filename; // Astro 5 glob loader used slug as id when present
-    entries.push({ c, file, filename, slug, status: fm.status || 'published', title: fm.title || '', currentPath: `${c.prefix}${slug}/` });
+    entries.push({
+      c,
+      file,
+      filename,
+      slug,
+      status: fm.status || 'published',
+      title: fm.title || '',
+      currentPath: `${c.prefix}${slug}/`,
+    });
   }
 }
 
 const rows = [];
 const live = entries.filter((e) => {
-  if (e.status !== 'published') { rows.push(row(e, null, 'drop', `status ${e.status}`)); return false; }
-  if (e.title === 'Project Title') { rows.push(row(e, null, 'drop', 'placeholder entry')); return false; }
+  if (e.status !== 'published') {
+    rows.push(row(e, null, 'drop', `status ${e.status}`));
+    return false;
+  }
+  if (e.title === 'Project Title') {
+    rows.push(row(e, null, 'drop', 'placeholder entry'));
+    return false;
+  }
   return true;
 });
 
@@ -59,15 +73,29 @@ for (const [target, group] of byTarget) {
   if (group.length === 1) continue;
   // Rule: the entry whose filename equals the contested id owns it; every other entry falls back to its filename.
   const owners = group.filter((e) => e.filename === e.newId);
-  if (owners.length !== 1) throw new Error(`unresolvable collision for ${target}: ${group.map((g) => g.file).join(', ')}`);
-  for (const e of group) if (e !== owners[0]) { e.newId = e.filename; e.collidedWith = owners[0].file; }
+  if (owners.length !== 1)
+    throw new Error(`unresolvable collision for ${target}: ${group.map((g) => g.file).join(', ')}`);
+  for (const e of group)
+    if (e !== owners[0]) {
+      e.newId = e.filename;
+      e.collidedWith = owners[0].file;
+    }
 }
 
 for (const e of live) {
   const newPath = `${e.c.prefix}${e.newId}/`;
-  if (e.collidedWith) rows.push(row(e, newPath, 'keep', `slug collided with ${e.collidedWith}; uses filename ${e.filename} (new path, no redirect)`));
+  if (e.collidedWith)
+    rows.push(
+      row(
+        e,
+        newPath,
+        'keep',
+        `slug collided with ${e.collidedWith}; uses filename ${e.filename} (new path, no redirect)`,
+      ),
+    );
   else if (e.slug.endsWith('.mdx')) rows.push(row(e, newPath, 'redirect', 'slug contained .mdx'));
-  else if (e.slug !== e.filename) rows.push(row(e, newPath, 'keep', `rename file ${e.filename}.mdx -> ${e.slug}.mdx`));
+  else if (e.slug !== e.filename)
+    rows.push(row(e, newPath, 'keep', `rename file ${e.filename}.mdx -> ${e.slug}.mdx`));
   else rows.push(row(e, newPath, 'keep', 'unchanged'));
 }
 
@@ -76,25 +104,84 @@ function row(e, newPath, action, reason) {
 }
 
 // Static aliases and service pages
-rows.push({ collection: 'static', file: null, currentPath: '/me/', newPath: '/me/personally/', action: 'redirect', reason: 'existing rule' });
-rows.push({ collection: 'static', file: null, currentPath: '/me/get-in-touch/', newPath: '/get-in-touch/', action: 'redirect', reason: 'replaces meta-refresh page' });
-rows.push({ collection: 'static', file: null, currentPath: '/home/', newPath: null, action: 'drop', reason: 'orphan duplicate of /' });
+rows.push({
+  collection: 'static',
+  file: null,
+  currentPath: '/me/',
+  newPath: '/me/personally/',
+  action: 'redirect',
+  reason: 'existing rule',
+});
+rows.push({
+  collection: 'static',
+  file: null,
+  currentPath: '/me/get-in-touch/',
+  newPath: '/get-in-touch/',
+  action: 'redirect',
+  reason: 'replaces meta-refresh page',
+});
+rows.push({
+  collection: 'static',
+  file: null,
+  currentPath: '/home/',
+  newPath: null,
+  action: 'drop',
+  reason: 'orphan duplicate of /',
+});
 for (const [oldPage, target] of [
   ['vpn-setup-routing-wireguard-ipsec-openvpn', 'networking-and-security'],
   ['system-administration', 'system-design-and-deployment'],
-]) rows.push({ collection: 'services', file: null, currentPath: `/hire-me/${oldPage}/`, newPath: `/hire-me/${target}/`, action: 'redirect', reason: 'page merged (spec §4.3)' });
-for (const p of ['web-development','business-apps','cloud-and-hosted','networking-and-security','storage-and-nas','software-development','data-and-databases','system-design-and-deployment'])
-  rows.push({ collection: 'services', file: null, currentPath: `/hire-me/${p}/`, newPath: `/hire-me/${p}/`, action: 'keep', reason: 'service page' });
-rows.push({ collection: 'services', file: null, currentPath: null, newPath: '/hire-me/ai-and-automation/', action: 'keep', reason: 'new service page (spec §4.3)' });
+])
+  rows.push({
+    collection: 'services',
+    file: null,
+    currentPath: `/hire-me/${oldPage}/`,
+    newPath: `/hire-me/${target}/`,
+    action: 'redirect',
+    reason: 'page merged (spec §4.3)',
+  });
+for (const p of [
+  'web-development',
+  'business-apps',
+  'cloud-and-hosted',
+  'networking-and-security',
+  'storage-and-nas',
+  'software-development',
+  'data-and-databases',
+  'system-design-and-deployment',
+])
+  rows.push({
+    collection: 'services',
+    file: null,
+    currentPath: `/hire-me/${p}/`,
+    newPath: `/hire-me/${p}/`,
+    action: 'keep',
+    reason: 'service page',
+  });
+rows.push({
+  collection: 'services',
+  file: null,
+  currentPath: null,
+  newPath: '/hire-me/ai-and-automation/',
+  action: 'keep',
+  reason: 'new service page (spec §4.3)',
+});
 
 // Self-checks
 const kept = rows.filter((r) => r.action === 'keep').map((r) => r.newPath);
 if (new Set(kept).size !== kept.length) throw new Error('duplicate kept destination paths');
 const find = (file) => rows.find((r) => r.file === file);
-if (find('src/content/tech/langchain.mdx')?.newPath !== '/tech/langchain/') throw new Error('langchain must own /tech/langchain/');
-if (find('src/content/tech/flowise.mdx')?.newPath !== '/tech/flowise/') throw new Error('flowise must move to /tech/flowise/');
+if (find('src/content/tech/langchain.mdx')?.newPath !== '/tech/langchain/')
+  throw new Error('langchain must own /tech/langchain/');
+if (find('src/content/tech/flowise.mdx')?.newPath !== '/tech/flowise/')
+  throw new Error('flowise must move to /tech/flowise/');
 
-rows.sort((a, b) => `${a.collection}${a.currentPath}${a.file}`.localeCompare(`${b.collection}${b.currentPath}${b.file}`));
-writeFileSync(outFile, JSON.stringify({ generatedAt: new Date().toISOString(), rows }, null, 2) + '\n');
-const counts = rows.reduce((acc, r) => ((acc[r.action] = (acc[r.action] || 0) + 1), acc), {});
+rows.sort((a, b) =>
+  `${a.collection}${a.currentPath}${a.file}`.localeCompare(`${b.collection}${b.currentPath}${b.file}`),
+);
+writeFileSync(outFile, `${JSON.stringify({ generatedAt: new Date().toISOString(), rows }, null, 2)}\n`);
+const counts = {};
+for (const r of rows) {
+  counts[r.action] = (counts[r.action] || 0) + 1;
+}
 console.log(JSON.stringify(counts));

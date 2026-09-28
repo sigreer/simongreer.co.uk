@@ -1,0 +1,11 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": ["scripts/gen-route-manifest.mjs", "tests/**/*.ts"],
+  "ignore": ["src/content/**"],
+  "ignoreDependencies": [
+    "@iconify-json/material-symbols",
+    "@iconify-json/simple-icons",
+    "cloudflare",
+    "@astrojs/rss"
+  ]
+}

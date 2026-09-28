@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test('ping action runs in the Worker and reads a binding var', async ({ page }) => {
   await page.goto('/spike/');
