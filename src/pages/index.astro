@@ -1,62 +1,8 @@
 ---
-import { getCollection } from 'astro:content';
-import type { CollectionEntry } from 'astro:content';
-import HomeLayout from "@layouts/HomeLayout.astro";
-import ShowAll from "@components/Inline/ShowAll.astro";
-import Card from '@components/ContentBoxes/Card.astro';
-import HomeBanner from '@components/Media/HomeBanner.astro';
-const posts = (await getCollection('blog'))
-  .filter(({ data }: { data: { status: string } }) => data.status === 'published')
-  .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime())
-  .slice(0, 5);
+const title = 'SimonGreer.co.uk';
 ---
-<script>
-  function getSliceSize() {
-    if (window.innerWidth < 640) return 6; // xs
-    if (window.innerWidth < 768) return 8; // sm
-    if (window.innerWidth < 1024) return 10; // md
-    return 12; // lg
-  }
-
-  function updateVisibleItems() {
-    const sliceSize = getSliceSize();
-    document.querySelectorAll('.tech-grid').forEach(grid => {
-      const items = grid.querySelectorAll('.tech-item');
-      items.forEach((item, index) => {
-        (item as HTMLElement).style.display = index < sliceSize ? 'block' : 'none';
-      });
-    });
-  }
-
-  window.addEventListener('resize', updateVisibleItems);
-  document.addEventListener('astro:page-load', updateVisibleItems);
-  updateVisibleItems();
-</script>
-<HomeLayout title="Tech" leftcol="blog" rightcol="tech">
-  <section class="md:py-4 lg:py-5 xl:py-6 px-6 md:px-0">
-    <div class="flex flex-col gap-6 md:gap-7 lg:gap-8 xl:gap-10">
-      <HomeBanner post={posts[0]} />
-      <div class="w-full">
-        <div class="flex justify-between items-center">
-          <h2 class="text-lg text-gray-900 font-semibold uppercase mb-2 md:mb-3 lg:mb-4 dark:text-themepurple">
-            Recent Blog Posts
-          </h2>
-          <ShowAll link="/blog/" />
-        </div>
-        <ul class="grid gap-6 md:gap-7 lg:gap-8 xl:gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 overflow-visible">
-          {posts.slice(1).map((post: CollectionEntry<'blog'>) => (
-            <Card 
-              title={post.data.title}
-              slug={post.data.slug}
-              description={post.data.description}
-              coverimage={post.data.coverimage}
-              pubDate={post.data.pubDate}
-              tags={post.data.tags}
-              type="blog"
-            />
-          ))}
-        </ul>
-      </div>
-    </div>
-  </section>
-</HomeLayout>
+<!doctype html>
+<html lang="en-GB">
+  <head><meta charset="utf-8" /><title>{title}</title></head>
+  <body><h1>{title}</h1></body>
+</html>

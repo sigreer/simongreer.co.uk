@@ -1,32 +1,17 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "target": "ESNext",
-    "lib": ["dom", "ES2015", "ESNext", "DOM", "DOM.Iterable"],
-    "moduleResolution": "NodeNext",
-    "module": "NodeNext",
-    "jsx": "react-jsx",
-    "jsxImportSource": "react",
-    "strictNullChecks": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
+      "@/*": ["src/*"],
       "@components/*": ["src/components/*"],
-      "@icons/*": ["src/components/Icons/*"],
-      "@content/*": ["src/content/*"],
-      "@images/*": ["src/images/*"],
-      "@styles/*": ["src/styles/*"],
-      "@assets/*": ["src/assets/*"],
       "@layouts/*": ["src/layouts/*"],
-      "@pages/*": ["src/pages/*"],
-      "@utils/*": ["src/utils/*"],
-      "@lib/*": ["src/lib/*"]
+      "@lib/*": ["src/lib/*"],
+      "@styles/*": ["src/styles/*"],
+      "@images/*": ["src/images/*"]
     },
-    "allowJs": true,
-    "outDir": "./public/js",
-    "types": [
-      "@cloudflare/workers-types/2023-07-01",
-  ]},
-  "include": [".astro/types.d.ts", "src/**/*.ts*", "src/**/*.mdx", "src/**/*.astro", "src/components/**/*", "@components/**/*", "@icons/**/*", "**/*"],
-  "exclude": ["dist"]
+    "types": ["./worker-configuration.d.ts"]
+  },
+  "include": [".astro/types.d.ts", "src/**/*", "tests/**/*", "astro.config.ts", "vitest.config.ts", "playwright.config.ts"],
+  "exclude": ["dist", "node_modules"]
 }

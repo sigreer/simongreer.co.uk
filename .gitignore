@@ -1,41 +1,13 @@
-# build output
-dist/
-.output/
-.astro/
-.playwright/
-.playwright-cli/
-# dependencies
 node_modules/
-
-# logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# environment variables
-.env*
-
-# macOS-specific files
-.DS_Store
-
-# Bun-specific files
-bun.lockb
-.bunlockb
-.bun/
-
-.vscode/
-
-_ignore*
-
-# Wrangler dry run output
-wrangler-output/
-
-.astro/content.d.ts
-.astro/content.d.ts
-.astro/content-modules.mjs
-.astro/data-store.json
+dist/
+.astro/
+.wrangler/
+worker-configuration.d.ts
 .dev.vars
-
-# Benchmark results
-bench-results/
+.env
+.env.*
+!.dev.vars.example
+test-results/
+playwright-report/
+tests/e2e/__snapshots__/**/*-actual.png
+.lighthouseci/

@@ -1,16 +1,3 @@
-/// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
-
-declare global {
-    interface Window {
-        applyTagColorsToNewElements: () => void;
-    }
-}
-
-type Runtime = import('@astrojs/cloudflare').Runtime<Env>;
-
-declare namespace App {
-  interface Locals extends Runtime {}
-}
-
-export {};
+// Bindings and vars are typed by `wrangler types` into worker-configuration.d.ts (Env interface).
+// `import { env } from 'cloudflare:workers'` is typed by @cloudflare/workers-types via wrangler.
