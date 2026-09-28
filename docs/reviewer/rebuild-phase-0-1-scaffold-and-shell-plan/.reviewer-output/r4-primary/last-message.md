@@ -1,0 +1,29 @@
+1. Findings
+
+- **F1 — Severity: blocking — RESOLVED.** Task 0 commits planning documents before creating the worktree from local `main` and verifies their presence.
+- **F2 — Severity: blocking — RESOLVED.** Task 2 removes the legacy content configuration and creates the modern empty configuration before building.
+- **F3 — Severity: important — RESOLVED.** Re-executed the generator in scratch space in both enumeration orders: both produced `{"drop":7,"keep":80,"redirect":5}` with identical rows.
+- **F4 — Severity: important — RESOLVED.** Desktop toggle tests remain desktop-only; mobile tests open the menu first.
+- **F5 — Severity: important — RESOLVED.** The `check` script generates Wrangler declarations before Astro checking.
+- **F6 — Severity: important — RESOLVED at plan level.** Modal behavior, close-event cleanup, breakpoint handling and keyboard tests remain present.
+- **F8 — Severity: important — RESOLVED.** [Task 2 step 8](/home/simon/Dev/sigreer/simongreer.co.uk/simongreer.co.uk/docs/plans/2026-09-28-rebuild-phase-0-1-scaffold-and-shell.md:474) now runs only type generation and Astro checking. The full check remains after tooling configuration in Task 4. The unused `basename` import is removed.
+- **F7 — Severity: minor — RESOLVED.** Task 12 selects the workflow run by exact commit SHA and uses its run ID.
+
+No new findings within this incremental review.
+
+2. Open questions / assumptions
+
+- The reported “clean” status still differs from the repository: `scripts/icon-helper.sh` is modified; `.claude/`, `ai_docs/` and `docs/` are untracked. Task 0 already accounts for the planning documents.
+- Readiness concerns the plan; runtime and deployment acceptance remain implementation gates.
+
+3. Suggested document edits
+
+None required for the reviewed fixes.
+
+4. Verification gaps / commands that should be run
+
+- In a clean checkout of the completed scaffold, run `bun install --frozen-lockfile && bun run check` before building.
+- Complete desktop/mobile browser tests and visual acceptance.
+- Record the accepted commit SHA, successful Actions run ID, Worker version ID and preview URL.
+
+Overall verdict: ready

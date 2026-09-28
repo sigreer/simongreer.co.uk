@@ -1,0 +1,83 @@
+1. Findings
+
+**F1 — Severity: blocking — The rate-limit configuration cannot implement the acceptance criterion.**  
+Spec lines 21, 51 and 156 require five submissions per 600 seconds. Cloudflare’s binding accepts only 10- or 60-second periods and maintains counters per Cloudflare location. Choose a supported, explicitly approximate policy or specify stateful enforcement for the ten-minute requirement. Mocked binding tests cannot validate this configuration. [Cloudflare rate-limit documentation](https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/)
+
+**F2 — Severity: blocking — Native form submission contradicts the static rendering topology.**  
+Spec lines 46 and 175 require static HTML everywhere, while line 154 promises native Action form submission and server-rendered results. Astro requires on-demand rendering for pages using an HTML form Action. Furthermore, Turnstile requires JavaScript, so the stated no-JavaScript success path cannot obtain a token. Choose either static pages with JavaScript submission and a visible contact fallback, or explicitly server-render the form pages and update routing, caching and header requirements. [Astro Actions](https://docs.astro.build/en/guides/actions/), [Turnstile setup](https://developers.cloudflare.com/turnstile/get-started/)
+
+**F3 — Severity: blocking — Binding access uses a removed adapter API.**  
+Spec line 158 prescribes `Astro.locals.runtime.env`; this was removed in adapter v13. The selected v14 adapter uses `import { env } from 'cloudflare:workers'`. Correct the binding-access contract and require a built-Worker integration test; a mocked handler could conceal this failure. [Adapter migration documentation](https://docs.astro.build/en/guides/integrations-guide/cloudflare/#removed-astrolocalsruntime-api)
+
+**F4 — Severity: important — Redirect generation uses the wrong project prefix and lacks collision handling.**  
+Spec line 100 prescribes `/<collection>/<id>`, but projects are routed under `/tech/projects/` in both line 74 and the existing `src/pages/tech/projects/[id].astro:9`.
+
+Additionally, `src/content/tech/flowise.mdx:6` and `src/content/tech/langchain.mdx:6` both declare `langchain`. The proposed mechanical rule would create `/tech/langchain → /tech/flowise`, redirecting away from the new canonical Langchain page. The installed loader also uses frontmatter `slug` as its ID when present (`node_modules/astro/dist/content/loaders/glob.js:9–19`), contradicting the assumption that current IDs always mean filenames.
+
+Specify collection-specific prefixes, explicit collision resolution, and an old-to-new route manifest. Include existing static aliases such as `/me/get-in-touch`, which the proposed directory layout drops.
+
+**F5 — Severity: important — Services cannot directly validate the existing filter enum against route IDs.**  
+Spec line 95 retains existing `hireme_filter` values while validating them against one service per hire-me category. These identifiers differ: `networking` selects `/hire-me/networking-and-security` (`src/pages/hire-me/networking-and-security.astro:30–32`); other examples include `storage` versus `storage-and-nas` and `business` versus `business-apps`. Existing filters also include categories without corresponding pages.
+
+Define separate service route IDs and associated filter keys, with an exhaustive mapping and a policy for unmatched categories. Otherwise implementation must invent routes, reject existing content, or silently omit vendor tiles.
+
+**F6 — Severity: important — The MDX migration omits dependencies scheduled for deletion.**  
+Spec lines 30, 67 and 166 cover copying content and migrating gallery images, but existing posts import old components and styles:
+
+- `src/content/blog/magick-tricks-automate-screenshot-cover-images.mdx:11–13`: old Carousel and Gallery.
+- `src/content/blog/astro-on-cloudflare-fully-automated-part-3.mdx:15–16`: old lightbox stylesheet and component.
+- `src/content/blog/fedora-kernel-upgrades-with-zfs.mdx:14,40–42`: old icon component and Tailwind classes.
+
+Require a migration inventory covering executable MDX imports, component props and embedded styling, while preserving prose and code samples. Otherwise the fresh scaffold fails to build or silently loses presentation. One representative post screenshot is insufficient coverage.
+
+**F7 — Severity: important — The CSP mechanism does not produce the required HTTP header.**  
+Spec line 22 requires `content-security-policy` in response headers, but line 174 relies on Astro’s CSP feature, which emits a `<meta http-equiv="content-security-policy">` element. The listed `_headers` configuration does not supply CSP. Either change acceptance to verify the generated meta policy and browser enforcement, or specify how per-page hashes become response headers. [Astro CSP configuration](https://docs.astro.build/en/reference/configuration-reference/#securitycsp)
+
+**F8 — Severity: important — Image configuration contradicts the build-time optimization promise.**  
+Spec line 50 selects `imageService: 'cloudflare-binding'`, while line 166 promises build-time optimization for prerendered images. The adapter documents the string setting as runtime-only optimization; the explicit combination is `{ build: 'compile', runtime: 'cloudflare-binding' }`. Correct the configuration and distinguish any custom runtime fallback from documented adapter behavior. [Adapter image-service documentation](https://docs.astro.build/en/guides/integrations-guide/cloudflare/#imageservice)
+
+**F9 — Severity: important — CI can pass without testing the intended deployed revision.**  
+Spec lines 190–194 do not define a reliable connection between a commit, its Workers preview and the required CI check. Reading an unspecified PR comment can select a stale deployment; falling back to localhost bypasses the preview acceptance gate. Current Workers Previews also require their own configuration rather than assuming production bindings and secrets apply. [Workers Builds branch configuration](https://developers.cloudflare.com/workers/ci-cd/builds/build-branches/)
+
+Specify the preview command, bindings/secrets, Turnstile hostname configuration, commit-matched deployment lookup and bounded readiness wait. Local checks should remain useful, but must not substitute for the required deployed gate.
+
+**F10 — Severity: important — Cutover order is inconsistent and its DNS assumption is unsupported.**  
+Spec line 30 merges the rebuild into `main` after cutover, yet lines 190 and 202 require testing the production Worker whose production branch is `main`. The spec never establishes how the accepted rebuild reaches that Worker before domain transfer.
+
+Line 203 also assumes adding custom domains rewrites existing Pages CNAMEs, while Cloudflare documents that a Worker Custom Domain cannot be created on a hostname with an existing CNAME. Rollback must account for removing the Worker association and restoring DNS, not merely re-adding Pages domains. [Workers Custom Domains](https://developers.cloudflare.com/workers/configuration/routing/custom-domains/)
+
+Define the exact revision-promotion sequence, DNS/domain transfer and reversal steps. Reconcile deletion of `production` immediately after cutover versus after one week.
+
+2. Open questions / assumptions
+
+- Is the required rate limit strict across locations, or an approximate abuse deterrent?
+- Which entry should own the existing `/tech/langchain` URL?
+- What are the initial publication statuses for clients, and how should published content referencing unpublished entries behave?
+- Are preview canonical/RSS URLs intentionally production URLs? Their current acceptance checks could otherwise validate the old live site.
+- What mechanism guarantees Pagefind indexing runs after the build, and which content is searchable?
+
+3. Suggested document edits
+
+Retain the current structure. Resolve F1–F3 before planning, then add a migration mapping table and a concrete deployment/cutover sequence addressing F4–F10.
+
+Also clarify these smaller contracts:
+
+- Restrict year-long immutable caching to versioned URLs; `/fonts/*` and `/pagefind/*` can include stable filenames.
+- Define Pagefind generation and a search acceptance test.
+- Replace `document.currentScript` guidance with instance-safe hooks for bundled module scripts.
+- Correct line 183’s “5.2 criteria” reference to success criterion 4.
+- Reconcile the generic 500 message with the promised mailto fallback.
+
+4. Verification gaps / commands that should be run
+
+No implementation builds or deployments were performed; this was a read-only spec review.
+
+Before accepting the implementation plan, require:
+
+- A minimal pinned Astro/adapter scaffold that builds, passes `wrangler deploy --dry-run`, and executes an Action under the built Worker.
+- A route-manifest check covering all old published URLs, redirects, collisions and unpublished-route exclusion.
+- Browser form tests covering the chosen fallback, expired/reused tokens, rate limiting and delivery failures.
+- Deployed header/CSP checks and image-network inspection.
+- Tests against the exact accepted preview revision, followed by custom-domain checks after transfer and a documented rollback rehearsal.
+
+Overall verdict: revise

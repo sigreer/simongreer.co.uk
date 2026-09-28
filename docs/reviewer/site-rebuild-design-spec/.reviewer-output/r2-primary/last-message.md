@@ -1,0 +1,51 @@
+1. Findings
+
+**F9 — Severity: important — PARTIALLY RESOLVED: preview identity is defined, but Turnstile’s preview configuration is invalid.**  
+`docs/specs/2026-09-28-site-rebuild-design.md:215` specifies `*.workers.dev` as an allowed hostname. Turnstile does not accept wildcard characters; registering a hostname automatically permits its subdomains. Consequently, the required real-email preview submission at lines 25 and 258 lacks a valid configuration.
+
+Replace the wildcard with the actual account hostname, `<account-subdomain>.workers.dev`, which covers the version-preview hostnames, or explicitly register each accepted preview hostname. The commit-tagged upload, bounded readiness wait and removal of the localhost fallback otherwise resolve the previous CI identity concerns. [Turnstile hostname requirements](https://developers.cloudflare.com/turnstile/additional-configuration/hostname-management/)
+
+**F10 — Severity: important — PARTIALLY RESOLVED: cutover still assumes automatic DNS deletion.**  
+`docs/specs/2026-09-28-site-rebuild-design.md:268` says removing Pages custom domains deletes their CNAMEs. Cloudflare’s documented procedure explicitly deletes the DNS record separately before removing the Pages domain association. The revised sequence can therefore still encounter the CNAME conflict identified in round 1. [Pages domain removal procedure](https://developers.cloudflare.com/pages/configuration/custom-domains/#delete-a-custom-domain)
+
+Record the existing DNS records, explicitly remove and verify absence of conflicting records, then create Worker Custom Domains. Rollback must explicitly restore and verify both Pages associations and DNS records. Require active-domain/TLS checks with a timeout and rollback trigger; the under-one-minute expectation is not an acceptance gate. Also replace `/www` at line 270 with `https://www.simongreer.co.uk/`.
+
+The temporary production branch and one-week retention now resolve the earlier sequencing and cleanup contradictions.
+
+**F11 — Severity: important — NEW REGRESSION: the new route acceptance test runs before its required build output exists.**  
+`docs/specs/2026-09-28-site-rebuild-design.md:17` requires `routes.test.ts` to inspect `dist/`, and line 245 includes it in Vitest. However, line 254 runs `bun run test` before `bun run build`. A clean CI checkout cannot pass the prescribed route assertions; a reused checkout could inspect stale output.
+
+Run the build before artifact-dependent tests, or separate source tests from a post-build route-validation command. Require the latter to inspect output generated for the current checkout.
+
+The following prior findings are **RESOLVED at specification level**:
+
+- **F1 — Severity: blocking — RESOLVED.** Lines 21–24, 56 and 217 specify a supported 60-second limit, acknowledge approximation and test the built Worker.
+- **F2 — Severity: blocking — RESOLVED.** Lines 202 and 213–219 consistently specify JavaScript Action submission from static pages with a no-JavaScript email fallback.
+- **F3 — Severity: blocking — RESOLVED.** Lines 51, 217 and 293 use the current binding API and require a built-Worker spike.
+- **F4 — Severity: important — RESOLVED.** Lines 103–122 define collection-specific prefixes, slug-preserving renames, collision ownership and the contact alias. The newly introduced test-order problem is tracked separately as F11.
+- **F5 — Severity: important — RESOLVED.** Lines 126–142 provide an explicit service/filter mapping and unmatched-filter policy consistent with the existing content.
+- **F6 — Severity: important — RESOLVED.** Lines 148–161 cover executable MDX dependencies, styling migration and additional visual checks.
+- **F7 — Severity: important — RESOLVED.** Lines 26 and 237 consistently require a meta CSP and browser enforcement testing.
+- **F8 — Severity: important — RESOLVED.** Line 55 specifies the documented build/runtime image-service combination. [Astro adapter documentation](https://docs.astro.build/en/guides/integrations-guide/cloudflare/#imageservice)
+
+2. Open questions / assumptions
+
+- CI’s uploaded version and Workers Builds’ deployment are separate uploads. Record their version IDs and source SHA when verifying line 267; do not assume identical version IDs.
+- The image-error fallback promised at line 278 remains behavior to demonstrate during implementation.
+
+3. Suggested document edits
+
+Keep the current structure. Correct the Turnstile hostname, make DNS transfer/restoration explicit, and place artifact-dependent tests after the build. No broad architectural rewrite is needed.
+
+4. Verification gaps / commands that should be run
+
+This was a read-only review of the on-disk spec, tracker brief and relevant repository content, with platform-documentation checks. No implementation build or deployment was performed.
+
+During implementation, require:
+
+- A clean-checkout build followed by route-manifest tests.
+- The phase-0 built-Worker Action and version-preview spike.
+- A real Turnstile-protected submission on the exact accepted preview.
+- The throwaway-hostname cutover/rollback rehearsal, recording DNS, domain activation and HTTPS results in both directions.
+
+Overall verdict: revise

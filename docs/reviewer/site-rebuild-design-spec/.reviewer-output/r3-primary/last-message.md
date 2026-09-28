@@ -1,0 +1,42 @@
+1. Findings
+
+All prior findings are **RESOLVED at specification level**. No new blocking issues or fix-induced regressions found.
+
+| ID | Original severity | Status | Evidence in `docs/specs/2026-09-28-site-rebuild-design.md` |
+|---|---|---|---|
+| F1 | blocking | RESOLVED | Lines 21–24, 56 and 217 retain the supported rate-limit period and built-Worker tests. |
+| F2 | blocking | RESOLVED | Lines 202 and 213–219 retain JavaScript Action submission and the email fallback. |
+| F3 | blocking | RESOLVED | Lines 51, 217 and 299 retain the binding API and runtime spike. |
+| F4 | important | RESOLVED | Lines 103–122 retain route preservation, collision ownership and redirects. |
+| F5 | important | RESOLVED | Lines 126–142 retain explicit service/filter mappings. |
+| F6 | important | RESOLVED | Lines 148–161 retain the MDX migration inventory and visual acceptance checks. |
+| F7 | important | RESOLVED | Lines 26 and 237 retain consistent meta-CSP requirements and enforcement testing. |
+| F8 | important | RESOLVED | Line 55 retains the build/runtime image-service configuration. |
+| F9 | important | RESOLVED | Line 215 replaces the wildcard with `<account-subdomain>.workers.dev`. |
+| F10 | important | RESOLVED | Lines 267–277 specify separate version identities, DNS capture and deletion, conflict checks, activation/HTTPS polling, timeout-triggered rollback, restoration and rehearsal. |
+| F11 | important | RESOLVED | Lines 243–245 and 254 separate source tests from route tests and require a fresh build before artifact assertions. |
+
+F9’s hostname correction matches [Cloudflare’s documented subdomain behavior](https://developers.cloudflare.com/turnstile/additional-configuration/hostname-management/). F10 now explicitly handles the separate DNS removal required by [Pages domain removal](https://developers.cloudflare.com/pages/configuration/custom-domains/#delete-a-custom-domain).
+
+2. Open questions / assumptions
+
+- Platform integration remains subject to the phase-0 spike and the prescribed deployment rehearsal; this review establishes specification readiness.
+- The image-error fallback at line 284 still needs implementation evidence.
+- The supplied “clean” status does not match the repository inspected: it contains modified and untracked files. This review used the on-disk target as requested.
+
+3. Suggested document edits
+
+No substantive edits required. Optionally update line 3’s stale revision label, which still says “after review round 1.”
+
+4. Verification gaps / commands that should be run
+
+Read-only review completed against the full on-disk spec, tracker brief, relevant audit evidence and Cloudflare documentation. No build or deployment performed.
+
+Implementation must demonstrate:
+
+- Clean-checkout `bun run test:unit`, `bun run build`, then `bun run test:routes`.
+- The built-Worker Action and exact-commit preview spike.
+- Real Turnstile-protected email delivery on the accepted preview.
+- Cutover and rollback rehearsal with DNS, activation and HTTPS evidence in both directions.
+
+Overall verdict: ready

@@ -1,0 +1,36 @@
+1. Findings
+
+- **F1 — Severity: blocking — The worktree will not contain the reviewed documents.** [Plan:52–59](/home/simon/Dev/sigreer/simongreer.co.uk/simongreer.co.uk/docs/plans/2026-09-28-rebuild-phase-0-1-scaffold-and-shell.md:52) creates the worktree from `origin/main`, but the current repository reports `?? docs/`, and `git ls-tree -r --name-only origin/main docs` returns nothing. Neither the plan nor spec will transfer; Task 1’s manifest write also lacks its destination directory. Add an explicit prerequisite to commit and transfer the reviewed planning artifacts, then verify their presence in `$WT` before proceeding.
+
+- **F2 — Severity: blocking — The scaffold preserves the legacy content configuration.** [Plan:219](/home/simon/Dev/sigreer/simongreer.co.uk/simongreer.co.uk/docs/plans/2026-09-28-rebuild-phase-0-1-scaffold-and-shell.md:219) preserves all of `src/content`, including the existing [config.ts](/home/simon/Dev/sigreer/simongreer.co.uk/simongreer.co.uk/src/content/config.ts:1). Task 2 then builds before Task 8 introduces `src/content.config.ts`. Astro documents the legacy location as a `LegacyContentConfigError` without compatibility configuration. Explicitly remove the old configuration and create an empty modern configuration during scaffolding, while preserving the content files. This also makes the claim that legacy collections remain unloaded accurate. See [Astro’s migration guidance](https://docs.astro.build/en/guides/upgrade-to/v6/#updating-existing-collections).
+
+- **F3 — Severity: important — The supplied generator produces the known collision incorrectly.** [Plan:148–158](/home/simon/Dev/sigreer/simongreer.co.uk/simongreer.co.uk/docs/plans/2026-09-28-rebuild-phase-0-1-scaffold-and-shell.md:148) only handles the case where the previously encountered file owns the slug. I executed the supplied generator against the existing content, redirecting its output to `/tmp`: both `flowise.mdx` and `langchain.mdx` receive `/tech/langchain/`; Flowise is instructed to rename over Langchain. Actual counts are `keep:80, drop:7, redirect:5`, contradicting line 189. Replace the deferred “fix the winner logic” instruction with deterministic collision resolution and assertions for both enumeration orders, unique retained destinations, and the exact two expected paths.
+
+- **F4 — Severity: important — The mobile shell acceptance tests cannot pass as written.** The toggle test at [Plan:1066](/home/simon/Dev/sigreer/simongreer.co.uk/simongreer.co.uk/docs/plans/2026-09-28-rebuild-phase-0-1-scaffold-and-shell.md:1066) clicks a toggle before opening the mobile menu, then repeats after a reload closes it. The header test similarly expects visible navigation without opening the menu. At 390px, the desktop controls are hidden and the mobile overlay starts hidden. Open the menu before each mobile interaction, including after reload, and scope assertions to the visible navigation. The advertised Task 9/10 pass counts are otherwise unattainable.
+
+- **F5 — Severity: important — CI checks run before their generated type dependency exists.** [Plan:1826–1836](/home/simon/Dev/sigreer/simongreer.co.uk/simongreer.co.uk/docs/plans/2026-09-28-rebuild-phase-0-1-scaffold-and-shell.md:1826) runs `check` before `build`; only `dev` and `build` generate `worker-configuration.d.ts`. That file is ignored but explicitly referenced by `tsconfig.json`, and the spike imports `cloudflare:workers`. Local builds conceal this clean-checkout failure. Generate Wrangler types before `astro check`, preferably in the `check` script itself. [Astro’s adapter documentation](https://docs.astro.build/en/guides/integrations-guide/cloudflare/#typing) explicitly requires generating these types.
+
+- **F6 — Severity: important — The full-screen mobile overlay leaves background content keyboard-accessible.** [Plan:1450–1475](/home/simon/Dev/sigreer/simongreer.co.uk/simongreer.co.uk/docs/plans/2026-09-28-rebuild-phase-0-1-scaffold-and-shell.md:1450) moves focus into a plain `div` and locks scrolling, but neither contains focus nor makes the underlying page inert. Tabbing can reach obscured content; Escape is only handled inside the menu. Crossing the desktop breakpoint also hides the overlay without clearing the body scroll lock. Specify modal focus handling or a native modal dialog, breakpoint cleanup, and tests for Tab/Shift+Tab, Escape, focus restoration, and resizing while open.
+
+- **F7 — Severity: minor — The CI evidence command is invalid and can select the wrong run.** [Plan:1938–1940](/home/simon/Dev/sigreer/simongreer.co.uk/simongreer.co.uk/docs/plans/2026-09-28-rebuild-phase-0-1-scaffold-and-shell.md:1938) uses unsupported `gh run view --branch`; stderr suppression hides the error. Selecting the latest branch run immediately after pushing can also select an earlier run. Resolve and retain the `ci.yml` run ID for the exact pushed SHA, then use that ID for both watching and viewing evidence.
+
+2. Open questions / assumptions
+
+- The account-specific preview hostname and repository-level Cloudflare secrets are assumed, not verified by this review.
+- Confirm whether the declared email binding can be deployed before destination verification; the plan defers verification until Phase 5 but deploys the binding in Task 12.
+- Deferring content routes, CSP, search, and blocking Lighthouse thresholds is consistent with this phase’s stated scope.
+
+3. Suggested document edits
+
+Address F1–F7 in their existing tasks; no broad restructuring is needed. Also update the opening inventory from `_spike.astro` to `spike.astro` and from `public/fonts` to `src/assets/fonts`. Require failure-preserving command execution: several `build/check | tail` examples currently return the filter’s exit status rather than the verification command’s.
+
+4. Verification gaps / commands that should be run
+
+- Re-run the corrected manifest generator against the pinned legacy revision, with collision assertions in both file orders.
+- Verify `bun install --frozen-lockfile && bun run check` in a clean implementation checkout before any build.
+- Run the complete desktop/mobile shell suite, including keyboard and breakpoint tests.
+- Validate CI with an Actions-aware validator, then record the exact SHA, run ID, Worker version ID, and preview URL from the first successful run.
+
+Repository files were read; only the manifest generator was executed in isolation. No scaffold build or deployment was performed.
+
+Overall verdict: revise
