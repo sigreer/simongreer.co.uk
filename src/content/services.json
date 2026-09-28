@@ -1,0 +1,74 @@
+[
+  {
+    "id": "web-development",
+    "title": "Web Development",
+    "navLabel": "Web Development",
+    "inNav": true,
+    "icon": "material-symbols:code-rounded",
+    "filters": ["web-development"]
+  },
+  {
+    "id": "business-apps",
+    "title": "Business Apps",
+    "navLabel": "Business Apps",
+    "inNav": true,
+    "icon": "material-symbols:business-center-outline",
+    "filters": ["business"]
+  },
+  {
+    "id": "cloud-and-hosted",
+    "title": "Cloud & Hosted Services",
+    "navLabel": "Cloud & Hosted",
+    "inNav": false,
+    "icon": "material-symbols:cloud-outline",
+    "filters": ["cloud-and-hosted"]
+  },
+  {
+    "id": "networking-and-security",
+    "title": "Networking, Security & VPNs",
+    "navLabel": "Networking, Security, VPNs",
+    "inNav": true,
+    "icon": "material-symbols:lan-outline",
+    "filters": ["networking", "broadcast-networking"]
+  },
+  {
+    "id": "storage-and-nas",
+    "title": "Storage & NAS",
+    "navLabel": "Storage, NAS",
+    "inNav": true,
+    "icon": "material-symbols:storage-rounded",
+    "filters": ["storage"]
+  },
+  {
+    "id": "software-development",
+    "title": "Software Development",
+    "navLabel": "Software Development",
+    "inNav": false,
+    "icon": "material-symbols:terminal-rounded",
+    "filters": ["software-development"]
+  },
+  {
+    "id": "data-and-databases",
+    "title": "Data & Databases",
+    "navLabel": "Data & Databases",
+    "inNav": false,
+    "icon": "material-symbols:database-outline",
+    "filters": ["data-and-databases"]
+  },
+  {
+    "id": "system-design-and-deployment",
+    "title": "System Design, Deployment & Administration",
+    "navLabel": "System Design & Deployment",
+    "inNav": false,
+    "icon": "material-symbols:architecture-rounded",
+    "filters": ["design-and-deployment"]
+  },
+  {
+    "id": "ai-and-automation",
+    "title": "AI & Automation",
+    "navLabel": "AI & Automation",
+    "inNav": false,
+    "icon": "material-symbols:smart-toy-outline",
+    "filters": ["ai-automation"]
+  }
+]
