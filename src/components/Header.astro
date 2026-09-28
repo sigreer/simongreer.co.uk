@@ -1,4 +1,114 @@
 ---
+import Nav from '@components/Nav.astro';
 import ThemeToggle from '@components/ThemeToggle.astro';
+import { SITE } from '@lib/site';
+import { Icon } from 'astro-icon/components';
 ---
-<header><ThemeToggle /></header>
+<header class="header">
+  <div class="preheader">
+    <ul class="cluster socials" role="list">
+      {SITE.socials.map((s) => (
+        <li><a href={s.href} aria-label={s.label} rel="me noopener" target="_blank"><Icon name={s.icon} class="social-icon" aria-hidden="true" /></a></li>
+      ))}
+    </ul>
+    <ThemeToggle />
+  </div>
+
+  <div class="navbar">
+    <a class="brand" href="/" aria-label={`${SITE.name} home`}>
+      <span class="dots" aria-hidden="true"><i class="dot dot-pink"></i><i class="dot dot-purple"></i><i class="dot dot-grey"></i></span>
+      <span class="wordmark">{SITE.name}</span>
+    </a>
+
+    <div class="desktop-nav"><Nav /></div>
+
+    <button type="button" class="burger" data-menu-open aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false">
+      <Icon name="material-symbols:menu-rounded" aria-hidden="true" />
+    </button>
+  </div>
+
+  <dialog id="mobile-menu" class="mobile-menu" data-mobile-menu aria-label="Menu">
+    <div class="mobile-top">
+      <button type="button" class="burger" data-menu-close aria-label="Close menu">
+        <Icon name="material-symbols:close-rounded" aria-hidden="true" />
+      </button>
+      <ThemeToggle class="mobile-toggle" />
+    </div>
+    <Nav forceOpenMenus />
+  </dialog>
+</header>
+
+<script>
+  // Native modal dialog: showModal() makes the rest of the page inert, traps focus,
+  // and closes on Escape. We only manage aria-expanded, focus restoration and the breakpoint.
+  const menu = document.querySelector<HTMLDialogElement>('[data-mobile-menu]');
+  const open = document.querySelector<HTMLButtonElement>('[data-menu-open]');
+  const close = document.querySelector<HTMLButtonElement>('[data-menu-close]');
+  if (menu && open && close && !menu.dataset.ready) {
+    menu.dataset.ready = '';
+    open.addEventListener('click', () => {
+      menu.showModal();
+      open.setAttribute('aria-expanded', 'true');
+      close.focus();
+    });
+    close.addEventListener('click', () => menu.close());
+    menu.addEventListener('close', () => {
+      open.setAttribute('aria-expanded', 'false');
+      open.focus();
+    });
+    matchMedia('(min-width: 48rem)').addEventListener('change', (e) => {
+      if (e.matches && menu.open) menu.close();
+    });
+  }
+</script>
+
+<style>
+  @layer components {
+    .header { view-transition-name: site-header; }
+    .preheader {
+      display: none; align-items: center; justify-content: space-between;
+      block-size: var(--preheader-height); padding-inline: var(--space-4);
+      background: var(--color-band); color: var(--color-band-text);
+      border: 1px solid var(--color-border-strong); border-block-end: 0;
+      border-start-start-radius: var(--radius-lg); border-start-end-radius: var(--radius-lg);
+    }
+    .socials { --cluster-gap: var(--space-4); }
+    .social-icon { inline-size: 1.25rem; block-size: 1.25rem; color: var(--color-band-text); transition: transform var(--motion-fast) var(--ease); }
+    .socials a:hover .social-icon { transform: scale(1.25); }
+
+    .navbar {
+      display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+      min-block-size: var(--header-height); padding-inline: var(--space-4);
+      background: var(--color-surface); border: 1px solid var(--color-border-strong);
+      border-end-start-radius: var(--radius-lg); border-end-end-radius: var(--radius-lg);
+    }
+    .brand { display: inline-flex; align-items: center; gap: var(--space-3); text-decoration: none; color: var(--color-text-muted); font-size: var(--step-3); font-weight: 600; }
+    .brand:hover { text-decoration: none; color: var(--color-text-muted); }
+    .dots { display: inline-flex; gap: 2px; }
+    .dot { inline-size: 0.9rem; block-size: 0.9rem; border-radius: 50%; display: block; }
+    .dot-pink { background: var(--color-logo-pink); }
+    .dot-purple { background: var(--color-logo-purple); }
+    .dot-grey { background: light-dark(oklch(48% 0 0), white); }
+
+    .desktop-nav { display: none; }
+    .burger { display: inline-grid; place-items: center; inline-size: 2.5rem; block-size: 2.5rem; color: var(--color-text); }
+    .burger svg { inline-size: 1.75rem; block-size: 1.75rem; }
+
+    .mobile-menu {
+      position: fixed; inset: 0; z-index: 50; padding: var(--space-5); margin: 0; border: 0;
+      inline-size: 100vw; block-size: 100dvh; max-inline-size: none; max-block-size: none;
+      background: var(--color-surface); color: var(--color-text); overflow-y: auto;
+    }
+    .mobile-menu::backdrop { background: transparent; }
+    :global(body:has(.mobile-menu[open])) { overflow: hidden; }
+    .mobile-top { display: flex; justify-content: space-between; align-items: center; margin-block-end: var(--space-6); }
+    .mobile-toggle { color: var(--color-text); }
+
+    @media (min-width: 48rem) {
+      .preheader { display: flex; }
+      .navbar { border-radius: 0 0 var(--radius-lg) var(--radius-lg); }
+      .desktop-nav { display: block; }
+      .burger, .mobile-menu { display: none; }
+    }
+  }
+</style>

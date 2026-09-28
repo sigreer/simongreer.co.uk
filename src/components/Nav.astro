@@ -1,0 +1,98 @@
+---
+import { getCollection } from 'astro:content';
+import { NAV_ITEMS } from '@lib/site';
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  /** Render the services submenu expanded and exempt from outside-click closing (mobile overlay). */
+  forceOpenMenus?: boolean;
+}
+const { forceOpenMenus = false } = Astro.props;
+
+const services = (await getCollection('services')).filter((s) => s.data.inNav);
+const path = Astro.url.pathname;
+const isActive = (root: string) => path === root || path.startsWith(`${root}/`);
+---
+<nav class="nav" aria-label="Main">
+  <ul class="nav-list" role="list">
+    {NAV_ITEMS.map((item) =>
+      item.hasServicesMenu ? (
+        <li class="nav-item has-menu">
+          <details class="menu" data-nav-menu={forceOpenMenus ? undefined : ''} open={forceOpenMenus}>
+            <summary class:list={['nav-link', { active: isActive(item.root) }]}>
+              <Icon name={item.icon} class="nav-icon" aria-hidden="true" />
+              <span>{item.label}</span>
+            </summary>
+            <ul class="menu-panel" role="list" aria-label="Hire me services">
+              {services.map((s) => (
+                <li>
+                  <a class="menu-link" href={`/hire-me/${s.id}/`}>
+                    <Icon name={s.data.icon} class="nav-icon" aria-hidden="true" />
+                    <span>{s.data.navLabel}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        </li>
+      ) : (
+        <li class="nav-item">
+          <a class:list={['nav-link', { active: isActive(item.root) }]} href={item.href} aria-current={isActive(item.root) ? 'page' : undefined}>
+            <Icon name={item.icon} class="nav-icon" aria-hidden="true" />
+            <span>{item.label}</span>
+          </a>
+        </li>
+      ),
+    )}
+  </ul>
+</nav>
+
+<script>
+  // Close an open dropdown when clicking outside or pressing Escape.
+  for (const details of document.querySelectorAll<HTMLDetailsElement>('[data-nav-menu]:not([data-ready])')) {
+    details.dataset.ready = '';
+    document.addEventListener('click', (e) => {
+      if (details.open && !details.contains(e.target as Node)) details.open = false;
+    });
+    details.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') details.open = false;
+    });
+  }
+</script>
+
+<style>
+  @layer components {
+    .nav-list { display: flex; gap: var(--space-2); align-items: center; }
+    .nav-link {
+      display: inline-flex; align-items: center; gap: var(--space-2);
+      padding: var(--space-2) var(--space-4) var(--space-2) var(--space-3);
+      border-radius: var(--radius-lg); font-size: var(--step--1); font-weight: 500;
+      color: var(--color-text); text-decoration: none; cursor: pointer; list-style: none;
+      transition: background-color var(--motion-fast) var(--ease), color var(--motion-fast) var(--ease);
+    }
+    .nav-link::-webkit-details-marker { display: none; }
+    .nav-link:hover { background: var(--color-nav-hover-bg); color: var(--color-purple); text-decoration: none; }
+    .nav-link.active { background: var(--color-nav-active); color: white; }
+    .nav-icon { inline-size: 1.125rem; block-size: 1.125rem; }
+
+    .has-menu { position: relative; }
+    .menu-panel {
+      position: absolute; inset-inline-end: 0; top: calc(100% + var(--space-2)); z-index: 20;
+      inline-size: 16rem; padding: var(--space-2);
+      background: var(--color-surface-raised); border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); box-shadow: var(--shadow-lg);
+    }
+    .menu-link {
+      display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3);
+      border-radius: var(--radius-md); font-size: var(--step--1); font-weight: 500; color: var(--color-text); text-decoration: none;
+    }
+    .menu-panel li + li .menu-link { border-top: 1px solid var(--color-border); border-radius: 0; }
+    .menu-link:hover { background: var(--color-nav-hover-bg); color: var(--color-purple); }
+
+    /* Inside the mobile overlay the list stacks and the dropdown is always open */
+    :global([data-mobile-menu]) .nav-list { flex-direction: column; align-items: stretch; gap: var(--space-3); }
+    :global([data-mobile-menu]) .nav-link { font-size: var(--step-2); }
+    :global([data-mobile-menu]) .nav-icon { inline-size: 2.5rem; block-size: 2.5rem; }
+    :global([data-mobile-menu]) .menu-panel { position: static; inline-size: auto; box-shadow: none; border: 0; padding-inline-start: var(--space-6); background: transparent; }
+  }
+</style>
