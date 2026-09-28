@@ -3,22 +3,22 @@
     color-scheme: light dark;
 
     /* Brand */
-    --color-pink: oklch(58% 0.22 356); /* ≈ #DA2676, hsl(333 71% 50%) */
+    --color-pink: oklch(59.2% 0.218 0.6); /* live #db2777 */
     --color-purple: oklch(66% 0.2 318); /* ≈ #C95BE6, hsl(288 70% 62%) */
-    --color-blue: oklch(38% 0.16 268); /* ≈ #1D3A8A / tailwind blue-900 */
+    --color-blue: oklch(37.9% 0.138 265.5); /* live #1e3a8a / tailwind blue-900 */
     --color-blue-deep: oklch(30% 0.14 268); /* tailwind blue-950, hero gradient end */
-    --color-logo-pink: oklch(72% 0.26 340); /* #ff63d5 */
+    --color-logo-pink: oklch(72.2% 0.225 339); /* live #ff63d5 */
     --color-logo-purple: oklch(32% 0.22 295); /* #4200a0 */
 
     /* Semantic, light-dark pairs */
     --color-bg-page: light-dark(
-      oklch(97% 0 0),
+      oklch(96.7% 0.003 265),
       oklch(19% 0 0)
-    ); /* gray-100 / legacy hsl(0 0% 8%) ≈ oklch 19% */
+    ); /* live #f3f4f6 gray-100 / legacy hsl(0 0% 8%) ≈ oklch 19% */
     --color-surface: light-dark(oklch(100% 0 0), oklch(20% 0 0));
     --color-surface-raised: light-dark(oklch(100% 0 0), oklch(24% 0 0));
     --color-text: light-dark(oklch(20% 0 0), oklch(98% 0 0));
-    --color-text-muted: light-dark(oklch(48% 0 0), oklch(72% 0 0));
+    --color-text-muted: light-dark(oklch(44.6% 0.03 257), oklch(72% 0 0)); /* light: live #4b5563 gray-600 */
     --color-heading-accent: light-dark(oklch(35% 0 0), var(--color-purple));
     --color-border: light-dark(oklch(88% 0 0), oklch(30% 0 0)); /* #dcdde0 / neutral-800 */
     --color-border-strong: light-dark(oklch(66% 0 0), oklch(36% 0 0)); /* #9b9b9b */
