@@ -36,4 +36,4 @@ const ogImage = image ? new URL(image, SITE.url).href : undefined;
   name: SITE.name,
   url: SITE.url,
   author: { '@type': 'Person', name: SITE.author },
-})} />
+}).replace(/</g, '\\u003c')} />

@@ -26,7 +26,7 @@ const { title, description, image, type, publishedTime } = Astro.props;
     <meta name="color-scheme" content="light dark" />
     <style is:inline>@layer reset, tokens, base, layout, components, utilities;</style>
     <script is:inline>
-      // Apply the stored theme before first paint. Hashed by Astro CSP in Phase 6.
+      // Apply the stored theme before first paint. is:inline on purpose (a module script would flash the wrong theme). Its hash must be added manually to the CSP script directive in Phase 6.
       (() => {
         try {
           const t = localStorage.getItem('theme');

@@ -66,5 +66,6 @@ export default defineConfig({
       TURNSTILE_SITE_KEY: envField.string({ context: 'client', access: 'public' }),
     },
   },
-  build: { assets: '_astro' },
+  trailingSlash: 'always',
+  build: { assets: '_astro', format: 'directory' },
 });
