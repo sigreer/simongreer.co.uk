@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "wrangler types && astro dev",
     "build": "wrangler types && astro build && pagefind --site dist/client",
-    "preview": "wrangler dev --port 8787",
+    "preview": "wrangler dev --port ${E2E_PORT:-8787}",
     "check": "wrangler types && astro check && biome check . && knip",
     "format": "biome check --write .",
     "test:unit": "vitest run tests/unit --exclude tests/unit/routes.test.ts",

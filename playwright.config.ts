@@ -1,6 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const port = Number(process.env.E2E_PORT ?? 8787);
+const raw = process.env.E2E_PORT;
+const port = raw === undefined || raw === '' ? 8787 : Number(raw);
+if (!Number.isInteger(port) || port <= 0) {
+  throw new Error('E2E_PORT must be a positive integer');
+}
 const origin = `http://127.0.0.1:${port}`;
 
 export default defineConfig({
@@ -9,7 +13,8 @@ export default defineConfig({
   expect: { toHaveScreenshot: { maxDiffPixelRatio: 0.01 } },
   use: { baseURL: origin, trace: 'retain-on-failure' },
   webServer: {
-    command: `bunx wrangler dev --port ${port}`,
+    command: 'bun run preview',
+    env: { ...process.env, E2E_PORT: String(port) } as Record<string, string>,
     url: `${origin}/`,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
