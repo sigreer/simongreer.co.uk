@@ -1,0 +1,58 @@
+---
+import { Font } from 'astro:assets';
+import Footer from '@components/Footer.astro';
+import Header from '@components/Header.astro';
+import Seo from '@components/Seo.astro';
+import '@styles/reset.css';
+import '@styles/tokens.css';
+import '@styles/base.css';
+import '@styles/layout.css';
+import '@styles/utilities.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  publishedTime?: Date;
+}
+const { title, description, image, type, publishedTime } = Astro.props;
+---
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <style is:inline>@layer reset, tokens, base, layout, components, utilities;</style>
+    <script is:inline>
+      // Apply the stored theme before first paint. Hashed by Astro CSP in Phase 6.
+      (() => {
+        try {
+          const t = localStorage.getItem('theme');
+          if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+        } catch {}
+      })();
+    </script>
+    <Font cssVariable="--font-sans" preload />
+    <Font cssVariable="--font-mono" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <Seo {title} {description} {image} {type} {publishedTime} />
+    <slot name="head" />
+  </head>
+  <body>
+    <div class="container site">
+      <Header />
+      <main id="main" class="site-main"><slot /></main>
+      <Footer />
+    </div>
+  </body>
+</html>
+
+<style>
+  @layer components {
+    .site { display: flex; flex-direction: column; min-height: 100dvh; }
+    .site-main { flex: 1; padding-block: var(--space-6); font-size: var(--step-0); }
+  }
+</style>
