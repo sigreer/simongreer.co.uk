@@ -90,3 +90,15 @@ test('theme toggle works from the mobile menu and persists', async ({ page, isMo
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
 });
+
+test('escape closes the hire me dropdown and keeps focus on its summary', async ({ page, isMobile }) => {
+  test.skip(isMobile, 'dropdown is desktop only');
+  await page.goto('/');
+  await page.locator('.desktop-nav').getByText('Hire Me').click();
+  const menu = page.getByRole('list', { name: 'Hire me services' });
+  await page.keyboard.press('Tab');
+  await expect(menu.getByRole('link').first()).toBeFocused();
+  await page.keyboard.press('Escape');
+  await expect(page.locator('.desktop-nav summary')).toBeFocused();
+  await expect(menu.getByRole('link').first()).toBeHidden();
+});

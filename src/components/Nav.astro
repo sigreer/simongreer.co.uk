@@ -21,7 +21,10 @@ const isActive = (root: string) => path === root || path.startsWith(`${root}/`);
       item.hasServicesMenu ? (
         <li class="nav-item has-menu">
           <details class="menu" data-nav-menu={forceOpenMenus ? undefined : ''} open={forceOpenMenus}>
-            <summary class:list={['nav-link', { active: isActive(item.root) }]}>
+            <summary
+              class:list={['nav-link', { active: isActive(item.root) }]}
+              aria-current={isActive(item.root) ? 'page' : undefined}
+            >
               <Icon name={item.icon} class="nav-icon" aria-hidden="true" />
               <span>{item.label}</span>
             </summary>
@@ -57,7 +60,10 @@ const isActive = (root: string) => path === root || path.startsWith(`${root}/`);
       if (details.open && !details.contains(e.target as Node)) details.open = false;
     });
     details.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') details.open = false;
+      if (e.key === 'Escape' && details.open) {
+        details.querySelector('summary')?.focus();
+        details.open = false;
+      }
     });
   }
 </script>

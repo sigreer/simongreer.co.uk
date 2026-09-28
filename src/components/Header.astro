@@ -16,7 +16,7 @@ import { Icon } from 'astro-icon/components';
 
   <div class="navbar">
     <a class="brand" href="/" aria-label={`${SITE.name} home`}>
-      <span class="dots" aria-hidden="true"><i class="dot dot-pink"></i><i class="dot dot-purple"></i><i class="dot dot-grey"></i></span>
+      <span class="dots" aria-hidden="true"><span class="dot dot-pink"></span><span class="dot dot-purple"></span><span class="dot dot-grey"></span></span>
       <span class="wordmark">{SITE.name}</span>
     </a>
 
@@ -49,12 +49,11 @@ import { Icon } from 'astro-icon/components';
     open.addEventListener('click', () => {
       menu.showModal();
       open.setAttribute('aria-expanded', 'true');
-      close.focus();
     });
     close.addEventListener('click', () => menu.close());
     menu.addEventListener('close', () => {
       open.setAttribute('aria-expanded', 'false');
-      open.focus();
+      if (open.offsetParent) open.focus();
     });
     matchMedia('(min-width: 48rem)').addEventListener('change', (e) => {
       if (e.matches && menu.open) menu.close();
@@ -96,7 +95,7 @@ import { Icon } from 'astro-icon/components';
 
     .mobile-menu {
       position: fixed; inset: 0; z-index: 50; padding: var(--space-5); margin: 0; border: 0;
-      inline-size: 100vw; block-size: 100dvh; max-inline-size: none; max-block-size: none;
+      block-size: 100dvh; max-inline-size: none; max-block-size: none;
       background: var(--color-surface); color: var(--color-text); overflow-y: auto;
     }
     .mobile-menu::backdrop { background: transparent; }
