@@ -35,6 +35,12 @@ test('hire me dropdown lists the four nav services', async ({ page, isMobile }) 
   await page.locator('.desktop-nav').getByText('Hire Me').click();
   const menu = page.getByRole('list', { name: 'Hire me services' });
   await expect(menu.getByRole('link')).toHaveCount(4);
+  expect(await menu.getByRole('link').evaluateAll((els) => els.map((e) => e.getAttribute('href')))).toEqual([
+    '/hire-me/web-development/',
+    '/hire-me/business-apps/',
+    '/hire-me/networking-and-security/',
+    '/hire-me/storage-and-nas/',
+  ]);
   await expect(menu.getByRole('link', { name: /Networking, Security, VPNs/ })).toHaveAttribute(
     'href',
     '/hire-me/networking-and-security/',

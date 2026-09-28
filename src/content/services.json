@@ -1,6 +1,7 @@
 [
   {
     "id": "web-development",
+    "order": 1,
     "title": "Web Development",
     "navLabel": "Web Development",
     "inNav": true,
@@ -9,6 +10,7 @@
   },
   {
     "id": "business-apps",
+    "order": 2,
     "title": "Business Apps",
     "navLabel": "Business Apps",
     "inNav": true,
@@ -17,6 +19,7 @@
   },
   {
     "id": "cloud-and-hosted",
+    "order": 3,
     "title": "Cloud & Hosted Services",
     "navLabel": "Cloud & Hosted",
     "inNav": false,
@@ -25,6 +28,7 @@
   },
   {
     "id": "networking-and-security",
+    "order": 4,
     "title": "Networking, Security & VPNs",
     "navLabel": "Networking, Security, VPNs",
     "inNav": true,
@@ -33,6 +37,7 @@
   },
   {
     "id": "storage-and-nas",
+    "order": 5,
     "title": "Storage & NAS",
     "navLabel": "Storage, NAS",
     "inNav": true,
@@ -41,6 +46,7 @@
   },
   {
     "id": "software-development",
+    "order": 6,
     "title": "Software Development",
     "navLabel": "Software Development",
     "inNav": false,
@@ -49,6 +55,7 @@
   },
   {
     "id": "data-and-databases",
+    "order": 7,
     "title": "Data & Databases",
     "navLabel": "Data & Databases",
     "inNav": false,
@@ -57,6 +64,7 @@
   },
   {
     "id": "system-design-and-deployment",
+    "order": 8,
     "title": "System Design, Deployment & Administration",
     "navLabel": "System Design & Deployment",
     "inNav": false,
@@ -65,6 +73,7 @@
   },
   {
     "id": "ai-and-automation",
+    "order": 9,
     "title": "AI & Automation",
     "navLabel": "AI & Automation",
     "inNav": false,

@@ -5,6 +5,7 @@ import { z } from 'astro/zod';
 const services = defineCollection({
   loader: file('./src/content/services.json'),
   schema: z.object({
+    order: z.number().int().positive(),
     title: z.string(),
     navLabel: z.string(),
     inNav: z.boolean(),

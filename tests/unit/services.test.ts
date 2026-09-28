@@ -25,11 +25,16 @@ describe('services.json', () => {
     expect([...all].sort()).toEqual([...FILTERS_IN_USE].sort());
   });
   it('exposes exactly four nav entries in the legacy order', () => {
-    expect(services.filter((s) => s.inNav).map((s) => s.id)).toEqual([
-      'web-development',
-      'business-apps',
-      'networking-and-security',
-      'storage-and-nas',
-    ]);
+    expect(
+      [...services]
+        .sort((a, b) => a.order - b.order)
+        .filter((s) => s.inNav)
+        .map((s) => s.id),
+    ).toEqual(['web-development', 'business-apps', 'networking-and-security', 'storage-and-nas']);
+  });
+  it('has unique positive integer order values', () => {
+    const orders = services.map((s) => s.order);
+    expect(new Set(orders).size).toBe(orders.length);
+    for (const o of orders) expect(Number.isInteger(o) && o > 0).toBe(true);
   });
 });
