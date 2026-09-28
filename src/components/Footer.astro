@@ -1,3 +1,73 @@
 ---
+import { SITE } from '@lib/site';
+import { Icon } from 'astro-icon/components';
+
+const year = new Date().getFullYear();
+const powered = [
+  { name: 'Astro', icon: 'simple-icons:astro' },
+  { name: 'Cloudflare', icon: 'simple-icons:cloudflare' },
+  { name: 'Bun', icon: 'simple-icons:bun' },
+  { name: 'TypeScript', icon: 'simple-icons:typescript' },
+];
 ---
-<footer>footer</footer>
+<footer class="footer">
+  <div class="band">
+    <section class="col col-posts">
+      <h2 class="footer-heading">Recent blog posts</h2>
+      <slot name="recent-posts"><p class="muted">Posts appear here once content is migrated.</p></slot>
+    </section>
+    <section class="col col-links">
+      <h2 class="footer-heading">Links</h2>
+      <ul role="list" class="stack">
+        <li><a href="/get-in-touch/">Get in touch</a></li>
+        <li><a href={SITE.repo} rel="noopener" target="_blank">GitHub for this site</a></li>
+        <li><a href="/rss.xml">RSS feed</a></li>
+      </ul>
+    </section>
+    <section class="col col-powered">
+      <h2 class="footer-heading">Powered by</h2>
+      <ul role="list" class="cluster logos">
+        {powered.map((p) => (<li><Icon name={p.icon} title={p.name} class="logo" /></li>))}
+      </ul>
+    </section>
+  </div>
+  <div class="bar">
+    <span class="wordmark">{SITE.name}</span>
+    <span class="copy">All content human-written, mistakes included. © {year}</span>
+  </div>
+</footer>
+
+<style>
+  @layer components {
+    .footer { view-transition-name: site-footer; margin-block-start: var(--space-6); }
+    .band {
+      display: grid; gap: var(--space-6); padding: var(--space-6) var(--space-5);
+      grid-template-columns: 1fr;
+      background: var(--color-band); color: var(--color-band-text);
+      border: 1px solid var(--color-border-strong); border-block-end: 0;
+      border-start-start-radius: var(--radius-lg); border-start-end-radius: var(--radius-lg);
+    }
+    .footer-heading { font-size: var(--step-0); font-weight: 600; text-transform: uppercase; margin-block-end: var(--space-3); color: light-dark(white, var(--color-purple)); }
+    .band a { color: var(--color-band-text); font-weight: 400; font-size: var(--step--1); }
+    .band a:hover { text-decoration: underline; color: var(--color-band-text); }
+    .muted { font-size: var(--step--1); opacity: 0.8; }
+    .stack { --stack-gap: var(--space-2); }
+    .logos { --cluster-gap: var(--space-4); }
+    .logo { inline-size: 3.5rem; block-size: 3.5rem; color: white; }
+    .col-powered { display: none; }
+
+    .bar {
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-3);
+      padding: var(--space-4); background: var(--color-pink); color: white;
+      border-end-start-radius: var(--radius-lg); border-end-end-radius: var(--radius-lg);
+    }
+    .wordmark { font-size: var(--step-3); font-weight: 600; }
+    .copy { font-size: var(--step--1); }
+
+    @media (min-width: 40rem) { .band { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 48rem) {
+      .band { grid-template-columns: 4fr 3fr 2fr; }
+      .col-powered { display: block; }
+    }
+  }
+</style>

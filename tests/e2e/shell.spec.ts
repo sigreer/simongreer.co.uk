@@ -102,3 +102,10 @@ test('escape closes the hire me dropdown and keeps focus on its summary', async 
   await expect(page.locator('.desktop-nav summary')).toBeFocused();
   await expect(menu.getByRole('link').first()).toBeHidden();
 });
+
+test('footer shows links and the pink bar with the current year', async ({ page }) => {
+  await page.goto('/');
+  const footer = page.getByRole('contentinfo');
+  await expect(footer.getByRole('link', { name: 'Get in touch' })).toHaveAttribute('href', '/get-in-touch/');
+  await expect(footer.getByText(String(new Date().getFullYear()))).toBeVisible();
+});
