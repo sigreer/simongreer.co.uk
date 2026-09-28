@@ -6,7 +6,7 @@ interface Props {
 }
 const { class: className } = Astro.props;
 ---
-<button type="button" class:list={['theme-toggle', className]} data-theme-toggle aria-label="Switch to dark theme">
+<button type="button" class:list={['theme-toggle', className]} data-theme-toggle aria-label="Switch to dark theme" title="Switch to dark theme">
   <Icon name="material-symbols:dark-mode-outline" class="icon icon-dark" aria-hidden="true" />
   <Icon name="material-symbols:light-mode-outline" class="icon icon-light" aria-hidden="true" />
 </button>
@@ -22,7 +22,9 @@ const { class: className } = Astro.props;
     return media.matches ? 'dark' : 'light';
   }
   function label(btn: HTMLButtonElement) {
-    btn.setAttribute('aria-label', current() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+    const text = current() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
+    btn.setAttribute('aria-label', text);
+    btn.setAttribute('title', text);
   }
   for (const btn of document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]:not([data-ready])')) {
     btn.dataset.ready = '';
@@ -42,7 +44,7 @@ const { class: className } = Astro.props;
 <style>
   @layer components {
     .theme-toggle { display: inline-grid; place-items: center; inline-size: 2rem; block-size: 2rem; color: inherit; transition: transform var(--motion-fast) var(--ease); }
-    .theme-toggle:hover { transform: scale(1.25); }
+    @media (hover: hover) { .theme-toggle:hover { transform: scale(1.25); } }
     .icon { inline-size: 1.25rem; block-size: 1.25rem; }
     .icon-light { display: none; }
     :root[data-theme='dark'] .icon-dark { display: none; }
