@@ -1,3 +1,8 @@
+/* @view-transition is top-level only; it is ignored inside a cascade layer. */
+@view-transition {
+  navigation: auto;
+}
+
 @layer base {
   html {
     font-size: var(--font-size-root);
@@ -5,9 +10,6 @@
     background: var(--color-bg-page);
     color: var(--color-text);
     scroll-behavior: smooth;
-  }
-  @view-transition {
-    navigation: auto;
   }
   ::view-transition-old(root),
   ::view-transition-new(root) {

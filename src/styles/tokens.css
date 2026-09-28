@@ -11,7 +11,10 @@
     --color-logo-purple: oklch(32% 0.22 295); /* #4200a0 */
 
     /* Semantic, light-dark pairs */
-    --color-bg-page: light-dark(oklch(97% 0 0), oklch(20% 0 0)); /* gray-100 / 8% grey */
+    --color-bg-page: light-dark(
+      oklch(97% 0 0),
+      oklch(19% 0 0)
+    ); /* gray-100 / legacy hsl(0 0% 8%) ≈ oklch 19% */
     --color-surface: light-dark(oklch(100% 0 0), oklch(20% 0 0));
     --color-surface-raised: light-dark(oklch(100% 0 0), oklch(24% 0 0));
     --color-text: light-dark(oklch(20% 0 0), oklch(98% 0 0));
@@ -27,8 +30,8 @@
     --color-nav-hover-bg: light-dark(oklch(90% 0.06 318), oklch(30% 0 0)); /* purple-200 */
     --color-focus: var(--color-purple);
 
-    /* Type: fluid steps reproducing 16px → 18px @1024 → 19px @1280 root scaling */
-    --font-size-root: clamp(1rem, 0.85rem + 0.25vw, 1.1875rem);
+    /* Type: root ramps 16px @600px → ~17.9px @1024px → 19px @1280px (capped) */
+    --font-size-root: clamp(1rem, 0.835rem + 0.441vw, 1.1875rem);
     --step--1: 0.875em;
     --step-0: 1em;
     --step-1: 1.125em;
