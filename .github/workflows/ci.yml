@@ -23,6 +23,7 @@ jobs:
       # Job-level so the Mattermost step's `if:` can see it (step-level env is
       # evaluated after the step `if:`, and `secrets` is not allowed in `if:`).
       PAGESPEED_WEBHOOK_URL: ${{ secrets.PAGESPEED_WEBHOOK_URL }}
+      HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
       - uses: actions/checkout@v4
 
@@ -54,51 +55,58 @@ jobs:
         if: failure()
         with:
           name: playwright-report
-          path: playwright-report
+          path: |
+            playwright-report
+            test-results
 
       - name: Upload Worker version (preview, no traffic)
         id: version
+        if: env.CLOUDFLARE_API_TOKEN != ''
         run: |
           set -euo pipefail
-          bunx wrangler versions upload --tag "${GITHUB_SHA::12}" --message "ci ${GITHUB_REF_NAME} ${GITHUB_SHA::12}" 2>&1 | tee /tmp/wv.log
+          bunx wrangler versions upload --tag "${HEAD_SHA::12}" --message "ci ${GITHUB_REF_NAME} ${HEAD_SHA::12}" 2>&1 | tee /tmp/wv.log
           URL=$(grep -oE 'https://[a-z0-9-]+-simongreer-site\.sideways-systems\.workers\.dev' /tmp/wv.log | head -1 || true)
           test -n "$URL" || { echo "no preview URL in output"; exit 1; }
           echo "url=$URL" >> "$GITHUB_OUTPUT"
           echo "Preview: $URL"
-          echo "Preview: $URL" >> "$GITHUB_STEP_SUMMARY"
+          echo "Preview for ${HEAD_SHA::12}: $URL" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Wait for preview
+        if: env.CLOUDFLARE_API_TOKEN != ''
         run: |
           for i in $(seq 1 24); do
-            code=$(curl -s -o /dev/null -w '%{http_code}' "${{ steps.version.outputs.url }}/") && [ "$code" = "200" ] && exit 0
+            code=$(curl -s --max-time 10 -o /dev/null -w '%{http_code}' "${{ steps.version.outputs.url }}/") && [ "$code" = "200" ] && exit 0
             sleep 5
           done
           echo "preview not ready"; exit 1
 
       - name: Headers on preview
+        if: env.CLOUDFLARE_API_TOKEN != ''
         run: |
-          curl -sI "${{ steps.version.outputs.url }}/" | tee /tmp/h.txt
+          curl -sI --max-time 10 "${{ steps.version.outputs.url }}/" | tee /tmp/h.txt
           grep -qi '^x-frame-options: DENY' /tmp/h.txt
           grep -qi '^strict-transport-security:' /tmp/h.txt
 
       - name: Lighthouse on preview
+        if: env.CLOUDFLARE_API_TOKEN != ''
         run: bunx lhci autorun --collect.url="${{ steps.version.outputs.url }}/"
         continue-on-error: true
         # Thresholds become blocking (continue-on-error removed) in Phase 6 once real pages exist.
 
       - name: Comment preview URL on PR
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && env.CLOUDFLARE_API_TOKEN != ''
         uses: actions/github-script@v7
         with:
           script: |
             const url = '${{ steps.version.outputs.url }}';
             await github.rest.issues.createComment({ ...context.repo, issue_number: context.issue.number,
-              body: `Preview for ${context.sha.slice(0,12)}: ${url}` });
+              body: `Preview for ${process.env.HEAD_SHA.slice(0,12)}: ${url}` });
 
       - name: Mattermost summary
         if: always() && env.PAGESPEED_WEBHOOK_URL != ''
+        env:
+          STATUS: ${{ job.status }}
+          PREVIEW_URL: ${{ steps.version.outputs.url }}
         run: |
-          STATUS="${{ job.status }}"
-          curl -s -X POST -H 'Content-Type: application/json' \
-            -d "{\"text\": \"simongreer-site ci ${STATUS} on ${GITHUB_REF_NAME} ${GITHUB_SHA::12} - preview ${{ steps.version.outputs.url }}\"}" \
-            "$PAGESPEED_WEBHOOK_URL"
+          jq -n --arg t "simongreer-site ci ${STATUS} on ${GITHUB_REF_NAME} ${HEAD_SHA::12} - preview ${PREVIEW_URL}" '{text:$t}' \
+            | curl -s --max-time 10 -X POST -H 'Content-Type: application/json' --data-binary @- "$PAGESPEED_WEBHOOK_URL"
