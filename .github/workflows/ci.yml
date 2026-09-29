@@ -25,7 +25,14 @@ jobs:
       PAGESPEED_WEBHOOK_URL: ${{ secrets.PAGESPEED_WEBHOOK_URL }}
       HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
+      # Build the PR head, not the default merge commit, so the artifact, the
+      # version tag, the step summary and the PR comment all name the same SHA.
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.HEAD_SHA }}
+
+      - name: Assert checkout matches HEAD_SHA
+        run: test "$(git rev-parse HEAD)" = "$HEAD_SHA"
 
       - uses: oven-sh/setup-bun@v2
         with:

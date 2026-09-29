@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "chain": "rebuild-phase-0-1-scaffold-and-shell-P0-1-post-phase",
+  "kind": "post-phase",
+  "target": "docs/plans/2026-09-28-rebuild-phase-0-1-scaffold-and-shell.md",
+  "work_id": "P0-1",
+  "legacy_migrated": false,
+  "rounds": [
+    {
+      "round": 1,
+      "reviewers": [
+        {
+          "role": "primary",
+          "sweep_group": null,
+          "parent_round": 1,
+          "request": "r1-2026-09-29T0104-primary-request.md",
+          "response": "r1-2026-09-29T0104-primary-response.md",
+          "verdict": "revise",
+          "verdict_valid": true,
+          "returncode": 0,
+          "status": "ok",
+          "provider": "codex",
+          "caller_provider": "claude",
+          "model": null,
+          "sandbox": {
+            "repo_root": "/home/simon/Dev/sigreer/simongreer.co.uk/rebuild-astro7",
+            "scratch_dir": "/tmp/superstar-reviewer-rebuild-phase-0-1-scaffold-and-shell-P0-1-post-phase-r1-primary-b82zhfj2",
+            "response_dir": "docs/reviewer/rebuild-phase-0-1-scaffold-and-shell-P0-1-post-phase/.reviewer-output/r1-primary",
+            "mode": "workspace-write-with-read-access"
+          },
+          "started_at": "2026-09-29T00:04:39.156Z",
+          "finished_at": "2026-09-29T00:06:49.951Z",
+          "duration_ms": 130794,
+          "estimated_usage": {
+            "formula": "ceil(chars / 4)",
+            "prompt_chars": 59269,
+            "response_chars": 4507,
+            "estimated_input_tokens": 14818,
+            "estimated_output_tokens": 1127,
+            "estimated_total_tokens": 15945
+          },
+          "exact_usage": null,
+          "usage_capture_status": "estimated_only",
+          "usage_capture_error": null
+        },
+        {
+          "role": "sweep",
+          "sweep_group": 1,
+          "parent_round": 1,
+          "request": "r1-2026-09-29T0104-sweep1-request.md",
+          "response": "r1-2026-09-29T0104-sweep1-response.md",
+          "verdict": "revise",
+          "verdict_valid": true,
+          "returncode": 0,
+          "status": "ok",
+          "provider": "codex",
+          "caller_provider": "claude",
+          "model": null,
+          "sandbox": {
+            "repo_root": "/home/simon/Dev/sigreer/simongreer.co.uk/rebuild-astro7",
+            "scratch_dir": "/tmp/superstar-reviewer-rebuild-phase-0-1-scaffold-and-shell-P0-1-post-phase-r1-sweep1-mnmuolwm",
+            "response_dir": "docs/reviewer/rebuild-phase-0-1-scaffold-and-shell-P0-1-post-phase/.reviewer-output/r1-sweep1",
+            "mode": "workspace-write-with-read-access"
+          },
+          "started_at": "2026-09-29T00:06:49.953Z",
+          "finished_at": "2026-09-29T00:09:33.862Z",
+          "duration_ms": 163909,
+          "estimated_usage": {
+            "formula": "ceil(chars / 4)",
+            "prompt_chars": 59269,
+            "response_chars": 4060,
+            "estimated_input_tokens": 14818,
+            "estimated_output_tokens": 1015,
+            "estimated_total_tokens": 15833
+          },
+          "exact_usage": null,
+          "usage_capture_status": "estimated_only",
+          "usage_capture_error": null
+        }
+      ],
+      "status": "ok",
+      "returncode": 0,
+      "started_at": "2026-09-29T00:04:39.156Z",
+      "finished_at": "2026-09-29T00:06:49.951Z",
+      "duration_ms": 130794,
+      "provider": "codex",
+      "caller_provider": "claude",
+      "model": null,
+      "estimated_usage": {
+        "formula": "ceil(chars / 4)",
+        "prompt_chars": 59269,
+        "response_chars": 4507,
+        "estimated_input_tokens": 14818,
+        "estimated_output_tokens": 1127,
+        "estimated_total_tokens": 15945
+      },
+      "exact_usage": null,
+      "usage_capture_status": "estimated_only",
+      "usage_capture_error": null,
+      "merged_verdict": "revise",
+      "merged_findings": "r1-merged-findings.md",
+      "request": "r1-2026-09-29T0104-primary-request.md",
+      "response": "r1-2026-09-29T0104-primary-response.md",
+      "resolution": null,
+      "resolution_parse_status": null,
+      "resolution_waiver": false,
+      "head_sha_at_request": "1e778a9731f43ff846c5f8be4b65b16160347aaf",
+      "head_sha_after_round": "1e778a9731f43ff846c5f8be4b65b16160347aaf",
+      "worktree_dirty_at_request": true,
+      "verdict": "revise",
+      "verdict_valid": true,
+      "findings_count": 3,
+      "blocking_findings_count": 0,
+      "base_ref": null,
+      "base_ref_source": null,
+      "diff_included": false,
+      "depth_resolved": "thorough"
+    }
+  ],
+  "sweep_checkpoints": {
+    "first-round": "completed",
+    "final-ready": "pending"
+  }
+}

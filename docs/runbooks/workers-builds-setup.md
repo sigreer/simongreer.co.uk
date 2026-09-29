@@ -24,9 +24,11 @@ First manual deploy (Task 12 prerequisite, 2026-09-29, `wrangler deploy` from `2
 | `475a0b00043b` | 36500528012 | `9631cac8-ebb6-4c01-856c-3907f311ad3a` | https://9631cac8-simongreer-site.sideways-systems.workers.dev |
 | `a2d347c44a12` | 36501029169 | `991bcc16-9685-4dce-800e-0b03a212ec76` | https://991bcc16-simongreer-site.sideways-systems.workers.dev |
 
-Both runs succeeded. In the first run Lighthouse did not run because of an invalid `preset: mobile` setting, fixed in `475a0b00`. From the second run, Lighthouse (non-blocking) fails only the SEO assertion with a score of 0.66. Cloudflare sends `x-robots-tag: noindex` on version preview URLs, which explains it.
+All recorded runs succeeded. In the first run Lighthouse did not run because of an invalid `preset: mobile` setting, fixed in `475a0b00`. From the second run, Lighthouse (non-blocking) fails only the SEO assertion with a score of 0.66. Cloudflare sends `x-robots-tag: noindex` on version preview URLs, which explains it.
 
 ## Dashboard setup record
+
+Status 2026-09-29: **not done yet.** Steps 1–6 are dashboard-only and assigned to Simon; the coordinator has raised it. Until this table has a row, the plan's Workers Builds exit gate stays deferred (see the exit-gate table in `docs/handoffs/rebuild-phase-0-1-closeout.md`). The repo secret `PAGESPEED_WEBHOOK_URL` is also outstanding (Simon); CI skips the Mattermost step while it is unset.
 
 | Date | Done by | Notes |
 |---|---|---|

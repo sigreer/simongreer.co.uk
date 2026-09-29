@@ -52,7 +52,7 @@
 **Files:**
 - Create: worktree at `/home/simon/Dev/sigreer/simongreer.co.uk/rebuild-astro7`
 
-- [ ] **Step 1: Commit the planning documents on `main`** (they are currently untracked, so a worktree from `main` would not contain them)
+- [x] **Step 1: Commit the planning documents on `main`** (they are currently untracked, so a worktree from `main` would not contain them)
 
 ```bash
 cd /home/simon/Dev/sigreer/simongreer.co.uk/simongreer.co.uk
@@ -62,7 +62,7 @@ git push origin main
 ```
 Expected: one commit containing `docs/specs/2026-09-28-site-rebuild-design.md` and this plan. The pre-existing uncommitted change to `scripts/icon-helper.sh` is left alone (it belongs to the old tree and is deleted in Task 2).
 
-- [ ] **Step 2: Create the branch and worktree from local `main`**
+- [x] **Step 2: Create the branch and worktree from local `main`**
 
 ```bash
 git worktree add -b rebuild/astro7 ../rebuild-astro7 main
@@ -71,7 +71,7 @@ cd $WT && git status --short | head && ls docs/specs docs/plans
 ```
 Expected: `Preparing worktree (new branch 'rebuild/astro7')`, an empty status, and both the spec and this plan listed.
 
-- [ ] **Step 3: Upgrade Bun and record the version**
+- [x] **Step 3: Upgrade Bun and record the version**
 
 ```bash
 bun upgrade
@@ -79,7 +79,7 @@ bun --version
 ```
 Expected: a version `1.4.x` or later. Record it; it is used in Task 2 and Task 12 as `<BUN_VERSION>`.
 
-- [ ] **Step 4: Confirm Node meets Astro 7's requirement**
+- [x] **Step 4: Confirm Node meets Astro 7's requirement**
 
 ```bash
 node --version
@@ -96,7 +96,7 @@ No commit for this task.
 - Create: `scripts/gen-route-manifest.mjs`
 - Create: `docs/specs/route-manifest.json` (generated)
 
-- [ ] **Step 1: Write the generator**
+- [x] **Step 1: Write the generator**
 
 ```js
 // scripts/gen-route-manifest.mjs
@@ -201,7 +201,7 @@ const counts = rows.reduce((acc, r) => ((acc[r.action] = (acc[r.action] || 0) + 
 console.log(JSON.stringify(counts));
 ```
 
-- [ ] **Step 2: Run it in both enumeration orders and confirm identical output**
+- [x] **Step 2: Run it in both enumeration orders and confirm identical output**
 
 ```bash
 cd $WT && mkdir -p docs/specs
@@ -220,7 +220,7 @@ drop	/tech/projects/another-project/ -> null | placeholder entry
 ```
 The script's own self-checks throw if kept destinations are not unique, if `langchain.mdx` does not own `/tech/langchain/`, or if `flowise.mdx` does not land on `/tech/flowise/`. A thrown error means the content differs from what the audit recorded; investigate before continuing.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add scripts/gen-route-manifest.mjs docs/specs/route-manifest.json
@@ -235,7 +235,7 @@ git commit -m "chore(rebuild): generate route manifest from legacy content"
 - Delete: everything except `src/content`, `src/images`, `public/fonts`, `public/images`, `docs/`, `scripts/gen-route-manifest.mjs`, `.git`
 - Create: `package.json`, `.bun-version`, `tsconfig.json`, `.gitignore`, `.dev.vars.example`, `astro.config.ts`, `wrangler.jsonc`, `src/env.d.ts`, `src/pages/index.astro`
 
-- [ ] **Step 1: Remove the legacy tree**
+- [x] **Step 1: Remove the legacy tree**
 
 ```bash
 cd $WT
@@ -249,7 +249,7 @@ ls
 ```
 Expected: `docs  public  scripts  src`.
 
-- [ ] **Step 2: Write `package.json`** (replace `<BUN_VERSION>` with the value from Task 0)
+- [x] **Step 2: Write `package.json`** (replace `<BUN_VERSION>` with the value from Task 0)
 
 ```json
 {
@@ -296,7 +296,7 @@ Expected: `docs  public  scripts  src`.
 }
 ```
 
-- [ ] **Step 3: Write the small config files**
+- [x] **Step 3: Write the small config files**
 
 `.bun-version`:
 ```
@@ -347,7 +347,7 @@ tests/e2e/__snapshots__/**/*-actual.png
 TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA
 ```
 
-- [ ] **Step 4: Write `wrangler.jsonc`**
+- [x] **Step 4: Write `wrangler.jsonc`**
 
 ```jsonc
 {
@@ -380,7 +380,7 @@ TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA
 ```
 Note: `TURNSTILE_SITE_KEY` is the documented always-pass test key until Phase 5 creates the real widget. `CONTACT_*` addresses are placeholders to be confirmed with Simon in Phase 5.
 
-- [ ] **Step 5: Write `astro.config.ts`**
+- [x] **Step 5: Write `astro.config.ts`**
 
 ```ts
 import { defineConfig, envField, fontProviders } from 'astro/config';
@@ -435,7 +435,7 @@ export default defineConfig({
 ```
 The Fonts API copies the woff2 files into `dist/_astro/fonts/` with hashed names, so after this task `public/fonts` is moved to `src/assets/fonts` in Step 7 to avoid shipping duplicates.
 
-- [ ] **Step 6: Write `src/env.d.ts` and a placeholder page**
+- [x] **Step 6: Write `src/env.d.ts` and a placeholder page**
 
 `src/env.d.ts`:
 ```ts
@@ -461,7 +461,7 @@ const title = 'SimonGreer.co.uk';
 </html>
 ```
 
-- [ ] **Step 7: Move fonts into `src/assets/fonts` and fix the config paths**
+- [x] **Step 7: Move fonts into `src/assets/fonts` and fix the config paths**
 
 ```bash
 mkdir -p src/assets/fonts && git mv public/fonts/*.woff2 src/assets/fonts/ 2>/dev/null || mv public/fonts/*.woff2 src/assets/fonts/
@@ -471,7 +471,7 @@ grep -n "assets/fonts" astro.config.ts
 ```
 Expected: two lines showing `./src/assets/fonts/Geist[wght].woff2` and `./src/assets/fonts/GeistMono[wght].woff2`.
 
-- [ ] **Step 8: Install, type-check and build (in that order, as CI will)**
+- [x] **Step 8: Install, type-check and build (in that order, as CI will)**
 
 Biome and Knip are configured in Task 4, so only the type-generation and Astro check run here; the full `bun run check` is first exercised in Task 4 step 7.
 
@@ -482,14 +482,14 @@ bun run build 2>&1 | tail -20
 ```
 Expected: `wrangler types` writes `worker-configuration.d.ts`, `astro check` reports 0 errors, then Astro prints `[build] Complete!`; Pagefind prints `Indexed 1 page` (or 0 pages, acceptable until content exists). No errors. If `astro build` complains that `session` is unknown, the installed Astro is older than 7.2: run `bun update astro` and retry.
 
-- [ ] **Step 9: Verify the Worker config is valid without deploying**
+- [x] **Step 9: Verify the Worker config is valid without deploying**
 
 ```bash
 bunx wrangler deploy --dry-run --outdir /tmp/wr-dry 2>&1 | tail -15
 ```
 Expected: `--dry-run: exiting now.` after a bindings summary that lists `env.ASSETS`, `env.CONTACT_RATE_LIMIT`, `env.IMAGES` and the four vars. No `✘` lines.
 
-- [ ] **Step 10: Commit**
+- [x] **Step 10: Commit**
 
 ```bash
 git add -A
@@ -503,7 +503,7 @@ git commit -m "feat(rebuild): scaffold Astro 7 on Cloudflare Workers with static
 **Files:**
 - Create: `src/actions/index.ts`, `src/pages/spike.astro` (deleted in Phase 5), `playwright.config.ts`, `tests/e2e/spike.spec.ts`
 
-- [ ] **Step 1: Write the Playwright config**
+- [x] **Step 1: Write the Playwright config**
 
 `playwright.config.ts`:
 ```ts
@@ -527,7 +527,7 @@ export default defineConfig({
 });
 ```
 
-- [ ] **Step 2: Write the failing e2e test**
+- [x] **Step 2: Write the failing e2e test**
 
 `tests/e2e/spike.spec.ts`:
 ```ts
@@ -540,7 +540,7 @@ test('ping action runs in the Worker and reads a binding var', async ({ page }) 
 });
 ```
 
-- [ ] **Step 3: Run it to see it fail**
+- [x] **Step 3: Run it to see it fail**
 
 ```bash
 bunx playwright install chromium
@@ -548,7 +548,7 @@ bun run build && bunx playwright test tests/e2e/spike.spec.ts --project=desktop 
 ```
 Expected: `1 failed` with a 404 on `/spike/`.
 
-- [ ] **Step 4: Write the action and the page**
+- [x] **Step 4: Write the action and the page**
 
 `src/actions/index.ts`:
 ```ts
@@ -588,14 +588,14 @@ const title = 'Spike';
   </body>
 </html>
 ```
-- [ ] **Step 5: Build and run the test**
+- [x] **Step 5: Build and run the test**
 
 ```bash
 bun run build && bunx playwright test tests/e2e/spike.spec.ts --project=desktop 2>&1 | tail -5
 ```
 Expected: `1 passed`. This proves: Actions work with `output: 'static'`, `env` from `cloudflare:workers` resolves under `wrangler dev`, and the Worker serves `/_actions/ping` while `/spike/` is a static asset.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add -A
@@ -609,7 +609,7 @@ git commit -m "feat(rebuild): spike Action under workerd reading cloudflare:work
 **Files:**
 - Create: `biome.json`, `knip.json`, `vitest.config.ts`, `tests/unit/site.test.ts`, `src/lib/site.ts`
 
-- [ ] **Step 1: Write `biome.json`**
+- [x] **Step 1: Write `biome.json`**
 
 ```json
 {
@@ -634,7 +634,7 @@ git commit -m "feat(rebuild): spike Action under workerd reading cloudflare:work
 }
 ```
 
-- [ ] **Step 2: Write `knip.json`**
+- [x] **Step 2: Write `knip.json`**
 
 ```json
 {
@@ -646,7 +646,7 @@ git commit -m "feat(rebuild): spike Action under workerd reading cloudflare:work
 ```
 The Astro plugin auto-detects `src/pages/**`, `src/content.config.ts` and `src/actions/index.ts`. Iconify sets are loaded by name at build time, so Knip cannot see them; they are ignored explicitly.
 
-- [ ] **Step 3: Write `vitest.config.ts`**
+- [x] **Step 3: Write `vitest.config.ts`**
 
 ```ts
 import { getViteConfig } from 'astro/config';
@@ -659,7 +659,7 @@ export default getViteConfig({
 });
 ```
 
-- [ ] **Step 4: Write the failing unit test for site constants**
+- [x] **Step 4: Write the failing unit test for site constants**
 
 `tests/unit/site.test.ts`:
 ```ts
@@ -681,14 +681,14 @@ describe('site constants', () => {
 });
 ```
 
-- [ ] **Step 5: Run to see it fail**
+- [x] **Step 5: Run to see it fail**
 
 ```bash
 bun run test:unit 2>&1 | tail -5
 ```
 Expected: FAIL, `Cannot find module '../../src/lib/site'`.
 
-- [ ] **Step 6: Write `src/lib/site.ts`**
+- [x] **Step 6: Write `src/lib/site.ts`**
 
 ```ts
 export const SITE = {
@@ -721,7 +721,7 @@ export const NAV_ITEMS: readonly NavItem[] = [
 ```
 The Bluesky handle must be confirmed against the current live pre-header link (`git show main:src/components/Header/PreHeader.astro | grep -o 'https://bsky[^"]*'`) and corrected if different.
 
-- [ ] **Step 7: Run unit tests and the full check**
+- [x] **Step 7: Run unit tests and the full check**
 
 ```bash
 bun run test:unit 2>&1 | tail -5
@@ -729,7 +729,7 @@ bun run check 2>&1 | tail -15
 ```
 Expected: `2 passed`; `wrangler types` regenerates `worker-configuration.d.ts`, `astro check` reports 0 errors; Biome `Checked N files. No fixes applied.`; Knip prints nothing (exit 0). If Biome reports formatting diffs, run `bun run format` and re-run. If Knip flags `src/pages/spike.astro` or the `ping` action, that is expected to be temporary; do not ignore it, it is removed in Phase 5. If Knip flags anything else, fix it.
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add -A
@@ -745,7 +745,7 @@ git commit -m "chore(rebuild): add Biome, Knip, Vitest and site constants"
 
 Colour values are converted from the audit's HSL values (spec source §1.6). Verify each OKLCH visually in the browser against the live site during Task 11; they are starting points, not sacred.
 
-- [ ] **Step 1: `tokens.css`**
+- [x] **Step 1: `tokens.css`**
 
 ```css
 @layer tokens {
@@ -823,7 +823,7 @@ Colour values are converted from the audit's HSL values (spec source §1.6). Ver
 }
 ```
 
-- [ ] **Step 2: `reset.css`**
+- [x] **Step 2: `reset.css`**
 
 ```css
 @layer reset {
@@ -843,7 +843,7 @@ Colour values are converted from the audit's HSL values (spec source §1.6). Ver
 }
 ```
 
-- [ ] **Step 3: `base.css`**
+- [x] **Step 3: `base.css`**
 
 ```css
 @layer base {
@@ -872,7 +872,7 @@ Colour values are converted from the audit's HSL values (spec source §1.6). Ver
 }
 ```
 
-- [ ] **Step 4: `layout.css`**
+- [x] **Step 4: `layout.css`**
 
 ```css
 @layer layout {
@@ -897,7 +897,7 @@ Colour values are converted from the audit's HSL values (spec source §1.6). Ver
 }
 ```
 
-- [ ] **Step 5: `utilities.css`**
+- [x] **Step 5: `utilities.css`**
 
 ```css
 @layer utilities {
@@ -912,14 +912,14 @@ Colour values are converted from the audit's HSL values (spec source §1.6). Ver
 }
 ```
 
-- [ ] **Step 6: Lint the CSS**
+- [x] **Step 6: Lint the CSS**
 
 ```bash
 bunx biome check src/styles 2>&1 | tail -5
 ```
 Expected: `Checked 5 files. No fixes applied.` (run `bun run format` if only formatting differs).
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add src/styles
@@ -934,7 +934,7 @@ git commit -m "feat(rebuild): add vanilla CSS design system with OKLCH tokens an
 - Create: `src/components/Seo.astro`, `src/layouts/Base.astro`
 - Modify: `src/pages/index.astro`
 
-- [ ] **Step 1: `src/components/Seo.astro`**
+- [x] **Step 1: `src/components/Seo.astro`**
 
 ```astro
 ---
@@ -978,7 +978,7 @@ const ogImage = image ? new URL(image, SITE.url).href : undefined;
 })} />
 ```
 
-- [ ] **Step 2: `src/layouts/Base.astro`**
+- [x] **Step 2: `src/layouts/Base.astro`**
 
 ```astro
 ---
@@ -1041,7 +1041,7 @@ const { title, description, image, type, publishedTime } = Astro.props;
 </style>
 ```
 
-- [ ] **Step 3: Favicon**
+- [x] **Step 3: Favicon**
 
 Copy the legacy favicon SVG (three circles) from `main` if present, else create a minimal one:
 ```bash
@@ -1052,7 +1052,7 @@ head -c 200 public/favicon.svg; echo
 ```
 Expected: an `<svg` opening tag.
 
-- [ ] **Step 4: Update `src/pages/index.astro` to use the layout**
+- [x] **Step 4: Update `src/pages/index.astro` to use the layout**
 
 ```astro
 ---
@@ -1071,14 +1071,14 @@ printf -- '---\n---\n<header>header</header>\n' > src/components/Header.astro
 printf -- '---\n---\n<footer>footer</footer>\n' > src/components/Footer.astro
 ```
 
-- [ ] **Step 5: Build and inspect the head**
+- [x] **Step 5: Build and inspect the head**
 
 ```bash
 bun run build 2>&1 | grep -E "Complete|error" ; grep -oE '<(link rel="canonical"[^>]*|meta property="og:title"[^>]*|link rel="preload"[^>]*)>' dist/index.html
 ```
 Expected: `[build] Complete!`, a canonical of `https://simongreer.co.uk/`, an `og:title` of `SimonGreer.co.uk`, and a font preload pointing at `/_astro/fonts/...woff2`.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add -A
@@ -1092,7 +1092,7 @@ git commit -m "feat(rebuild): base layout with SEO head, fonts API and CSS layer
 **Files:**
 - Create: `src/components/ThemeToggle.astro`, `tests/e2e/shell.spec.ts`
 
-- [ ] **Step 1: Failing e2e test for the toggle**
+- [x] **Step 1: Failing e2e test for the toggle**
 
 `tests/e2e/shell.spec.ts`:
 ```ts
@@ -1114,14 +1114,14 @@ test('theme toggle switches and persists (desktop pre-header)', async ({ page, i
 // The mobile variant lives in Task 9 because it needs the mobile menu.
 ```
 
-- [ ] **Step 2: Run to see it fail**
+- [x] **Step 2: Run to see it fail**
 
 ```bash
 bun run build && bunx playwright test tests/e2e/shell.spec.ts --project=desktop 2>&1 | tail -5
 ```
 Expected: `1 failed` on desktop (button not found); mobile is skipped.
 
-- [ ] **Step 3: Write the component**
+- [x] **Step 3: Write the component**
 
 `src/components/ThemeToggle.astro`:
 ```astro
@@ -1179,7 +1179,7 @@ const { class: className } = Astro.props;
 </style>
 ```
 
-- [ ] **Step 4: Put the toggle in the Header stub so the test can find it**
+- [x] **Step 4: Put the toggle in the Header stub so the test can find it**
 
 ```bash
 cat > src/components/Header.astro <<'ASTRO'
@@ -1192,7 +1192,7 @@ bun run build && bunx playwright test tests/e2e/shell.spec.ts 2>&1 | tail -5
 ```
 Expected: `1 passed, 1 skipped`.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add -A
@@ -1208,7 +1208,7 @@ git commit -m "feat(rebuild): theme toggle with light-dark() and persisted prefe
 
 Only the fields the nav needs are populated now. `sections`, `skills` and `intro` are filled in Phase 4 and are optional in the schema until then.
 
-- [ ] **Step 1: Failing unit test**
+- [x] **Step 1: Failing unit test**
 
 `tests/unit/services.test.ts`:
 ```ts
@@ -1233,14 +1233,14 @@ describe('services.json', () => {
 });
 ```
 
-- [ ] **Step 2: Run to see it fail**
+- [x] **Step 2: Run to see it fail**
 
 ```bash
 bun run test:unit 2>&1 | tail -5
 ```
 Expected: FAIL, cannot resolve `services.json`.
 
-- [ ] **Step 3: Write `src/content/services.json`**
+- [x] **Step 3: Write `src/content/services.json`**
 
 ```json
 [
@@ -1257,7 +1257,7 @@ Expected: FAIL, cannot resolve `services.json`.
 ```
 Then add the new icon names to the `material-symbols` include list in `astro.config.ts`: `code-rounded`, `business-center-outline`, `cloud-outline`, `lan-outline`, `storage-rounded`, `terminal-rounded`, `database-outline`, `architecture-rounded`, `smart-toy-outline`.
 
-- [ ] **Step 4: Write `src/content.config.ts`**
+- [x] **Step 4: Write `src/content.config.ts`**
 
 ```ts
 import { defineCollection } from 'astro:content';
@@ -1294,14 +1294,14 @@ export const collections = { services };
 ```
 Blog, tech, projects, clients, testimonials and tags collections are added in Phase 2. Until then the legacy MDX under `src/content/{blog,tech,...}` is not loaded by Astro because no collection references those folders.
 
-- [ ] **Step 5: Run tests and the build**
+- [x] **Step 5: Run tests and the build**
 
 ```bash
 bun run test:unit 2>&1 | tail -5 && bun run build 2>&1 | grep -E "Complete|error|services"
 ```
 Expected: `5 passed` (2 site + 3 services); `[build] Complete!` with no schema errors. If the build reports that `src/content/blog` contains files not belonging to a collection, that is a warning only; it disappears in Phase 2.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add -A
@@ -1318,7 +1318,7 @@ git commit -m "feat(rebuild): services collection driving hire-me navigation"
 
 Visual reference (spec source §1.6): a 40px blue pre-header with social icons left and the toggle right, rounded top corners; a white 64px navbar with rounded bottom corners, logo (three circles + wordmark) left, three items right with icons; active item is a pink pill with white text; hover is pale purple; the Hire Me item opens a dropdown of `inNav` services; on mobile the pre-header is hidden and a hamburger opens a full-height overlay menu that also contains the toggle.
 
-- [ ] **Step 1: Extend the e2e test**
+- [x] **Step 1: Extend the e2e test**
 
 Append to `tests/e2e/shell.spec.ts`:
 ```ts
@@ -1390,14 +1390,14 @@ test('theme toggle works from the mobile menu and persists', async ({ page, isMo
 });
 ```
 
-- [ ] **Step 2: Run to see the new tests fail**
+- [x] **Step 2: Run to see the new tests fail**
 
 ```bash
 bun run build && bunx playwright test tests/e2e/shell.spec.ts 2>&1 | tail -6
 ```
 Expected: on desktop the header and dropdown tests fail (navigation not found) and the toggle test passes; on mobile the five mobile tests fail (`Open menu` not found).
 
-- [ ] **Step 3: Write `src/components/Nav.astro`**
+- [x] **Step 3: Write `src/components/Nav.astro`**
 
 ```astro
 ---
@@ -1494,7 +1494,7 @@ const isActive = (root: string) => path === root || path.startsWith(`${root}/`);
 </style>
 ```
 
-- [ ] **Step 4: Write `src/components/Header.astro`**
+- [x] **Step 4: Write `src/components/Header.astro`**
 
 ```astro
 ---
@@ -1614,14 +1614,14 @@ import { SITE } from '@lib/site';
 ```
 The toggle inherits `currentColor`, so it is white inside `.preheader` and text-coloured inside the mobile overlay without extra rules.
 
-- [ ] **Step 5: Build, run the shell tests on both projects**
+- [x] **Step 5: Build, run the shell tests on both projects**
 
 ```bash
 bun run build && bunx playwright test tests/e2e/shell.spec.ts 2>&1 | tail -8
 ```
 Expected: `8 passed, 6 skipped` (desktop: toggle, header, dropdown; mobile: header, modal, focus trap, breakpoint, mobile toggle).
 
-- [ ] **Step 6: Check and commit**
+- [x] **Step 6: Check and commit**
 
 ```bash
 bun run check 2>&1 | tail -5
@@ -1639,7 +1639,7 @@ git commit -m "feat(rebuild): header with pre-header, brand, nav, services dropd
 
 Visual reference: a blue block with rounded top corners holding three columns (recent posts, links, powered-by logos in white) and a pink bottom bar with the wordmark left and a copyright line right. Recent posts are filled from the blog collection in Phase 2 via a named slot; this task renders the block with an empty slot.
 
-- [ ] **Step 1: Extend the e2e test**
+- [x] **Step 1: Extend the e2e test**
 
 Append to `tests/e2e/shell.spec.ts`:
 ```ts
@@ -1651,7 +1651,7 @@ test('footer shows links and the pink bar with the current year', async ({ page 
 });
 ```
 
-- [ ] **Step 2: Run to see it fail, then write the component**
+- [x] **Step 2: Run to see it fail, then write the component**
 
 ```bash
 bun run build && bunx playwright test tests/e2e/shell.spec.ts -g footer 2>&1 | tail -4
@@ -1734,14 +1734,14 @@ const powered = [
 </style>
 ```
 
-- [ ] **Step 3: Build and test**
+- [x] **Step 3: Build and test**
 
 ```bash
 bun run build && bunx playwright test tests/e2e/shell.spec.ts 2>&1 | tail -5
 ```
 Expected: `10 passed, 6 skipped`.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add -A
@@ -1755,7 +1755,7 @@ git commit -m "feat(rebuild): footer band, links and pink bar"
 **Files:**
 - Create: `src/pages/404.astro`, `public/_headers`, `public/_redirects`, `tests/e2e/visual.spec.ts`
 
-- [ ] **Step 1: `src/pages/404.astro`**
+- [x] **Step 1: `src/pages/404.astro`**
 
 ```astro
 ---
@@ -1769,7 +1769,7 @@ import Base from '@layouts/Base.astro';
 </Base>
 ```
 
-- [ ] **Step 2: `public/_headers`** (CSP is added by Astro's meta emission in Phase 6, not here)
+- [x] **Step 2: `public/_headers`** (CSP is added by Astro's meta emission in Phase 6, not here)
 
 ```
 /_astro/*
@@ -1786,7 +1786,7 @@ import Base from '@layouts/Base.astro';
   X-Frame-Options: DENY
 ```
 
-- [ ] **Step 3: `public/_redirects`** generated from the manifest
+- [x] **Step 3: `public/_redirects`** generated from the manifest
 
 ```bash
 node -e "
@@ -1797,7 +1797,7 @@ console.log(lines.join('\n'));"
 ```
 Expected: 5 lines including `/me/ /me/personally/ 301` and `/hire-me/system-administration/ /hire-me/system-design-and-deployment/ 301`.
 
-- [ ] **Step 4: Verify headers and redirects under `wrangler dev`**
+- [x] **Step 4: Verify headers and redirects under `wrangler dev`**
 
 ```bash
 bun run build
@@ -1810,7 +1810,7 @@ pkill -f "wrangler dev" || true
 ```
 Expected: the three security headers present; `HTTP/1.1 301` with `location: /me/personally/`; `404` for the unknown path (served by `404.astro`); `cache-control: public, max-age=31536000, immutable` for the CSS file.
 
-- [ ] **Step 5: Visual baseline test**
+- [x] **Step 5: Visual baseline test**
 
 `tests/e2e/visual.spec.ts`:
 ```ts
@@ -1832,11 +1832,11 @@ ls tests/e2e/visual.spec.ts-snapshots/
 ```
 Expected: 4 PNG files (`home-light-desktop-linux.png`, `home-dark-desktop-linux.png`, `home-light-mobile-linux.png`, `home-dark-mobile-linux.png`).
 
-- [ ] **Step 6: Side-by-side check against the live site (human gate)**
+- [x] **Step 6: Side-by-side check against the live site (human gate)**
 
 Open `tests/e2e/visual.spec.ts-snapshots/home-light-desktop-linux.png` and `https://simongreer.co.uk/` side by side. The header band colours, wordmark, nav pill, footer band and pink bar should match in hue and proportion. Adjust `tokens.css` OKLCH values until they do, re-run `--update-snapshots`, and note any changed values in the commit message. This is the first checkpoint for spec criterion 4; Simon reviews the four PNGs before this task is committed.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add -A
@@ -1858,7 +1858,7 @@ bun run build && bunx wrangler deploy 2>&1 | tail -5
 ```
 Expected: `Deployed simongreer-site triggers` and a URL `https://simongreer-site.sideways-systems.workers.dev`. Visit it: the placeholder home renders. The token in `~/.cloudflare/token` must include `Workers Scripts:Edit`; if the command fails with 403, create a token per the `cloudflare` skill's token reference and retry. Also copy the `PAGESPEED_WEBHOOK_URL` environment secret to a repo-level secret: `gh secret set PAGESPEED_WEBHOOK_URL` (paste the value from the Mattermost webhook settings; it is not readable from GitHub).
 
-- [ ] **Step 1: `lighthouserc.json`**
+- [x] **Step 1: `lighthouserc.json`**
 
 ```json
 {
@@ -1878,7 +1878,7 @@ Expected: `Deployed simongreer-site triggers` and a URL `https://simongreer-site
 ```
 URLs are supplied on the command line in CI so the same file serves previews and production.
 
-- [ ] **Step 2: `.github/workflows/ci.yml`**
+- [x] **Step 2: `.github/workflows/ci.yml`**
 
 ```yaml
 name: ci
@@ -1986,7 +1986,7 @@ jobs:
 ```
 Note the `if:` for the Mattermost step reads `env.PAGESPEED_WEBHOOK_URL`, not `secrets.*`, because the `secrets` context is not allowed in job/step `if:` (the bug that broke the old bench workflows). The secret is mapped into `env` on that step.
 
-- [ ] **Step 3: Write the runbook**
+- [x] **Step 3: Write the runbook**
 
 `docs/runbooks/workers-builds-setup.md`:
 ```markdown
@@ -2011,7 +2011,7 @@ Verification after the first Workers Build: `bunx wrangler deployments list` sho
 | | | |
 ```
 
-- [ ] **Step 4: Validate the workflow file locally and commit**
+- [x] **Step 4: Validate the workflow file locally and commit**
 
 ```bash
 node -e "require('js-yaml')" 2>/dev/null && node -e "require('js-yaml').load(require('fs').readFileSync('.github/workflows/ci.yml','utf8')); console.log('yaml ok')" || python3 -c "import yaml,sys; yaml.safe_load(open('.github/workflows/ci.yml')); print('yaml ok')"
@@ -2019,7 +2019,7 @@ git add -A
 git commit -m "ci(rebuild): build, test, per-commit Worker preview version, Lighthouse and Mattermost summary"
 ```
 
-- [ ] **Step 5: Push and watch the first run**
+- [x] **Step 5: Push and watch the first run**
 
 ```bash
 git push -u origin rebuild/astro7
@@ -2037,6 +2037,8 @@ Expected: `run=<id>` for this exact SHA; the run succeeds and prints a preview U
 
 - [ ] **Step 6: Complete the Workers Builds runbook**
 
+> **Status 2026-09-29: deferred, owner Simon.** Dashboard-only step; not automatable by agents. Tracked in the exit-gate table in `docs/handoffs/rebuild-phase-0-1-closeout.md`.
+
 Perform the dashboard steps in `docs/runbooks/workers-builds-setup.md` steps 1–6, fill in the table row, then:
 ```bash
 git add docs/runbooks/workers-builds-setup.md
@@ -2049,6 +2051,8 @@ Expected: within a few minutes `bunx wrangler deployments list | head -12` shows
 
 ## Phase 0–1 exit criteria (verify before closing)
 
+> Status as of 2026-09-29: see the exit-gate table in `docs/handoffs/rebuild-phase-0-1-closeout.md` for the evidence SHA and location of each gate. The task steps above are historical implementation instructions; recorded deviations are listed in the closeout under "Decisions and plan deviations".
+
 Run from `$WT`:
 
 ```bash
@@ -2058,12 +2062,12 @@ Expected: all pass and `PHASE-0-1-OK` prints.
 
 Then confirm:
 
-- [ ] `docs/specs/route-manifest.json` exists with `drop`, `redirect` and `keep` rows and the langchain collision resolved in favour of `langchain.mdx`.
-- [ ] `git log --oneline main..rebuild/astro7 | wc -l` shows at least 11 commits.
-- [ ] The CI run for the head SHA of `rebuild/astro7` is green and its summary shows a preview URL that serves the shell; SHA, run id, version id and URL are recorded in `docs/runbooks/workers-builds-setup.md`.
-- [ ] Workers Builds has deployed the same commit to `simongreer-site.sideways-systems.workers.dev`.
-- [ ] Simon has looked at the four shell snapshots against the live site (Task 11 step 6).
-- [ ] Invoke `superstar:external-review --kind post-phase` on this plan with the spec as context before starting the Phase 2 plan.
+- [x] `docs/specs/route-manifest.json` exists with `drop`, `redirect` and `keep` rows and the langchain collision resolved in favour of `langchain.mdx`.
+- [x] `git log --oneline main..rebuild/astro7 | wc -l` shows at least 11 commits.
+- [x] The CI run for the head SHA of `rebuild/astro7` is green and its summary shows a preview URL that serves the shell; SHA, run id, version id and URL are recorded in `docs/runbooks/workers-builds-setup.md`.
+- [ ] Workers Builds has deployed the same commit to `simongreer-site.sideways-systems.workers.dev`. **Deferred, owner Simon** (dashboard step; see the closeout exit-gate table).
+- [x] Simon has looked at the four shell snapshots against the live site (Task 11 step 6).
+- [x] Invoke `superstar:external-review --kind post-phase` on this plan with the spec as context before starting the Phase 2 plan.
 
 ## Deferred to later phase plans (not gaps)
 
