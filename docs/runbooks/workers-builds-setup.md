@@ -23,6 +23,7 @@ First manual deploy (Task 12 prerequisite, 2026-09-29, `wrangler deploy` from `2
 | `4fa161ed8cfa` | 36500332435 | `8c855cc1-5b14-4a81-a66d-fd01ed743739` | https://8c855cc1-simongreer-site.sideways-systems.workers.dev |
 | `475a0b00043b` | 36500528012 | `9631cac8-ebb6-4c01-856c-3907f311ad3a` | https://9631cac8-simongreer-site.sideways-systems.workers.dev |
 | `a2d347c44a12` | 36501029169 | `991bcc16-9685-4dce-800e-0b03a212ec76` | https://991bcc16-simongreer-site.sideways-systems.workers.dev |
+| `f2a6eef04707` | 36501868189 | `bd3258b1-018d-49c2-8f7a-fb7581b3d729` | https://bd3258b1-simongreer-site.sideways-systems.workers.dev |
 
 All recorded runs succeeded. In the first run Lighthouse did not run because of an invalid `preset: mobile` setting, fixed in `475a0b00`. From the second run, Lighthouse (non-blocking) fails only the SEO assertion with a score of 0.66. Cloudflare sends `x-robots-tag: noindex` on version preview URLs, which explains it.
 

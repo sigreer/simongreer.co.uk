@@ -43,7 +43,7 @@ Carry-forwards for later phases:
 | `bun run check && bun run test && bunx playwright test` pass | met | `c826e2fe` (local); CI re-runs all three on every push | this note; CI run for the accepted revision | coordinator |
 | Route manifest with keep/redirect/drop rows, langchain collision resolved | met | `c826e2fe` | `docs/specs/route-manifest.json` | coordinator |
 | At least 11 commits on `main..rebuild/astro7` | met (25 at r1) | branch head | `git log --oneline main..rebuild/astro7` | coordinator |
-| CI green for the branch head with a working preview, recorded in runbook | met | PENDING_R1_SHA (run PENDING_R1_RUN) | `docs/runbooks/workers-builds-setup.md` record table, last row | coordinator |
+| CI green for the branch head with a working preview, recorded in runbook | met | `f2a6eef0` (run 36501868189) | `docs/runbooks/workers-builds-setup.md` record table, last row | coordinator |
 | Workers Builds deployed the same commit | **deferred** | none | runbook "Dashboard setup record" (empty until done) | Simon (dashboard steps 1–6; not automatable by agents; coordinator has raised it) |
 | Simon reviewed the four shell snapshots | met (2026-09-29, inset width kept) | `c826e2fe` | this note, "Tests" bullet | Simon |
 | Post-phase external review | in progress (r1 revise, fixes applied) | this revision | `docs/reviewer/rebuild-phase-0-1-scaffold-and-shell-P0-1-post-phase/` | coordinator |
